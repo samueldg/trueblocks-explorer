@@ -4,13 +4,13 @@ const { spawn } = require('child_process');
 const fs = require('fs');
 
 //------------------------------------------------------------------
-const chifraStreamEvents = require('./chifra_stream_events');
+const streamEvents = require('./progress_streams');
 const webSockets = require('./websockets');
 
 const app = express();
 
 //------------------------------------------------------------------
-const apiOptions = require('./apiOptions.generated.json');
+const apiOptions = require('./api_options.json');
 let env = process.env;
 env.API_MODE = true;
 env.NO_COLOR = true;
@@ -138,7 +138,7 @@ app.get(`/:routeName`, (req, res) => {
     console.log(' ');
     res.send();
   });
-  chifraStreamEvents.bindEvents(chifra.stderr, { routeName });
+  streamEvents.bindEvents(chifra.stderr, { routeName });
 });
 
 //------------------------------------------------------------------
