@@ -1,0 +1,13 @@
+[settings]
+class = "CNames"
+recordIcons = "viewing,editing,follow,exporting,importing"
+defaultSort = "tags,address,name"
+cmdUrl = "names"
+dataUrl = "names"
+dataQuery = "all&expand"
+imports = "||getServerData, sendServerCommand, sortArray, sortStrings, handleClick, navigate, replaceRecord, stateFromStorage|useStatus, LOADING, NOT_LOADING, useMonitorMap||"
+
+[[subpages]]
+list = [
+    { page = "names", subpage = "" },
+]

@@ -1,0 +1,14 @@
+@import url('../Tables.css');
+
+.dt-cell:first-child {
+  border-left: var(--at-border2);
+}
+
+.dt-header-cell {
+  text-align: center;
+  border-right: var(--at-border2);
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  word-wrap: none;
+}

@@ -1,0 +1,21 @@
+/* add custom css code for the Signatures component here. */
+
+.function {
+  background-color: blueviolet;
+  color: antiquewhite;
+}
+
+.event {
+  background-color: tomato;
+  color: yellow;
+}
+
+.constructor {
+  background-color: orange;
+  color: black;
+}
+
+.fallback {
+  background-color: teal;
+  color: white;
+}

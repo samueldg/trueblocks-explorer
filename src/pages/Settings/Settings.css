@@ -1,0 +1,8 @@
+/* add custom css code for the Settings component here. */
+
+.system-log {
+  background-color: var(--black-color);
+  color: var(--logtext-color);
+  margin: 2px;
+  padding: 3px;
+}

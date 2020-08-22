@@ -1,0 +1,14 @@
+[settings]
+class = "COther"
+recordIcons = "editing"
+defaultSort = "blockNumber,name,date"
+cmdUrl = "when"
+dataUrl = "when"
+dataQuery = "list"
+defaultTags = "['Yours', 'Known', 'Dated']"
+imports = "||getServerData, sendServerCommand, sortArray, handleClick, navigate, replaceRecord, stateFromStorage|||"
+
+[[subpages]]
+list = [
+    { page = "other", subpage = "", },
+]

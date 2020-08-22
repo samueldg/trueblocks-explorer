@@ -1,0 +1,15 @@
+/* add custom css code for the Digests component here. */
+
+.hashes {
+  color: turquoise;
+  font-weight: 700;
+}
+.hashes:hover {
+  color: red;
+  background-color: black;
+}
+
+.apps {
+  color: red;
+  font-weight: 700;
+}

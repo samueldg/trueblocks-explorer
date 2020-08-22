@@ -1,0 +1,20 @@
+[settings]
+class = "CSignatures"
+recordIcons = "editing,exporting"
+defaultSort = "encoding,type,name"
+defaultTags = "['Functions', 'Events', 'Constructors', '|', 'Known', 'Monitored', '|', 'Names Only', 'Signatures Only', 'Cross']"
+cmdUrl = "abi"
+dataUrl = "abi"
+dataQuery = "monitored&known"
+imports = "||getServerData, sendServerCommand, sortArray, handleClick, replaceRecord, stateFromStorage|||"
+
+[[subpages]]
+list = [
+    { page = "signatures", subpage = "" },
+    { page = "signatures", subpage = "Known" },
+    { page = "signatures", subpage = "Monitored" },
+    { page = "signatures", subpage = "Separator" },
+    { page = "signatures", subpage = "Names" },
+    { page = "signatures", subpage = "Params" },
+    { page = "signatures", subpage = "Cross" },
+]

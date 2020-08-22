@@ -1,0 +1,49 @@
+/* add custom css code for the Accounts component here. */
+
+.focusValue {
+  border-radius: 5px;
+  padding: 2px;
+  color: var(--secondary-bg-color);
+  background-color: var(--okay-bg-color);
+}
+.nonFocusValue {
+  border-radius: 5px;
+  padding: 2px;
+  font-weight: bold;
+}
+.underField {
+  font-size: 0.8em;
+  font-style: italic;
+}
+
+.exchangeAddr {
+  background-color: lightblue;
+  color: darkblue;
+}
+
+.isError {
+  display: inline;
+  background-color: red;
+  color: yellow;
+  margin-left: 0px;
+  padding: 1px;
+  padding-left: 2px;
+  padding-right: 2px;
+  font-style: unset;
+  font-size: 0.8em;
+}
+
+.internal {
+  display: inline;
+  background-color: blue;
+  color: white;
+  margin-left: 0px;
+  padding: 1px;
+  padding-left: 2px;
+  padding-right: 2px;
+  font-style: unset;
+  font-size: 0.8em;
+}
+.outflow {
+  color: var(--warning-bg-color);
+}

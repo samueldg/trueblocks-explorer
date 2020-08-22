@@ -1,0 +1,16 @@
+[settings]
+class = "CSummary"
+recordIcons = "viewing,exporting,importing"
+defaultTable = "SidebarTable"
+defaultSort = "blockNumber,transactionIndex"
+defaultSearch = "blockNumber,hash,from,fromName,to,toName,encoding,compressedTx"
+defaultTags = "['Eth', 'Not Eth', '|', 'Tokens', 'Grants', 'Hide Outgoing', 'Hide Airdrops', 'Show Airdrops', '|', 'Reconciled', 'Unreconciled', '|', 'Neighbors', 'Balances', 'Functions', 'Events', 'Messages', 'Creations', 'SelfDestructs']"
+dataUrl = "export"
+dataQuery = "addrs=' + addresses.value + '&accounting"
+cmdUrl = "none"
+imports = "Fragment, |DataTable, ObjectTable, ChartTable, PageCaddie|getServerData, sortArray, handleClick, navigate, replaceRecord, stateFromStorage|useStatus, LOADING, NOT_LOADING||"
+
+[[subpages]]
+list = [
+    { page = "accounts", subpage = "" },
+]

@@ -1,0 +1,33 @@
+.pagination-container {
+  align-self: end;
+  justify-self: end;
+  font-size: 0.95em;
+  padding: 0 16px 0 10px;
+}
+
+.pagination-perpage {
+  user-select: none;
+  font-size: inherit;
+  background-color: transparent;
+  appearance: none;
+  direction: ltr;
+  padding: 0 0px 0 10px;
+}
+
+.pagination-perpage:hover {
+  cursor: pointer;
+}
+
+.pagination-icons {
+  padding: 0 0px 0 10px;
+  margin-bottom: -3px;
+}
+
+.pagination-icons:hover {
+  cursor: pointer;
+}
+
+.pagination-icons.disabled {
+  color: var(--lightgrey-color);
+  cursor: auto;
+}

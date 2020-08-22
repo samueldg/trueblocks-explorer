@@ -1,0 +1,7 @@
+/* add custom css code for the Collections component here. */
+
+.collections {
+  display: flex;
+  flex-wrap: wrap;
+  justify-items: center;
+}

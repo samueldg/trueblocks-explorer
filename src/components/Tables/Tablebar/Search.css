@@ -1,0 +1,33 @@
+.search-container {
+  display: grid;
+  grid-auto-flow: column;
+  align-self: end;
+  justify-self: start;
+  height: 1.8em;
+}
+
+.search {
+  width: 250px;
+  border-radius: var(--at-radius) 0px 0px 0px;
+  border: var(--at-border2);
+  border-right: 0px;
+  border-bottom: 0px;
+  padding: 0 32px 0 16px;
+  outline: none;
+}
+
+.clear-button {
+  width: 30px;
+  height: 100%;
+  margin: 0px;
+  border-radius: 0px var(--at-radius) 0px 0px;
+  border: var(--at-border1);
+  border-bottom: 0px;
+  outline: none;
+  color: var(--at-primary-text-color);
+  background-color: var(--at-primary-bg-color);
+}
+
+.clear-button:hover {
+  cursor: pointer;
+}

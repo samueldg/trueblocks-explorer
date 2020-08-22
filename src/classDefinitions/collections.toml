@@ -1,0 +1,13 @@
+[settings]
+class = "CCollections"
+recordIcons =  "editing,view,exporting"
+defaultSort = "tags,name,client"
+cmdUrl = "names"
+dataUrl = "names"
+dataQuery = "collections"
+imports = "||getServerData, sendServerCommand, sortArray, sortStrings, handleClick, replaceRecord, stateFromStorage|||"
+
+[[subpages]]
+list = [
+    { page = "collections", subpage = "" },
+]

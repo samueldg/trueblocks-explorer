@@ -1,0 +1,126 @@
+{
+  "name": "trueblocks-explorer",
+  "main": "electron/main.js",
+  "version": "0.1.0",
+  "homepage": "./",
+  "private": true,
+  "scripts": {
+    "start-docker": "PORT=3002 REACT_APP_API_URL=http://localhost REACT_APP_API_PORT=80 react-scripts start",
+    "start": "PORT=3002 react-scripts start",
+    "electron-forge-start": "ELECTRON_UI_URL=http://localhost:3002 electron-forge start",
+    "build": "react-scripts build",
+    "eject": "react-scripts eject",
+    "prettify": "node_modules/.bin/prettier '{src,test,mocks}/**/*.js' --write",
+    "lint": "eslint '{src,test,mocks}/**/*.js'",
+    "test": "react-scripts test",
+    "document": "documentation build src/components/**/[A-Zi]*.{js,jsx,ts,tsx} -f html -o docs/components ; open docs/components/index.html",
+    "generate": "cd src ; makeClass -jarv ; cd -",
+    "electron-dev": "ELECTRON_UI_URL=http://localhost:3002 electron electron/main.js",
+    "electron-app-dev": "nf start",
+    "package": "electron-forge package",
+    "premake": "yarn build",
+    "make": "electron-forge make",
+    "make-mac": "yarn make --platform mas",
+    "storybook": "start-storybook -p 9009 -s public",
+    "build-storybook": "build-storybook -s public"
+  },
+  "dependencies": {
+    "axios": "^0.19.2",
+    "d3": "^5.15.1",
+    "d3-array": "^2.4.0",
+    "d3-scale": "^3.2.1",
+    "deepmerge": "^4.2.2",
+    "documentation": "^12.3.0",
+    "electron-is-dev": "^1.2.0",
+    "electron-squirrel-startup": "^1.0.0",
+    "electron-store": "^5.1.1",
+    "husky": "^4.2.3",
+    "jquery": "^3.4.1",
+    "lodash": "^4.17.19",
+    "lodash.orderby": "^4.6.0",
+    "mousetrap": "^1.6.5",
+    "react": "^16.13.0",
+    "react-dom": "^16.13.0",
+    "react-hook-form": "^5.7.2",
+    "react-hook-form-devtools": "^1.2.0",
+    "react-markdown": "^4.3.1",
+    "react-router-dom": "^5.1.2",
+    "react-scripts": "^3.4.0",
+    "react-spring": "^8.0.27",
+    "shortid": "^2.2.15",
+    "ss-search": "^1.5.20",
+    "styled-components": "^5.1.1",
+    "swr": "^0.1.18",
+    "yarn.lock": "^0.0.1-security"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@electron-forge/cli": "6.0.0-beta.51",
+    "@electron-forge/maker-deb": "6.0.0-beta.51",
+    "@electron-forge/maker-dmg": "6.0.0-beta.51",
+    "@electron-forge/maker-rpm": "6.0.0-beta.51",
+    "@electron-forge/maker-squirrel": "6.0.0-beta.51",
+    "@electron-forge/maker-zip": "6.0.0-beta.51",
+    "@storybook/addon-actions": "^5.3.19",
+    "@storybook/addon-links": "^5.3.19",
+    "@storybook/addons": "^5.3.19",
+    "@storybook/preset-create-react-app": "^3.1.1",
+    "@storybook/react": "^5.3.19",
+    "electron": "^8.2.5",
+    "husky": "^4.2.3",
+    "jest": "24.9.0",
+    "jest-websocket-mock": "^2.0.2",
+    "mock-socket": "^9.0.3",
+    "prettier": "^2.0.2"
+  },
+  "config": {
+    "forge": {
+      "packagerConfig": {
+        "icon": "electron/icon",
+        "name": "TrueBlocks Explorer"
+      },
+      "makers": [
+        {
+          "name": "@electron-forge/maker-dmg",
+          "config": {
+            "icon": "electron/icon.png"
+          }
+        },
+        {
+          "name": "@electron-forge/maker-squirrel",
+          "config": {
+            "name": "trueblocks_explorer"
+          }
+        },
+        {
+          "name": "@electron-forge/maker-zip",
+          "platforms": [
+            "darwin"
+          ]
+        },
+        {
+          "name": "@electron-forge/maker-deb",
+          "config": {}
+        },
+        {
+          "name": "@electron-forge/maker-rpm",
+          "config": {}
+        }
+      ]
+    }
+  }
+}

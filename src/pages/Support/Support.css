@@ -1,0 +1,8 @@
+/* add custom css code for the Support component here. */
+
+.style2 {
+  border: var(--border2-panel);
+  background-color: var(--lightgrey-color);
+  width: 700px;
+  margin-left: 2%;
+}

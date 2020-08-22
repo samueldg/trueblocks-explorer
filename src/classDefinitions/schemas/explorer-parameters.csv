@@ -1,0 +1,9 @@
+name        ,selector    ,type   ,unused ,width ,editable ,decimals ,isPill ,align ,cn ,download ,chart ,searchable ,detail ,wide ,underField ,onDisplay     ,onAccept ,onValidate
+ID          ,id          ,string ,       ,1     ,         ,         ,       ,      ,   ,         ,      ,true       ,       ,     ,           ,getFieldValue ,         ,
+Type        ,type        ,string ,       ,1     ,         ,         ,       ,      ,   ,         ,      ,true       ,       ,     ,           ,              ,         ,
+Name        ,name        ,string ,       ,1     ,         ,         ,       ,      ,   ,         ,      ,true       ,       ,     ,           ,              ,         ,
+Str Default ,str_default ,string ,       ,1     ,         ,         ,       ,      ,   ,         ,      ,           ,       ,     ,           ,              ,         ,
+Value       ,value       ,string ,       ,1     ,         ,         ,       ,      ,   ,         ,      ,           ,       ,     ,           ,              ,         ,
+Indexed     ,indexed     ,bool   ,       ,1     ,         ,         ,       ,      ,   ,         ,      ,           ,       ,     ,           ,              ,         ,
+No Write    ,no_write    ,bool   ,       ,1     ,         ,         ,       ,      ,   ,         ,      ,           ,       ,     ,           ,              ,         ,
+isFlags     ,is_flags    ,uint64 ,       ,1     ,         ,         ,       ,      ,   ,         ,      ,           ,       ,     ,           ,              ,         ,

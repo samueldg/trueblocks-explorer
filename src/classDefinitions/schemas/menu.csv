@@ -1,0 +1,6 @@
+name        ,selector ,type   ,unused ,width ,editable ,decimals ,isPill ,align ,cn ,download ,chart ,searchable ,detail ,wide ,underField ,onDisplay     ,onAccept ,onValidate
+ID          ,id       ,string ,       ,0     ,         ,         ,       ,      ,   ,         ,      ,           ,       ,     ,           ,getFieldValue ,         ,
+Label       ,label    ,string ,       ,0     ,         ,         ,       ,      ,   ,         ,      ,           ,       ,     ,           ,getFieldValue ,         ,
+Name        ,name     ,string ,       ,0     ,         ,         ,       ,      ,   ,         ,      ,           ,       ,     ,           ,              ,         ,
+Route       ,route    ,string ,       ,0     ,         ,         ,       ,      ,   ,         ,      ,           ,       ,     ,           ,getFieldValue ,         ,
+Description ,descr    ,string ,       ,1     ,         ,         ,       ,      ,   ,         ,      ,           ,       ,     ,           ,              ,         ,

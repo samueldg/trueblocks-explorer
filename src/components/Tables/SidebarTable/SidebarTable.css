@@ -1,0 +1,57 @@
+.sidebar-table {
+  display: grid;
+  grid-template-columns: 80fr 1fr 30fr;
+}
+
+.st-left {
+  overflow: hidden;
+}
+
+.st-right {
+  overflow: hidden;
+}
+
+.st-container {
+  padding: 2px;
+}
+
+.st-body {
+}
+
+.st-row {
+  display: grid;
+  grid-template-columns: 3fr 14fr;
+  justify-content: space-between;
+}
+
+.st-row-wide {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.st-cell {
+  padding: var(--at-padding);
+  padding-left: 4px;
+}
+
+.st-cell-wide {
+  padding: var(--at-padding);
+  padding-left: 4px;
+  text-align: center;
+}
+
+.st-cell.editable {
+  display: block;
+  font-style: italic;
+}
+.st-cell.nowrap {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.st-sider {
+  background-color: var(--at-bg-color);
+  color: var(--at-text-color);
+  font-size: 1em;
+  font-weight: 700;
+}

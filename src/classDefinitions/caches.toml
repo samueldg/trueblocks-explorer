@@ -1,0 +1,19 @@
+[settings]
+class = "CCaches"
+recordIcons =  "editing,exporting"
+defaultSort = "path"
+dataUrl = "status"
+dataQuery = "modes=abis%20caches&types=all&details&depth=1"
+imports = "||getServerData, sortArray, sortStrings, handleClick, replaceRecord, stateFromStorage|||"
+
+[[subpages]]
+list = [
+    { page = "caches", subpage = "" },
+    { page = "caches", subpage = "Blocks" },
+    { page = "caches", subpage = "Transactions" },
+    { page = "caches", subpage = "Traces" },
+    { page = "caches", subpage = "Separator" },
+    { page = "caches", subpage = "Slurps" },
+    { page = "caches", subpage = "Prices" },
+    { page = "caches", subpage = "Abis" },
+]

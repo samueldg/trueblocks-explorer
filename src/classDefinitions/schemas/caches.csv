@@ -1,0 +1,10 @@
+name         ,selector     ,type     ,unused ,width ,editable ,decimals ,isPill ,align ,cn ,download ,chart ,searchable ,detail ,wide ,underField ,onDisplay     ,onAccept ,onValidate
+ID           ,id           ,string   ,       ,0     ,         ,         ,       ,      ,   ,         ,      ,true       ,       ,     ,           ,getFieldValue ,         ,
+Cache Type   ,type         ,string   ,       ,1     ,         ,         ,       ,      ,   ,         ,      ,true       ,       ,     ,           ,              ,         ,
+Location     ,path         ,string   ,       ,2     ,         ,         ,       ,      ,   ,         ,      ,true       ,       ,     ,           ,              ,         ,
+# Folders    ,nFolders     ,uint64   ,       ,1     ,         ,         ,       ,      ,   ,         ,      ,           ,       ,     ,           ,              ,         ,
+# Files      ,nFiles       ,uint64   ,       ,1     ,         ,         ,       ,      ,   ,         ,      ,           ,       ,     ,           ,              ,         ,
+Total Size   ,sizeInBytes  ,filesize ,       ,1     ,         ,         ,       ,      ,   ,         ,      ,           ,       ,     ,           ,              ,         ,
+Average Size ,bytesPerFile ,filesize ,       ,1     ,         ,         ,       ,      ,   ,         ,      ,           ,       ,     ,           ,getFieldValue ,         ,
+perFolder    ,perFolder    ,double   ,       ,1     ,         ,         ,       ,      ,   ,         ,      ,           ,       ,     ,           ,getFieldValue ,         ,
+Valid        ,is_valid     ,bool     ,       ,0     ,         ,         ,       ,      ,   ,         ,      ,           ,       ,     ,           ,              ,         ,

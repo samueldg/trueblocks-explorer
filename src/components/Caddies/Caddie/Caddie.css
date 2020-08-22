@@ -1,0 +1,12 @@
+.caddie {
+  display: flex;
+  flex-wrap: wrap;
+  /* justify-items: center; */
+}
+
+.inner-card-header {
+  display: grid;
+  grid-template-columns: 1fr 10fr;
+  align-items: center;
+  padding: 4px;
+}

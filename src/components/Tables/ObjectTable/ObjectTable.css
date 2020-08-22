@@ -1,0 +1,30 @@
+@import url('../Tables.css');
+
+.ot-container {
+  padding: 2px;
+}
+
+.ot-body {
+}
+
+.ot-row {
+  display: grid;
+  grid-template-columns: 8fr 14fr;
+  justify-content: space-between;
+}
+
+.ot-cell {
+  padding: var(--at-padding);
+  padding-left: 4px;
+}
+
+.ot-cell.editable {
+  display: block;
+  font-style: italic;
+}
+
+.ot-cell.nowrap {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}

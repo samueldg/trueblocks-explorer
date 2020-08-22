@@ -1,0 +1,7 @@
+/*------------------------------------------*/
+.menu {
+  grid-area: menu;
+  background-color: var(--primary-bg-color);
+  color: var(--primary-text-color);
+  overflow: hidden;
+}

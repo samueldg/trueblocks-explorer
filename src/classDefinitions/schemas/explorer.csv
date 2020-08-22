@@ -1,0 +1,11 @@
+name          ,selector     ,type         ,unused ,width ,editable ,decimals ,isPill ,align ,cn ,download ,chart ,searchable ,detail ,wide ,underField ,onDisplay ,onAccept ,onValidate
+ABIs          ,abis         ,CAbi         ,       ,1     ,         ,         ,       ,      ,   ,         ,      ,           ,       ,     ,           ,          ,         ,
+Blocks        ,blocks       ,CBlock       ,       ,1     ,         ,         ,       ,      ,   ,         ,      ,           ,       ,     ,           ,          ,         ,
+Functions     ,functions    ,CFunction    ,       ,1     ,         ,         ,       ,      ,   ,         ,      ,           ,       ,     ,           ,          ,         ,
+Logs          ,logs         ,CLogEntry    ,       ,1     ,         ,         ,       ,      ,   ,         ,      ,           ,       ,     ,           ,          ,         ,
+Parameters    ,parameters   ,CParameter   ,       ,1     ,         ,         ,       ,      ,   ,         ,      ,           ,       ,     ,           ,          ,         ,
+Receipts      ,receipts     ,CReceipt     ,       ,1     ,         ,         ,       ,      ,   ,         ,      ,           ,       ,     ,           ,          ,         ,
+Trace Actions ,traceActions ,CTraceAction ,       ,1     ,         ,         ,       ,      ,   ,         ,      ,           ,       ,     ,           ,          ,         ,
+Trace Results ,traceResults ,CTraceResult ,       ,1     ,         ,         ,       ,      ,   ,         ,      ,           ,       ,     ,           ,          ,         ,
+Traces        ,traces       ,CTrace       ,       ,1     ,         ,         ,       ,      ,   ,         ,      ,           ,       ,     ,           ,          ,         ,
+Transactions  ,transactions ,CTransaction ,       ,1     ,         ,         ,       ,      ,   ,         ,      ,           ,       ,     ,           ,          ,         ,

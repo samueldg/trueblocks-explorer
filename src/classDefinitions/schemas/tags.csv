@@ -1,0 +1,5 @@
+name      ,selector ,type   ,unused ,width ,editable ,decimals ,isPill ,align ,cn ,download ,chart ,searchable ,detail ,wide ,underField ,onDisplay     ,onAccept ,onValidate
+ID        ,id       ,string ,       ,0     ,         ,         ,       ,      ,   ,         ,      ,true       ,       ,     ,           ,getFieldValue ,         ,
+Tags      ,tags     ,string ,       ,1     ,         ,         ,       ,      ,   ,         ,      ,true       ,       ,     ,           ,getFieldValue ,         ,
+Subtags 1 ,subtags1 ,string ,       ,1     ,         ,         ,       ,      ,   ,         ,      ,true       ,       ,     ,           ,getFieldValue ,         ,
+Subtags 2 ,subtags2 ,string ,       ,1     ,         ,         ,       ,      ,   ,         ,      ,true       ,       ,     ,           ,getFieldValue ,         ,

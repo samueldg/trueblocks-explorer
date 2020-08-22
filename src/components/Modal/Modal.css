@@ -1,0 +1,23 @@
+.modal-style {
+    background-color: #fff;
+    border: 1px solid;
+    border-radius: 5px;
+    max-width: 800px;
+    min-height: 300px;
+    margin: 20px auto;
+    padding: 10px;
+}
+
+.backdrop-style {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0,0,0,0.3);
+    padding: 20;
+}
+  
+.modal-buttons button:not(:last-of-type) {
+    margin-right: .63rem;
+}

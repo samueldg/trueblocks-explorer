@@ -1,0 +1,20 @@
+@import url('../Tables.css');
+
+.chart {
+  border: var(--at-border);
+  background-color: var(--white-color);
+  margin-left: 8px;
+  margin-right: 8px;
+  margin-bottom: 8px;
+}
+
+.selected {
+  background-color: var(--at-primary-bg-color);
+  color: var(--white-color);
+  margin: 2px;
+}
+
+.notSelected {
+  font-size: 0.9em;
+  margin: 2px;
+}

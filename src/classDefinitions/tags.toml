@@ -1,0 +1,13 @@
+[settings]
+class = "CTags"
+recordIcons = "editing"
+defaultSort = "tags,subtags1,subtags2"
+cmdUrl = "names"
+dataUrl = "names"
+dataQuery = "tags"
+imports = "||getServerData, sendServerCommand, sortArray, sortStrings, handleClick, replaceRecord, stateFromStorage|||"
+
+[[subpages]]
+list = [
+    { page = "tags", subpage = "" },
+]

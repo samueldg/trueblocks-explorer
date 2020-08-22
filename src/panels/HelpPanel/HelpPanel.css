@@ -1,0 +1,8 @@
+/*------------------------------------------*/
+.help {
+  border-left: var(--border2-panel);
+  grid-area: help;
+  background-color: var(--secondary-bg-color);
+  color: var(--secondary-text-color);
+  overflow: hidden;
+}
