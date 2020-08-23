@@ -4,7 +4,8 @@
  * All Rights Reserved
  *------------------------------------------------------------------------*/
 import React, { Fragment } from 'react';
-import { useForm, ErrorMessage } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
+import { ErrorMessage } from '@hookform/error-message';
 import { DevTool } from 'react-hook-form-devtools';
 
 import { Modal } from 'components/Modal/Modal';
