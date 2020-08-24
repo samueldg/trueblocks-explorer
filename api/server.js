@@ -182,18 +182,6 @@ app.put(`/settings`, (req, res) => {
   });
 });
 
-//var CONFIG_FILE_PATH = process.env.HOME + '/.quickBlocks/quickBlocks.toml';
-//fs.createReadStream(CONFIG_FILE_PATH, 'utf8').pipe(
-//  concat(function (data) {
-//    var parsed = toml.parse(data);
-//    console.log('Settings: ', parsed.settings);
-//    var provider = 'localhost:8080';
-//    if (parsed.settings && parsed.settings.apiProvider) {
-//      provider = parsed.settings.apiProvider.replace('http://', '');
-//    }
-//    var array = provider.split(':');
-//  })
-//);
 // TODO(tjayrush): This code should notice the lack of a path but allow the API to run anyway. All requests
 // TODO(tjayrush): to the API should return an error to the requestor instead of refusing to run.
 /*

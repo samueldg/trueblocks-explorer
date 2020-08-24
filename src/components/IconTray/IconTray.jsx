@@ -10,6 +10,7 @@ import { getIcon } from 'pages/utils';
 
 import './IconTray.css';
 
+//----------------------------------------------------------------------
 export const IconTray = ({ iconList, handler, record_id, alt = { deleted: false, monitored: false } }) => {
   if (!iconList || iconList.length === 0) return <div></div>;
   return (
