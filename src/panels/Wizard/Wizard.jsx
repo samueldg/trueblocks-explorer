@@ -87,4 +87,4 @@ export const WizardBox = ({ image = '', children }) => {
 };
 
 //----------------------------------------------------------------------
-export const X = Number(5);
+export const X = Number(1);

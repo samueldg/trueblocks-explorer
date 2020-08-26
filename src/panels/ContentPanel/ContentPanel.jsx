@@ -23,9 +23,9 @@ export const ContentPanel = () => {
   title = title === 'summary' ? 'Summary of Accounts for John Q. Public (8 accounts)' : title;
   const expanded = useToggles().state.content;
   return (
-    <Panel title={title} type='content' expanded={expanded}>
+    <Panel title={title} type="content" expanded={expanded}>
       {expanded && (
-        <div className='content-container'>
+        <div className="content-container">
           <InnerContent />
         </div>
       )}
@@ -36,7 +36,7 @@ export const ContentPanel = () => {
 //----------------------------------------------------------------------
 export var PageContext = createContext({});
 export const InnerContent = () => {
-  const [step, setStep] = useState(Number(localStorage.getItem('wizardStep') || 10));
+  const [step, setStep] = useState(Number(localStorage.getItem('wizardStep') || 1));
   const notReady = !useSystemCheck('api');
   const { page, subpage } = currentPage();
 
@@ -62,7 +62,7 @@ export const InnerContent = () => {
   if (notReady)
     return (
       <Fragment>
-        {/*<div onClick={(e) => handleClick(e, nextWizard, { type: 'reset' })}>wizardStep: {step}</div>*/}
+        {<div onClick={(e) => handleClick(e, nextWizard, { type: 'reset' })}>wizardStep: {step}</div>}
         <Settings />
       </Fragment>
     );
@@ -75,8 +75,8 @@ export const InnerContent = () => {
   }
   return (
     <PageContext.Provider value={[]}>
-      {/*<div onClick={(e) => handleClick(e, nextWizard, { type: 'reset' })}>wizardStep: {step}</div>*/}
-      {ret ? ret.component : <div className='warning'>Missing Inner Content</div>}
+      {<div onClick={(e) => handleClick(e, nextWizard, { type: 'reset' })}>wizardStep: {step}</div>}
+      {ret ? ret.component : <div className="warning">Missing Inner Content</div>}
     </PageContext.Provider>
   );
 };

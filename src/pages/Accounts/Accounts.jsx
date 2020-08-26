@@ -181,7 +181,7 @@ export const Accounts = (props) => {
         refreshAccountsData(dataQuery, dispatch, mocked);
       } else {
         if (recordCount > 0) {
-          const max_records = stateFromStorage('perPage', 10); // start with five pages, double each time
+          const max_records = stateFromStorage('perPage', 15); // start with five pages, double each time
           refreshAccountsData2(dataQuery, dispatch, 0, max_records, recordCount);
         }
       }
@@ -223,7 +223,7 @@ export const Accounts = (props) => {
           case 'Eth':
             if (!item['statements']) return false;
             const statements = item['statements'][0];
-            if (statements.weiIn !== '') return true;
+            if (statements.amountIn !== '') return true;
             if (statements.internalIn !== '') return true;
             if (statements.selfDestructIn !== '') return true;
             if (statements.minerBaseRewardIn !== '') return true;
@@ -231,7 +231,7 @@ export const Accounts = (props) => {
             if (statements.minerTxFeeIn !== '') return true;
             if (statements.minerUncleRewardIn !== '') return true;
             if (statements.prefundIn !== '') return true;
-            if (statements.weiOut !== '') return true;
+            if (statements.amountOut !== '') return true;
             if (statements.internalOut !== '') return true;
             if (statements.selfDestructOut !== '') return true;
             if (statements.gasCostOut !== '') return true;
@@ -239,7 +239,7 @@ export const Accounts = (props) => {
           case 'Not Eth':
             if (!item['statements']) return false;
             const statements1 = item['statements'][0];
-            if (statements1.weiIn !== '') return false;
+            if (statements1.amountIn !== '') return false;
             if (statements1.internalIn !== '') return false;
             if (statements1.selfDestructIn !== '') return false;
             if (statements1.minerBaseRewardIn !== '') return true;
@@ -247,7 +247,7 @@ export const Accounts = (props) => {
             if (statements1.minerTxFeeIn !== '') return true;
             if (statements1.minerUncleRewardIn !== '') return true;
             if (statements1.prefundIn !== '') return false;
-            if (statements1.weiOut !== '') return false;
+            if (statements1.amountOut !== '') return false;
             if (statements1.internalOut !== '') return false;
             if (statements1.selfDestructOut !== '') return false;
             if (statements1.gasCostOut !== '') return false;
@@ -596,7 +596,7 @@ export function getFieldValue(record, fieldName) {
       );
     } else if (fn === 'totalIn') {
       let value =
-        Number(record.statements[0]['weiIn']) +
+        Number(record.statements[0]['amountIn']) +
         Number(record.statements[0]['internalIn']) +
         Number(record.statements[0]['selfDestructIn']) +
         Number(record.statements[0]['minerBaseRewardIn']) +
@@ -607,20 +607,11 @@ export function getFieldValue(record, fieldName) {
       return formatFieldByType('double', value, 7);
     } else if (fn === 'totalOut') {
       let value =
-        Number(record.statements[0]['weiOut']) +
+        Number(record.statements[0]['amountOut']) +
         Number(record.statements[0]['internalOut']) +
         Number(record.statements[0]['selfDestructOut']) +
         Number(record.statements[0]['gasCostOut']);
       return formatFieldByType('double', value, 7);
-    } else if (fn === 'net') {
-      let income = record.statements.reduce((sum, statement) => {
-        const ret = getFieldValue(record, 'statements.totalIn');
-        return sum + Number(ret);
-      }, 0);
-      let outflow = record.statements.reduce((sum, statement) => {
-        return sum + Number(getFieldValue(record, 'statements.totalOut'));
-      }, 0);
-      return income - outflow;
     }
     return record.statements[0][fn];
   }
@@ -712,9 +703,9 @@ Date,Amount,Payee,Description,Reference
       }
       break;
     case 'amount':
-      return getFieldValue(record, 'statements.net');
+      return getFieldValue(record, 'statements.amountNet');
     case 'payee':
-      const ret = getFieldValue(record, 'statements.net');
+      const ret = getFieldValue(record, 'statements.amountNet');
       return ret > 0 ? record.from : record.to;
     case 'description':
       if (!record.compressedTx) return '';
@@ -855,6 +846,6 @@ export const messagesSchema = [
 
 //----------------------------------------------------------------------
 function zeroFunc(record) {
-  return getFieldValue(record, 'statements.net') === 0;
+  return getFieldValue(record, 'statements.amountNet') === 0;
 }
 // EXISTING_CODE

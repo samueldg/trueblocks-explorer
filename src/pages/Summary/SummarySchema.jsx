@@ -165,7 +165,7 @@ export const summarySchema = [
   },
   {
     name: 'Income',
-    selector: 'statements.weiIn',
+    selector: 'statements.amountIn',
     type: 'value',
     detail: 1,
     onDisplay: getFieldValue,
@@ -229,7 +229,7 @@ export const summarySchema = [
   },
   {
     name: 'Spending',
-    selector: 'statements.weiOut',
+    selector: 'statements.amountOut',
     type: 'value',
     detail: 1,
     onDisplay: getFieldValue,

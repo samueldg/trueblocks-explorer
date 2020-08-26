@@ -170,7 +170,7 @@ export const accountsSchema = [
   },
   {
     name: 'Ether In',
-    selector: 'statements.weiIn',
+    selector: 'statements.amountIn',
     type: 'value',
     detail: 1,
     onDisplay: getFieldValue,
@@ -234,7 +234,7 @@ export const accountsSchema = [
   },
   {
     name: 'Ether Out',
-    selector: 'statements.weiOut',
+    selector: 'statements.amountOut',
     type: 'value',
     detail: 1,
     onDisplay: getFieldValue,
