@@ -1824,6 +1824,22 @@
       "data_type": "<uint64>",
       "description": "if --skip_ddos is on, this many traces defines what a ddos transaction is (default = 250)"
     },
+    "filter": {
+      "num": "13490",
+      "group": "tools",
+      "api_route": "traces",
+      "tool": "getTrace",
+      "command": "filter",
+      "hotkey": "f",
+      "def_val": "",
+      "is_required": false,
+      "core_visible": false,
+      "docs_visible": false,
+      "generate": "header",
+      "option_kind": "flag",
+      "data_type": "<string>",
+      "description": "Call trace_filter with the comma seperated string of the filter (see docs)"
+    },
     "": {
       "num": "13500",
       "group": "tools",
