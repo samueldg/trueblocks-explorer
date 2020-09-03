@@ -1350,12 +1350,12 @@
       "data_type": "<boolean>",
       "description": "display only uniq addresses found per transaction"
     },
-    "count_only": {
+    "count": {
       "num": "12600",
       "group": "tools",
       "api_route": "blocks",
       "tool": "getBlock",
-      "command": "count_only",
+      "command": "count",
       "hotkey": "c",
       "def_val": "",
       "is_required": false,
@@ -1364,7 +1364,7 @@
       "generate": "header",
       "option_kind": "switch",
       "data_type": "<boolean>",
-      "description": "display counts of appearances (for --addrs, --uniq, or --uniq_tx only)"
+      "description": "display counts of appearances (for --addrs, --uniq, or --uniq_tx) or transactions"
     },
     "uncles": {
       "num": "12610",
@@ -1776,12 +1776,12 @@
       "data_type": "<boolean>",
       "description": "articulate the transactions if an ABI is found for the 'to' address"
     },
-    "count_only": {
+    "count": {
       "num": "13440",
       "group": "tools",
       "api_route": "traces",
       "tool": "getTrace",
-      "command": "count_only",
+      "command": "count",
       "hotkey": "c",
       "def_val": "",
       "is_required": false,
