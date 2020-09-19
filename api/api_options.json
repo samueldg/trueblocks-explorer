@@ -1398,6 +1398,22 @@
       "data_type": "<boolean>",
       "description": "force a re-write of the block to the cache"
     },
+    "trace": {
+      "num": "12625",
+      "group": "tools",
+      "api_route": "blocks",
+      "tool": "getBlock",
+      "command": "trace",
+      "hotkey": "t",
+      "def_val": "",
+      "is_required": false,
+      "core_visible": false,
+      "docs_visible": false,
+      "generate": "header",
+      "option_kind": "switch",
+      "data_type": "<boolean>",
+      "description": "export the traces from the block as opposed to the block data"
+    },
     "": {
       "num": "12640",
       "group": "tools",
