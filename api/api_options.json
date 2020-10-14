@@ -130,6 +130,22 @@
       "data_type": "list<addr>",
       "description": "one or more addresses (0x...) to export"
     },
+    "topics": {
+      "num": "10205",
+      "group": "apps",
+      "api_route": "export",
+      "tool": "acctExport",
+      "command": "topics",
+      "hotkey": "",
+      "def_val": "",
+      "is_required": false,
+      "core_visible": true,
+      "docs_visible": true,
+      "generate": "local",
+      "option_kind": "positional",
+      "data_type": "list<topic>",
+      "description": "filter by one or more logs topics (only for --logs option)"
+    },
     "appearances": {
       "num": "10210",
       "group": "apps",
@@ -353,6 +369,22 @@
       "option_kind": "flag",
       "data_type": "<blknum>",
       "description": "maximum number of records to process for --freshen option"
+    },
+    "factory": {
+      "num": "10395",
+      "group": "apps",
+      "api_route": "export",
+      "tool": "acctExport",
+      "command": "factory",
+      "hotkey": "y",
+      "def_val": "",
+      "is_required": false,
+      "core_visible": false,
+      "docs_visible": false,
+      "generate": "header",
+      "option_kind": "switch",
+      "data_type": "<boolean>",
+      "description": "scan for contract creations from the given address(es) and report address of those contracts"
     },
     "emitter": {
       "num": "10430",
