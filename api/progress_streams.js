@@ -22,7 +22,7 @@ function onFinish(routeName) {
 }
 
 function getProgress(string) {
-  const match = string.match(/\:([A-Za-z|\s]+)([\d]+) of ([\d]+)/);
+  const match = string.match(/\:([A-Za-z|\s]+)([\d]+) of.*([\d]+)/);
   if (match) {
     let [, op, done, total] = match;
     op = string.trim(op);

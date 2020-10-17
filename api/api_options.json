@@ -807,40 +807,6 @@
       "description": "Report on status of one or more TrueBlocks caches."
     }
   },
-  "settings": {
-    "get": {
-      "num": "10940",
-      "group": "apps",
-      "api_route": "settings",
-      "tool": "settings",
-      "command": "get",
-      "hotkey": "",
-      "def_val": "",
-      "is_required": false,
-      "core_visible": false,
-      "docs_visible": false,
-      "generate": "--",
-      "option_kind": "switch",
-      "data_type": "<boolean>",
-      "description": "retrieve current configuration values"
-    },
-    "set": {
-      "num": "10960",
-      "group": "apps",
-      "api_route": "settings",
-      "tool": "settings",
-      "command": "set",
-      "hotkey": "",
-      "def_val": "",
-      "is_required": false,
-      "core_visible": false,
-      "docs_visible": false,
-      "generate": "--",
-      "option_kind": "flag",
-      "data_type": "<string>",
-      "description": "set new configuration values"
-    }
-  },
   "rm": {
     "addrs": {
       "num": "11000",
@@ -873,42 +839,6 @@
       "option_kind": "switch",
       "data_type": "<boolean>",
       "description": "must be present for remove to occur"
-    }
-  },
-  "leech": {
-    "": {
-      "num": "11120",
-      "group": "apps",
-      "api_route": "leech",
-      "tool": "leech",
-      "command": "",
-      "hotkey": "",
-      "def_val": "",
-      "is_required": false,
-      "core_visible": true,
-      "docs_visible": true,
-      "generate": "--",
-      "option_kind": "flag",
-      "data_type": "<string>",
-      "description": "leech the address index from IPFS"
-    }
-  },
-  "seed": {
-    "": {
-      "num": "11160",
-      "group": "apps",
-      "api_route": "seed",
-      "tool": "seed",
-      "command": "",
-      "hotkey": "",
-      "def_val": "",
-      "is_required": false,
-      "core_visible": true,
-      "docs_visible": true,
-      "generate": "--",
-      "option_kind": "flag",
-      "data_type": "<string>",
-      "description": "seed the address index to IPFS"
     }
   },
   "quotes": {

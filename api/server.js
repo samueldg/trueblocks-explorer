@@ -141,47 +141,6 @@ app.get(`/:routeName`, (req, res) => {
   streamEvents.bindEvents(chifra.stderr, { routeName });
 });
 
-//------------------------------------------------------------------
-app.put(`/settings`, (req, res) => {
-  const routeName = 'settings';
-  debug_log(req.query);
-  if (req.query.set !== undefined) {
-    debug_log(`setting env CONFIG_SET to...\n${JSON.stringify(req.body)}`);
-    env.CONFIG_SET = JSON.stringify(req.body);
-  }
-
-  let cmd = getCommandLine(routeName, req.query);
-  let chifra = spawn('chifra', [routeName, cmd], { env: env, detached: true });
-
-  cmdCount++;
-  console.log(`-API: -------------- ${cmdCount} ---------------------------`);
-  console.log(
-    ~~(Date.now() / 1000) + ' ~ \x1b[32m\x1b[1m<INFO>\x1b[0m  : ' + `API calling \'chifra ${routeName} ${cmd}\'`
-  );
-
-  processList.push({ pid: chifra.pid, cmd: `chifra ${routeName} ${cmd}` });
-  debug_log(processList);
-
-  req.on('close', (err) => {
-    debug_log(`killing ${-chifra.pid}...`);
-    try {
-      process.kill(-chifra.pid, 'SIGINT');
-    } catch (e) {
-      debug_log('completed'); //`error killing process: ${e}`)
-    }
-    removeFromProcessList(chifra.pid);
-    return false;
-  });
-  chifra.stderr.pipe(process.stderr);
-  chifra.stdout.pipe(res).on('finish', (code) => {
-    removeFromProcessList(chifra.pid);
-    log(`Exiting route ${routeName} with ${code === undefined ? 'OK' : code}`);
-    console.log(`-API: -------------- ${cmdCount} ---------------------------`);
-    console.log(' ');
-    res.send();
-  });
-});
-
 // TODO(tjayrush): This code should notice the lack of a path but allow the API to run anyway. All requests
 // TODO(tjayrush): to the API should return an error to the requestor instead of refusing to run.
 /*
