@@ -1933,11 +1933,11 @@
       "description": "Retrieve an Ethereum transaction from the local cache or a running node."
     }
   },
-  "abi": {
+  "abis": {
     "addrs": {
       "num": "13660",
       "group": "tools",
-      "api_route": "abi",
+      "api_route": "abis",
       "tool": "grabABI",
       "command": "addrs",
       "hotkey": "",
@@ -1953,7 +1953,7 @@
     "canonical": {
       "num": "13680",
       "group": "tools",
-      "api_route": "abi",
+      "api_route": "abis",
       "tool": "grabABI",
       "command": "canonical",
       "hotkey": "c",
@@ -1969,7 +1969,7 @@
     "generate": {
       "num": "13700",
       "group": "tools",
-      "api_route": "abi",
+      "api_route": "abis",
       "tool": "grabABI",
       "command": "generate",
       "hotkey": "g",
@@ -1985,7 +1985,7 @@
     "monitored": {
       "num": "13840",
       "group": "tools",
-      "api_route": "abi",
+      "api_route": "abis",
       "tool": "grabABI",
       "command": "monitored",
       "hotkey": "m",
@@ -2001,7 +2001,7 @@
     "known": {
       "num": "13850",
       "group": "tools",
-      "api_route": "abi",
+      "api_route": "abis",
       "tool": "grabABI",
       "command": "known",
       "hotkey": "k",
@@ -2017,7 +2017,7 @@
     "addr": {
       "num": "13855",
       "group": "tools",
-      "api_route": "abi",
+      "api_route": "abis",
       "tool": "grabABI",
       "command": "addr",
       "hotkey": "a",
@@ -2033,7 +2033,7 @@
     "sol": {
       "num": "13860",
       "group": "tools",
-      "api_route": "abi",
+      "api_route": "abis",
       "tool": "grabABI",
       "command": "sol",
       "hotkey": "s",
@@ -2046,10 +2046,26 @@
       "data_type": "<string>",
       "description": "file name of .sol file from which to create a new known abi (without .sol)"
     },
+    "find": {
+      "num": "13865",
+      "group": "tools",
+      "api_route": "abis",
+      "tool": "grabABI",
+      "command": "find",
+      "hotkey": "f",
+      "def_val": "",
+      "is_required": false,
+      "core_visible": true,
+      "docs_visible": false,
+      "generate": "local",
+      "option_kind": "flag",
+      "data_type": "<string>",
+      "description": "try to search for a function declaration given a four byte code"
+    },
     "": {
       "num": "13880",
       "group": "tools",
-      "api_route": "abi",
+      "api_route": "abis",
       "tool": "grabABI",
       "command": "",
       "hotkey": "",

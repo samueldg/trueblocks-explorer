@@ -41,7 +41,7 @@ export const Signatures = (props) => {
   // EXISTING_CODE
   // EXISTING_CODE
 
-  const cmdUrl = getApiUrl('abi');
+  const cmdUrl = getApiUrl('abis');
 
   const dataQuery = 'monitored&known';
   function addendum(record, record_id) {
@@ -259,7 +259,7 @@ const defaultSearch = ['encoding', 'type', 'name'];
 
 //----------------------------------------------------------------------
 export function refreshSignaturesData(query, dispatch, mocked) {
-  getServerData(getApiUrl('abi'), query + (mocked ? '&mockData' : '')).then((theData) => {
+  getServerData(getApiUrl('abis'), query + (mocked ? '&mockData' : '')).then((theData) => {
     let signatures = theData.data;
     // EXISTING_CODE
     signatures = signatures.filter((item) => item.type !== 'constructor');
