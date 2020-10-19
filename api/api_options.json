@@ -15,7 +15,27 @@
       "option_kind": "positional",
       "data_type": "list<addr>",
       "description": "one or more Ethereum addresses"
-    },
+    }
+  },
+  "rm": {
+    "rm": {
+      "num": "10030",
+      "group": "apps",
+      "api_route": "rm",
+      "tool": "acctScrape",
+      "command": "rm",
+      "hotkey": "",
+      "def_val": "",
+      "is_required": false,
+      "core_visible": true,
+      "docs_visible": false,
+      "generate": "local",
+      "option_kind": "switch",
+      "data_type": "<boolean>",
+      "description": "process the request to delete, undelete, or remove monitors"
+    }
+  },
+  "list": {
     "staging": {
       "num": "10060",
       "group": "apps",
@@ -110,7 +130,7 @@
       "generate": "--",
       "option_kind": "description",
       "data_type": "",
-      "description": "Index transactions for a given Ethereum address (or collection of addresses)."
+      "description": "Add or remove monitors for a given Ethereum address (or collection of addresses)."
     }
   },
   "export": {
@@ -807,40 +827,6 @@
       "description": "Report on status of one or more TrueBlocks caches."
     }
   },
-  "rm": {
-    "addrs": {
-      "num": "11000",
-      "group": "apps",
-      "api_route": "rm",
-      "tool": "rm",
-      "command": "addrs",
-      "hotkey": "",
-      "def_val": "",
-      "is_required": true,
-      "core_visible": true,
-      "docs_visible": true,
-      "generate": "--",
-      "option_kind": "positional",
-      "data_type": "list<addr>",
-      "description": "remove one or more monitors"
-    },
-    "header": {
-      "num": "11020",
-      "group": "apps",
-      "api_route": "rm",
-      "tool": "rm",
-      "command": "header",
-      "hotkey": "",
-      "def_val": "",
-      "is_required": false,
-      "core_visible": true,
-      "docs_visible": true,
-      "generate": "--",
-      "option_kind": "switch",
-      "data_type": "<boolean>",
-      "description": "must be present for remove to occur"
-    }
-  },
   "quotes": {
     "freshen": {
       "num": "12020",
@@ -1165,11 +1151,13 @@
       "option_kind": "switch",
       "data_type": "<boolean>",
       "description": "display only addresses in the results (useful for scripting)"
-    },
+    }
+  },
+  "collections": {
     "collections": {
       "num": "12430",
       "group": "tools",
-      "api_route": "names",
+      "api_route": "collections",
       "tool": "ethNames",
       "command": "collections",
       "hotkey": "s",
@@ -1181,27 +1169,13 @@
       "option_kind": "switch",
       "data_type": "<boolean>",
       "description": "display collections data"
-    },
-    "to_custom": {
-      "num": "12435",
-      "group": "tools",
-      "api_route": "names",
-      "tool": "ethNames",
-      "command": "to_custom",
-      "hotkey": "u",
-      "def_val": "",
-      "is_required": false,
-      "core_visible": false,
-      "docs_visible": false,
-      "generate": "local",
-      "option_kind": "switch",
-      "data_type": "<boolean>",
-      "description": "for editCmd only, is the edited name a custom name or not"
-    },
+    }
+  },
+  "tags": {
     "tags": {
       "num": "12445",
       "group": "tools",
-      "api_route": "names",
+      "api_route": "tags",
       "tool": "ethNames",
       "command": "tags",
       "hotkey": "g",
@@ -1213,7 +1187,9 @@
       "option_kind": "switch",
       "data_type": "<boolean>",
       "description": "export the list of tags and subtags only"
-    },
+    }
+  },
+  "names": {
     "": {
       "num": "12460",
       "group": "tools",
