@@ -121,7 +121,7 @@ export const Monitors = (props) => {
           break;
         case 'delete':
           {
-            const cmdQuery = 'editCmd=delete&terms=' + action.record_id + addendum(record, action.record_id);
+            const cmdQuery = 'terms=' + action.record_id; // + addendum(record, action.record_id);
             statusDispatch(LOADING);
             dispatch(action);
             sendServerCommand(cmdUrl, cmdQuery).then(() => {
@@ -132,7 +132,7 @@ export const Monitors = (props) => {
           break;
         case 'undelete':
           {
-            const cmdQuery = 'editCmd=undelete&terms=' + action.record_id + addendum(record, action.record_id);
+            const cmdQuery = 'terms=' + action.record_id; // + addendum(record, action.record_id);
             statusDispatch(LOADING);
             dispatch(action);
             sendServerCommand(cmdUrl, cmdQuery).then(() => {
@@ -143,7 +143,7 @@ export const Monitors = (props) => {
           break;
         case 'remove':
           {
-            const cmdQuery = 'editCmd=remove&terms=' + action.record_id + addendum(record, action.record_id);
+            const cmdQuery = 'remove&terms=' + action.record_id; // + addendum(record, action.record_id);
             statusDispatch(LOADING);
             sendServerCommand(cmdUrl, cmdQuery).then((theData) => {
               // the command worked, but now we need to reload the data
