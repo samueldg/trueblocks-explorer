@@ -1190,6 +1190,22 @@
     }
   },
   "names": {
+    "to_custom": {
+      "num": "12450",
+      "group": "tools",
+      "api_route": "names",
+      "tool": "ethNames",
+      "command": "to_custom",
+      "hotkey": "u",
+      "def_val": "",
+      "is_required": false,
+      "core_visible": false,
+      "docs_visible": false,
+      "generate": "local",
+      "option_kind": "switch",
+      "data_type": "<boolean>",
+      "description": "for editCmd only, is the edited name a custom name or not"
+    },
     "": {
       "num": "12460",
       "group": "tools",
