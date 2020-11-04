@@ -2186,5 +2186,71 @@
       "data_type": "",
       "description": "Reports if a block was found in the cache, at a local, or at a remote node."
     }
+  },
+  "dive": {
+    "mode": {
+      "num": "14010",
+      "group": "tools",
+      "api_route": "dive",
+      "tool": "turboDive",
+      "command": "mode",
+      "hotkey": "m",
+      "def_val": "",
+      "is_required": false,
+      "core_visible": true,
+      "docs_visible": false,
+      "generate": "header",
+      "option_kind": "flag",
+      "data_type": "enum[tables*|dump]",
+      "description": "the command to run"
+    },
+    "datadir": {
+      "num": "14020",
+      "group": "tools",
+      "api_route": "dive",
+      "tool": "turboDive",
+      "command": "datadir",
+      "hotkey": "d",
+      "def_val": "",
+      "is_required": false,
+      "core_visible": true,
+      "docs_visible": true,
+      "generate": "header",
+      "option_kind": "flag",
+      "data_type": "<string>",
+      "description": "folder containing TurboGeth data file (data.mdb)"
+    },
+    "name": {
+      "num": "14030",
+      "group": "tools",
+      "api_route": "dive",
+      "tool": "turboDive",
+      "command": "name",
+      "hotkey": "n",
+      "def_val": "",
+      "is_required": false,
+      "core_visible": true,
+      "docs_visible": true,
+      "generate": "header",
+      "option_kind": "flag",
+      "data_type": "<string>",
+      "description": "for 'dump' command only, the name of the table to dump"
+    },
+    "": {
+      "num": "14040",
+      "group": "tools",
+      "api_route": "dive",
+      "tool": "turboDive",
+      "command": "",
+      "hotkey": "",
+      "def_val": "",
+      "is_required": false,
+      "core_visible": true,
+      "docs_visible": false,
+      "generate": "--",
+      "option_kind": "description",
+      "data_type": "",
+      "description": "Dive deeply into the turboGeth database."
+    }
   }
 }
