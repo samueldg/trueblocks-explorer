@@ -6,7 +6,7 @@ import App from './App';
 import 'index.css';
 
 let host = process.env.REACT_APP_API_URL ? process.env.REACT_APP_API_URL : 'localhost';
-let port = process.env.REACT_APP_API_PORT ? process.env.REACT_APP_API_PORT : '8080';
+let port = process.env.REACT_APP_API_PORT ? process.env.REACT_APP_API_PORT : '8090';
 setupWebsocket({ host: host, port: port, path: 'websocket' });
 
 const routes = (

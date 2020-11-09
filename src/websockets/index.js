@@ -65,7 +65,7 @@ export function clear() {
   messageQueue = state.messageQueue;
 }
 
-export function setup({ host = 'localhost', port = 8080, path = 'websocket' } = {}) {
+export function setup({ host = 'localhost', port = 8090, path = 'websocket' } = {}) {
   socket = new WebSocket(`ws://${host}:${port}/${path}`);
   socket.addEventListener('open', () => {
     socketReady = true;
