@@ -2236,8 +2236,40 @@
       "data_type": "<string>",
       "description": "for 'dump' command only, the name of the table to dump"
     },
-    "": {
+    "goerli": {
+      "num": "14035",
+      "group": "tools",
+      "api_route": "dive",
+      "tool": "turboDive",
+      "command": "goerli",
+      "hotkey": "g",
+      "def_val": "",
+      "is_required": false,
+      "core_visible": true,
+      "docs_visible": true,
+      "generate": "header",
+      "option_kind": "switch",
+      "data_type": "<boolean>",
+      "description": "run against the goerli testnet"
+    },
+    "no_zero": {
       "num": "14040",
+      "group": "tools",
+      "api_route": "dive",
+      "tool": "turboDive",
+      "command": "no_zero",
+      "hotkey": "z",
+      "def_val": "",
+      "is_required": false,
+      "core_visible": true,
+      "docs_visible": true,
+      "generate": "header",
+      "option_kind": "switch",
+      "data_type": "<boolean>",
+      "description": "suppress the display of tables with zero records"
+    },
+    "": {
+      "num": "14050",
       "group": "tools",
       "api_route": "dive",
       "tool": "turboDive",
