@@ -188,7 +188,7 @@ if (paths) {
 }
 */
 
-const port = !isNaN(process.argv[2]) ? process.argv[2] : 8090;
+const port = !isNaN(process.argv[2]) ? process.argv[2] : 8080;
 const server = app.listen(port, () => {
   console.log('TrueBlocks Data API (version 0.8.1-alpha) initialized on port ' + port);
 });

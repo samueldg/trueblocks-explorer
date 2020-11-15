@@ -9,7 +9,7 @@ const boot = require('./boot');
 const getUiUrl = require('./get_ui_url').getUiUrl;
 const detectApi = require('./detect_api').detectApi;
 
-const apiPort = 8090;
+const apiPort = 8080;
 
 const store = new Store();
 
