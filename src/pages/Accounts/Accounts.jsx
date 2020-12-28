@@ -481,7 +481,11 @@ export function refreshAccountsData2(query, dispatch, firstRecord, maxRecords, n
     dispatch({ type: 'success', payload: theData });
 
     if (Number(firstRecord) + Number(maxRecords) < nRecords) {
-      refreshAccountsData2(query, dispatch, Number(firstRecord) + Number(maxRecords), maxRecords * 2, nRecords);
+      var newStart = Number(firstRecord) + Number(maxRecords);
+      var newEnd = maxRecords * 2;
+      var max = 100;
+      if (newStart + max < newEnd) newEnd = newStart + max;
+      refreshAccountsData2(query, dispatch, newStart, newEnd, nRecords);
     }
   });
 }

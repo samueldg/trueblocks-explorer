@@ -280,6 +280,18 @@
       "data_type": "<boolean>",
       "description": "toggle skipping over 2016 dDos transactions ('on' by default)"
     },
+    "ignore_malicious": {
+      "num": "10345",
+      "group": "apps",
+      "api_route": "export",
+      "tool": "acctExport",
+      "command": "ignore_malicious",
+      "hotkey": "g",
+      "generate": "header",
+      "option_kind": "toggle",
+      "data_type": "<boolean>",
+      "description": "toggle skipping over transactions againt malicious addresses ('off' by default)"
+    },
     "max_traces": {
       "num": "10350",
       "group": "apps",
