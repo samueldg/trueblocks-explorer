@@ -347,7 +347,7 @@ export const Accounts = (props) => {
         handler={accountsHandler}
       />
       {mocked && (
-        <span className="warning">
+        <span className='warning'>
           <b>&nbsp;&nbsp;MOCKED DATA&nbsp;&nbsp;</b>
         </span>
       )}
@@ -445,9 +445,9 @@ const BalanceView = ({ data, columns, title }) => {
     <ChartTable
       columns={cols}
       data={data}
-      title=""
+      title=''
       search={false}
-      chartName="accounts"
+      chartName='accounts'
       chartCtx={{ type: 'line', defPair: ['blockNumber', 'statements.endBal'] }}
       pagination={true}
     />
@@ -632,8 +632,8 @@ export function getFieldValue(record, fieldName) {
     case 'marker2':
       return (
         <Fragment>
-          {internal ? <div className="internal">{'in'}</div> : ''}
-          {record.isError ? <div className="isError">{'er'}</div> : ''}
+          {internal ? <div className='internal'>{'in'}</div> : ''}
+          {record.isError ? <div className='isError'>{'er'}</div> : ''}
         </Fragment>
       );
     case 'isError':
@@ -642,13 +642,13 @@ export function getFieldValue(record, fieldName) {
       return internal ? 'int' : '';
     case 'from': {
       const val = record.fromName ? record.fromName.name : record.from;
-      if (record.from === g_focusValue) return <div className="focusValue">{val}</div>;
-      return <div className="nonFocusValue">{val}</div>;
+      if (record.from === g_focusValue) return <div className='focusValue'>{val}</div>;
+      return <div className='nonFocusValue'>{val}</div>;
     }
     case 'to': {
       const val = record.toName ? record.toName.name : record.to;
-      if (record.to === g_focusValue) return <div className="focusValue">{val}</div>;
-      return <div className="nonFocusValue">{val}</div>;
+      if (record.to === g_focusValue) return <div className='focusValue'>{val}</div>;
+      return <div className='nonFocusValue'>{val}</div>;
     }
     case 'fromName':
       return record.fromName ? (
@@ -656,8 +656,7 @@ export function getFieldValue(record, fieldName) {
       ) : (
         <div
           onClick={(e) => handleClick(e, g_Handler, { type: 'Add', record_id: record.from })}
-          style={{ color: 'green' }}
-        >
+          style={{ color: 'green' }}>
           {getIcon(record.from, 'AddName', false, false, 12)}
         </div>
       );
@@ -667,8 +666,7 @@ export function getFieldValue(record, fieldName) {
       ) : (
         <div
           onClick={(e) => handleClick(e, g_Handler, { type: 'Add', record_id: record.to })}
-          style={{ color: 'green' }}
-        >
+          style={{ color: 'green' }}>
           {getIcon(record.to, 'AddName', false, false, 12)}
         </div>
       );
@@ -777,8 +775,7 @@ function displayCompressed(compressed, debug) {
                 style={{
                   display: 'grid',
                   gridTemplateColumns: '3fr 20fr 80fr 1fr',
-                }}
-              >
+                }}>
                 <div> </div>
                 <div key={item + '_a'} style={{ fontStyle: 'italic' }}>
                   {s[0] === ' stub' ? '0x' : s[0] + ':'}
