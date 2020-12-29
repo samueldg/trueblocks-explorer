@@ -11,7 +11,7 @@ setupWebsocket({ host: host, port: port, path: 'websocket' });
 
 const routes = (
   <BrowserRouter>
-    <Route path="/" component={App} />
+    <Route path='/' component={App} />
   </BrowserRouter>
 );
 export default routes;

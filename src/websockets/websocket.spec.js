@@ -1,13 +1,6 @@
 import WS from 'jest-websocket-mock';
 
-import {
-  addMessageListener,
-  addActionListener,
-  removeListener,
-  send,
-  clear,
-  setup
-} from './';
+import { addMessageListener, addActionListener, removeListener, send, clear, setup } from './';
 
 let server = null;
 
@@ -23,10 +16,10 @@ beforeEach(async () => {
 afterEach(() => WS.clean());
 
 describe('Websocket communication module', () => {
-  it('can receive messages via addMessageListener', async done => {
+  it('can receive messages via addMessageListener', async (done) => {
     const expectedMessage = {
       action: 'test',
-      testing: true
+      testing: true,
     };
 
     addMessageListener((message) => {
@@ -37,10 +30,10 @@ describe('Websocket communication module', () => {
     server.send(JSON.stringify(expectedMessage));
   });
 
-  it('can receive messages via addActionListener', async done => {
+  it('can receive messages via addActionListener', async (done) => {
     const expectedMessage = {
       action: 'test',
-      testing: true
+      testing: true,
     };
     const otherListener = jest.fn();
 
@@ -70,14 +63,12 @@ describe('Websocket communication module', () => {
   it('sends message', async () => {
     const expectedMessage = {
       action: 'test',
-      testing: true
+      testing: true,
     };
 
     send(expectedMessage.action, { testing: expectedMessage.testing });
 
     await expect(server).toReceiveMessage(JSON.stringify(expectedMessage));
-    expect(server).toHaveReceivedMessages([
-      JSON.stringify(expectedMessage)
-    ]);
+    expect(server).toHaveReceivedMessages([JSON.stringify(expectedMessage)]);
   });
 });

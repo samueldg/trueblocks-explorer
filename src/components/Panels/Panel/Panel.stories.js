@@ -16,7 +16,7 @@ export const displayPanel = () => (
       headerLink={'http://google.com'}
       topIcon={null}
       type={null}
-      dir="left"
+      dir='left'
       expanded={true}
       children={"This is the time that tries men's souls"}
     />

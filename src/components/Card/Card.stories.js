@@ -7,13 +7,13 @@ import './Card.css';
 
 export default { title: 'Card' };
 
-const helpIcon = <HelpCircle fill="forestgreen" color="#333" onClick={null} />;
+const helpIcon = <HelpCircle fill='forestgreen' color='#333' onClick={null} />;
 export const displayCard = () => (
   <BrowserRouter>
     <Card
       title={'Title'}
       headerLink={'/'}
-      headerClass="card-header"
+      headerClass='card-header'
       topIcon={helpIcon}
       iconTray={''}
       children={"This is the times that try men's souls"}

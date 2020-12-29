@@ -7,17 +7,16 @@ const ChevronRight = (props) => {
   const pts = filled ? '9 18 15 12 9 6 9 18' : '9 18 15 12 9 6';
   return (
     <svg
-      xmlns="http://www.w3.org/2000/svg"
+      xmlns='http://www.w3.org/2000/svg'
       width={size}
       height={size}
       viewBox={viewBox}
       fill={fillColor}
       stroke={color}
       strokeWidth={stroke}
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      {...otherProps}
-    >
+      strokeLinecap='round'
+      strokeLinejoin='round'
+      {...otherProps}>
       <polyline points={pts} />
     </svg>
   );
