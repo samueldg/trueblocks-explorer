@@ -286,11 +286,23 @@
       "api_route": "export",
       "tool": "acctExport",
       "command": "ignore_malicious",
-      "hotkey": "g",
+      "hotkey": "G",
       "generate": "header",
       "option_kind": "toggle",
       "data_type": "<boolean>",
       "description": "toggle skipping over transactions againt malicious addresses ('off' by default)"
+    },
+    "include_airdrops": {
+      "num": "10347",
+      "group": "apps",
+      "api_route": "export",
+      "tool": "acctExport",
+      "command": "include_airdrops",
+      "hotkey": "N",
+      "generate": "header",
+      "option_kind": "toggle",
+      "data_type": "<boolean>",
+      "description": "toggle skipping airdrop transactions ('off' by default)"
     },
     "max_traces": {
       "num": "10350",
