@@ -280,30 +280,6 @@
       "data_type": "<boolean>",
       "description": "toggle skipping over 2016 dDos transactions ('on' by default)"
     },
-    "ignore_malicious": {
-      "num": "10345",
-      "group": "apps",
-      "api_route": "export",
-      "tool": "acctExport",
-      "command": "ignore_malicious",
-      "hotkey": "G",
-      "generate": "header",
-      "option_kind": "toggle",
-      "data_type": "<boolean>",
-      "description": "toggle skipping over transactions againt malicious addresses ('off' by default)"
-    },
-    "include_airdrops": {
-      "num": "10347",
-      "group": "apps",
-      "api_route": "export",
-      "tool": "acctExport",
-      "command": "include_airdrops",
-      "hotkey": "N",
-      "generate": "header",
-      "option_kind": "toggle",
-      "data_type": "<boolean>",
-      "description": "toggle skipping airdrop transactions ('off' by default)"
-    },
     "max_traces": {
       "num": "10350",
       "group": "apps",
@@ -1059,6 +1035,18 @@
       "option_kind": "switch",
       "data_type": "<boolean>",
       "description": "for editCmd only, is the edited name a custom name or not"
+    },
+    "clean": {
+      "num": "12455",
+      "group": "tools",
+      "api_route": "names",
+      "tool": "ethNames",
+      "command": "clean",
+      "hotkey": "C",
+      "generate": "local",
+      "option_kind": "switch",
+      "data_type": "<boolean>",
+      "description": "clean the data (addrs to lower case, sort by addr)"
     },
     "": {
       "num": "12460",

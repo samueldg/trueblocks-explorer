@@ -9,7 +9,7 @@ import Mousetrap from 'mousetrap';
 
 import { ToastProvider } from 'components/Toast';
 import { PageHeader, PageFooter, PageContent } from 'page-parts';
-import GlobalContext, { getApiUrl, defaultToggles, togglesReducer, statusDefault, statusReducer } from 'store';
+import GlobalContext, { defaultToggles, togglesReducer, statusDefault, statusReducer } from 'store';
 import { theMenu, menusReducer } from 'pages';
 import { stateFromStorage } from 'components/utils';
 
@@ -108,18 +108,24 @@ function App() {
 
   return (
     <GlobalContext.Provider value={theGlobalState}>
-      <div className='whole-page'>
-        <ToastProvider>
-          <PageHeader />
-          <PageContent />
-          <PageFooter />
-        </ToastProvider>
-      </div>
+      <ToastProvider>
+        <WholePage />
+      </ToastProvider>
     </GlobalContext.Provider>
   );
 }
-
 export default App;
+
+//------------------------------------------------------
+const WholePage = () => {
+  return (
+     <div className='whole-page'>
+       <PageHeader />
+       <PageContent />
+       <PageFooter />
+     </div>
+   );
+ };
 
 //------------------------------------------------------
 const mapHotKeys = (panelDispatch) => {

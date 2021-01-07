@@ -384,8 +384,7 @@ const getInnerTable = (
   accountsHandler
 ) => {
   // EXISTING_CODE
-  if (!accounts) return <></>;
-
+  if (!accounts) return <Fragment></Fragment>;
   if (curTag === 'Neighbors') {
     return <ObjectTable data={accounts.meta} columns={metaSchema} title={'Direct Neighbors of ' + title} />;
   } else if (curTag === 'Balances') {
@@ -425,9 +424,7 @@ const getInnerTable = (
       data={filtered}
       columns={accountsSchema}
       title={title}
-      search={true}
       searchFields={searchFields}
-      pagination={true}
       recordIcons={recordIconList}
       parentHandler={accountsHandler}
       detailLevel={detailLevel}
@@ -728,7 +725,7 @@ export const CompressedLogs = ({ record }) => {
     return l;
   });
   const theList = logs.map((log) => {
-    return displayCompressed(log.compressedLog.replace(/ /g, ''), false);
+    return displayCompressed(log.address, log.compressedLog.replace(/ /g, ''), false);
   });
   return <Fragment>{theList}</Fragment>;
 };
@@ -737,20 +734,21 @@ export const CompressedLogs = ({ record }) => {
 export const CompressedTx = ({ record, fieldName }) => {
   if (!record['compressedTx']) return null;
   const compressed = record['compressedTx'];
-  return displayCompressed(compressed.replace(/ /g, ''), false);
+  return displayCompressed('', compressed.replace(/ /g, ''), false);
 };
 
 //----------------------------------------------------------------------
-function displayCompressed(compressed, debug) {
+function displayCompressed(emitter, compressed, debug) {
   if (compressed === '0x()') return <div key={'xxx'}>{<i>{'null'}</i>}</div>;
 
-  if (compressed.substr(0, 8) === 'message:')
+  if (compressed.substr(0, 8) === 'message:') {
     return (
       <div key={'xxx'}>
         <b>{compressed.replace('message:', '')}</b>
       </div>
     );
-
+  }
+  
   let arr = compressed.replace(')', '').replace('(', ',').split(',');
   if (arr.length === 0 || (arr.length === 1 && arr[0] === '')) return null;
 
@@ -759,7 +757,15 @@ function displayCompressed(compressed, debug) {
     <div>
       {arr.map((item, index) => {
         if (index === 0) {
-          return <div key={item}>{<b>{item}</b>}</div>;
+          return (
+            <div key={item}>
+              {
+                <b>
+                  {item}{emitter !== '' ? ': ' : '' }{emitter}
+                </b>
+              }
+            </div>
+          );
         } else {
           let s = item.split(':');
           if (!s) {
