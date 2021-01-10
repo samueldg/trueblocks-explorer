@@ -104,8 +104,8 @@ export const transactionsSchema = [
     width: 1,
   },
   {
-    name: 'isInternal',
-    selector: 'isInternal',
+    name: 'hasToken',
+    selector: 'hasToken',
     type: 'uint64',
     width: 1,
   },

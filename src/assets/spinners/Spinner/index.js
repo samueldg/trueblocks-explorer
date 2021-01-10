@@ -2,17 +2,17 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './style.css';
 
-export default function Spinner({ color, className, style }) {
+export default function Spinner({color, className, style}) {
   const circles = [...Array(12)].map((_, index) => {
     return (
       <div key={index}>
-        <div className='div-after' style={{ background: color }}></div>
+        <div className='div-after' style={{background: color}}></div>
       </div>
     );
   });
 
   return (
-    <div className={`lds-spinner ${className}`} style={{ ...style }}>
+    <div className={`lds-spinner ${className}`} style={{...style}}>
       {circles}
     </div>
   );

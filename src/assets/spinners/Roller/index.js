@@ -2,17 +2,17 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './style.css';
 
-export default function Roller({ color, className, style }) {
+export default function Roller({color, className, style}) {
   const circles = [...Array(8)].map((_, index) => {
     return (
       <div key={index}>
-        <div className='div-after' style={{ background: color }}></div>
+        <div className='div-after' style={{background: color}}></div>
       </div>
     );
   });
 
   return (
-    <div className={`lds-roller ${className}`} style={{ ...style }}>
+    <div className={`lds-roller ${className}`} style={{...style}}>
       {circles}
     </div>
   );

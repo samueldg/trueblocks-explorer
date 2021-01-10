@@ -1,7 +1,7 @@
 import React from 'react';
-import { Dialog } from './Dialog';
+import {Dialog} from './Dialog';
 
-export default { title: 'Dialog' };
+export default {title: 'Dialog'};
 
 export const showing = () => <Dialog showing={true} columns={[]} handler={{}} object={{}} />;
 

@@ -618,6 +618,10 @@ export function getFieldValue(record, fieldName) {
   }
 
   const internal = record.from !== g_focusValue && record.to !== g_focusValue;
+  const is20 = record.hasToken || (record.toName && record.toName.is_erc20);
+  const isAir =
+    (record["toName"] && record["toName"].name.includes("Airdrop")) ||
+    (record["fromName"] && record["fromName"].name.includes("Airdrop"));
 
   switch (fieldName) {
     case 'id':
@@ -629,8 +633,10 @@ export function getFieldValue(record, fieldName) {
     case 'marker2':
       return (
         <Fragment>
-          {internal ? <div className='internal'>{'in'}</div> : ''}
-          {record.isError ? <div className='isError'>{'er'}</div> : ''}
+          {internal ? <div className="internal">{"in"}</div> : ""}
+          {record.isError ? <div className="isError">{"er"}</div> : ""}
+          {is20 ? <div className="is20">{"tok"}</div> : ""}
+          {isAir ? <div className="isAir">{"a"}</div> : ""}
         </Fragment>
       );
     case 'isError':
@@ -725,7 +731,8 @@ export const CompressedLogs = ({ record }) => {
     return l;
   });
   const theList = logs.map((log) => {
-    return displayCompressed(log.address, log.compressedLog.replace(/ /g, ''), false);
+    const emitter = log.address;
+    return displayCompressed(emitter, log.compressedLog.replace(/ /g, ''), false);
   });
   return <Fragment>{theList}</Fragment>;
 };

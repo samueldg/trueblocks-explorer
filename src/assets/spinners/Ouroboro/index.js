@@ -2,14 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './style.css';
 
-export default function Ouroboro({ color, className, style }) {
+export default function Ouroboro({color, className, style}) {
   return (
-    <div className={`lds-ouroboro ${className}`} style={{ ...style }}>
+    <div className={`lds-ouroboro ${className}`} style={{...style}}>
       <span className='left'>
-        <span className='anim' style={{ background: color }}></span>
+        <span className='anim' style={{background: color}}></span>
       </span>
       <span className='right'>
-        <span className='anim' style={{ background: color }}></span>
+        <span className='anim' style={{background: color}}></span>
       </span>
     </div>
   );

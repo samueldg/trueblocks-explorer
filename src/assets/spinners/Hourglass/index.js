@@ -2,10 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './style.css';
 
-export default function Hourglass({ color, size, className, style }) {
+export default function Hourglass({color, size, className, style}) {
   return (
-    <div className={`lds-hourglass ${className}`} style={{ ...style }}>
-      <div className='lds-hourglass-after' style={{ background: color, borderWidth: size, borderHeight: size }}></div>
+    <div className={`lds-hourglass ${className}`} style={{...style}}>
+      <div className='lds-hourglass-after' style={{background: color, borderWidth: size, borderHeight: size}}></div>
     </div>
   );
 }

@@ -2,10 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './style.css';
 
-export default function Circle({ color, size, className, style }) {
-  return (
-    <div className={`lds-circle ${className}`} style={{ background: color, width: size, height: size, ...style }} />
-  );
+export default function Circle({color, size, className, style}) {
+  return <div className={`lds-circle ${className}`} style={{background: color, width: size, height: size, ...style}} />;
 }
 
 Circle.propTypes = {

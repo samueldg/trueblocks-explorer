@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const ChevronsUp = (props) => {
-  const { color, size, stroke = 2, viewBox = '0 0 24 24', filled = false, ...otherProps } = props;
+  const {color, size, stroke = 2, viewBox = '0 0 24 24', filled = false, ...otherProps} = props;
   const fillColor = filled ? color : 'none';
   const pts = filled ? '6 18 12 12 18 18 6 18' : '6 18 12 12 18 18';
   return (

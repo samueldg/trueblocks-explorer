@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './style.css';
 
-export default function Heart({ color, className, style, size }) {
+export default function Heart({color, className, style, size}) {
   return (
-    <div className={`lds-heart ${className}`} style={{ width: size, height: size, ...style }}>
+    <div className={`lds-heart ${className}`} style={{width: size, height: size, ...style}}>
       <div
         style={{
           background: color,

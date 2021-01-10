@@ -1,12 +1,12 @@
 module.exports = {
-  endOfLine: "lf",
-  arrowParens: "always",
+  endOfLine: 'lf',
+  arrowParens: 'always',
   semi: true,
   singleQuote: true,
   printWidth: 120,
   tabWidth: 2,
   useTabs: false,
-  bracketSpacing: true,
+  bracketSpacing: false,
   jsxBracketSameLine: true,
   jsxSingleQuote: true,
 };

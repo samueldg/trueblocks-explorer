@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './style.css';
 
-export default function Ring({ color, size, className, style }) {
+export default function Ring({color, size, className, style}) {
   const circles = [...Array(4)].map((_, index) => {
     return (
       <div
@@ -18,7 +18,7 @@ export default function Ring({ color, size, className, style }) {
   });
 
   return (
-    <div className={`lds-ring ${className}`} style={{ width: size, height: size, ...style }}>
+    <div className={`lds-ring ${className}`} style={{width: size, height: size, ...style}}>
       {circles}
     </div>
   );

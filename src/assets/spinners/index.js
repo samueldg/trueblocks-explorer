@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, {Fragment} from 'react';
 
 //import Circle from './Circle';
 //import Default from './Default';
@@ -32,13 +32,11 @@ export {
   //  Ouroboro,
 };
 
-export const Spinner = ({ showing, which, color, className, style, size }) => {
+export const Spinner = ({showing, which, color, className, style, size}) => {
   if (!showing) return <Fragment></Fragment>;
   switch (which) {
     case 'ellipsis':
-      return (
-        <Ellipsis color={color} className={className} style={{ textShadow: '2px 2px red', ...style }} size={size} />
-      );
+      return <Ellipsis color={color} className={className} style={{textShadow: '2px 2px red', ...style}} size={size} />;
     case 'facebook':
       return <Facebook color={color} className={className} style={style} size={size} />;
     default:

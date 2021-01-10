@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const GitCoin = (props) => {
-  const { color, size, stroke, ...otherProps } = props;
+  const {color, size, stroke, ...otherProps} = props;
   return (
     <svg
       xmlns='http://www.w3.org/2000/svg'

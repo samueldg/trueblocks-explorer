@@ -1,4 +1,4 @@
-let { socket, socketReady, listeners, messageQueue } = getInitialState();
+let {socket, socketReady, listeners, messageQueue} = getInitialState();
 
 function getInitialState() {
   return {
@@ -19,7 +19,7 @@ export function addMessageListener(listener) {
 
 export function addActionListener(actionToListenFor, listener) {
   const actionListener = (message) => {
-    const { action } = message;
+    const {action} = message;
 
     if (!action) {
       throw new Error('Unsupported message format, missing action');
@@ -65,14 +65,14 @@ export function clear() {
   messageQueue = state.messageQueue;
 }
 
-export function setup({ host = 'localhost', port = 8080, path = 'websocket' } = {}) {
+export function setup({host = 'localhost', port = 8080, path = 'websocket'} = {}) {
   socket = new WebSocket(`ws://${host}:${port}/${path}`);
   socket.addEventListener('open', () => {
     socketReady = true;
     messageQueue.forEach((message) => send.apply(null, message));
     messageQueue = [];
   });
-  socket.addEventListener('message', ({ data }) => {
+  socket.addEventListener('message', ({data}) => {
     const message = JSON.parse(data);
 
     callListeners(message);

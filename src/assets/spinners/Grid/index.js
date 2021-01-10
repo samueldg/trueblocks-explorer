@@ -2,11 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './style.css';
 
-export default function Grid({ color, className, style, size }) {
-  const circles = [...Array(9)].map((_, index) => <div key={index} style={{ background: `${color}` }} />);
+export default function Grid({color, className, style, size}) {
+  const circles = [...Array(9)].map((_, index) => <div key={index} style={{background: `${color}`}} />);
 
   return (
-    <div className={`lds-grid ${className}`} style={{ width: size, height: size, ...style }}>
+    <div className={`lds-grid ${className}`} style={{width: size, height: size, ...style}}>
       {circles}
     </div>
   );

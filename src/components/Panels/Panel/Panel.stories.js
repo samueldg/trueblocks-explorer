@@ -1,11 +1,11 @@
 import React from 'react';
-import { BrowserRouter } from 'react-router-dom';
-import { Panel } from './Panel';
+import {BrowserRouter} from 'react-router-dom';
+import {Panel} from './Panel';
 
 import '../../Card/Card.css';
 import './Panel.css';
 
-export default { title: 'Panel' };
+export default {title: 'Panel'};
 
 export const displayPanel = () => (
   <BrowserRouter>

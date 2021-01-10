@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const ChevronsDown = (props) => {
-  const { color, size, stroke = 2, viewBox = '0 0 24 24', filled = false, ...otherProps } = props;
+  const {color, size, stroke = 2, viewBox = '0 0 24 24', filled = false, ...otherProps} = props;
   const fillColor = filled ? color : 'none';
   const pts = filled ? '6 8 12 14 18 8 6 8' : '6 8 12 14 18 8';
   return (

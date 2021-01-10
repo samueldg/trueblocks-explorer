@@ -108,7 +108,7 @@ export const Collections = (props) => {
           break;
         case 'delete':
           {
-            const cmdQuery = 'editCmd=delete&terms=' + action.record_id + addendum(record, action.record_id);
+            const cmdQuery = 'delete&terms=' + action.record_id + addendum(record, action.record_id);
             statusDispatch(LOADING);
             dispatch(action);
             sendServerCommand(cmdUrl, cmdQuery).then(() => {
@@ -119,7 +119,7 @@ export const Collections = (props) => {
           break;
         case 'undelete':
           {
-            const cmdQuery = 'editCmd=undelete&terms=' + action.record_id + addendum(record, action.record_id);
+            const cmdQuery = 'undelete&terms=' + action.record_id + addendum(record, action.record_id);
             statusDispatch(LOADING);
             dispatch(action);
             sendServerCommand(cmdUrl, cmdQuery).then(() => {
@@ -130,7 +130,7 @@ export const Collections = (props) => {
           break;
         case 'remove':
           {
-            const cmdQuery = 'editCmd=remove&terms=' + action.record_id + addendum(record, action.record_id);
+            const cmdQuery = 'remove&terms=' + action.record_id + addendum(record, action.record_id);
             statusDispatch(LOADING);
             sendServerCommand(cmdUrl, cmdQuery).then((theData) => {
               // the command worked, but now we need to reload the data
@@ -185,16 +185,7 @@ export const Collections = (props) => {
   // EXISTING_CODE
   // EXISTING_CODE
 
-  const table = getInnerTable(
-    collections,
-    curTag,
-    filtered,
-    title,
-    detailLevel,
-    searchFields,
-    recordIconList,
-    collectionsHandler
-  );
+  const table = getInnerTable(collections, curTag, filtered, title, detailLevel, searchFields, recordIconList, collectionsHandler);
   return (
     <div>
       {/* prettier-ignore */}
@@ -231,16 +222,7 @@ const getTagList = (collections) => {
 };
 
 //----------------------------------------------------------------------
-const getInnerTable = (
-  collections,
-  curTag,
-  filtered,
-  title,
-  detailLevel,
-  searchFields,
-  recordIconList,
-  collectionsHandler
-) => {
+const getInnerTable = (collections, curTag, filtered, title, detailLevel, searchFields, recordIconList, collectionsHandler) => {
   // EXISTING_CODE
   // EXISTING_CODE
   return (

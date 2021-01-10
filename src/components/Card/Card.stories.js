@@ -1,11 +1,11 @@
 import React from 'react';
-import { BrowserRouter } from 'react-router-dom';
-import { Card } from './Card';
+import {BrowserRouter} from 'react-router-dom';
+import {Card} from './Card';
 import HelpCircle from 'assets/icons/HelpCircle';
 
 import './Card.css';
 
-export default { title: 'Card' };
+export default {title: 'Card'};
 
 const helpIcon = <HelpCircle fill='forestgreen' color='#333' onClick={null} />;
 export const displayCard = () => (

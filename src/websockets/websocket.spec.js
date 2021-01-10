@@ -1,6 +1,6 @@
 import WS from 'jest-websocket-mock';
 
-import { addMessageListener, addActionListener, removeListener, send, clear, setup } from './';
+import {addMessageListener, addActionListener, removeListener, send, clear, setup} from './';
 
 let server = null;
 
@@ -9,7 +9,7 @@ beforeEach(async () => {
     clear();
   }
   server = new WS('ws://localhost:1234/websocket');
-  setup({ port: 1234 });
+  setup({port: 1234});
   await server.connected;
 });
 
@@ -45,7 +45,7 @@ describe('Websocket communication module', () => {
 
     addActionListener('never-called', otherListener);
 
-    server.send(JSON.stringify({ action: 'something-else' }));
+    server.send(JSON.stringify({action: 'something-else'}));
     server.send(JSON.stringify(expectedMessage));
   });
 
@@ -56,7 +56,7 @@ describe('Websocket communication module', () => {
 
     removeListener(listener);
 
-    server.send(JSON.stringify({ action: 'test' }));
+    server.send(JSON.stringify({action: 'test'}));
     expect(listener).not.toHaveBeenCalled();
   });
 
@@ -66,7 +66,7 @@ describe('Websocket communication module', () => {
       testing: true,
     };
 
-    send(expectedMessage.action, { testing: expectedMessage.testing });
+    send(expectedMessage.action, {testing: expectedMessage.testing});
 
     await expect(server).toReceiveMessage(JSON.stringify(expectedMessage));
     expect(server).toHaveReceivedMessages([JSON.stringify(expectedMessage)]);

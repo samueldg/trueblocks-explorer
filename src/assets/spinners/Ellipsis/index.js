@@ -2,11 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './style.css';
 
-export default function Ellipsis({ color, size, className, style }) {
-  const circles = [...Array(4)].map((_, index) => <div key={index} style={{ background: `${color}` }} />);
+export default function Ellipsis({color, size, className, style}) {
+  const circles = [...Array(4)].map((_, index) => <div key={index} style={{background: `${color}`}} />);
 
   return (
-    <div className={`lds-ellipsis ${className}`} style={{ ...style, width: size, height: size }}>
+    <div className={`lds-ellipsis ${className}`} style={{...style, width: size, height: size}}>
       {circles}
     </div>
   );

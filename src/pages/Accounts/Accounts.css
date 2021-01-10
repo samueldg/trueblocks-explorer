@@ -49,6 +49,31 @@
   font-style: unset;
   font-size: 0.8em;
 }
+
+.is20 {
+  display: inline;
+  background-color: green;
+  color: white;
+  margin-left: 0px;
+  padding: 1px;
+  padding-left: 2px;
+  padding-right: 2px;
+  font-style: unset;
+  font-size: 0.8em;
+}
+
+.isAir {
+  display: inline;
+  background-color:purple;
+  color: white;
+  margin-left: 0px;
+  padding: 1px;
+  padding-left: 2px;
+  padding-right: 2px;
+  font-style: unset;
+  font-size: 0.8em;
+}
+
 .outflow {
   color: var(--warning-bg-color);
 }

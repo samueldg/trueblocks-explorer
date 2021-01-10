@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './style.css';
 
-export default function DualRing({ color, className, style, size }) {
+export default function DualRing({color, className, style, size}) {
   return (
-    <div className={`lds-dual-ring ${className}`} style={{ width: size, height: size, ...style }}>
+    <div className={`lds-dual-ring ${className}`} style={{width: size, height: size, ...style}}>
       <div
         className='lds-dual-ring-after'
         style={{

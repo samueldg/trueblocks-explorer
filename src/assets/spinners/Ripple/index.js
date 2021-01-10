@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './style.css';
 
-export default function Ripple({ color, className, style, size }) {
+export default function Ripple({color, className, style, size}) {
   const circles = [...Array(2)].map((_, index) => (
     <div
       key={index}
@@ -14,7 +14,7 @@ export default function Ripple({ color, className, style, size }) {
   ));
 
   return (
-    <div className={`lds-ripple ${className}`} style={{ width: size, height: size, ...style }}>
+    <div className={`lds-ripple ${className}`} style={{width: size, height: size, ...style}}>
       {circles}
     </div>
   );
