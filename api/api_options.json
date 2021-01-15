@@ -14,6 +14,7 @@
       "generate": "local",
       "option_kind": "positional",
       "data_type": "list<addr>",
+      "real_type": "listaddr",
       "description": "one or more Ethereum addresses"
     }
   },
@@ -29,6 +30,7 @@
       "generate": "local",
       "option_kind": "switch",
       "data_type": "<boolean>",
+      "real_type": "bool",
       "description": "process the request to delete, undelete, or remove monitors"
     }
   },
@@ -43,6 +45,7 @@
       "generate": "local",
       "option_kind": "switch",
       "data_type": "<boolean>",
+      "real_type": "bool",
       "description": "enable search of staging (not yet finalized) folder"
     },
     "unripe": {
@@ -55,6 +58,7 @@
       "generate": "local",
       "option_kind": "switch",
       "data_type": "<boolean>",
+      "real_type": "bool",
       "description": "enable search of unripe (neither staged nor finalized) folder (requires --staging)"
     },
     "blooms": {
@@ -67,6 +71,7 @@
       "generate": "header",
       "option_kind": "switch",
       "data_type": "<boolean>",
+      "real_type": "bool",
       "description": "process query by first using bloom filter and, if hit, downloading index chunk from remote"
     },
     "start": {
@@ -80,6 +85,7 @@
       "generate": "local",
       "option_kind": "flag",
       "data_type": "<blknum>",
+      "real_type": "blknum_t",
       "description": "this value is ignored but remains for backward compatibility"
     },
     "end": {
@@ -93,6 +99,7 @@
       "generate": "local",
       "option_kind": "flag",
       "data_type": "<blknum>",
+      "real_type": "blknum_t",
       "description": "this value is ignored but remains for backward compatibility"
     },
     "": {
@@ -126,6 +133,7 @@
       "generate": "local",
       "option_kind": "positional",
       "data_type": "list<addr>",
+      "real_type": "listaddr",
       "description": "one or more addresses (0x...) to export"
     },
     "topics": {
@@ -141,6 +149,7 @@
       "generate": "local",
       "option_kind": "positional",
       "data_type": "list<topic>",
+      "real_type": "listtopic",
       "description": "filter by one or more logs topics (only for --logs option)"
     },
     "appearances": {
@@ -155,6 +164,7 @@
       "generate": "header",
       "option_kind": "switch",
       "data_type": "<boolean>",
+      "real_type": "bool",
       "description": "export a list of appearances"
     },
     "receipts": {
@@ -169,6 +179,7 @@
       "generate": "header",
       "option_kind": "switch",
       "data_type": "<boolean>",
+      "real_type": "bool",
       "description": "export receipts instead of transaction list"
     },
     "logs": {
@@ -183,6 +194,7 @@
       "generate": "header",
       "option_kind": "switch",
       "data_type": "<boolean>",
+      "real_type": "bool",
       "description": "export logs instead of transaction list"
     },
     "traces": {
@@ -197,6 +209,7 @@
       "generate": "header",
       "option_kind": "switch",
       "data_type": "<boolean>",
+      "real_type": "bool",
       "description": "export traces instead of transaction list"
     },
     "statements": {
@@ -211,6 +224,7 @@
       "generate": "header",
       "option_kind": "switch",
       "data_type": "<boolean>",
+      "real_type": "bool",
       "description": "export reconcilations instead of transaction list"
     },
     "accounting": {
@@ -225,6 +239,7 @@
       "generate": "header",
       "option_kind": "switch",
       "data_type": "<boolean>",
+      "real_type": "bool",
       "description": "export accounting records instead of transaction list"
     },
     "articulate": {
@@ -239,6 +254,7 @@
       "generate": "header",
       "option_kind": "switch",
       "data_type": "<boolean>",
+      "real_type": "bool",
       "description": "articulate transactions, traces, logs, and outputs"
     },
     "write_txs": {
@@ -252,6 +268,7 @@
       "generate": "local",
       "option_kind": "switch",
       "data_type": "<boolean>",
+      "real_type": "bool",
       "description": "write transactions to the cache (see notes)"
     },
     "write_traces": {
@@ -265,6 +282,7 @@
       "generate": "local",
       "option_kind": "switch",
       "data_type": "<boolean>",
+      "real_type": "bool",
       "description": "write traces to the cache (see notes)"
     },
     "skip_ddos": {
@@ -278,6 +296,7 @@
       "generate": "header",
       "option_kind": "toggle",
       "data_type": "<boolean>",
+      "real_type": "bool",
       "description": "toggle skipping over 2016 dDos transactions ('on' by default)"
     },
     "max_traces": {
@@ -291,6 +310,7 @@
       "generate": "header",
       "option_kind": "flag",
       "data_type": "<uint64>",
+      "real_type": "uint64_t",
       "description": "if --skip_ddos is on, this many traces defines what a ddos transaction is (default = 250)"
     },
     "all_abis": {
@@ -303,6 +323,7 @@
       "generate": "local",
       "option_kind": "switch",
       "data_type": "<boolean>",
+      "real_type": "bool",
       "description": "load all previously cached abi files"
     },
     "freshen": {
@@ -315,6 +336,7 @@
       "generate": "header",
       "option_kind": "switch",
       "data_type": "<boolean>",
+      "real_type": "bool",
       "description": "freshen but do not print the exported data"
     },
     "freshen_max": {
@@ -328,6 +350,7 @@
       "generate": "header",
       "option_kind": "flag",
       "data_type": "<blknum>",
+      "real_type": "blknum_t",
       "description": "maximum number of records to process for --freshen option"
     },
     "factory": {
@@ -340,6 +363,7 @@
       "generate": "header",
       "option_kind": "switch",
       "data_type": "<boolean>",
+      "real_type": "bool",
       "description": "scan for contract creations from the given address(es) and report address of those contracts"
     },
     "emitter": {
@@ -353,6 +377,7 @@
       "generate": "header",
       "option_kind": "switch",
       "data_type": "<boolean>",
+      "real_type": "bool",
       "description": "available for --logs option only, export will only export if the address emitted the event"
     },
     "count": {
@@ -367,6 +392,7 @@
       "generate": "header",
       "option_kind": "switch",
       "data_type": "<boolean>",
+      "real_type": "bool",
       "description": "only available for --appearances mode, if present return only the number of records"
     },
     "start": {
@@ -378,8 +404,9 @@
       "hotkey": "S",
       "def_val": "",
       "generate": "local",
-      "option_kind": "skipN",
+      "option_kind": "deprecated",
       "data_type": "<blknum>",
+      "real_type": "blknum_t",
       "description": "first block to process (inclusive)"
     },
     "end": {
@@ -391,8 +418,9 @@
       "hotkey": "E",
       "def_val": "",
       "generate": "local",
-      "option_kind": "skipN",
+      "option_kind": "deprecated",
       "data_type": "<blknum>",
+      "real_type": "blknum_t",
       "description": "last block to process (inclusive)"
     },
     "first_record": {
@@ -406,6 +434,7 @@
       "generate": "header",
       "option_kind": "flag",
       "data_type": "<blknum>",
+      "real_type": "blknum_t",
       "description": "the first record to process"
     },
     "max_records": {
@@ -419,6 +448,7 @@
       "generate": "header",
       "option_kind": "flag",
       "data_type": "<blknum>",
+      "real_type": "blknum_t",
       "description": "the maximum number of records to process before reporting"
     },
     "staging": {
@@ -431,6 +461,7 @@
       "generate": "local",
       "option_kind": "switch",
       "data_type": "<boolean>",
+      "real_type": "bool",
       "description": "ignored (preserved for backwards compatibility)"
     },
     "unripe": {
@@ -443,6 +474,7 @@
       "generate": "local",
       "option_kind": "switch",
       "data_type": "<boolean>",
+      "real_type": "bool",
       "description": "ignored (preserved for backwards compatibility)"
     },
     "": {
@@ -462,8 +494,40 @@
     }
   },
   "scrape": {
-    "n_blocks": {
+    "mode": {
       "num": "10600",
+      "group": "apps",
+      "api_route": "scrape",
+      "tool": "blockScrape",
+      "command": "mode",
+      "hotkey": "",
+      "def_val": "",
+      "core_visible": true,
+      "docs_visible": true,
+      "generate": "header",
+      "option_kind": "positional",
+      "data_type": "enum[run*|quit|pause|restart]",
+      "real_type": "string_q",
+      "description": "control the block and account scrapers"
+    },
+    "tool": {
+      "num": "10610",
+      "group": "apps",
+      "api_route": "scrape",
+      "tool": "blockScrape",
+      "command": "tool",
+      "hotkey": "t",
+      "def_val": "",
+      "core_visible": true,
+      "docs_visible": true,
+      "generate": "header",
+      "option_kind": "flag",
+      "data_type": "list<enum[monitors|index*|none|both]>",
+      "real_type": "string_q",
+      "description": "process the index, monitors, or both (none means process timestamps only)"
+    },
+    "n_blocks": {
+      "num": "10615",
       "group": "apps",
       "api_route": "scrape",
       "tool": "blockScrape",
@@ -475,6 +539,7 @@
       "generate": "header",
       "option_kind": "flag",
       "data_type": "<blknum>",
+      "real_type": "blknum_t",
       "description": "maximum number of blocks to process (defaults to 5000)"
     },
     "n_block_procs": {
@@ -488,6 +553,7 @@
       "generate": "header",
       "option_kind": "flag",
       "data_type": "<uint64>",
+      "real_type": "uint64_t",
       "description": "number of block channels for blaze"
     },
     "n_addr_procs": {
@@ -501,10 +567,11 @@
       "generate": "header",
       "option_kind": "flag",
       "data_type": "<uint64>",
+      "real_type": "uint64_t",
       "description": "number of address channels for blaze"
     },
     "pin": {
-      "num": "10650",
+      "num": "10645",
       "group": "apps",
       "api_route": "scrape",
       "tool": "blockScrape",
@@ -515,10 +582,11 @@
       "generate": "header",
       "option_kind": "switch",
       "data_type": "<boolean>",
+      "real_type": "bool",
       "description": "pin new chunks (and blooms) to IPFS (requires Pinata key)"
     },
     "publish": {
-      "num": "10650",
+      "num": "10648",
       "group": "apps",
       "api_route": "scrape",
       "tool": "blockScrape",
@@ -529,6 +597,7 @@
       "generate": "header",
       "option_kind": "switch",
       "data_type": "<boolean>",
+      "real_type": "bool",
       "description": "publish the hash of the pin manifest to the UnchainedIndex smart contract"
     },
     "listpins": {
@@ -541,7 +610,23 @@
       "generate": "local",
       "option_kind": "switch",
       "data_type": "<boolean>",
+      "real_type": "bool",
       "description": "list pins (precludes other options, requires API key)"
+    },
+    "sleep": {
+      "num": "10658",
+      "group": "apps",
+      "api_route": "scrape",
+      "tool": "blockScrape",
+      "command": "sleep",
+      "hotkey": "s",
+      "def_val": "14",
+      "core_visible": true,
+      "generate": "header",
+      "option_kind": "flag",
+      "data_type": "<double>",
+      "real_type": "double",
+      "description": "the number of seconds to sleep between passes (default 14)"
     },
     "": {
       "num": "10660",
@@ -573,6 +658,7 @@
       "generate": "local",
       "option_kind": "positional",
       "data_type": "list<enum[index|monitors|collections|names|abis|caches|some*|all]>",
+      "real_type": "string_q",
       "description": "the type of status info to retrieve"
     },
     "details": {
@@ -587,6 +673,7 @@
       "generate": "header",
       "option_kind": "switch",
       "data_type": "<boolean>",
+      "real_type": "bool",
       "description": "include details about items found in monitors, slurps, abis, or price caches"
     },
     "types": {
@@ -601,6 +688,7 @@
       "generate": "local",
       "option_kind": "flag",
       "data_type": "list<enum[blocks|transactions|traces|slurps|prices|all*]>",
+      "real_type": "string_q",
       "description": "for cache mode only, which type(s) of cache to report"
     },
     "depth": {
@@ -614,6 +702,7 @@
       "generate": "header",
       "option_kind": "flag",
       "data_type": "<uint64>",
+      "real_type": "uint64_t",
       "description": "for cache mode only, number of levels deep to report"
     },
     "report": {
@@ -628,6 +717,7 @@
       "generate": "local",
       "option_kind": "switch",
       "data_type": "<boolean>",
+      "real_type": "bool",
       "description": "show a summary of the current status of the blockchain and TrueBlocks scrapers"
     },
     "get_config": {
@@ -640,6 +730,7 @@
       "generate": "local",
       "option_kind": "switch",
       "data_type": "<boolean>",
+      "real_type": "bool",
       "description": "returns JSON data of the editable configuration file items"
     },
     "set_config": {
@@ -652,6 +743,7 @@
       "generate": "local",
       "option_kind": "switch",
       "data_type": "<boolean>",
+      "real_type": "bool",
       "description": "accepts JSON in an env variable and writes it to configuration files"
     },
     "start": {
@@ -665,6 +757,7 @@
       "generate": "header",
       "option_kind": "flag",
       "data_type": "<blknum>",
+      "real_type": "blknum_t",
       "description": "first block to process (inclusive)"
     },
     "end": {
@@ -678,6 +771,7 @@
       "generate": "header",
       "option_kind": "flag",
       "data_type": "<blknum>",
+      "real_type": "blknum_t",
       "description": "last block to process (inclusive)"
     },
     "": {
@@ -709,6 +803,7 @@
       "generate": "header",
       "option_kind": "switch",
       "data_type": "<boolean>",
+      "real_type": "bool",
       "description": "Freshen price database (append new data)"
     },
     "period": {
@@ -724,6 +819,7 @@
       "generate": "local",
       "option_kind": "flag",
       "data_type": "enum[5|15|30|60|120*|240|1440|10080|hourly|daily|weekly]",
+      "real_type": "string_q",
       "description": "increment of display"
     },
     "pair": {
@@ -739,6 +835,7 @@
       "generate": "local",
       "option_kind": "flag",
       "data_type": "<string>",
+      "real_type": "string_q",
       "description": "which price pair to freshen or list (see Poloniex)"
     },
     "feed": {
@@ -754,6 +851,7 @@
       "generate": "header",
       "option_kind": "flag",
       "data_type": "enum[poloniex*|maker|tellor]",
+      "real_type": "string_q",
       "description": "the feed for the price data"
     },
     "": {
@@ -787,6 +885,7 @@
       "generate": "header",
       "option_kind": "positional",
       "data_type": "list<addr>",
+      "real_type": "listaddr",
       "description": "one or more addresses to slurp from Etherscan"
     },
     "blocks": {
@@ -802,6 +901,7 @@
       "generate": "header",
       "option_kind": "positional",
       "data_type": "list<blknum>",
+      "real_type": "listblknum_t",
       "description": "an optional range of blocks to slurp"
     },
     "types": {
@@ -817,6 +917,7 @@
       "generate": "local",
       "option_kind": "flag",
       "data_type": "list<enum[ext*|int|token|nfts|miner|all]>",
+      "real_type": "string_q",
       "description": "one or more types of transactions to request"
     },
     "appearances": {
@@ -831,6 +932,7 @@
       "generate": "header",
       "option_kind": "switch",
       "data_type": "<boolean>",
+      "real_type": "bool",
       "description": "show only the blocknumer.tx_id appearances of the exported transactions"
     },
     "": {
@@ -864,6 +966,7 @@
       "generate": "local",
       "option_kind": "positional",
       "data_type": "list<string>",
+      "real_type": "liststring_q",
       "description": "a space separated list of one or more search terms"
     },
     "expand": {
@@ -878,6 +981,7 @@
       "generate": "local",
       "option_kind": "switch",
       "data_type": "<boolean>",
+      "real_type": "bool",
       "description": "expand search to include all fields (default searches name, address, and symbol only)"
     },
     "match_case": {
@@ -892,6 +996,7 @@
       "generate": "header",
       "option_kind": "switch",
       "data_type": "<boolean>",
+      "real_type": "bool",
       "description": "do case-sensitive search"
     },
     "all": {
@@ -906,6 +1011,7 @@
       "generate": "local",
       "option_kind": "switch",
       "data_type": "<boolean>",
+      "real_type": "bool",
       "description": "include all accounts in the search"
     },
     "owned": {
@@ -920,6 +1026,7 @@
       "generate": "local",
       "option_kind": "switch",
       "data_type": "<boolean>",
+      "real_type": "bool",
       "description": "include personal accounts in the search"
     },
     "custom": {
@@ -934,6 +1041,7 @@
       "generate": "local",
       "option_kind": "switch",
       "data_type": "<boolean>",
+      "real_type": "bool",
       "description": "include your custom named accounts"
     },
     "prefund": {
@@ -948,6 +1056,7 @@
       "generate": "local",
       "option_kind": "switch",
       "data_type": "<boolean>",
+      "real_type": "bool",
       "description": "include prefund accounts"
     },
     "named": {
@@ -962,6 +1071,7 @@
       "generate": "local",
       "option_kind": "switch",
       "data_type": "<boolean>",
+      "real_type": "bool",
       "description": "include well know token and airdrop addresses in the search"
     },
     "other": {
@@ -974,6 +1084,7 @@
       "generate": "local",
       "option_kind": "switch",
       "data_type": "<boolean>",
+      "real_type": "bool",
       "description": "export other addresses if found"
     },
     "addr": {
@@ -988,6 +1099,7 @@
       "generate": "local",
       "option_kind": "switch",
       "data_type": "<boolean>",
+      "real_type": "bool",
       "description": "display only addresses in the results (useful for scripting)"
     }
   },
@@ -1004,6 +1116,7 @@
       "generate": "header",
       "option_kind": "switch",
       "data_type": "<boolean>",
+      "real_type": "bool",
       "description": "display collections data"
     }
   },
@@ -1020,6 +1133,7 @@
       "generate": "header",
       "option_kind": "switch",
       "data_type": "<boolean>",
+      "real_type": "bool",
       "description": "export the list of tags and subtags only"
     }
   },
@@ -1034,6 +1148,7 @@
       "generate": "local",
       "option_kind": "switch",
       "data_type": "<boolean>",
+      "real_type": "bool",
       "description": "for editCmd only, is the edited name a custom name or not"
     },
     "clean": {
@@ -1046,6 +1161,7 @@
       "generate": "local",
       "option_kind": "switch",
       "data_type": "<boolean>",
+      "real_type": "bool",
       "description": "clean the data (addrs to lower case, sort by addr)"
     },
     "": {
@@ -1079,6 +1195,7 @@
       "generate": "local",
       "option_kind": "positional",
       "data_type": "list<blknum>",
+      "real_type": "listblknum_t",
       "description": "a space-separated list of one or more blocks to retrieve"
     },
     "hashes_only": {
@@ -1093,6 +1210,7 @@
       "generate": "header",
       "option_kind": "switch",
       "data_type": "<boolean>",
+      "real_type": "bool",
       "description": "display only transaction hashes, default is to display full transaction detail"
     },
     "addrs": {
@@ -1107,6 +1225,7 @@
       "generate": "local",
       "option_kind": "switch",
       "data_type": "<boolean>",
+      "real_type": "bool",
       "description": "display all addresses included in the block"
     },
     "uniq": {
@@ -1121,6 +1240,7 @@
       "generate": "local",
       "option_kind": "switch",
       "data_type": "<boolean>",
+      "real_type": "bool",
       "description": "display only uniq addresses found per block"
     },
     "uniq_tx": {
@@ -1135,6 +1255,7 @@
       "generate": "local",
       "option_kind": "switch",
       "data_type": "<boolean>",
+      "real_type": "bool",
       "description": "display only uniq addresses found per transaction"
     },
     "count": {
@@ -1149,6 +1270,7 @@
       "generate": "header",
       "option_kind": "switch",
       "data_type": "<boolean>",
+      "real_type": "bool",
       "description": "display counts of appearances (for --addrs, --uniq, or --uniq_tx) or transactions"
     },
     "uncles": {
@@ -1163,6 +1285,7 @@
       "generate": "header",
       "option_kind": "switch",
       "data_type": "<boolean>",
+      "real_type": "bool",
       "description": "display uncle blocks (if any) instead of the requested block"
     },
     "force": {
@@ -1175,6 +1298,7 @@
       "generate": "header",
       "option_kind": "switch",
       "data_type": "<boolean>",
+      "real_type": "bool",
       "description": "force a re-write of the block to the cache"
     },
     "trace": {
@@ -1187,6 +1311,7 @@
       "generate": "header",
       "option_kind": "switch",
       "data_type": "<boolean>",
+      "real_type": "bool",
       "description": "export the traces from the block as opposed to the block data"
     },
     "": {
@@ -1220,6 +1345,7 @@
       "generate": "local",
       "option_kind": "positional",
       "data_type": "list<tx_id>",
+      "real_type": "listtx_id",
       "description": "a space-separated list of one or more transaction identifiers (tx_hash, bn.txID, blk_hash.txID)"
     },
     "articulate": {
@@ -1234,6 +1360,7 @@
       "generate": "header",
       "option_kind": "switch",
       "data_type": "<boolean>",
+      "real_type": "bool",
       "description": "articulate the transactions if an ABI is found for the 'to' address"
     },
     "": {
@@ -1267,6 +1394,7 @@
       "generate": "local",
       "option_kind": "positional",
       "data_type": "list<tx_id>",
+      "real_type": "listtx_id",
       "description": "a space-separated list of one or more transaction identifiers (tx_hash, bn.txID, blk_hash.txID)"
     },
     "articulate": {
@@ -1281,6 +1409,7 @@
       "generate": "header",
       "option_kind": "switch",
       "data_type": "<boolean>",
+      "real_type": "bool",
       "description": "articulate the transactions if an ABI is found for the 'to' address"
     },
     "logs": {
@@ -1295,6 +1424,7 @@
       "generate": "header",
       "option_kind": "switch",
       "data_type": "<boolean>",
+      "real_type": "bool",
       "description": "display the receipt's logs"
     },
     "": {
@@ -1328,6 +1458,7 @@
       "generate": "header",
       "option_kind": "positional",
       "data_type": "list<addr>",
+      "real_type": "listaddr",
       "description": "one or more addresses (0x...) from which to retrieve balances"
     },
     "blocks": {
@@ -1343,6 +1474,7 @@
       "generate": "header",
       "option_kind": "positional",
       "data_type": "list<blknum>",
+      "real_type": "listblknum_t",
       "description": "an optional list of one or more blocks at which to report balances, defaults to 'latest'"
     },
     "parts": {
@@ -1358,6 +1490,7 @@
       "generate": "local",
       "option_kind": "flag",
       "data_type": "list<enum[none|some*|all|balance|nonce|code|storage|deployed|accttype]>",
+      "real_type": "string_q",
       "description": "control which state to export"
     },
     "changes": {
@@ -1372,6 +1505,7 @@
       "generate": "header",
       "option_kind": "switch",
       "data_type": "<boolean>",
+      "real_type": "bool",
       "description": "only report a balance when it changes from one block to the next"
     },
     "no_zero": {
@@ -1386,6 +1520,7 @@
       "generate": "header",
       "option_kind": "switch",
       "data_type": "<boolean>",
+      "real_type": "bool",
       "description": "suppress the display of zero balance accounts"
     },
     "call": {
@@ -1400,6 +1535,7 @@
       "generate": "header",
       "option_kind": "flag",
       "data_type": "<string>",
+      "real_type": "string_q",
       "description": "a comma-separated string of an address, a 4-byte, and required parameters for a call against a smart contract"
     },
     "": {
@@ -1433,6 +1569,7 @@
       "generate": "header",
       "option_kind": "positional",
       "data_type": "list<addr>",
+      "real_type": "listaddr",
       "description": "two or more addresses (0x...), the first is an ERC20 token, balances for the rest are reported"
     },
     "blocks": {
@@ -1448,6 +1585,7 @@
       "generate": "header",
       "option_kind": "positional",
       "data_type": "list<blknum>",
+      "real_type": "listblknum_t",
       "description": "an optional list of one or more blocks at which to report balances, defaults to 'latest'"
     },
     "parts": {
@@ -1463,6 +1601,7 @@
       "generate": "local",
       "option_kind": "flag",
       "data_type": "list<enum[name|symbol|decimals|totalSupply|version|none|all*]>",
+      "real_type": "string_q",
       "description": "one or more parts of the token information to retreive"
     },
     "by_acct": {
@@ -1477,6 +1616,7 @@
       "generate": "header",
       "option_kind": "switch",
       "data_type": "<boolean>",
+      "real_type": "bool",
       "description": "consider each address an ERC20 token except the last, whose balance is reported for each token"
     },
     "no_zero": {
@@ -1491,6 +1631,7 @@
       "generate": "header",
       "option_kind": "switch",
       "data_type": "<boolean>",
+      "real_type": "bool",
       "description": "suppress the display of zero balance accounts"
     },
     "": {
@@ -1524,6 +1665,7 @@
       "generate": "local",
       "option_kind": "positional",
       "data_type": "list<tx_id>",
+      "real_type": "listtx_id",
       "description": "a space-separated list of one or more transaction identifiers (tx_hash, bn.txID, blk_hash.txID)"
     },
     "articulate": {
@@ -1538,6 +1680,7 @@
       "generate": "header",
       "option_kind": "switch",
       "data_type": "<boolean>",
+      "real_type": "bool",
       "description": "articulate the transactions if an ABI is found for the 'to' address"
     },
     "count": {
@@ -1552,6 +1695,7 @@
       "generate": "header",
       "option_kind": "switch",
       "data_type": "<boolean>",
+      "real_type": "bool",
       "description": "show the number of traces for the transaction only (fast)"
     },
     "skip_ddos": {
@@ -1565,6 +1709,7 @@
       "generate": "header",
       "option_kind": "toggle",
       "data_type": "<boolean>",
+      "real_type": "bool",
       "description": "toggle skipping over 2018 ddos transactions during export ('on' by default)"
     },
     "max_traces": {
@@ -1578,6 +1723,7 @@
       "generate": "header",
       "option_kind": "flag",
       "data_type": "<uint64>",
+      "real_type": "uint64_t",
       "description": "if --skip_ddos is on, this many traces defines what a ddos transaction is (default = 250)"
     },
     "filter": {
@@ -1591,6 +1737,7 @@
       "generate": "header",
       "option_kind": "flag",
       "data_type": "<string>",
+      "real_type": "string_q",
       "description": "Call trace_filter with the comma seperated string of the filter (see docs)"
     },
     "": {
@@ -1624,6 +1771,7 @@
       "generate": "local",
       "option_kind": "positional",
       "data_type": "list<tx_id>",
+      "real_type": "listtx_id",
       "description": "a space-separated list of one or more transaction identifiers (tx_hash, bn.txID, blk_hash.txID)"
     },
     "articulate": {
@@ -1638,6 +1786,7 @@
       "generate": "header",
       "option_kind": "switch",
       "data_type": "<boolean>",
+      "real_type": "bool",
       "description": "articulate the transactions if an ABI is found for the 'to' address"
     },
     "trace": {
@@ -1652,6 +1801,7 @@
       "generate": "header",
       "option_kind": "switch",
       "data_type": "<boolean>",
+      "real_type": "bool",
       "description": "display the transaction's trace"
     },
     "force": {
@@ -1664,6 +1814,7 @@
       "generate": "header",
       "option_kind": "switch",
       "data_type": "<boolean>",
+      "real_type": "bool",
       "description": "force the results into the tx cache"
     },
     "uniq": {
@@ -1678,6 +1829,7 @@
       "generate": "header",
       "option_kind": "switch",
       "data_type": "<boolean>",
+      "real_type": "bool",
       "description": "display a list of uniq addresses found in this transaction"
     },
     "": {
@@ -1711,6 +1863,7 @@
       "generate": "header",
       "option_kind": "positional",
       "data_type": "list<addr>",
+      "real_type": "listaddr",
       "description": "list of one or more smart contracts whose ABI to grab from EtherScan"
     },
     "canonical": {
@@ -1725,6 +1878,7 @@
       "generate": "local",
       "option_kind": "switch",
       "data_type": "<boolean>",
+      "real_type": "bool",
       "description": "convert all types to their canonical represenation and remove all spaces from display"
     },
     "generate": {
@@ -1739,6 +1893,7 @@
       "generate": "header",
       "option_kind": "switch",
       "data_type": "<boolean>",
+      "real_type": "bool",
       "description": "generate C++ code into the current folder for all functions and events found in the ABI"
     },
     "monitored": {
@@ -1752,6 +1907,7 @@
       "generate": "local",
       "option_kind": "switch",
       "data_type": "<boolean>",
+      "real_type": "bool",
       "description": "load ABIs from monitored addresses"
     },
     "known": {
@@ -1765,6 +1921,7 @@
       "generate": "local",
       "option_kind": "switch",
       "data_type": "<boolean>",
+      "real_type": "bool",
       "description": "load common 'known' ABIs from cache"
     },
     "addr": {
@@ -1778,6 +1935,7 @@
       "generate": "local",
       "option_kind": "switch",
       "data_type": "<boolean>",
+      "real_type": "bool",
       "description": "include address of smart contract for the abi in output"
     },
     "sol": {
@@ -1791,6 +1949,7 @@
       "generate": "local",
       "option_kind": "flag",
       "data_type": "<string>",
+      "real_type": "string_q",
       "description": "file name of .sol file from which to create a new known abi (without .sol)"
     },
     "find": {
@@ -1805,6 +1964,7 @@
       "generate": "local",
       "option_kind": "flag",
       "data_type": "<string>",
+      "real_type": "string_q",
       "description": "try to search for a function declaration given a four byte code"
     },
     "": {
@@ -1836,6 +1996,7 @@
       "generate": "local",
       "option_kind": "positional",
       "data_type": "list<string>",
+      "real_type": "liststring_q",
       "description": "one or more dates, block numbers, hashes, or special named blocks (see notes)"
     },
     "list": {
@@ -1849,6 +2010,7 @@
       "generate": "header",
       "option_kind": "switch",
       "data_type": "<boolean>",
+      "real_type": "bool",
       "description": "export a list of the 'special' blocks"
     },
     "timestamps": {
@@ -1863,6 +2025,7 @@
       "generate": "header",
       "option_kind": "switch",
       "data_type": "<boolean>",
+      "real_type": "bool",
       "description": "ignore other options and generate timestamps only"
     },
     "skip": {
@@ -1878,6 +2041,7 @@
       "generate": "header",
       "option_kind": "flag",
       "data_type": "<uint64>",
+      "real_type": "uint64_t",
       "description": "only applicable if --timestamps is on, the step between block numbers in the export"
     },
     "": {
@@ -1909,6 +2073,7 @@
       "generate": "local",
       "option_kind": "positional",
       "data_type": "list<blknum>",
+      "real_type": "listblknum_t",
       "description": "a space-separated list of one or more blocks to search for"
     },
     "": {
@@ -1939,6 +2104,7 @@
       "generate": "header",
       "option_kind": "flag",
       "data_type": "enum[tables*|dump]",
+      "real_type": "string_q",
       "description": "the command to run"
     },
     "datadir": {
@@ -1954,6 +2120,7 @@
       "generate": "header",
       "option_kind": "flag",
       "data_type": "<string>",
+      "real_type": "string_q",
       "description": "folder containing TurboGeth data file (data.mdb)"
     },
     "name": {
@@ -1969,6 +2136,7 @@
       "generate": "header",
       "option_kind": "flag",
       "data_type": "<string>",
+      "real_type": "string_q",
       "description": "for 'dump' command only, the name of the table to dump"
     },
     "goerli": {
@@ -1983,6 +2151,7 @@
       "generate": "header",
       "option_kind": "switch",
       "data_type": "<boolean>",
+      "real_type": "bool",
       "description": "run against the goerli testnet"
     },
     "no_zero": {
@@ -1997,6 +2166,7 @@
       "generate": "header",
       "option_kind": "switch",
       "data_type": "<boolean>",
+      "real_type": "bool",
       "description": "suppress the display of tables with zero records"
     },
     "": {
