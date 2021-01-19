@@ -37,7 +37,7 @@ export const Tablebar = ({
   const header = (
     <div className="tablebar-container">
       <div
-        style={{ display: 'grid', gridTemplateColumns: count === 1 ? '1fr' : count === 2 ? '1fr 1fr' : '6fr 12fr 6fr' }}
+        style={{ display: 'grid', gridTemplateColumns: count === 1 ? '1fr' : count === 2 ? '1fr 1fr' : '12fr 12fr 12fr' }}
       >
         {searchPart && (
           <Search enabled={search} searchFields={searchFields} searchText={filterText} handler={handler} />

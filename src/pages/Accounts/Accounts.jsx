@@ -617,8 +617,10 @@ export function getFieldValue(record, fieldName) {
     return record.statements[0][fn];
   }
 
+  const creation = record.to === "0x0";
   const internal = record.from !== g_focusValue && record.to !== g_focusValue;
   const is20 = record.hasToken || (record.toName && record.toName.is_erc20);
+  const selfie = record.fromName && record.toName && record.fromName.tags.substr(0,2) < "30" && record.toName.tags.substr(0,2) < "30";
   const isAir =
     (record["toName"] && record["toName"].name.includes("Airdrop")) ||
     (record["fromName"] && record["fromName"].name.includes("Airdrop"));
@@ -633,10 +635,12 @@ export function getFieldValue(record, fieldName) {
     case 'marker2':
       return (
         <Fragment>
-          {internal ? <div className="internal">{"in"}</div> : ""}
-          {record.isError ? <div className="isError">{"er"}</div> : ""}
-          {is20 ? <div className="is20">{"tok"}</div> : ""}
-          {isAir ? <div className="isAir">{"a"}</div> : ""}
+          {internal ? <div className='internal'>{'i'}</div> : ''}
+          {record.isError ? <div className='isError'>{'e'}</div> : ''}
+          {is20 ? <div className='is20'>{'tk'}</div> : ''}
+          {isAir ? <div className='isAir'>{'a'}</div> : ''}
+          {selfie ? <div className='selfie'>{'s'}</div> : ''}
+          {creation ? <div className='creation'>{'c'}</div> : ''}
         </Fragment>
       );
     case 'isError':
@@ -644,12 +648,12 @@ export function getFieldValue(record, fieldName) {
     case 'internal':
       return internal ? 'int' : '';
     case 'from': {
-      const val = record.fromName ? record.fromName.name : record.from;
+      const val = record.fromName ? record.fromName.name + " (" + record.fromName.tags + ")" : record.from;
       if (record.from === g_focusValue) return <div className='focusValue'>{val}</div>;
       return <div className='nonFocusValue'>{val}</div>;
     }
     case 'to': {
-      const val = record.toName ? record.toName.name : record.to;
+      const val = record.toName ? record.toName.name + ' (' + record.toName.tags + ')' : record.to;
       if (record.to === g_focusValue) return <div className='focusValue'>{val}</div>;
       return <div className='nonFocusValue'>{val}</div>;
     }

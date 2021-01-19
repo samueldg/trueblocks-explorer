@@ -261,7 +261,7 @@ export const accountsSchema = [
            name: 'Ending',
            selector: 'statements.endBal',
            type: 'value',
-           width: 12,
+           width: 10,
            download: true,
            chart: 'domain',
            onDisplay: getFieldValue,
