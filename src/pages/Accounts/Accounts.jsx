@@ -479,7 +479,7 @@ export function refreshAccountsData2(query, dispatch, firstRecord, maxRecords, n
 
     if (Number(firstRecord) + Number(maxRecords) < nRecords) {
       var newStart = Number(firstRecord) + Number(maxRecords);
-      var newEnd = maxRecords * 2;
+      var newEnd = (maxRecords * 2 > 50 ? 50 : maxRecords * 2);
       var max = 100;
       if (newStart + max < newEnd) newEnd = newStart + max;
       refreshAccountsData2(query, dispatch, newStart, newEnd, nRecords);
@@ -647,14 +647,20 @@ export function getFieldValue(record, fieldName) {
       return record.isError ? 'error' : '';
     case 'internal':
       return internal ? 'int' : '';
+
+    // Names / Addresses
     case 'from': {
       const val = record.fromName ? record.fromName.name + " (" + record.fromName.tags + ")" : record.from;
       if (record.from === g_focusValue) return <div className='focusValue'>{val}</div>;
+      if (val && val.includes("0x"))
+        return <div style={{"font-style": "italic", "border":"1px lightgrey dotted"}}>{val}</div>
       return <div className='nonFocusValue'>{val}</div>;
     }
     case 'to': {
       const val = record.toName ? record.toName.name + ' (' + record.toName.tags + ')' : record.to;
       if (record.to === g_focusValue) return <div className='focusValue'>{val}</div>;
+      if (val && val.includes("0x"))
+        return <div style={{"font-style": "italic", "border":"1px lightgrey dotted"}}>{val}</div>
       return <div className='nonFocusValue'>{val}</div>;
     }
     case 'fromName':
@@ -677,6 +683,8 @@ export function getFieldValue(record, fieldName) {
           {getIcon(record.to, 'AddName', false, false, 12)}
         </div>
       );
+    // Names / Addresses
+
     case 'creations':
       if (!record['receipt']) return '';
       if (!record.receipt['contractAddress']) return '';
@@ -750,7 +758,8 @@ export const CompressedTx = ({ record, fieldName }) => {
 
 //----------------------------------------------------------------------
 function displayCompressed(emitter, compressed, debug) {
-  if (compressed === '0x()') return <div key={'xxx'}>{<i>{'null'}</i>}</div>;
+  if (compressed === '0x()')
+    return <div key={'xxx'}>{<i>{'null'}</i>}</div>;
 
   if (compressed.substr(0, 8) === 'message:') {
     return (
@@ -760,32 +769,35 @@ function displayCompressed(emitter, compressed, debug) {
     );
   }
   
-  let arr = compressed.replace(')', '').replace('(', ',').split(',');
-  if (arr.length === 0 || (arr.length === 1 && arr[0] === '')) return null;
+  let array = compressed.replace(')', '').replace('(', ',').split(',');
+  if (array.length === 0 || (array.length === 1 && array[0] === '')) return null;
 
-  if (debug) console.log('array: ', arr);
+  if (debug) console.log('array: ', array);
   return (
     <div>
-      {arr.map((item, index) => {
+      {array.map((item, index) => {
         if (index === 0) {
+          const ofInterest = emitter.includes(g_focusValue);
           return (
             <div key={item}>
-              {
-                <b>
-                  {item}{emitter !== '' ? ': ' : '' }{emitter}
-                </b>
-              }
+              {<b>{item}{emitter !== '' ? ': ' : '' }
+                <div style={{"display":"inline"}} className={ofInterest ? 'focusValue' : ''} key={emitter + '_t'}>
+                  {emitter}
+                </div>
+              </b>}
             </div>
           );
         } else {
           let s = item.split(':');
+          var name, value;
           if (!s) {
             s[0] = s[1] = '';
           } else if (!s[1]) {
             s[1] = '';
           }
-          s[1] = s[1].trim();
-          const ofInterest = s[1].includes(g_focusValue);
+          value = s[1].trim();
+          name = s[0];
+          const ofInterest = value.includes(g_focusValue);
           return (
             <>
               <div
@@ -795,10 +807,10 @@ function displayCompressed(emitter, compressed, debug) {
                 }}>
                 <div> </div>
                 <div key={item + '_a'} style={{ fontStyle: 'italic' }}>
-                  {s[0] === ' stub' ? '0x' : s[0] + ':'}
+                  {name === ' stub' ? '0x' : name + ':'}
                 </div>
                 <div className={ofInterest ? 'focusValue' : ''} key={item + '_b'}>
-                  {s[1]}
+                  {value}
                 </div>
                 <div> </div>
               </div>

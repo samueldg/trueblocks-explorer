@@ -46,7 +46,7 @@ export const accountsSchema = [
            name: 'Stat',
            selector: 'marker2',
            type: 'string',
-           width: 4,
+           width: 3,
            onDisplay: getFieldValue,
          },
          {
@@ -164,6 +164,7 @@ export const accountsSchema = [
            type: 'value',
            download: true,
            onDisplay: getFieldValue,
+           width: 5,
          },
          {
            name: 'Ether In',
@@ -227,6 +228,7 @@ export const accountsSchema = [
            type: 'value',
            download: true,
            onDisplay: getFieldValue,
+           width: 5,
          },
          {
            name: 'Ether Out',
@@ -261,7 +263,7 @@ export const accountsSchema = [
            name: 'Ending',
            selector: 'statements.endBal',
            type: 'value',
-           width: 10,
+           width: 5,
            download: true,
            chart: 'domain',
            onDisplay: getFieldValue,
