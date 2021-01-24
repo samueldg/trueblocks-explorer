@@ -43,9 +43,8 @@ export const HelpPanel = () => {
 
 //----------------------------------------------------------------------
 const MoreHelp = () => {
-  const apiUrl = 'https://app.gitbook.com/@trueblocks-llc/s/trueblocks-api-docs/';
-  const guideUrl = 'https://app.gitbook.com/@trueblocks-llc/s/trueblocks-explorer-users-guide/';
-  //'http://' + (process.env.REACT_APP_API_URL ? process.env.REACT_APP_API_URL : 'localhost') + ':8090/docs';
+  const apiUrl = '/help/api.html';
+  const guideUrl = '/help/userguide.html';
   return (
     <Fragment>
       <h4>Other</h4>
