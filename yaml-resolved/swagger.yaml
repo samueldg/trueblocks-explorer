@@ -836,9 +836,9 @@ paths:
         explode: true
         schema:
           type: boolean
-      - name: addrs
+      - name: apps
         in: query
-        description: display all addresses included in the block
+        description: display all address appearances included in the block
         required: false
         style: form
         explode: true
@@ -862,7 +862,7 @@ paths:
           type: boolean
       - name: count
         in: query
-        description: display counts of appearances (for --addrs, --uniq, or --uniq_tx)
+        description: display counts of appearances (for --apps, --uniq, or --uniq_tx)
           or transactions
         required: false
         style: form

@@ -1293,13 +1293,13 @@
       "real_type": "bool",
       "description": "display only transaction hashes, default is to display full transaction detail"
     },
-    "addrs": {
+    "apps": {
       "num": "12540",
       "group": "tools",
       "tags": "Data",
       "api_route": "blocks",
       "tool": "getBlock",
-      "command": "addrs",
+      "command": "apps",
       "hotkey": "a",
       "core_visible": true,
       "docs_visible": true,
@@ -1307,7 +1307,7 @@
       "option_kind": "switch",
       "data_type": "<boolean>",
       "real_type": "bool",
-      "description": "display all addresses included in the block"
+      "description": "display all address appearances included in the block"
     },
     "uniq": {
       "num": "12560",
@@ -1355,7 +1355,7 @@
       "option_kind": "switch",
       "data_type": "<boolean>",
       "real_type": "bool",
-      "description": "display counts of appearances (for --addrs, --uniq, or --uniq_tx) or transactions"
+      "description": "display counts of appearances (for --apps, --uniq, or --uniq_tx) or transactions"
     },
     "uncles": {
       "num": "12610",
