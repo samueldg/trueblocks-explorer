@@ -32,16 +32,17 @@ export const SettingsSystems = () => {
 
   const working = useSystemCheck('system');
   let msg = working ? 'All subsystems go...' : 'One or more of the TrueBlocks components is not working properly.';
+  let msg2 = '';
   if (!working && status.is_testing) {
-    msg += ' It appears that the API is in test mode. Wait until the test is finished and then reload.';
+    msg2 += ' It appears that the API is in test mode. Wait until the test is finished and then reload.';
   } else if (!working) {
-    msg += '  You will need to fix it before proceeding.';
+    msg2 += '  You will need to fix it before proceeding.';
   }
 
   const styleAll = { display: 'grid', gridTemplateColumns: '8fr 8fr 1fr', padding: '12px' };
   return (
     <Fragment>
-      <div className={working ? 'okay' : 'warning'}>{msg}</div>
+      <div className={working ? 'okay' : 'warning'}><div>{msg}</div><div>{msg2}</div></div>
       <div style={styleAll}>
         <LeftPanel status={status} handler={manageHandler} curSubsystem={curSubsystem} />
         <RightPanel status={status} handler={manageHandler} subsystem={curSubsystem} />
