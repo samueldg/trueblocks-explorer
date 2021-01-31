@@ -6,11 +6,11 @@
 import React, { Fragment, useState } from 'react';
 
 import { handleClick } from 'components/utils';
-import { Wizard1 } from 'panels/Wizard/Wizard1';
-import { Wizard2 } from 'panels/Wizard/Wizard2';
-import { Wizard3 } from 'panels/Wizard/Wizard3';
-import { Wizard4, Wizard5 } from 'panels/Wizard/Wizard4';
-import { Wizard6, Wizard7, Wizard8, Wizard9, Wizard10 } from 'panels/Wizard/Wizard4';
+import { Wizard1 } from 'page-panels/Wizard/Wizard1';
+import { Wizard2 } from 'page-panels/Wizard/Wizard2';
+import { Wizard3 } from 'page-panels/Wizard/Wizard3';
+import { Wizard4, Wizard5 } from 'page-panels/Wizard/Wizard4';
+import { Wizard6, Wizard7, Wizard8, Wizard9, Wizard10 } from 'page-panels/Wizard/Wizard4';
 
 import './Wizard.css';
 

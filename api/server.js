@@ -1,11 +1,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const { spawn } = require('child_process');
+const {spawn} = require('child_process');
 const fs = require('fs');
-
-//------------------------------------------------------------------
-const streamEvents = require('./progress_streams');
-const webSockets = require('./websockets');
+const ws = require('ws');
 
 const app = express();
 
@@ -14,7 +11,7 @@ const apiOptions = require('./api_options.json');
 let env = process.env;
 env.API_MODE = true;
 env.NO_COLOR = true;
-if (fs.existsSync('./testing')) {
+if (fs.existsSync('/tmp/test-api')) {
   env.TEST_MODE = true;
   console.log('Running in test mode');
 }
@@ -32,22 +29,15 @@ app.use('/help', express.static(__dirname + '/help'));
 app.use('/docs', express.static(__dirname + '/docs'));
 app.use('/', express.static(__dirname + '/build'));
 
+//------------------------------------------------------------------
 let processList = [];
 let cmdCount = 0;
-var DEBUG = false;
 
 //------------------------------------------------------------------
-function debug_log(...args) {
-  if (DEBUG) {
-    console.log.apply(null, [...args]);
-  }
-}
-
-//------------------------------------------------------------------
-function log(...args) {
-  const head = '-API: ';
-  console.log.apply(null, [head, ...args]);
-}
+// function log(...args) {
+//   const head = '-API: ';
+//   console.log.apply(null, [head, ...args]);
+// }
 
 //------------------------------------------------------------------
 const getCommandLine = (routeName, queryObj) => {
@@ -56,7 +46,7 @@ const getCommandLine = (routeName, queryObj) => {
       let option = apiOptions[routeName][key];
       let cmdString = [];
       if (option === undefined) {
-        debug_log('\x1b[31m', 'apiOption[' + routeName + '][' + key + '] not found', '\x1b[0m');
+        // console.log.apply(null, '\x1b[31m', 'apiOption[' + routeName + '][' + key + '] not found', '\x1b[0m');
         cmdString.push(`--${key}`, val);
       } else if (option.option_kind === 'positional') {
         cmdString.push(val);
@@ -104,12 +94,12 @@ app.get(`/:routeName`, (req, res) => {
     var msg = '{ "errors": [ "JS API: Route ';
     msg += routeName;
     msg += ' is not available." ] }';
-    debug_log(msg);
+    //console.log(msg);
     return res.send(msg);
   }
 
   let cmd = getCommandLine(routeName, req.query);
-  let chifra = spawn('chifra', [routeName, cmd], { env: env, detached: true });
+  let chifra = spawn('chifra', [routeName, cmd], {env: env, detached: true});
 
   cmdCount++;
   console.log(`-API: -------------- ${cmdCount} ---------------------------`);
@@ -118,79 +108,135 @@ app.get(`/:routeName`, (req, res) => {
   );
 
   req.on('close', (err) => {
-    debug_log(`killing ${-chifra.pid}...`);
+    //console.log(`killing ${-chifra.pid}...`);
     try {
       process.kill(-chifra.pid, 'SIGINT');
     } catch (e) {
-      debug_log(`error killing process: ${e}`);
+      //console.log(`error killing process: ${e}`);
     }
     removeFromProcessList(chifra.pid);
     return false;
   });
 
-  processList.push({ pid: chifra.pid, cmd: `chifra ${routeName} ${cmd}` });
-  debug_log(processList);
+  processList.push({pid: chifra.pid, cmd: `chifra ${routeName} ${cmd}`});
+  //console.log(processList);
   chifra.stderr.pipe(process.stderr);
   chifra.stdout.pipe(res).on('finish', (code) => {
     removeFromProcessList(chifra.pid);
-    log(`Exiting route ${routeName} with ${code === undefined ? 'OK' : code}`);
+    console.log(`-API: Exiting route ${routeName} with ${code === undefined ? 'OK' : code}`);
     console.log(`-API: -------------- ${cmdCount} ---------------------------`);
     console.log(' ');
     res.send();
   });
-  streamEvents.bindEvents(chifra.stderr, { routeName });
+  bindEvents(chifra.stderr, {routeName});
 });
 
-// TODO(tjayrush): This code should notice the lack of a path but allow the API to run anyway. All requests
-// TODO(tjayrush): to the API should return an error to the requestor instead of refusing to run.
-/*
-let thePath = '';
-const paths = env.PATH.split(':');
-if (paths) {
-  const array = paths.map((path) => {
-    return path;
-  });
-  if (array) {
-    const tb = array.filter((item) => {
-      return item.includes('trueblocks-core/bin') && !item.includes('/test');
-    });
-    if (tb.length !== 1) {
-      console.log(
-        '\n    \x1b[31m\x1b[1m%s\x1b[0m\x1b[33m\x1b[1m %s\x1b[0m',
-        'Error:',
-        'The API cannot find a $PATH to ./trueblocks-core/bin/chifra. Quitting...\n'
-      );
-      return;
-    } else {
-      //console.log('chifra found at: ' + tb[0] + '/chifra');
-      thePath = tb[0] + '/chifra';
-      try {
-        if (fs.existsSync(thePath)) {
-          //file exists
-        } else {
-          console.log(
-            '\n    \x1b[31m\x1b[1m%s\x1b[0m\x1b[33m\x1b[1m %s\x1b[0m',
-            'Error:',
-            'The command file (' + thePath + ') was not found. Quitting...\n'
-          );
-          return;
-        }
-      } catch (err) {
-        console.log(
-          '\n    \x1b[31m\x1b[1m%s\x1b[0m\x1b[33m\x1b[1m %s\x1b[0m',
-          'Error:',
-          'The chifra file was not found. ' + err + '\n'
-        );
-        return;
-      }
-    }
-  }
-}
-*/
+//------------------------------------------------------------------
+function onData(routeName) {
+  return function onDataListener(stream) {
+    if (routeName !== 'export') return;
 
+    const outputString = stream.toString();
+    const values = getProgress(outputString);
+
+    if (!values) return;
+
+    reportProgress('export', {finished: false, ...values});
+  };
+}
+
+//------------------------------------------------------------------
+function onFinish(routeName) {
+  return function onFinishListener(stream) {
+    if (routeName !== 'export') return;
+
+    reportProgress('export', {finished: true});
+  };
+}
+
+//------------------------------------------------------------------
+function getProgress(string) {
+  const match = string.match(/:([A-Za-z|\s]+) .*([\d]+) of .*([\d]+)/);
+  if (match) {
+    let [, op, done, total] = match;
+    op = string.trim(op);
+    return {op, done, total};
+  }
+  return;
+}
+
+//------------------------------------------------------------------
+function bindEvents(stderr, {routeName}) {
+  stderr.on('data', onData(routeName));
+  stderr.on('end', onFinish(routeName));
+  stderr.on('error', onFinish(routeName));
+}
+
+//------------------------------------------------------------------
+function reportProgress(id, progress) {
+  broadcast({action: 'progress', id, progress});
+}
+
+//------------------------------------------------------------------
+const listeners = [];
+
+//------------------------------------------------------------------
+function reportConnectedCount() {
+  console.log('-API: sockets connected', server.clients.size);
+}
+
+//------------------------------------------------------------------
+function bindSocketEvents(socket) {
+  socket.on('close', (code, reason) => {
+    console.log('-API: socket closing', code, reason);
+    reportConnectedCount();
+  });
+  socket.on('message', (message) => {
+    console.log('-API: incoming message:', message);
+    listeners.forEach((listener) => listener(message, socket));
+  });
+  socket.on('error', (error) => {
+    console.error('Websockets error:', error);
+  });
+}
+
+//------------------------------------------------------------------
+function bindServerEvents(server) {
+  server.on('listening', () => console.log('-API: server ready'));
+  server.on('connection', (socket) => {
+    console.log('-API: socket connected');
+    reportConnectedCount();
+    bindSocketEvents(socket);
+  });
+}
+
+//------------------------------------------------------------------
+function createServer(httpInstance) {
+  server = new ws.Server({
+    server: httpInstance,
+    clientTracking: true,
+    path: '/websocket',
+  });
+  bindServerEvents(server);
+  return server;
+}
+
+//------------------------------------------------------------------
+function broadcast(message, sendRaw = false) {
+  const messageToSend = sendRaw ? message : JSON.stringify(message);
+  [...server.clients].filter(({readyState}) => readyState === ws.OPEN).forEach((socket) => socket.send(messageToSend));
+}
+
+//------------------------------------------------------------------
+// function addMessageListener(listener) {
+//   listeners.push(listener);
+// }
+
+//------------------------------------------------------------------
 const port = !isNaN(process.argv[2]) ? process.argv[2] : 8080;
-const server = app.listen(port, () => {
+let server = app.listen(port, () => {
   console.log('TrueBlocks Data API (version 0.8.4-alpha) initialized on port ' + port);
 });
 
-webSockets.createServer(server);
+//------------------------------------------------------------------
+createServer(server);

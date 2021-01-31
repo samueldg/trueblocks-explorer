@@ -1637,7 +1637,7 @@
       "option_kind": "flag",
       "data_type": "<string>",
       "real_type": "string_q",
-      "description": "a comma-separated string of an address, a 4-byte, and required parameters for a call against a smart contract"
+      "description": "a bang-separated string consisting of address!4-byte!bytes"
     },
     "": {
       "num": "13220",

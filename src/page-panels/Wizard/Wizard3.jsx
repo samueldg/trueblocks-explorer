@@ -6,7 +6,7 @@
 import React, { Fragment, useState } from 'react';
 
 import { handleClick } from 'components/utils';
-import { WizardHead, WizardBody, WizardBox, X } from 'panels/Wizard/Wizard';
+import { WizardHead, WizardBody, WizardBox, X } from 'page-panels/Wizard/Wizard';
 
 import './Wizard.css';
 

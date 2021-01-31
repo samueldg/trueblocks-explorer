@@ -6,7 +6,7 @@
 import React from 'react';
 
 import { useToggles } from 'store';
-import { MenuPanel, ContentPanel, StatusPanel, HelpPanel } from 'panels/';
+import { MenuPanel, ContentPanel, StatusPanel, HelpPanel } from 'page-panels/';
 
 import './PageContent.css';
 

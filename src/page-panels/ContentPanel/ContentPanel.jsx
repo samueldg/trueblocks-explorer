@@ -12,7 +12,7 @@ import { thePages } from 'pages';
 import { Settings } from 'pages/Settings/Settings';
 import { Panel } from 'components/';
 import { currentPage, handleClick } from 'components/utils';
-import { Wizard, X } from 'panels/Wizard/Wizard';
+import { Wizard, X } from 'page-panels/Wizard/Wizard';
 
 import './ContentPanel.css';
 

@@ -76,6 +76,7 @@ export const SidebarTable = ({
           <div style={{ display: 'flex', alignItems: 'center' }}>
             <div style={{height: '30px', width: '200px', overflow: 'hidden'}} onClick={(e) => handleClick(e, sidebarHandler, { type: 'interact', payload: selectedRow['toName'] })}>
               <img height="30px" title={''} alt={''} src={imageUrl} />
+              <div>{selectedRow ? selectedRow['to'] : 'nothing'}</div>
             </div>
           </div>
           <div className="at-title" style={{ textAlign: 'center' }}>
