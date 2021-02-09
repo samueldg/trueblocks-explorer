@@ -315,20 +315,6 @@
       "real_type": "uint64_t",
       "description": "if --skip_ddos is on, this many traces defines what a ddos transaction is (default = 250)"
     },
-    "all_abis": {
-      "num": "10360",
-      "group": "apps",
-      "tags": "Accounts",
-      "api_route": "export",
-      "tool": "acctExport",
-      "command": "all_abis",
-      "hotkey": "A",
-      "generate": "local",
-      "option_kind": "switch",
-      "data_type": "<boolean>",
-      "real_type": "bool",
-      "description": "load all previously cached abi files"
-    },
     "freshen": {
       "num": "10380",
       "group": "apps",
@@ -622,7 +608,7 @@
       "option_kind": "switch",
       "data_type": "<boolean>",
       "real_type": "bool",
-      "description": "pin new chunks (and blooms) to IPFS (requires Pinata key)"
+      "description": "pin new chunks (and blooms) to IPFS (requires Pinata key and running IPFS node)"
     },
     "publish": {
       "num": "10648",
@@ -639,20 +625,6 @@
       "data_type": "<boolean>",
       "real_type": "bool",
       "description": "publish the hash of the pin manifest to the UnchainedIndex smart contract"
-    },
-    "listpins": {
-      "num": "10652",
-      "group": "apps",
-      "tags": "Admin",
-      "api_route": "scrape",
-      "tool": "blockScrape",
-      "command": "listpins",
-      "hotkey": "l",
-      "generate": "local",
-      "option_kind": "switch",
-      "data_type": "<boolean>",
-      "real_type": "bool",
-      "description": "list pins (precludes other options, requires API key)"
     },
     "sleep": {
       "num": "10658",
@@ -760,13 +732,27 @@
       "tool": "cacheStatus",
       "command": "report",
       "hotkey": "r",
-      "core_visible": true,
       "docs_visible": true,
       "generate": "local",
       "option_kind": "switch",
       "data_type": "<boolean>",
       "real_type": "bool",
-      "description": "show a summary of the current status of the blockchain and TrueBlocks scrapers"
+      "description": "show a summary of the current status of TrueBlocks (deprecated)"
+    },
+    "terse": {
+      "num": "10770",
+      "group": "apps",
+      "tags": "Admin",
+      "api_route": "status",
+      "tool": "cacheStatus",
+      "command": "terse",
+      "hotkey": "e",
+      "docs_visible": true,
+      "generate": "header",
+      "option_kind": "switch",
+      "data_type": "<boolean>",
+      "real_type": "bool",
+      "description": "show a terse summary report"
     },
     "get_config": {
       "num": "10780",
@@ -841,6 +827,106 @@
       "option_kind": "description",
       "data_type": "",
       "description": "Report on status of one or more TrueBlocks caches."
+    }
+  },
+  "pins": {
+    "mode": {
+      "num": "10900",
+      "group": "apps",
+      "tags": "Admin",
+      "api_route": "pins",
+      "tool": "pinStatus",
+      "command": "mode",
+      "hotkey": "",
+      "def_val": "",
+      "is_required": true,
+      "core_visible": true,
+      "docs_visible": true,
+      "generate": "header",
+      "option_kind": "positional",
+      "data_type": "enum[local*|remote|onchain]",
+      "real_type": "string_q",
+      "description": "display local or remote manifest or its IPFS hash"
+    },
+    "hash": {
+      "num": "10900",
+      "group": "apps",
+      "tags": "Admin",
+      "api_route": "pins",
+      "tool": "pinStatus",
+      "command": "hash",
+      "hotkey": "a",
+      "core_visible": true,
+      "docs_visible": true,
+      "generate": "header",
+      "option_kind": "switch",
+      "data_type": "<boolean>",
+      "real_type": "bool",
+      "description": "display the hash instead of contents of manifest ('on' for onchain mode)"
+    },
+    "pin": {
+      "num": "10900",
+      "group": "apps",
+      "tags": "Admin",
+      "api_route": "pins",
+      "tool": "pinStatus",
+      "command": "pin",
+      "hotkey": "p",
+      "def_val": "",
+      "core_visible": true,
+      "docs_visible": true,
+      "generate": "header",
+      "option_kind": "flag",
+      "data_type": "<string>",
+      "real_type": "string_q",
+      "description": "pin indexes and blooms, add to manifest, and return hash"
+    },
+    "unpin": {
+      "num": "10900",
+      "group": "apps",
+      "tags": "Admin",
+      "api_route": "pins",
+      "tool": "pinStatus",
+      "command": "unpin",
+      "hotkey": "u",
+      "def_val": "",
+      "core_visible": true,
+      "docs_visible": true,
+      "generate": "header",
+      "option_kind": "flag",
+      "data_type": "<string>",
+      "real_type": "string_q",
+      "description": "unpin index(es) and blooms given a hash, a filename, or 'all'"
+    },
+    "license": {
+      "num": "10900",
+      "group": "apps",
+      "tags": "Admin",
+      "api_route": "pins",
+      "tool": "pinStatus",
+      "command": "license",
+      "hotkey": "i",
+      "generate": "header",
+      "option_kind": "switch",
+      "data_type": "<boolean>",
+      "real_type": "bool",
+      "description": "show the current pinata license information, if any"
+    },
+    "": {
+      "num": "10910",
+      "group": "apps",
+      "tags": "Admin",
+      "api_route": "pins",
+      "tool": "pinStatus",
+      "command": "",
+      "hotkey": "",
+      "def_val": "",
+      "core_visible": true,
+      "docs_visible": true,
+      "generate": "--",
+      "option_kind": "description",
+      "data_type": "",
+      "description": "Report on and manage pinned appearance index and bloom chunks."
     }
   },
   "quotes": {
@@ -1852,7 +1938,7 @@
       "option_kind": "flag",
       "data_type": "<string>",
       "real_type": "string_q",
-      "description": "Call trace_filter with the comma seperated string of the filter (see docs)"
+      "description": "Call trace_filter with bang-seperated string fromBlk!toBlk[!fromAddr[!toAddr[!after[!count]]]]"
     },
     "": {
       "num": "13500",
@@ -2004,37 +2090,6 @@
       "real_type": "bool",
       "description": "convert all types to their canonical represenation and remove all spaces from display"
     },
-    "generate": {
-      "num": "13700",
-      "group": "tools",
-      "tags": "Accounts",
-      "api_route": "abis",
-      "tool": "grabABI",
-      "command": "generate",
-      "hotkey": "g",
-      "core_visible": true,
-      "docs_visible": true,
-      "generate": "header",
-      "option_kind": "switch",
-      "data_type": "<boolean>",
-      "real_type": "bool",
-      "description": "generate C++ code into the current folder for all functions and events found in the ABI"
-    },
-    "monitored": {
-      "num": "13840",
-      "group": "tools",
-      "tags": "Accounts",
-      "api_route": "abis",
-      "tool": "grabABI",
-      "command": "monitored",
-      "hotkey": "m",
-      "core_visible": true,
-      "generate": "local",
-      "option_kind": "switch",
-      "data_type": "<boolean>",
-      "real_type": "bool",
-      "description": "load ABIs from monitored addresses"
-    },
     "known": {
       "num": "13850",
       "group": "tools",
@@ -2049,21 +2104,6 @@
       "data_type": "<boolean>",
       "real_type": "bool",
       "description": "load common 'known' ABIs from cache"
-    },
-    "addr": {
-      "num": "13855",
-      "group": "tools",
-      "tags": "Accounts",
-      "api_route": "abis",
-      "tool": "grabABI",
-      "command": "addr",
-      "hotkey": "a",
-      "core_visible": true,
-      "generate": "local",
-      "option_kind": "switch",
-      "data_type": "<boolean>",
-      "real_type": "bool",
-      "description": "include address of smart contract for the abi in output"
     },
     "sol": {
       "num": "13860",

@@ -142,14 +142,6 @@ paths:
         explode: true
         schema:
           type: number
-      - name: all_abis
-        in: query
-        description: load all previously cached abi files
-        required: false
-        style: form
-        explode: true
-        schema:
-          type: boolean
       - name: freshen
         in: query
         description: freshen but do not print the exported data
@@ -504,34 +496,9 @@ paths:
         explode: true
         schema:
           type: boolean
-      - name: generate
-        in: query
-        description: generate C++ code into the current folder for all functions and
-          events found in the ABI
-        required: false
-        style: form
-        explode: true
-        schema:
-          type: boolean
-      - name: monitored
-        in: query
-        description: load ABIs from monitored addresses
-        required: false
-        style: form
-        explode: true
-        schema:
-          type: boolean
       - name: known
         in: query
         description: load common 'known' ABIs from cache
-        required: false
-        style: form
-        explode: true
-        schema:
-          type: boolean
-      - name: addr
-        in: query
-        description: include address of smart contract for the abi in output
         required: false
         style: form
         explode: true
@@ -653,8 +620,15 @@ paths:
           type: number
       - name: report
         in: query
-        description: show a summary of the current status of the blockchain and TrueBlocks
-          scrapers
+        description: show a summary of the current status of TrueBlocks (deprecated)
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: boolean
+      - name: terse
+        in: query
+        description: show a terse summary report
         required: false
         style: form
         explode: true
@@ -767,7 +741,7 @@ paths:
           type: number
       - name: pin
         in: query
-        description: pin new chunks (and blooms) to IPFS (requires Pinata key)
+        description: pin new chunks (and blooms) to IPFS (requires Pinata key and running IPFS node)
         required: false
         style: form
         explode: true
@@ -777,14 +751,6 @@ paths:
         in: query
         description: publish the hash of the pin manifest to the UnchainedIndex smart
           contract
-        required: false
-        style: form
-        explode: true
-        schema:
-          type: boolean
-      - name: listpins
-        in: query
-        description: list pins (precludes other options, requires API key)
         required: false
         style: form
         explode: true
@@ -1104,8 +1070,7 @@ paths:
           type: number
       - name: filter
         in: query
-        description: Call trace_filter with the comma seperated string of the filter
-          (see docs)
+        description: Call trace_filter with bang-seperated string fromBlk!toBlk[!fromAddr[!toAddr[!after[!count]]]]
         required: false
         style: form
         explode: true
