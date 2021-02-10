@@ -308,7 +308,7 @@ export const Accounts = (props) => {
   g_Handler = accountsHandler;
 
   useMountEffect(() => {
-    const qqq = 'count&addrs=' + addresses.value + '' + (mocked ? '&mockData' : '');
+    const qqq = 'count&addrs=' + addresses.value + '' + (mocked ? '&mock' : '');
     getServerData(getApiUrl('export'), qqq).then((theData) => {
       if (mocked) {
         setRecordCount(100);
@@ -502,7 +502,7 @@ const defaultSearch = ['blockNumber', 'hash', 'from', 'fromName', 'to', 'toName'
 
 //----------------------------------------------------------------------
 export function refreshAccountsData(query, dispatch, mocked) {
-  getServerData(getApiUrl('export'), query + (mocked ? '&mockData' : '')).then((theData) => {
+  getServerData(getApiUrl('export'), query + (mocked ? '&mock' : '')).then((theData) => {
     let accounts = theData.data;
     // EXISTING_CODE
     // EXISTING_CODE

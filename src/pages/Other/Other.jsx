@@ -260,7 +260,7 @@ const defaultSearch = ['blockNumber', 'name', 'date'];
 
 //----------------------------------------------------------------------
 export function refreshOtherData(query, dispatch, mocked) {
-  getServerData(getApiUrl('when'), query + (mocked ? '&mockData' : '')).then((theData) => {
+  getServerData(getApiUrl('when'), query + (mocked ? '&mock' : '')).then((theData) => {
     let other = theData.data;
     // EXISTING_CODE
     // EXISTING_CODE

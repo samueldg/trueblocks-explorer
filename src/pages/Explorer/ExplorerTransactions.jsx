@@ -56,7 +56,7 @@ export const ExplorerTransactions = () => {
   const url = getApiUrl('transactions');
   let query = 'transactions=' + current + '&force';
   useEffect(() => {
-    getServerData(url, query + (mocked ? '&mockData' : '')).then((theData) => {
+    getServerData(url, query + (mocked ? '&mock' : '')).then((theData) => {
       let result = theData.data;
       // EXISTING_CODE
       // EXISTING_CODE

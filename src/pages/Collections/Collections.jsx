@@ -260,7 +260,7 @@ const defaultSearch = ['tags', 'name', 'client'];
 
 //----------------------------------------------------------------------
 export function refreshCollectionsData(query, dispatch, mocked) {
-  getServerData(getApiUrl('names'), query + (mocked ? '&mockData' : '')).then((theData) => {
+  getServerData(getApiUrl('names'), query + (mocked ? '&mock' : '')).then((theData) => {
     let collections = theData.data;
     // EXISTING_CODE
     // EXISTING_CODE

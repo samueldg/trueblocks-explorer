@@ -257,7 +257,7 @@ const defaultSearch = ['tags', 'subtags1', 'subtags2'];
 
 //----------------------------------------------------------------------
 export function refreshTagsData(query, dispatch, mocked) {
-  getServerData(getApiUrl('names'), query + (mocked ? '&mockData' : '')).then((theData) => {
+  getServerData(getApiUrl('names'), query + (mocked ? '&mock' : '')).then((theData) => {
     let tags = theData.data;
     // EXISTING_CODE
     // EXISTING_CODE

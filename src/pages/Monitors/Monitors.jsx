@@ -310,7 +310,7 @@ const defaultSearch = ['tags', 'address', 'name'];
 
 //----------------------------------------------------------------------
 export function refreshMonitorsData(query, dispatch, mocked) {
-  getServerData(getApiUrl('status'), query + (mocked ? '&mockData' : '')).then((theData) => {
+  getServerData(getApiUrl('status'), query + (mocked ? '&mock' : '')).then((theData) => {
     let monitors = theData.data;
     // EXISTING_CODE
     if (!mocked) monitors = theData.data[0].caches[0].items;

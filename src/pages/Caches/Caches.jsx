@@ -242,7 +242,7 @@ const defaultSearch = ['path'];
 
 //----------------------------------------------------------------------
 export function refreshCachesData(query, dispatch, mocked) {
-  getServerData(getApiUrl('status'), query + (mocked ? '&mockData' : '')).then((theData) => {
+  getServerData(getApiUrl('status'), query + (mocked ? '&mock' : '')).then((theData) => {
     let caches = theData.data;
     // EXISTING_CODE
     if (caches) caches = caches[0].caches;

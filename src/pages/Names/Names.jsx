@@ -290,7 +290,7 @@ const defaultSearch = ['tags', 'address', 'name'];
 
 //----------------------------------------------------------------------
 export function refreshNamesData(query, dispatch, mocked) {
-  getServerData(getApiUrl('names'), query + (mocked ? '&mockData' : '')).then((theData) => {
+  getServerData(getApiUrl('names'), query + (mocked ? '&mock' : '')).then((theData) => {
     let names = theData.data;
     // EXISTING_CODE
     // EXISTING_CODE

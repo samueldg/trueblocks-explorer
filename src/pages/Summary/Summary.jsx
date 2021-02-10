@@ -233,7 +233,7 @@ const defaultSearch = ['blockNumber', 'hash', 'from', 'fromName', 'to', 'toName'
 
 //----------------------------------------------------------------------
 export function refreshSummaryData(query, dispatch, mocked) {
-  getServerData(getApiUrl('export'), query + (mocked ? '&mockData' : '')).then((theData) => {
+  getServerData(getApiUrl('export'), query + (mocked ? '&mock' : '')).then((theData) => {
     let summary = theData.data;
     // EXISTING_CODE
     // EXISTING_CODE

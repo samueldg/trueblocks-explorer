@@ -56,7 +56,7 @@ export const ExplorerLogs = () => {
   const url = getApiUrl('logs');
   let query = 'transactions=' + current + '';
   useEffect(() => {
-    getServerData(url, query + (mocked ? '&mockData' : '')).then((theData) => {
+    getServerData(url, query + (mocked ? '&mock' : '')).then((theData) => {
       let result = theData.data;
       // EXISTING_CODE
       // EXISTING_CODE
