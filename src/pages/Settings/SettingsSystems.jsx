@@ -3,8 +3,9 @@
  * copyright (c) 2018, 2019 TrueBlocks, LLC (http://trueblocks.io)
  * All Rights Reserved
  *------------------------------------------------------------------------*/
-import React, { Fragment, useState } from 'react';
+import React, {Fragment, useState, useContext} from 'react';
 
+import GlobalContext from 'store';
 import { getApiUrl, useStatusData, useSystemCheck } from 'store';
 
 import { ObjectTable } from 'components';
@@ -36,7 +37,7 @@ export const SettingsSystems = () => {
   if (!working && status.is_testing) {
     msg2 += ' It appears that the API is in test mode. Wait until the test is finished and then reload.';
   } else if (!working) {
-    msg2 += '  You will need to fix it before proceeding.';
+    msg2 += '  Current status returns ' + JSON.stringify(status, null, 2);
   }
 
   const styleAll = { display: 'grid', gridTemplateColumns: '8fr 8fr 1fr', padding: '12px' };

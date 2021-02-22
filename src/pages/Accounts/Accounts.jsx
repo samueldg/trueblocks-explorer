@@ -62,7 +62,7 @@ export const Accounts = (props) => {
   g_focusValue = addresses.value && addresses.value.toLowerCase();
   // EXISTING_CODE
 
-  const dataQuery = 'addrs=' + addresses.value + '&staging&accounting&ether&write_txs';
+  const dataQuery = 'addrs=' + addresses.value + '&staging&accounting&ether&cache_txs';
   function addendum(record, record_id) {
     let ret = '';
     // EXISTING_CODE

@@ -26,7 +26,7 @@ import { tracesSchema } from 'pages/Explorer/ExplorerTracesSchema';
 import { transactionsSchema } from 'pages/Explorer/ExplorerTransactionsSchema';
 
 // auto-generate: all-schemas
-import { collectionsSchema } from 'pages/Collections/CollectionsSchema';
+import { entitiesSchema } from 'pages/Entities/EntitiesSchema';
 import { monitorsSchema } from 'pages/Monitors/MonitorsSchema';
 import { accountsSchema } from 'pages/Accounts/AccountsSchema';
 import { summarySchema } from 'pages/Summary/SummarySchema';
@@ -238,7 +238,7 @@ const useSchemas = () => {
     { group: 'system', name: 'schemasSchema', schema: schemasSchema },
 
     // auto-generate: use-schemas
-    { group: 'pages_', name: 'collectionsSchema', schema: collectionsSchema },
+    { group: 'pages_', name: 'entitiesSchema', schema: entitiesSchema },
     { group: 'pages_', name: 'monitorsSchema', schema: monitorsSchema },
     { group: 'pages_', name: 'accountsSchema', schema: accountsSchema },
     { group: 'pages_', name: 'summarySchema', schema: summarySchema },

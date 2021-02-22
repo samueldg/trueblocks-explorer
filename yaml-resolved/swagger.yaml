@@ -265,31 +265,14 @@ paths:
         explode: true
         schema:
           type: boolean
-      - name: blooms
+      - name: clean
         in: query
-        description: process query by first using bloom filter and, if hit, downloading
-          index chunk from remote
+        description: clean (i.e. remove dups) from all existing monitors
         required: false
         style: form
         explode: true
         schema:
           type: boolean
-      - name: start
-        in: query
-        description: this value is ignored but remains for backward compatibility
-        required: false
-        style: form
-        explode: true
-        schema:
-          type: string
-      - name: end
-        in: query
-        description: this value is ignored but remains for backward compatibility
-        required: false
-        style: form
-        explode: true
-        schema:
-          type: string
       responses:
         "200":
           description: status of the scraper
@@ -444,15 +427,15 @@ paths:
                   $ref: '#/components/schemas/response'
         "400":
           description: bad input parameter
-  /collections:
+  /entities:
     get:
       tags:
       - Accounts
-      operationId: accounts-collections
+      operationId: accounts-entities
       parameters:
-      - name: collections
+      - name: entities
         in: query
-        description: display collections data
+        description: display entity data
         required: false
         style: form
         explode: true
@@ -578,7 +561,7 @@ paths:
             enum:
             - index
             - monitors
-            - collections
+            - entities
             - names
             - abis
             - caches

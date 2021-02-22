@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Collections = (props) => {
+const Entities = (props) => {
   const {color, size, ...otherProps} = props;
   return (
     <svg
@@ -22,14 +22,14 @@ const Collections = (props) => {
   );
 };
 
-Collections.propTypes = {
+Entities.propTypes = {
   color: PropTypes.string,
   size: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
 
-Collections.defaultProps = {
+Entities.defaultProps = {
   color: 'currentColor',
   size: '24',
 };
 
-export default Collections;
+export default Entities;

@@ -54,7 +54,7 @@ export const SupportKeys = () => {
     <pre>
       <big>
         <h4>Accessing Screens</h4>
-        {'\ts c\t\tOpen Collections screen\n'}
+        {'\ts c\t\tOpen Entities screen\n'}
         {'\ts m\t\tOpen Monitors screen\n'}
         {'\ts a\t\tOpen Accounts screen\n'}
         {'\ts e\t\tOpen Explorers screen\n'}

@@ -7,7 +7,7 @@
  * This file was generated with makeClass. Edit only those parts of the code inside
  * of 'EXISTING_CODE' tags.
  */
-import { getFieldValue } from 'pages/Collections/Collections';
+import {getFieldValue} from 'pages/Entities/Entities';
 import { notEmpty } from 'components/utils';
 
 //----------------------------------------------------------------------------
@@ -18,7 +18,7 @@ const validateUserInput = (fieldName, value) => {
 
 //----------------------------------------------------------------------------
 // auto-generate: schema
-export const collectionsSchema = [
+export const entitiesSchema = [
   {
     name: 'ID',
     selector: 'id',

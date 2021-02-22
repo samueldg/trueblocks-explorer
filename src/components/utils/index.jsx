@@ -122,7 +122,7 @@ export const currentPage = () => {
   const electronIndexLoaded = [/^file:\/\//, /index.html/].every((regexp) => regexp.test(window.location));
 
   if (electronIndexLoaded) {
-    return { page: 'collections', subpage: '', params: {} };
+    return { page: 'entities', subpage: '', params: {} };
   }
 
   const parts = window.location.pathname.split('/');
@@ -131,7 +131,7 @@ export const currentPage = () => {
     const p = item.split('=');
     return { name: p[0], value: p[1] };
   });
-  if (parts.length < 2 || parts[1] === '') parts[1] = 'collections';
+  if (parts.length < 2 || parts[1] === '') parts[1] = 'entities';
   if (parts.length < 3) parts[2] = '';
   return { page: parts[1], subpage: parts[2], params: params };
 };

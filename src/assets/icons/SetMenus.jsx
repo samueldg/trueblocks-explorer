@@ -3,7 +3,7 @@
  * copyright (c) 2018, 2019 TrueBlocks, LLC (http://trueblocks.io)
  * All Rights Reserved
  *------------------------------------------------------------------------*/
-import Collections from './Collections';
+import Entities from './Entities';
 import InteractWith from './InteractWith';
 import Monitors from './Monitors';
 import Accounts from './Accounts';
@@ -19,7 +19,7 @@ import Settings from './Settings';
 import Support from './Support';
 
 export {
-  Collections,
+  Entities,
   InteractWith,
   Accounts,
   Summary,

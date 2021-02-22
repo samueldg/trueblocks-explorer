@@ -53,8 +53,8 @@ export const Tablebar = ({
 
 //-----------------------------------------------------------------------
 const Title = ({ title }) => {
-  let tit = decodeURIComponent(title.substr(0, 45).replace(/\+/g, '%20'));
-  if (title.length > 45) tit += '...';
+  let tit = decodeURIComponent(title.substr(0, 35).replace(/\+/g, '%20'));
+  if (title.length > 35) tit += '...';
   return <div className="at-title">{tit}</div>;
 };
 

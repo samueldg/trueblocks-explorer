@@ -3,9 +3,9 @@
  * copyright (c) 2018, 2019 TrueBlocks, LLC (http://trueblocks.io)
  * All Rights Reserved
  *------------------------------------------------------------------------*/
-/* add custom css code for the Collections component here. */
+/* add custom css code for the Entities component here. */
 
-.collections {
+.entities {
   display: flex;
   flex-wrap: wrap;
   justify-items: center;

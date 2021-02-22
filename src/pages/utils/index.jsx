@@ -6,7 +6,7 @@
 import React from 'react';
 
 import {
-  Collections,
+  Entities,
   InteractWith,
   Monitors,
   Accounts,
@@ -50,8 +50,8 @@ export function getIcon(index, labelIn, expanded = false, pad = false, size = 20
   const key = 'icon_' + label + '_' + index;
   const cn = (expanded ? 'menu-icon' : '') + (pad ? ' menu-icon-padded' : '');
   switch (label) {
-    case 'collections':
-      return <Collections key={key} size={size} className={cn} />;
+    case 'entities':
+      return <Entities key={key} size={size} className={cn} />;
     case 'monitors':
       return <Monitors key={key} size={size} className={cn} />;
     case 'accounts':

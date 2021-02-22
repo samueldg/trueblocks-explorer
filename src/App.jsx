@@ -15,7 +15,7 @@ import { stateFromStorage } from 'components/utils';
 
 // page-related - for searching do not remove
 // auto-generate: imports
-import { collectionsDefault, collectionsReducer } from 'pages/Collections/Collections';
+import { entitiesDefault, entitiesReducer } from 'pages/Entities/Entities';
 import { monitorsDefault, monitorsReducer } from 'pages/Monitors/Monitors';
 import { accountsDefault, accountsReducer } from 'pages/Accounts/Accounts';
 import { summaryDefault, summaryReducer } from 'pages/Summary/Summary';
@@ -39,7 +39,7 @@ const defaultData = {
   status: statusDefault,
   menu: theMenu,
   // auto-generate: defaults
-  collections: collectionsDefault,
+  entities: entitiesDefault,
   monitors: monitorsDefault,
   accounts: accountsDefault,
   summary: summaryDefault,
@@ -61,7 +61,7 @@ function App() {
   const [statusState, statusDispatch] = useReducer(statusReducer, defaultData['status']);
   const [menusState, menusDispatch] = useReducer(menusReducer, defaultData['menu']);
   // auto-generate: reducers
-  const [collectionsState, collectionsDispatch] = useReducer(collectionsReducer, defaultData['collections']);
+  const [entitiesState, entitiesDispatch] = useReducer(entitiesReducer, defaultData['entities']);
   const [monitorsState, monitorsDispatch] = useReducer(monitorsReducer, defaultData['monitors']);
   const [accountsState, accountsDispatch] = useReducer(accountsReducer, defaultData['accounts']);
   const [summaryState, summaryDispatch] = useReducer(summaryReducer, defaultData['summary']);
@@ -81,7 +81,7 @@ function App() {
     status: { state: statusState, dispatch: statusDispatch },
     menus: { menu: menusState, dispatch: menusDispatch },
     // auto-generate: state
-    collections: { collections: collectionsState, dispatch: collectionsDispatch },
+    entities: { entities: entitiesState, dispatch: entitiesDispatch },
     monitors: { monitors: monitorsState, dispatch: monitorsDispatch },
     accounts: { accounts: accountsState, dispatch: accountsDispatch },
     summary: { summary: summaryState, dispatch: summaryDispatch },
@@ -103,7 +103,7 @@ function App() {
   const electronIndexLoaded = [/^file:\/\//, /index.html/].every((regexp) => regexp.test(window.location));
 
   if (insideElectron && electronIndexLoaded) {
-    return <Redirect to='/collections' />;
+    return <Redirect to='/entities' />;
   }
 
   return (
@@ -130,7 +130,7 @@ const WholePage = () => {
 //------------------------------------------------------
 const mapHotKeys = (panelDispatch) => {
   Mousetrap.bind('s c', function () {
-    window.location = '/collections';
+    window.location = '/entities';
   });
   Mousetrap.bind('s m', function () {
     window.location = '/monitors';

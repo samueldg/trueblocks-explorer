@@ -7,43 +7,52 @@
  * This file was generated with makeClass. Edit only those parts of the code inside
  * of 'EXISTING_CODE' tags.
  */
-import React, { useEffect, useState, useMemo, useCallback, useContext } from 'react';
+import React, {useEffect, useState, useMemo, useCallback, useContext} from 'react';
 import Mousetrap from 'mousetrap';
 
-import GlobalContext, { getApiUrl } from 'store';
+import GlobalContext, {getApiUrl} from 'store';
 
-import { DataTable, PageCaddie, Dialog } from 'components';
-import { calcValue, getServerData, sendServerCommand, sortArray, sortStrings, handleClick, replaceRecord, stateFromStorage } from 'components/utils';
+import {DataTable, PageCaddie, Dialog} from 'components';
+import {
+  calcValue,
+  getServerData,
+  sendServerCommand,
+  sortArray,
+  sortStrings,
+  handleClick,
+  replaceRecord,
+  stateFromStorage,
+} from 'components/utils';
 
-import { useStatus, LOADING, NOT_LOADING } from 'store/status_store';
+import {useStatus, LOADING, NOT_LOADING} from 'store/status_store';
 
-import { collectionsSchema } from './CollectionsSchema';
-import './Collections.css';
+import {entitiesSchema} from './EntitiesSchema';
+import './Entities.css';
 
 // EXISTING_CODE
 // EXISTING_CODE
 
 //---------------------------------------------------------------------------
-export const Collections = (props) => {
-  const { collections, dispatch } = useCollections();
+export const Entities = (props) => {
+  const {entities, dispatch} = useEntities();
   const mocked = useStatus().state.mocked;
   const statusDispatch = useStatus().dispatch;
 
-  const [filtered, setFiltered] = useState(collectionsDefault);
+  const [filtered, setFiltered] = useState(entitiesDefault);
   const [tagList, setTagList] = useState([]);
   const [searchFields] = useState(defaultSearch);
-  const [curTag, setTag] = useState(localStorage.getItem('collectionsTag') || 'All');
-  const [editDialog, setEditDialog] = useState({ showing: false, record: {} });
+  const [curTag, setTag] = useState(localStorage.getItem('entitiesTag') || 'All');
+  const [editDialog, setEditDialog] = useState({showing: false, record: {}});
   const [curRecordId, setCurRecordId] = useState('');
   const [debug, setDebug] = useState(false);
-  const [detailLevel, setDetailLevel] = useState(Number(stateFromStorage('collectionsPageDetails', 0)));
+  const [detailLevel, setDetailLevel] = useState(Number(stateFromStorage('entitiesPageDetails', 0)));
 
   // EXISTING_CODE
   // EXISTING_CODE
 
   const cmdUrl = getApiUrl('names');
 
-  const dataQuery = 'collections';
+  const dataQuery = 'entities';
   function addendum(record, record_id) {
     let ret = '';
     // EXISTING_CODE
@@ -51,43 +60,43 @@ export const Collections = (props) => {
     return ret;
   }
 
-  const collectionsHandler = useCallback(
+  const entitiesHandler = useCallback(
     (action) => {
       const record_id = action.record_id;
       setCurRecordId(record_id);
       let record = filtered.filter((record) => {
-        return record_id && calcValue(record, { selector: 'id', onDisplay: getFieldValue }) === record_id;
+        return record_id && calcValue(record, {selector: 'id', onDisplay: getFieldValue}) === record_id;
       });
       if (record) record = record[0];
       switch (action.type.toLowerCase()) {
         case 'toggle-detail':
           setDetailLevel((detailLevel + 1) % 3);
-          localStorage.setItem('collectionsPageDetails', (detailLevel + 1) % 3);
+          localStorage.setItem('entitiesPageDetails', (detailLevel + 1) % 3);
           break;
         case 'select-tag':
           if (action.payload === 'Debug') {
             setDebug(!debug);
             setTag('All');
-            localStorage.setItem('collectionsTag', 'All');
+            localStorage.setItem('entitiesTag', 'All');
           } else if (action.payload === 'MockData') {
-            statusDispatch({ type: 'mocked', payload: !mocked });
+            statusDispatch({type: 'mocked', payload: !mocked});
             setTag('All');
-            localStorage.setItem('collectionsTag', 'All');
+            localStorage.setItem('entitiesTag', 'All');
           } else {
             setTag(action.payload);
-            localStorage.setItem('collectionsTag', action.payload);
+            localStorage.setItem('entitiesTag', action.payload);
           }
           break;
         case 'add':
-          setEditDialog({ showing: true, record: {} });
+          setEditDialog({showing: true, record: {}});
           break;
         case 'enter':
         case 'edit':
-          if (record) setEditDialog({ showing: true, name: 'Edit Collection', record: record });
+          if (record) setEditDialog({showing: true, name: 'Edit Entity', record: record});
           break;
         case 'close':
         case 'cancel':
-          setEditDialog({ showing: false, record: {} });
+          setEditDialog({showing: false, record: {}});
           break;
         case 'okay':
           // let query = 'editCmd=edit';
@@ -104,7 +113,7 @@ export const Collections = (props) => {
           //  // we assume the delete worked, so we don't reload the data
           //  statusDispatch(NOT_LOADING);
           // });
-          setEditDialog({ showing: false, record: {} });
+          setEditDialog({showing: false, record: {}});
           break;
         case 'delete':
           {
@@ -134,7 +143,7 @@ export const Collections = (props) => {
             statusDispatch(LOADING);
             sendServerCommand(cmdUrl, cmdQuery).then((theData) => {
               // the command worked, but now we need to reload the data
-              refreshCollectionsData(dataQuery, dispatch, mocked);
+              refreshEntitiesData(dataQuery, dispatch, mocked);
               statusDispatch(NOT_LOADING);
             });
           }
@@ -155,22 +164,22 @@ export const Collections = (props) => {
     // EXISTING_CODE
     // EXISTING_CODE
     if (!partialFetch) {
-      refreshCollectionsData(dataQuery, dispatch, mocked);
+      refreshEntitiesData(dataQuery, dispatch, mocked);
     }
   }, [dataQuery, dispatch, mocked]);
 
   useEffect(() => {
-    Mousetrap.bind('plus', (e) => handleClick(e, collectionsHandler, { type: 'Add' }));
+    Mousetrap.bind('plus', (e) => handleClick(e, entitiesHandler, {type: 'Add'}));
     return () => {
       Mousetrap.unbind('plus');
     };
-  }, [collectionsHandler]);
+  }, [entitiesHandler]);
 
   useMemo(() => {
     // prettier-ignore
-    if (collections && collections.data) {
-      setTagList(getTagList(collections));
-      const result = collections.data.filter((item) => {
+    if (entities && entities.data) {
+      setTagList(getTagList(entities));
+      const result = entities.data.filter((item) => {
         // EXISTING_CODE
         // EXISTING_CODE
         return curTag === 'All' || (item.tags && item.tags.includes(curTag));
@@ -178,14 +187,23 @@ export const Collections = (props) => {
       setFiltered(result);
     }
     statusDispatch(NOT_LOADING);
-  }, [collections, curTag, statusDispatch]);
+  }, [entities, curTag, statusDispatch]);
 
   let custom = null;
-  let title = 'Collections';
+  let title = 'Entities';
   // EXISTING_CODE
   // EXISTING_CODE
 
-  const table = getInnerTable(collections, curTag, filtered, title, detailLevel, searchFields, recordIconList, collectionsHandler);
+  const table = getInnerTable(
+    entities,
+    curTag,
+    filtered,
+    title,
+    detailLevel,
+    searchFields,
+    recordIconList,
+    entitiesHandler
+  );
   return (
     <div>
       {/* prettier-ignore */}
@@ -193,26 +211,29 @@ export const Collections = (props) => {
         caddieName="Tags"
         caddieData={tagList}
         current={curTag}
-        handler={collectionsHandler}
+        handler={entitiesHandler}
       />
       {mocked && (
-        <span className="warning">
+        <span className='warning'>
           <b>&nbsp;&nbsp;MOCKED DATA&nbsp;&nbsp;</b>
         </span>
       )}
-      {debug && <pre>{JSON.stringify(collections, null, 2)}</pre>}
+      {debug && <pre>{JSON.stringify(entities, null, 2)}</pre>}
       {table}
       {/* prettier-ignore */}
-      <Dialog showing={editDialog.showing} header={'Edit/Add Collection'} handler={collectionsHandler} object={editDialog.record} columns={collectionsSchema}/>
+      <Dialog showing={editDialog.showing} header={'Edit/Add Entity'} handler={entitiesHandler} object={editDialog.record} columns={entitiesSchema}/>
       {custom}
     </div>
   );
 };
 
 //----------------------------------------------------------------------
-const getTagList = (collections) => {
+const getTagList = (entities) => {
   // prettier-ignore
-  let tagList = sortStrings([...new Set(collections.data.map((item) => calcValue(item, { selector: 'tags', onDisplay: getFieldValue })))], true);
+  let tagList = sortStrings(
+    [...new Set(entities.data.map((item) => calcValue(item, {selector: 'tags', onDisplay: getFieldValue})))],
+    true
+  );
   tagList.unshift('|');
   tagList.unshift('All');
   tagList.push('|');
@@ -222,20 +243,29 @@ const getTagList = (collections) => {
 };
 
 //----------------------------------------------------------------------
-const getInnerTable = (collections, curTag, filtered, title, detailLevel, searchFields, recordIconList, collectionsHandler) => {
+const getInnerTable = (
+  entities,
+  curTag,
+  filtered,
+  title,
+  detailLevel,
+  searchFields,
+  recordIconList,
+  entitiesHandler
+) => {
   // EXISTING_CODE
   // EXISTING_CODE
   return (
     <DataTable
-      tableName={'collectionsTable'}
+      tableName={'entitiesTable'}
       data={filtered}
-      columns={collectionsSchema}
+      columns={entitiesSchema}
       title={title}
       search={true}
       searchFields={searchFields}
       pagination={true}
       recordIcons={recordIconList}
-      parentHandler={collectionsHandler}
+      parentHandler={entitiesHandler}
       detailLevel={detailLevel}
     />
   );
@@ -259,48 +289,48 @@ const defaultSearch = ['tags', 'name', 'client'];
 // auto-generate: page-settings
 
 //----------------------------------------------------------------------
-export function refreshCollectionsData(query, dispatch, mocked) {
+export function refreshEntitiesData(query, dispatch, mocked) {
   getServerData(getApiUrl('names'), query + (mocked ? '&mock' : '')).then((theData) => {
-    let collections = theData.data;
+    let entities = theData.data;
     // EXISTING_CODE
     // EXISTING_CODE
-    theData.data = sortArray(collections, defaultSort, ['asc', 'asc', 'asc']); // will return if array is null
-    dispatch({ type: 'success', payload: theData });
+    theData.data = sortArray(entities, defaultSort, ['asc', 'asc', 'asc']); // will return if array is null
+    dispatch({type: 'success', payload: theData});
   });
 }
 
 //----------------------------------------------------------------------
-export const collectionsDefault = [];
+export const entitiesDefault = [];
 
 //----------------------------------------------------------------------
-export const collectionsReducer = (state, action) => {
-  let collections = state;
+export const entitiesReducer = (state, action) => {
+  let entities = state;
   switch (action.type.toLowerCase()) {
     case 'undelete':
     case 'delete':
       {
-        const record = collections.data.filter((r) => {
-          const val = calcValue(r, { selector: 'id', onDisplay: getFieldValue });
+        const record = entities.data.filter((r) => {
+          const val = calcValue(r, {selector: 'id', onDisplay: getFieldValue});
           return val === action.record_id;
         })[0];
         if (record) {
           record.deleted = !record.deleted;
-          collections.data = replaceRecord(collections.data, record, action.record_id, calcValue, getFieldValue);
+          entities.data = replaceRecord(entities.data, record, action.record_id, calcValue, getFieldValue);
         }
       }
       break;
     case 'success':
-      collections = action.payload;
+      entities = action.payload;
       break;
     default:
     // do nothing
   }
-  return collections;
+  return entities;
 };
 
 //----------------------------------------------------------------------
-export const useCollections = () => {
-  return useContext(GlobalContext).collections;
+export const useEntities = () => {
+  return useContext(GlobalContext).entities;
 };
 
 //----------------------------------------------------------------------------

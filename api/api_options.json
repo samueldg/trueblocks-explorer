@@ -1,112 +1,4 @@
 {
-  "list": {
-    "addrs": {
-      "num": "10110",
-      "group": "apps",
-      "tags": "Accounts",
-      "api_route": "list",
-      "tool": "acctScrape",
-      "command": "addrs",
-      "hotkey": "",
-      "def_val": "",
-      "is_required": true,
-      "core_visible": true,
-      "docs_visible": true,
-      "generate": "local",
-      "option_kind": "positional",
-      "data_type": "list<addr>",
-      "real_type": "listaddr",
-      "description": "one or more Ethereum addresses"
-    },
-    "staging": {
-      "num": "10120",
-      "group": "apps",
-      "tags": "Accounts",
-      "api_route": "list",
-      "tool": "acctScrape",
-      "command": "staging",
-      "hotkey": "s",
-      "generate": "local",
-      "option_kind": "switch",
-      "data_type": "<boolean>",
-      "real_type": "bool",
-      "description": "enable search of staging (not yet finalized) folder"
-    },
-    "unripe": {
-      "num": "10130",
-      "group": "apps",
-      "tags": "Accounts",
-      "api_route": "list",
-      "tool": "acctScrape",
-      "command": "unripe",
-      "hotkey": "u",
-      "generate": "local",
-      "option_kind": "switch",
-      "data_type": "<boolean>",
-      "real_type": "bool",
-      "description": "enable search of unripe (neither staged nor finalized) folder (requires --staging)"
-    },
-    "blooms": {
-      "num": "10140",
-      "group": "apps",
-      "tags": "Accounts",
-      "api_route": "list",
-      "tool": "acctScrape",
-      "command": "blooms",
-      "hotkey": "b",
-      "generate": "header",
-      "option_kind": "switch",
-      "data_type": "<boolean>",
-      "real_type": "bool",
-      "description": "process query by first using bloom filter and, if hit, downloading index chunk from remote"
-    },
-    "start": {
-      "num": "10150",
-      "group": "apps",
-      "tags": "Accounts",
-      "api_route": "list",
-      "tool": "acctScrape",
-      "command": "start",
-      "hotkey": "S",
-      "def_val": "",
-      "generate": "local",
-      "option_kind": "flag",
-      "data_type": "<blknum>",
-      "real_type": "blknum_t",
-      "description": "this value is ignored but remains for backward compatibility"
-    },
-    "end": {
-      "num": "10160",
-      "group": "apps",
-      "tags": "Accounts",
-      "api_route": "list",
-      "tool": "acctScrape",
-      "command": "end",
-      "hotkey": "E",
-      "def_val": "",
-      "generate": "local",
-      "option_kind": "flag",
-      "data_type": "<blknum>",
-      "real_type": "blknum_t",
-      "description": "this value is ignored but remains for backward compatibility"
-    },
-    "": {
-      "num": "10170",
-      "group": "apps",
-      "tags": "Accounts",
-      "api_route": "list",
-      "tool": "acctScrape",
-      "command": "",
-      "hotkey": "",
-      "def_val": "",
-      "core_visible": true,
-      "docs_visible": true,
-      "generate": "--",
-      "option_kind": "description",
-      "data_type": "",
-      "description": "Add or remove monitors for a given Ethereum address (or collection of addresses)."
-    }
-  },
   "export": {
     "addrs": {
       "num": "10200",
@@ -255,31 +147,31 @@
       "real_type": "bool",
       "description": "articulate transactions, traces, logs, and outputs"
     },
-    "write_txs": {
+    "cache_txs": {
       "num": "10320",
       "group": "apps",
       "tags": "Accounts",
       "api_route": "export",
       "tool": "acctExport",
-      "command": "write_txs",
+      "command": "cache_txs",
       "hotkey": "i",
       "core_visible": true,
-      "generate": "local",
+      "generate": "header",
       "option_kind": "switch",
       "data_type": "<boolean>",
       "real_type": "bool",
       "description": "write transactions to the cache (see notes)"
     },
-    "write_traces": {
+    "cache_traces": {
       "num": "10330",
       "group": "apps",
       "tags": "Accounts",
       "api_route": "export",
       "tool": "acctExport",
-      "command": "write_traces",
+      "command": "cache_traces",
       "hotkey": "R",
       "core_visible": true,
-      "generate": "local",
+      "generate": "header",
       "option_kind": "switch",
       "data_type": "<boolean>",
       "real_type": "bool",
@@ -449,6 +341,20 @@
       "real_type": "blknum_t",
       "description": "the maximum number of records to process before reporting"
     },
+    "clean": {
+      "num": "10085",
+      "group": "apps",
+      "tags": "Accounts",
+      "api_route": "export",
+      "tool": "acctExport",
+      "command": "clean",
+      "hotkey": "",
+      "generate": "header",
+      "option_kind": "switch",
+      "data_type": "<boolean>",
+      "real_type": "bool",
+      "description": "clean (i.e. remove duplicate appearances) from all existing monitors"
+    },
     "staging": {
       "num": "10060",
       "group": "apps",
@@ -461,7 +367,7 @@
       "option_kind": "switch",
       "data_type": "<boolean>",
       "real_type": "bool",
-      "description": "ignored (preserved for backwards compatibility)"
+      "description": "enable search of staging (not yet finalized) folder"
     },
     "unripe": {
       "num": "10080",
@@ -475,7 +381,7 @@
       "option_kind": "switch",
       "data_type": "<boolean>",
       "real_type": "bool",
-      "description": "ignored (preserved for backwards compatibility)"
+      "description": "enable search of unripe (neither staged nor finalized) folder (assumes --staging)"
     },
     "": {
       "num": "10460",
@@ -492,23 +398,6 @@
       "option_kind": "description",
       "data_type": "",
       "description": "Export full detail of transactions for one or more Ethereum addresses."
-    }
-  },
-  "rm": {
-    "rm": {
-      "num": "10510",
-      "group": "apps",
-      "tags": "Accounts",
-      "api_route": "rm",
-      "tool": "acctScrape",
-      "command": "rm",
-      "hotkey": "",
-      "core_visible": true,
-      "generate": "local",
-      "option_kind": "switch",
-      "data_type": "<boolean>",
-      "real_type": "bool",
-      "description": "process the request to delete, undelete, or remove monitors"
     }
   },
   "scrape": {
@@ -673,7 +562,7 @@
       "docs_visible": true,
       "generate": "local",
       "option_kind": "positional",
-      "data_type": "list<enum[index|monitors|collections|names|abis|caches|some*|all]>",
+      "data_type": "list<enum[index|monitors|entities|names|abis|caches|some*|all]>",
       "real_type": "string_q",
       "description": "the type of status info to retrieve"
     },
@@ -1262,14 +1151,14 @@
       "description": "display only addresses in the results (useful for scripting)"
     }
   },
-  "collections": {
-    "collections": {
+  "entities": {
+    "entities": {
       "num": "12430",
       "group": "tools",
       "tags": "Accounts",
-      "api_route": "collections",
+      "api_route": "entities",
       "tool": "ethNames",
-      "command": "collections",
+      "command": "entities",
       "hotkey": "s",
       "core_visible": true,
       "docs_visible": true,
@@ -1277,7 +1166,7 @@
       "option_kind": "switch",
       "data_type": "<boolean>",
       "real_type": "bool",
-      "description": "display collections data"
+      "description": "display entity data"
     }
   },
   "tags": {

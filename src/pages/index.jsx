@@ -10,7 +10,7 @@ import GlobalContext from 'store';
 
 //----------------------------------------------------------------------
 // auto-generate: imports
-import { Collections } from './Collections/Collections';
+import { Entities } from './Entities/Entities';
 import { Monitors } from './Monitors/Monitors';
 import { Accounts } from './Accounts/Accounts';
 import { Summary } from './Summary/Summary';
@@ -28,7 +28,7 @@ import { Support } from './Support/Support';
 //----------------------------------------------------------------------
 export const thePages = {
   // auto-generate: pages
-  'collections/': { component: <Collections /> },
+  'entities/': { component: <Entities /> },
   //
   'monitors/': { component: <Monitors /> },
   //
@@ -91,7 +91,7 @@ export const theMenu = {
   // auto-generate: menus
   items: [
     {
-      label: 'Collections',
+      label: 'Entities',
       exact: true,
     },
     { label: 'Separator' },
