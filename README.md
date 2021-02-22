@@ -11,7 +11,7 @@ TrueBlocks creates an index of Ethereum addresses on commerial-grade hardware pr
 
 ---
 
-## Installation
+## Installing
 
 ### Installing TrueBlocks Core and Core Applications
 
