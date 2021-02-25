@@ -787,6 +787,22 @@
       "real_type": "string_q",
       "description": "unpin index(es) and blooms given a hash, a filename, or 'all'"
     },
+    "init": {
+      "num": "10900",
+      "group": "apps",
+      "tags": "Admin",
+      "api_route": "pins",
+      "tool": "pinStatus",
+      "command": "init",
+      "hotkey": "i",
+      "core_visible": true,
+      "docs_visible": true,
+      "generate": "header",
+      "option_kind": "switch",
+      "data_type": "<boolean>",
+      "real_type": "bool",
+      "description": "initialize the TrueBlocks appearance index"
+    },
     "license": {
       "num": "10900",
       "group": "apps",
@@ -794,7 +810,7 @@
       "api_route": "pins",
       "tool": "pinStatus",
       "command": "license",
-      "hotkey": "i",
+      "hotkey": "l",
       "generate": "header",
       "option_kind": "switch",
       "data_type": "<boolean>",
