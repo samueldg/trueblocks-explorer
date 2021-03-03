@@ -444,7 +444,7 @@
       "tool": "blockScrape",
       "command": "n_blocks",
       "hotkey": "n",
-      "def_val": "",
+      "def_val": "(isDockerMode() ? 100 : 2000)",
       "core_visible": true,
       "docs_visible": true,
       "generate": "header",
@@ -461,7 +461,7 @@
       "tool": "blockScrape",
       "command": "n_block_procs",
       "hotkey": "b",
-      "def_val": "",
+      "def_val": "(isDockerMode() ? 5 : 10)",
       "generate": "header",
       "option_kind": "flag",
       "data_type": "<uint64>",
@@ -476,7 +476,7 @@
       "tool": "blockScrape",
       "command": "n_addr_procs",
       "hotkey": "a",
-      "def_val": "",
+      "def_val": "(isDockerMode() ? 10 : 20)",
       "generate": "header",
       "option_kind": "flag",
       "data_type": "<uint64>",
@@ -724,7 +724,7 @@
       "group": "apps",
       "tags": "Admin",
       "api_route": "pins",
-      "tool": "pinStatus",
+      "tool": "pinMan",
       "command": "mode",
       "hotkey": "",
       "def_val": "",
@@ -735,14 +735,14 @@
       "option_kind": "positional",
       "data_type": "enum[local*|remote|onchain]",
       "real_type": "string_q",
-      "description": "display local or remote manifest or its IPFS hash"
+      "description": "the source from which to pin, unpin, or display the index hashes"
     },
     "hash": {
       "num": "10900",
       "group": "apps",
       "tags": "Admin",
       "api_route": "pins",
-      "tool": "pinStatus",
+      "tool": "pinMan",
       "command": "hash",
       "hotkey": "a",
       "core_visible": true,
@@ -751,14 +751,14 @@
       "option_kind": "switch",
       "data_type": "<boolean>",
       "real_type": "bool",
-      "description": "display the hash instead of contents of manifest ('on' for onchain mode)"
+      "description": "display the hash instead of contents of manifest"
     },
     "pin": {
       "num": "10900",
       "group": "apps",
       "tags": "Admin",
       "api_route": "pins",
-      "tool": "pinStatus",
+      "tool": "pinMan",
       "command": "pin",
       "hotkey": "p",
       "def_val": "",
@@ -768,14 +768,14 @@
       "option_kind": "flag",
       "data_type": "<string>",
       "real_type": "string_q",
-      "description": "pin indexes and blooms, add to manifest, and return hash"
+      "description": "pin items either locally or remotely ('all' to all items in a folder)"
     },
     "unpin": {
       "num": "10900",
       "group": "apps",
       "tags": "Admin",
       "api_route": "pins",
-      "tool": "pinStatus",
+      "tool": "pinMan",
       "command": "unpin",
       "hotkey": "u",
       "def_val": "",
@@ -785,14 +785,14 @@
       "option_kind": "flag",
       "data_type": "<string>",
       "real_type": "string_q",
-      "description": "unpin index(es) and blooms given a hash, a filename, or 'all'"
+      "description": "unpin previously pinned items give a hash, a filename, or 'all'"
     },
     "init": {
       "num": "10900",
       "group": "apps",
       "tags": "Admin",
       "api_route": "pins",
-      "tool": "pinStatus",
+      "tool": "pinMan",
       "command": "init",
       "hotkey": "i",
       "core_visible": true,
@@ -801,28 +801,28 @@
       "option_kind": "switch",
       "data_type": "<boolean>",
       "real_type": "bool",
-      "description": "initialize the TrueBlocks appearance index"
+      "description": "initialize the TrueBlocks appearance index by downloading the bloom filters"
     },
     "license": {
       "num": "10900",
       "group": "apps",
       "tags": "Admin",
       "api_route": "pins",
-      "tool": "pinStatus",
+      "tool": "pinMan",
       "command": "license",
       "hotkey": "l",
       "generate": "header",
       "option_kind": "switch",
       "data_type": "<boolean>",
       "real_type": "bool",
-      "description": "show the current pinata license information, if any"
+      "description": "show the current pinata license information"
     },
     "": {
       "num": "10910",
       "group": "apps",
       "tags": "Admin",
       "api_route": "pins",
-      "tool": "pinStatus",
+      "tool": "pinMan",
       "command": "",
       "hotkey": "",
       "def_val": "",
@@ -831,7 +831,7 @@
       "generate": "--",
       "option_kind": "description",
       "data_type": "",
-      "description": "Report on and manage pinned appearance index and bloom chunks."
+      "description": "Report on and manage the pinned appearance index chunks and associated bloom filters."
     }
   },
   "quotes": {

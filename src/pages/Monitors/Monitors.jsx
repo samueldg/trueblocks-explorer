@@ -53,7 +53,7 @@ export const Monitors = (props) => {
   // EXISTING_CODE
   // EXISTING_CODE
 
-  const cmdUrl = getApiUrl('rm');
+  const cmdUrl = getApiUrl('monitor');
 
   const dataQuery = 'modes=monitors&details';
   function addendum(record, record_id) {
@@ -121,7 +121,7 @@ export const Monitors = (props) => {
           break;
         case 'delete':
           {
-            const cmdQuery = 'terms=' + action.record_id; // + addendum(record, action.record_id);
+            const cmdQuery = 'delete&terms=' + action.record_id; // + addendum(record, action.record_id);
             statusDispatch(LOADING);
             dispatch(action);
             sendServerCommand(cmdUrl, cmdQuery).then(() => {
@@ -132,7 +132,7 @@ export const Monitors = (props) => {
           break;
         case 'undelete':
           {
-            const cmdQuery = 'terms=' + action.record_id; // + addendum(record, action.record_id);
+            const cmdQuery = 'undelete&terms=' + action.record_id; // + addendum(record, action.record_id);
             statusDispatch(LOADING);
             dispatch(action);
             sendServerCommand(cmdUrl, cmdQuery).then(() => {
