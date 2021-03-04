@@ -259,13 +259,13 @@ const defaultSearch = ['encoding', 'type', 'name'];
 
 //----------------------------------------------------------------------
 export function refreshSignaturesData(query, dispatch, mocked) {
-  getServerData(getApiUrl('abis'), query + (mocked ? '&mock' : '')).then((theData) => {
+  getServerData(getApiUrl('abis'), query + (mocked ? '&mocked' : '')).then((theData) => {
     let signatures = theData.data;
     // EXISTING_CODE
     signatures = signatures.filter((item) => item.type !== 'constructor');
     // EXISTING_CODE
     theData.data = sortArray(signatures, defaultSort, ['asc', 'asc', 'asc']); // will return if array is null
-    dispatch({ type: 'success', payload: theData });
+    dispatch({type: 'success', payload: theData});
   });
 }
 

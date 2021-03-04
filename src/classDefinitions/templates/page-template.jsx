@@ -216,7 +216,7 @@ const getInnerTable = ([{LONG}], curTag, filtered, title, detailLevel, searchFie
 
 //----------------------------------------------------------------------
 export function refresh[{PROPER}]Data(query, dispatch, mocked) {
-  getServerData(getApiUrl('[{DATAURL}]'), query + (mocked ? '&mock' : '')).then((theData) => {
+  getServerData(getApiUrl('[{DATAURL}]'), query + (mocked ? '&mocked' : '')).then((theData) => {
     let [{LONG}] = theData.data;
     // EXISTING_CODE
     // EXISTING_CODE

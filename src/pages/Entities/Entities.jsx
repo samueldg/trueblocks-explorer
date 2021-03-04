@@ -290,7 +290,7 @@ const defaultSearch = ['tags', 'name', 'client'];
 
 //----------------------------------------------------------------------
 export function refreshEntitiesData(query, dispatch, mocked) {
-  getServerData(getApiUrl('names'), query + (mocked ? '&mock' : '')).then((theData) => {
+  getServerData(getApiUrl('names'), query + (mocked ? '&mocked' : '')).then((theData) => {
     let entities = theData.data;
     // EXISTING_CODE
     // EXISTING_CODE

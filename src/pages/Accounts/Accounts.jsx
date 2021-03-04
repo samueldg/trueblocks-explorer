@@ -308,7 +308,7 @@ export const Accounts = (props) => {
   g_Handler = accountsHandler;
 
   useMountEffect(() => {
-    const qqq = 'count&addrs=' + addresses.value + '' + (mocked ? '&mock' : '');
+    const qqq = 'count&addrs=' + addresses.value + '' + (mocked ? '&mocked' : '');
     getServerData(getApiUrl('export'), qqq).then((theData) => {
       if (mocked) {
         setRecordCount(100);
@@ -502,12 +502,12 @@ const defaultSearch = ['blockNumber', 'hash', 'from', 'fromName', 'to', 'toName'
 
 //----------------------------------------------------------------------
 export function refreshAccountsData(query, dispatch, mocked) {
-  getServerData(getApiUrl('export'), query + (mocked ? '&mock' : '')).then((theData) => {
+  getServerData(getApiUrl('export'), query + (mocked ? '&mocked' : '')).then((theData) => {
     let accounts = theData.data;
     // EXISTING_CODE
     // EXISTING_CODE
     theData.data = sortArray(accounts, defaultSort, ['asc', 'asc', 'asc']); // will return if array is null
-    dispatch({ type: 'success', payload: theData });
+    dispatch({type: 'success', payload: theData});
   });
 }
 
@@ -653,14 +653,14 @@ export function getFieldValue(record, fieldName) {
       const val = record.fromName ? record.fromName.name + " (" + record.fromName.tags + ")" : record.from;
       if (record.from === g_focusValue) return <div className='focusValue'>{val}</div>;
       if (val && val.includes("0x"))
-        return <div style={{"font-style": "italic", "border":"1px lightgrey dotted"}}>{val}</div>
+        return <div style={{"fontStyle": "italic", "border":"1px lightgrey dotted"}}>{val}</div>
       return <div className='nonFocusValue'>{val}</div>;
     }
     case 'to': {
       const val = record.toName ? record.toName.name + ' (' + record.toName.tags + ')' : record.to;
       if (record.to === g_focusValue) return <div className='focusValue'>{val}</div>;
       if (val && val.includes("0x"))
-        return <div style={{"font-style": "italic", "border":"1px lightgrey dotted"}}>{val}</div>
+        return <div style={{"fontStyle": "italic", "border":"1px lightgrey dotted"}}>{val}</div>
       return <div className='nonFocusValue'>{val}</div>;
     }
     case 'fromName':

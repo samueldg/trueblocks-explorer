@@ -310,13 +310,13 @@ const defaultSearch = ['tags', 'address', 'name'];
 
 //----------------------------------------------------------------------
 export function refreshMonitorsData(query, dispatch, mocked) {
-  getServerData(getApiUrl('status'), query + (mocked ? '&mock' : '')).then((theData) => {
+  getServerData(getApiUrl('status'), query + (mocked ? '&mocked' : '')).then((theData) => {
     let monitors = theData.data;
     // EXISTING_CODE
     if (!mocked) monitors = theData.data[0].caches[0].items;
     // EXISTING_CODE
     theData.data = sortArray(monitors, defaultSort, ['asc', 'asc', 'asc']); // will return if array is null
-    dispatch({ type: 'success', payload: theData });
+    dispatch({type: 'success', payload: theData});
   });
 }
 

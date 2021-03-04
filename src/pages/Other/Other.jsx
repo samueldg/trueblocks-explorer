@@ -260,12 +260,12 @@ const defaultSearch = ['blockNumber', 'name', 'date'];
 
 //----------------------------------------------------------------------
 export function refreshOtherData(query, dispatch, mocked) {
-  getServerData(getApiUrl('when'), query + (mocked ? '&mock' : '')).then((theData) => {
+  getServerData(getApiUrl('when'), query + (mocked ? '&mocked' : '')).then((theData) => {
     let other = theData.data;
     // EXISTING_CODE
     // EXISTING_CODE
     theData.data = sortArray(other, defaultSort, ['asc', 'asc', 'asc']); // will return if array is null
-    dispatch({ type: 'success', payload: theData });
+    dispatch({type: 'success', payload: theData});
   });
 }
 

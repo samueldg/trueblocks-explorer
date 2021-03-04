@@ -233,12 +233,12 @@ const defaultSearch = ['blockNumber', 'hash', 'from', 'fromName', 'to', 'toName'
 
 //----------------------------------------------------------------------
 export function refreshSummaryData(query, dispatch, mocked) {
-  getServerData(getApiUrl('export'), query + (mocked ? '&mock' : '')).then((theData) => {
+  getServerData(getApiUrl('export'), query + (mocked ? '&mocked' : '')).then((theData) => {
     let summary = theData.data;
     // EXISTING_CODE
     // EXISTING_CODE
     theData.data = sortArray(summary, defaultSort, ['asc', 'asc', 'asc']); // will return if array is null
-    dispatch({ type: 'success', payload: theData });
+    dispatch({type: 'success', payload: theData});
   });
 }
 

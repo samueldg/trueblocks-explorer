@@ -56,11 +56,11 @@ export const ExplorerReceipts = () => {
   const url = getApiUrl('receipts');
   let query = 'transactions=' + current + '';
   useEffect(() => {
-    getServerData(url, query + (mocked ? '&mock' : '')).then((theData) => {
+    getServerData(url, query + (mocked ? '&mocked' : '')).then((theData) => {
       let result = theData.data;
       // EXISTING_CODE
       // EXISTING_CODE
-      dispatch({ type: 'update', payload: result });
+      dispatch({type: 'update', payload: result});
     });
   }, [query, dispatch, current]);
 

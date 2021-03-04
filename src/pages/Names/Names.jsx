@@ -290,12 +290,12 @@ const defaultSearch = ['tags', 'address', 'name'];
 
 //----------------------------------------------------------------------
 export function refreshNamesData(query, dispatch, mocked) {
-  getServerData(getApiUrl('names'), query + (mocked ? '&mock' : '')).then((theData) => {
+  getServerData(getApiUrl('names'), query + (mocked ? '&mocked' : '')).then((theData) => {
     let names = theData.data;
     // EXISTING_CODE
     // EXISTING_CODE
     theData.data = sortArray(names, defaultSort, ['asc', 'asc', 'asc']); // will return if array is null
-    dispatch({ type: 'success', payload: theData });
+    dispatch({type: 'success', payload: theData});
   });
 }
 
