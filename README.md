@@ -66,11 +66,11 @@ should respond with the current version of the tools.
 Once you've installed the core, you may install the Explorer interface, the api (which requires the above tools), and the documentation server. All of this functionality is maintained in a single repo (this one). Again, from your development folder:
 
 ```
-git clone https://github.com/Great-Hill-Corporation/trueblocks-explorer
+git clone git@github.com:TrueBlocks/trueblocks-explorer.git
 cd trueblocks-explorer
-yarn global add foreman
+git checkout develop
 yarn install
-nf start
+yarn start
 ```
 
 Your should see the **TrueBlocks Account Explorer** screen:
