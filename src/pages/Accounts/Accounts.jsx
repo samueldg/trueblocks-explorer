@@ -620,10 +620,16 @@ export function getFieldValue(record, fieldName) {
   const creation = record.to === "0x0";
   const internal = record.from !== g_focusValue && record.to !== g_focusValue;
   const is20 = record.hasToken || (record.toName && record.toName.is_erc20);
-  const selfie = record.fromName && record.toName && record.fromName.tags.substr(0,2) < "30" && record.toName.tags.substr(0,2) < "30";
+  const selfie =
+    record.fromName &&
+    record.toName &&
+    record.fromName.tags &&
+    record.toName.tags &&
+    record.fromName.tags.substr(0, 2) < '30' &&
+    record.toName.tags.substr(0, 2) < '30';
   const isAir =
-    (record["toName"] && record["toName"].name.includes("Airdrop")) ||
-    (record["fromName"] && record["fromName"].name.includes("Airdrop"));
+    (record["toName"] && record["toName"].name && record["toName"].name.includes("Airdrop")) ||
+    (record["fromName"] && record["fromName"].name && record["fromName"].name.includes("Airdrop"));
 
   switch (fieldName) {
     case 'id':
