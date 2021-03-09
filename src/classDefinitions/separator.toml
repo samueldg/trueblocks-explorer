@@ -1,7 +1,0 @@
-[settings]
-class = "CSeparator"
-
-[[subpages]]
-list = [
-    { page = "separator" },
-]

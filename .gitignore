@@ -67,3 +67,5 @@ typings/
 .next
 out/
 .DS_Store
+dist
+.parcel-cache

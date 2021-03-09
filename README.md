@@ -68,14 +68,19 @@ Once you've installed the core, you may install the Explorer interface, the api 
 ```
 git clone https://github.com/Great-Hill-Corporation/trueblocks-explorer
 cd trueblocks-explorer
-yarn global add foreman
-yarn install
-nf start
+npm install
+npm run develop
 ```
 
 Your should see the **TrueBlocks Account Explorer** screen:
 
 <img src="./public/screen_shot.png" />
+
+## NPM Scripts
+
+- `compile | compile:ui | compile:electron` compile TypeScript into JavaScript, usually before packing new Electron bundle
+- `develop | develop:ui | develop:electron` run development server for UI and opens the app in Electron.
+- `test | test:e2e` run unit or E2E tests
 
 ## Requirements
 

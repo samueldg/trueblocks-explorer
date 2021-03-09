@@ -1,0 +1,11 @@
+{
+    "extends": "@tsconfig/recommended/tsconfig.json",
+    "compilerOptions": {
+        "sourceMap": true,
+        "target": "ES2020",
+        "module": "ES6",
+        "moduleResolution": "node"
+    },
+    "include": ["src"],
+    "exclude": ["node_modules"]
+}
