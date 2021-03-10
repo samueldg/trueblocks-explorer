@@ -12,6 +12,13 @@ import {
 
 import './ProgressBar.css';
 
+//------------------------------------------------------------------
+function getProgress(string) {
+  var str = string.replace(/\s+/g, ' ');
+  var tokens = str.split(' ')
+  return {msg: tokens[1], done: tokens[2], total: tokens[4]};
+}
+
 //-----------------------------------------------------
 export const ProgressBar = (props) => {
   const [progPct, setProgressPct] = useState(0);
@@ -20,16 +27,18 @@ export const ProgressBar = (props) => {
 
   useEffect(() => {
     const listener = addActionListener('progress', ({ id, progress }) => {
-      if (id !== props.id) return;
-
-      const toPercent = () => (parseInt(done) / parseInt(total) * 100).toFixed(0);
-      const { op, finished, done, total } = progress;
-      const prevPct = progPct;
-      const progressPercentage = finished ? 0 : toPercent();
-      if (progressPercentage !== prevPct) {
-        setOp(op);
-        setFinished(finished);
-        setProgressPct(progressPercentage);
+      const { op } = progress;
+      if (op) {
+        const { msg, done, total } = getProgress(op);
+        const toPercent = () => ((parseInt(done) / parseInt(total)) * 100).toFixed(0);
+        const finished = msg.includes('Finished');
+        const prevPct = progPct;
+        const progressPercentage = finished ? 0 : toPercent();
+        if (progressPercentage !== prevPct) {
+          setOp(finished ? "" : op);
+          setFinished(finished);
+          setProgressPct(progressPercentage);
+        }
       }
     });
     return () => removeListener(listener);
@@ -46,7 +55,7 @@ export const ProgressBar = (props) => {
     padding: finished ? '0px' : '3px',
     alignContent: 'center'
   };
-  const item = (props.text ? <div style={style}>{op}</div> : finished ? null : <progress max="100" value={progPct}></progress>);
+  const item = (props.asText ? <div style={style}>{op}</div> : finished ? null : <progress max="100" value={progPct}></progress>);
   return (
     <div className={`progress-wrapper ${props.className}`}>
       {item}

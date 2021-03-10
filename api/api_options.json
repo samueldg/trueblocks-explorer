@@ -334,7 +334,7 @@
       "tool": "acctExport",
       "command": "max_records",
       "hotkey": "e",
-      "def_val": "",
+      "def_val": "(isApiMode() ? 250 : )",
       "generate": "header",
       "option_kind": "flag",
       "data_type": "<blknum>",

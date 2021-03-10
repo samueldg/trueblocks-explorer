@@ -45,7 +45,7 @@ const CenterFooter = () => {
         </div>
       </div>
       <div></div>
-      <div>Console: <ProgressBar id="export" text={true} /></div>
+      <div>Console: <ProgressBar asText={true} /></div>
       <div></div>
     </div>
   );
@@ -60,11 +60,11 @@ const RightFooter = () => {
         icon={<GitCoin className="footer-social icon_color" height="24px" />}
       />
       <ClickableIcon
-        link="http://twitter.com/@quickblocks"
+        link="http://twitter.com/@trueblocks"
         icon={<Twitter className="footer-social icon_color" height="24px" />}
       />
       <ClickableIcon
-        link="http://github.com/Great-Hill-Corporation/trueblocks-core"
+        link="http://github.com/TrueBlocks/trueblocks-core"
         icon={<GitHub className="footer-social icon_color" height="24px" />}
       />
       <ClickableIcon

@@ -11,7 +11,7 @@ import { useStatus } from 'store';
 
 export const PageCaddie = ({ caddieName, caddieData, current, useProgress = false, handler }) => {
   const loading = useStatus().state.loading;
-  const spinner = useProgress ? <ProgressBar id="export" /> : <Spinner showing={loading} which="ellipsis" size={24} />;
+  const spinner = useProgress ? <ProgressBar /> : <Spinner showing={loading} which="ellipsis" size={24} />;
   return (
     <div style={{ display: 'grid', gridTemplateColumns: '4fr 1fr' }}>
       <ButtonCaddie name={caddieName} buttons={caddieData} current={current} actionType="select-tag" handler={handler} />
