@@ -4,8 +4,12 @@
         "sourceMap": true,
         "target": "ES2020",
         "module": "ES6",
-        "moduleResolution": "node"
+        "moduleResolution": "node",
+        "baseUrl": "./",
+        "paths": {
+            "@common/*": ["src/common/*"]
+        }
     },
     "include": ["src"],
-    "exclude": ["node_modules"]
+    "exclude": ["node_modules"],
 }
