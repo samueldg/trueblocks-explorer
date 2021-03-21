@@ -69,3 +69,12 @@ out/
 .DS_Store
 dist
 .parcel-cache
+
+# yarn
+.yarn/*
+!.yarn/patches
+!.yarn/releases
+!.yarn/plugins
+!.yarn/sdks
+!.yarn/versions
+.pnp.*

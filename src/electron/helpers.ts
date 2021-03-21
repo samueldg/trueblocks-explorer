@@ -1,7 +1,7 @@
 import { pathToFileURL } from 'url';
 import path from 'path';
 
-export { readEnvFile } from '@common/readEnvFile';
+export { readEnvFile } from '../common/readEnvFile';
 
 /**
  * Locates the UI and returns the URL to it. Should return react dev server URL
