@@ -26,16 +26,16 @@ export const ProgressBar = (props) => {
   const [op, setOp] = useState('');
 
   useEffect(() => {
-    const listener = addActionListener('progress', ({ id, progress }) => {
-      const { op } = progress;
-      if (op) {
-        const { msg, done, total } = getProgress(op);
+    const listener = addActionListener('progress', ({ id, content }) => {
+      //const {content} = content;
+      if (content) {
+        const {msg, done, total} = getProgress(content);
         const toPercent = () => ((parseInt(done) / parseInt(total)) * 100).toFixed(0);
         const finished = msg.includes('Finished');
         const prevPct = progPct;
         const progressPercentage = finished ? 0 : toPercent();
         if (progressPercentage !== prevPct) {
-          setOp(finished ? "" : op);
+          setOp(finished ? '' : content);
           setFinished(finished);
           setProgressPct(progressPercentage);
         }

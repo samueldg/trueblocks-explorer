@@ -34,12 +34,6 @@ let processList = [];
 let cmdCount = 0;
 
 //------------------------------------------------------------------
-// function log(...args) {
-//   const head = '-API: ';
-//   console.log.apply(null, [head, ...args]);
-// }
-
-//------------------------------------------------------------------
 const getCommandLine = (routeName, queryObj) => {
   let cmd = Object.entries(queryObj)
     .map(([key, val]) => {
@@ -70,9 +64,6 @@ const removeFromProcessList = (pid) => {
 
 //------------------------------------------------------------------
 app.get(`/ps`, (req, res) => {
-  // if(req.query.kill !== undefined) {
-  //     console.log("killing ", req.query.kill)
-  // }
   res.send(processList);
 });
 
@@ -226,11 +217,6 @@ function broadcast(message, sendRaw = false) {
   const messageToSend = sendRaw ? message : JSON.stringify(message);
   [...server.clients].filter(({readyState}) => readyState === ws.OPEN).forEach((socket) => socket.send(messageToSend));
 }
-
-//------------------------------------------------------------------
-// function addMessageListener(listener) {
-//   listeners.push(listener);
-// }
 
 //------------------------------------------------------------------
 const port = !isNaN(process.argv[2]) ? process.argv[2] : 8080;
