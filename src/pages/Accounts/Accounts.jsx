@@ -62,7 +62,7 @@ export const Accounts = (props) => {
   g_focusValue = addresses.value && addresses.value.toLowerCase();
   // EXISTING_CODE
 
-  const dataQuery = 'addrs=' + addresses.value + '&staging&accounting&ether&cache_txs';
+  const dataQuery = 'addrs=' + addresses.value + '&staging&accounting&tokens&ether&cache_txs';
   function addendum(record, record_id) {
     let ret = '';
     // EXISTING_CODE
@@ -584,37 +584,36 @@ export function getFieldValue(record, fieldName) {
   if (fieldName && fieldName.includes('statements.')) {
     if (!record || !record.statements || !record.statements[0]) return '';
     let fn = fieldName.replace('statements.', '');
-    if (fn === 'begBalDiff' && record.statements[0][fn] === 0) return '';
-    if (fn === 'endBalDiff' && record.statements[0][fn] === 0) return '';
-    if (fn === 'reconciled') {
-      return getIcon(
-        'reconciled',
-        record.statements[0][fn]
-          ? record.statements[0]['reconciliationType'] === ''
-            ? 'CheckCircle'
-            : 'CheckCircleYellow'
-          : 'XCircle'
-      );
-    } else if (fn === 'totalIn') {
-      let value =
-        Number(record.statements[0]['amountIn']) +
-        Number(record.statements[0]['internalIn']) +
-        Number(record.statements[0]['selfDestructIn']) +
-        Number(record.statements[0]['minerBaseRewardIn']) +
-        Number(record.statements[0]['minerNephewRewardIn']) +
-        Number(record.statements[0]['minerTxFeeIn']) +
-        Number(record.statements[0]['minerUncleRewardIn']) +
-        Number(record.statements[0]['prefundIn']);
-      return formatFieldByType('double', value, 7);
-    } else if (fn === 'totalOut') {
-      let value =
-        Number(record.statements[0]['amountOut']) +
-        Number(record.statements[0]['internalOut']) +
-        Number(record.statements[0]['selfDestructOut']) +
-        Number(record.statements[0]['gasCostOut']);
-      return formatFieldByType('double', value, 7);
-    }
-    return record.statements[0][fn];
+    return record.statements.map((st, index) => {
+      if (fn === 'begBalDiff' && st[fn] === 0) return (index !== 0 ? ',' : '') + '';
+      if (fn === 'endBalDiff' && st[fn] === 0) return (index !== 0 ? ',' : '') + '';
+      if (fn === 'reconciled') {
+        if (index !== 0) return '';
+        return getIcon(
+          'reconciled',
+          st[fn] ? (st['reconciliationType'] === '' ? 'CheckCircle' : 'CheckCircleYellow') : 'XCircle'
+        );
+      } else if (fn === 'totalIn') {
+        let value =
+          Number(st['amountIn']) +
+          Number(st['internalIn']) +
+          Number(st['selfDestructIn']) +
+          Number(st['minerBaseRewardIn']) +
+          Number(st['minerNephewRewardIn']) +
+          Number(st['minerTxFeeIn']) +
+          Number(st['minerUncleRewardIn']) +
+          Number(st['prefundIn']);
+        return (index !== 0 ? ',' : '') + formatFieldByType('double', value, 7);
+      } else if (fn === 'totalOut') {
+        let value =
+          Number(st['amountOut']) +
+          Number(st['internalOut']) +
+          Number(st['selfDestructOut']) +
+          Number(st['gasCostOut']);
+        return (index !== 0 ? ',' : '') + formatFieldByType('double', value, 7) + ',';
+      }
+      return (index !== 0 ? ',' : '') + st[fn];
+    });
   }
 
   const creation = record.to === "0x0";

@@ -43,7 +43,7 @@ export const Summary = (props) => {
   // EXISTING_CODE
   // EXISTING_CODE
 
-  const dataQuery = 'addrs=' + summary.value + '&accounting';
+  const dataQuery = 'addrs=' + summary.value + '&accounting&tokens';
   function addendum(record, record_id) {
     let ret = '';
     // EXISTING_CODE
