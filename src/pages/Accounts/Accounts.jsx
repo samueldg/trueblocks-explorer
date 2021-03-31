@@ -423,7 +423,7 @@ const getInnerTable = (
       tableName={'accountsTable'}
       data={filtered}
       columns={accountsSchema}
-      title={title}
+      title={title.substr(0,30)}
       searchFields={searchFields}
       recordIcons={recordIconList}
       parentHandler={accountsHandler}
@@ -584,11 +584,18 @@ export function getFieldValue(record, fieldName) {
   if (fieldName && fieldName.includes('statements.')) {
     if (!record || !record.statements || !record.statements[0]) return '';
     let fn = fieldName.replace('statements.', '');
+
+    if (fn === "reconciliations") {
+      const rs = record.statements.map((st, index) => {
+        return <Reconciliations record={record} statement={st}/>;
+      });
+      return <table style={{width: "100%"}}>{rs}</table>
+    }
+
     return record.statements.map((st, index) => {
       if (fn === 'begBalDiff' && st[fn] === 0) return (index !== 0 ? ',' : '') + '';
       if (fn === 'endBalDiff' && st[fn] === 0) return (index !== 0 ? ',' : '') + '';
       if (fn === 'reconciled') {
-        if (index !== 0) return '';
         return getIcon(
           'reconciled',
           st[fn] ? (st['reconciliationType'] === '' ? 'CheckCircle' : 'CheckCircleYellow') : 'XCircle'
@@ -882,5 +889,39 @@ export const messagesSchema = [
 //----------------------------------------------------------------------
 function zeroFunc(record) {
   return getFieldValue(record, 'statements.amountNet') === 0;
+}
+
+//----------------------------------------------------------------------
+export const Reconciliations = ({ record, statement }) => {
+  const head1 = {width: '10%', textAlign: 'left', border: '0px'}
+  const head2 = {width: '10%', textAlign: 'left', border: '0px', backgroundColor: '#eeeedd', color: 'black'};
+  const head = statement.asset === 'ETH' ? head1: head2;
+  const style1 = {width: '18%', textAlign: 'right', border: '0px'};
+  const style2 = {width: '18%', textAlign: 'right', border: '0px', backgroundColor: '#eeeedd', color: 'black'};
+  const style = statement.asset === 'ETH' ? style1 : style2;
+  const tail1 = {width: '10%', textAlign: 'center', border: '0px'};
+  const tail2 = {width: '10%', textAlign: 'center', border: '0px', backgroundColor: '#eeeedd', color: 'black'};
+  const tail = statement.asset === 'ETH' ? tail1 : tail2;
+  const totalIn = getFieldValue(record, 'statement.totalIn');
+  const totalOut = getFieldValue(record, 'statement.totalOut');
+  if (totalIn === 0 && totalOut === 0) return <Fragment></Fragment>
+  return (
+    <tr style={{padding: '0px', margin: '0px', fontSize: '14px'}}>
+      <td style={head}>
+        <i>
+          {statement.asset ? statement.asset.substr(0, 3) : ''}
+        </i>
+      </td>
+      <td style={style}>{statement.begBal ? statement.begBal.substr(0, 7) : '0'}</td>
+      <td style={style}>{totalIn ? totalIn.substr(0, 7) : '0'}</td>
+      <td style={style}>{totalOut ? totalOut.substr(0, 7) : '0'}</td>
+      <td style={style}>{statement.endBal ? statement.endBal.substr(0, 7) : '0'}</td>
+      <td style={tail}>
+        {getFieldValue(record, 'statement.reconciled')
+          ? getFieldValue(record, 'statement.reconciled').substr(0, 7)
+          : 'x'}
+      </td>
+    </tr>
+  );
 }
 // EXISTING_CODE

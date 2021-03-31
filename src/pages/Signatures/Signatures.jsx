@@ -265,7 +265,7 @@ export function refreshSignaturesData(query, dispatch, mocked) {
     signatures = signatures.filter((item) => item.type !== 'constructor');
     // EXISTING_CODE
     theData.data = sortArray(signatures, defaultSort, ['asc', 'asc', 'asc']); // will return if array is null
-    dispatch({type: 'success', payload: theData});
+    dispatch({ type: 'success', payload: theData });
   });
 }
 

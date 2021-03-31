@@ -238,7 +238,7 @@ export function refreshSummaryData(query, dispatch, mocked) {
     // EXISTING_CODE
     // EXISTING_CODE
     theData.data = sortArray(summary, defaultSort, ['asc', 'asc', 'asc']); // will return if array is null
-    dispatch({type: 'success', payload: theData});
+    dispatch({ type: 'success', payload: theData });
   });
 }
 

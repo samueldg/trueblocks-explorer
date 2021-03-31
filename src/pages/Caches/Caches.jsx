@@ -248,7 +248,7 @@ export function refreshCachesData(query, dispatch, mocked) {
     if (caches) caches = caches[0].caches;
     // EXISTING_CODE
     theData.data = sortArray(caches, defaultSort, ['asc', 'asc', 'asc']); // will return if array is null
-    dispatch({type: 'success', payload: theData});
+    dispatch({ type: 'success', payload: theData });
   });
 }
 

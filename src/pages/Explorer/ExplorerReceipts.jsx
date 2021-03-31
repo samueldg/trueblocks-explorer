@@ -60,7 +60,7 @@ export const ExplorerReceipts = () => {
       let result = theData.data;
       // EXISTING_CODE
       // EXISTING_CODE
-      dispatch({type: 'update', payload: result});
+      dispatch({ type: 'update', payload: result });
     });
   }, [query, dispatch, current]);
 

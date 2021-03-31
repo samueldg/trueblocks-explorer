@@ -121,7 +121,7 @@ export const Monitors = (props) => {
           break;
         case 'delete':
           {
-            const cmdQuery = 'delete&terms=' + action.record_id; // + addendum(record, action.record_id);
+            const cmdQuery = 'delete&terms=' + action.record_id;
             statusDispatch(LOADING);
             dispatch(action);
             sendServerCommand(cmdUrl, cmdQuery).then(() => {
@@ -132,7 +132,7 @@ export const Monitors = (props) => {
           break;
         case 'undelete':
           {
-            const cmdQuery = 'undelete&terms=' + action.record_id; // + addendum(record, action.record_id);
+            const cmdQuery = 'undelete&terms=' + action.record_id;
             statusDispatch(LOADING);
             dispatch(action);
             sendServerCommand(cmdUrl, cmdQuery).then(() => {
@@ -143,7 +143,7 @@ export const Monitors = (props) => {
           break;
         case 'remove':
           {
-            const cmdQuery = 'remove&terms=' + action.record_id; // + addendum(record, action.record_id);
+            const cmdQuery = 'remove&terms=' + action.record_id;
             statusDispatch(LOADING);
             sendServerCommand(cmdUrl, cmdQuery).then((theData) => {
               // the command worked, but now we need to reload the data
@@ -316,7 +316,7 @@ export function refreshMonitorsData(query, dispatch, mocked) {
     if (!mocked) monitors = theData.data[0].caches[0].items;
     // EXISTING_CODE
     theData.data = sortArray(monitors, defaultSort, ['asc', 'asc', 'asc']); // will return if array is null
-    dispatch({type: 'success', payload: theData});
+    dispatch({ type: 'success', payload: theData });
   });
 }
 

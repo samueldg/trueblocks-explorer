@@ -7,12 +7,12 @@
  * This file was generated with makeClass. Edit only those parts of the code inside
  * of 'EXISTING_CODE' tags.
  */
-import React, {useEffect, useState, useMemo, useCallback, useContext} from 'react';
+import React, { useEffect, useState, useMemo, useCallback, useContext } from 'react';
 import Mousetrap from 'mousetrap';
 
-import GlobalContext, {getApiUrl} from 'store';
+import GlobalContext, { getApiUrl } from 'store';
 
-import {DataTable, PageCaddie, Dialog} from 'components';
+import { DataTable, PageCaddie, Dialog } from 'components';
 import {
   calcValue,
   getServerData,
@@ -24,9 +24,9 @@ import {
   stateFromStorage,
 } from 'components/utils';
 
-import {useStatus, LOADING, NOT_LOADING} from 'store/status_store';
+import { useStatus, LOADING, NOT_LOADING } from 'store/status_store';
 
-import {entitiesSchema} from './EntitiesSchema';
+import { entitiesSchema } from './EntitiesSchema';
 import './Entities.css';
 
 // EXISTING_CODE
@@ -34,7 +34,7 @@ import './Entities.css';
 
 //---------------------------------------------------------------------------
 export const Entities = (props) => {
-  const {entities, dispatch} = useEntities();
+  const { entities, dispatch } = useEntities();
   const mocked = useStatus().state.mocked;
   const statusDispatch = useStatus().dispatch;
 
@@ -42,7 +42,7 @@ export const Entities = (props) => {
   const [tagList, setTagList] = useState([]);
   const [searchFields] = useState(defaultSearch);
   const [curTag, setTag] = useState(localStorage.getItem('entitiesTag') || 'All');
-  const [editDialog, setEditDialog] = useState({showing: false, record: {}});
+  const [editDialog, setEditDialog] = useState({ showing: false, record: {} });
   const [curRecordId, setCurRecordId] = useState('');
   const [debug, setDebug] = useState(false);
   const [detailLevel, setDetailLevel] = useState(Number(stateFromStorage('entitiesPageDetails', 0)));
@@ -65,7 +65,7 @@ export const Entities = (props) => {
       const record_id = action.record_id;
       setCurRecordId(record_id);
       let record = filtered.filter((record) => {
-        return record_id && calcValue(record, {selector: 'id', onDisplay: getFieldValue}) === record_id;
+        return record_id && calcValue(record, { selector: 'id', onDisplay: getFieldValue }) === record_id;
       });
       if (record) record = record[0];
       switch (action.type.toLowerCase()) {
@@ -79,7 +79,7 @@ export const Entities = (props) => {
             setTag('All');
             localStorage.setItem('entitiesTag', 'All');
           } else if (action.payload === 'MockData') {
-            statusDispatch({type: 'mocked', payload: !mocked});
+            statusDispatch({ type: 'mocked', payload: !mocked });
             setTag('All');
             localStorage.setItem('entitiesTag', 'All');
           } else {
@@ -88,7 +88,7 @@ export const Entities = (props) => {
           }
           break;
         case 'add':
-          setEditDialog({showing: true, record: {}});
+          setEditDialog({ showing: true, record: {} });
           break;
         case 'enter':
         case 'edit':
@@ -96,7 +96,7 @@ export const Entities = (props) => {
           break;
         case 'close':
         case 'cancel':
-          setEditDialog({showing: false, record: {}});
+          setEditDialog({ showing: false, record: {} });
           break;
         case 'okay':
           // let query = 'editCmd=edit';
@@ -113,7 +113,7 @@ export const Entities = (props) => {
           //  // we assume the delete worked, so we don't reload the data
           //  statusDispatch(NOT_LOADING);
           // });
-          setEditDialog({showing: false, record: {}});
+          setEditDialog({ showing: false, record: {} });
           break;
         case 'delete':
           {
@@ -169,7 +169,7 @@ export const Entities = (props) => {
   }, [dataQuery, dispatch, mocked]);
 
   useEffect(() => {
-    Mousetrap.bind('plus', (e) => handleClick(e, entitiesHandler, {type: 'Add'}));
+    Mousetrap.bind('plus', (e) => handleClick(e, entitiesHandler, { type: 'Add' }));
     return () => {
       Mousetrap.unbind('plus');
     };
@@ -214,7 +214,7 @@ export const Entities = (props) => {
         handler={entitiesHandler}
       />
       {mocked && (
-        <span className='warning'>
+        <span className="warning">
           <b>&nbsp;&nbsp;MOCKED DATA&nbsp;&nbsp;</b>
         </span>
       )}
@@ -231,7 +231,7 @@ export const Entities = (props) => {
 const getTagList = (entities) => {
   // prettier-ignore
   let tagList = sortStrings(
-    [...new Set(entities.data.map((item) => calcValue(item, {selector: 'tags', onDisplay: getFieldValue})))],
+    [...new Set(entities.data.map((item) => calcValue(item, { selector: 'tags', onDisplay: getFieldValue })))],
     true
   );
   tagList.unshift('|');
@@ -295,7 +295,7 @@ export function refreshEntitiesData(query, dispatch, mocked) {
     // EXISTING_CODE
     // EXISTING_CODE
     theData.data = sortArray(entities, defaultSort, ['asc', 'asc', 'asc']); // will return if array is null
-    dispatch({type: 'success', payload: theData});
+    dispatch({ type: 'success', payload: theData });
   });
 }
 
@@ -310,7 +310,7 @@ export const entitiesReducer = (state, action) => {
     case 'delete':
       {
         const record = entities.data.filter((r) => {
-          const val = calcValue(r, {selector: 'id', onDisplay: getFieldValue});
+          const val = calcValue(r, { selector: 'id', onDisplay: getFieldValue });
           return val === action.record_id;
         })[0];
         if (record) {

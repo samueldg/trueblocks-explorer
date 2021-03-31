@@ -1425,13 +1425,13 @@
       "real_type": "bool",
       "description": "display uncle blocks (if any) instead of the requested block"
     },
-    "force": {
+    "cache": {
       "num": "12620",
       "group": "tools",
       "tags": "Data",
       "api_route": "blocks",
       "tool": "getBlock",
-      "command": "force",
+      "command": "cache",
       "hotkey": "o",
       "generate": "header",
       "option_kind": "switch",
@@ -1990,13 +1990,13 @@
       "real_type": "bool",
       "description": "display the transaction's trace"
     },
-    "force": {
+    "cache": {
       "num": "13600",
       "group": "tools",
       "tags": "Data",
       "api_route": "transactions",
       "tool": "getTrans",
-      "command": "force",
+      "command": "cache",
       "hotkey": "o",
       "generate": "header",
       "option_kind": "switch",

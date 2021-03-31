@@ -127,7 +127,7 @@ export const summarySchema = [
     onDisplay: getFieldValue,
   },
   {
-    name: 'Reconcilations',
+    name: 'Reconciliations',
     selector: 'separator1',
     type: 'separator',
   },
