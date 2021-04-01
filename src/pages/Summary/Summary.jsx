@@ -153,16 +153,6 @@ export const Summary = (props) => {
   // EXISTING_CODE
 
   const table = <img height="1050px" className="summary" alt={sumImage} src={sumImage} />;
-  // const table = getInnerTable(
-  //   summary,
-  //   curTag,
-  //   filtered,
-  //   title,
-  //   detailLevel,
-  //   searchFields,
-  //   recordIconList,
-  //   summaryHandler
-  // );
   return (
     <div>
       {/* prettier-ignore */}

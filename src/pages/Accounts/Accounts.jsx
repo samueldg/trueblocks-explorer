@@ -532,10 +532,6 @@ export const accountsReducer = (state, action) => {
       }
       break;
     case 'success':
-      // console.log('   ')
-      // console.log('---------------------------------------------------------')
-      // console.log('state: ', state);
-      // console.log('payload: ', action.payload);
       let array = [];
       if (state.data) {
         array = state.data.map((item) => {
@@ -548,9 +544,7 @@ export const accountsReducer = (state, action) => {
           return true;
         });
       }
-      // console.log('array: ', array);
       action.payload.data = array;
-      // console.log('payload2: ', action.payload);
       accounts = action.payload;
       break;
     default:
@@ -596,27 +590,12 @@ export function getFieldValue(record, fieldName) {
       if (fn === 'begBalDiff' && st[fn] === 0) return (index !== 0 ? ',' : '') + '';
       if (fn === 'endBalDiff' && st[fn] === 0) return (index !== 0 ? ',' : '') + '';
       if (fn === 'reconciled') {
-        return getIcon(
-          'reconciled',
-          st[fn] ? (st['reconciliationType'] === '' ? 'CheckCircle' : 'CheckCircleYellow') : 'XCircle'
-        );
+        return isReconciled(st);
       } else if (fn === 'totalIn') {
-        let value =
-          Number(st['amountIn']) +
-          Number(st['internalIn']) +
-          Number(st['selfDestructIn']) +
-          Number(st['minerBaseRewardIn']) +
-          Number(st['minerNephewRewardIn']) +
-          Number(st['minerTxFeeIn']) +
-          Number(st['minerUncleRewardIn']) +
-          Number(st['prefundIn']);
+        let value = totalIn1(st);
         return (index !== 0 ? ',' : '') + formatFieldByType('double', value, 7);
       } else if (fn === 'totalOut') {
-        let value =
-          Number(st['amountOut']) +
-          Number(st['internalOut']) +
-          Number(st['selfDestructOut']) +
-          Number(st['gasCostOut']);
+        let value = totalOut1(st);
         return (index !== 0 ? ',' : '') + formatFieldByType('double', value, 7) + ',';
       }
       return (index !== 0 ? ',' : '') + st[fn];
@@ -714,6 +693,33 @@ export function getFieldValue(record, fieldName) {
 }
 
 // EXISTING_CODE
+//----------------------------------------------------------------------------
+function totalIn1(st) {
+  return (
+    Number(st['amountIn']) +
+    Number(st['internalIn']) +
+    Number(st['selfDestructIn']) +
+    Number(st['minerBaseRewardIn']) +
+    Number(st['minerNephewRewardIn']) +
+    Number(st['minerTxFeeIn']) +
+    Number(st['minerUncleRewardIn']) +
+    Number(st['prefundIn'])
+  );
+};
+
+//----------------------------------------------------------------------------
+function totalOut1(st) {
+  return Number(st['amountOut']) + Number(st['internalOut']) + Number(st['selfDestructOut']) + Number(st['gasCostOut']);
+}
+
+//----------------------------------------------------------------------
+function isReconciled(st) {
+  return getIcon(
+    'reconciled',
+    st['reconciled'] ? (st['reconciliationType'] === '' ? 'CheckCircle' : 'CheckCircleYellow') : 'XCircle', false, false, 14
+  );
+}
+
 //----------------------------------------------------------------------------
 export function getExportValue(record, fieldName) {
   /*
@@ -902,25 +908,20 @@ export const Reconciliations = ({ record, statement }) => {
   const tail1 = {width: '10%', textAlign: 'center', border: '0px'};
   const tail2 = {width: '10%', textAlign: 'center', border: '0px', backgroundColor: '#eeeedd', color: 'black'};
   const tail = statement.asset === 'ETH' ? tail1 : tail2;
-  const totalIn = getFieldValue(record, 'statement.totalIn');
-  const totalOut = getFieldValue(record, 'statement.totalOut');
+  const totalIn = String(totalIn1(statement));
+  const totalOut = String(totalOut1(statement));
+  const reconciled = isReconciled(statement);
   if (totalIn === 0 && totalOut === 0) return <Fragment></Fragment>
   return (
     <tr style={{padding: '0px', margin: '0px', fontSize: '14px'}}>
       <td style={head}>
-        <i>
-          {statement.asset ? statement.asset.substr(0, 3) : ''}
-        </i>
+        <i>{statement.asset ? statement.asset.substr(0, 4) : ''}</i>
       </td>
       <td style={style}>{statement.begBal ? statement.begBal.substr(0, 7) : '0'}</td>
       <td style={style}>{totalIn ? totalIn.substr(0, 7) : '0'}</td>
       <td style={style}>{totalOut ? totalOut.substr(0, 7) : '0'}</td>
       <td style={style}>{statement.endBal ? statement.endBal.substr(0, 7) : '0'}</td>
-      <td style={tail}>
-        {getFieldValue(record, 'statement.reconciled')
-          ? getFieldValue(record, 'statement.reconciled').substr(0, 7)
-          : 'x'}
-      </td>
+      <td style={tail}>{reconciled}</td>
     </tr>
   );
 }
