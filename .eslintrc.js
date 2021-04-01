@@ -40,5 +40,9 @@ module.exports = {
     'react/jsx-filename-extension': [2, { extensions: ['.js', '.jsx', '.ts', '.tsx'] }],
     'import/prefer-default-export': 'off',
     'import/extensions': 'off',
+    'no-shadow': 'off',
+    'no-unused-vars': 'off',
+    '@typescript-eslint/no-shadow': 'error',
+    '@typescript-eslint/no-unused-vars': 'error',
   },
 };

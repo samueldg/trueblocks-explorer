@@ -6,10 +6,6 @@ import {
   pipe,
 } from 'fp-ts/function';
 
-import { readEnvFile } from '@common/readEnvFile';
-
-const env = readEnvFile();
-
 type CoreCommand = 'export'
 | 'list'
 | 'tags'
@@ -36,7 +32,7 @@ type CommandParams = Record<string, string>;
 
 /* Helper functions that transform the response */
 
-type JsonResponse = Record<string, any>
+export type JsonResponse = Record<string, any>
 
 // Extracts JSON from the response
 function turnResponseIntoJson(response: Response) {
@@ -68,8 +64,8 @@ function validateStatus(response: Response): TaskEither.TaskEither<Error, Respon
 
 /* End of helpers */
 
-export function runCommand(command: CoreCommand, params: CommandParams) {
-  const url = new URL(command, env.CORE_URL);
+export function runCommand(command: CoreCommand, params?: CommandParams) {
+  const url = new URL(command, process.env.CORE_URL);
   url.search = new URLSearchParams(params).toString();
 
   return pipe(

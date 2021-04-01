@@ -21,7 +21,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@ant-design/icons@npm:^4.5.0":
+"@ant-design/icons@npm:^4.5.0, @ant-design/icons@npm:^4.6.2":
   version: 4.6.2
   resolution: "@ant-design/icons@npm:4.6.2"
   dependencies:
@@ -2812,6 +2812,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"classnames@npm:^2.3.0":
+  version: 2.3.0
+  resolution: "classnames@npm:2.3.0"
+  checksum: 8ca9dad97dd63db49ecd4d4b7bb5f05bef6628794b0ca3154bd7ec7ed7f16bdb9947515eca86dad0e7223b0391aa96f6b15dc2a7d31c795a19669b70799ec7f3
+  languageName: node
+  linkType: hard
+
 "clean-css@npm:^4.2.3":
   version: 4.2.3
   resolution: "clean-css@npm:4.2.3"
@@ -3880,12 +3887,32 @@ __metadata:
   languageName: node
   linkType: hard
 
+"dotenv-defaults@npm:^2.0.1":
+  version: 2.0.1
+  resolution: "dotenv-defaults@npm:2.0.1"
+  dependencies:
+    dotenv: ^8.2.0
+  checksum: 53ac7d987bb9de5d9be0f76040460f398cd56708833143f95ed48732c8d73cf55868d4b368c4eb6dbeba704263da7262623c33557c897f5c06262973477abf0d
+  languageName: node
+  linkType: hard
+
 "dotenv-safe@npm:^8.2.0":
   version: 8.2.0
   resolution: "dotenv-safe@npm:8.2.0"
   dependencies:
     dotenv: ^8.2.0
   checksum: 8525ceed5a8ae4a4b9264080a3ad1550cb4c5d8d5990b4772fd62a6d245c01a01f77a540bab4fb16ae0513d9ea804cbaa6d19acb370b5bc68f2d103813c2eb2e
+  languageName: node
+  linkType: hard
+
+"dotenv-webpack@npm:^7.0.2":
+  version: 7.0.2
+  resolution: "dotenv-webpack@npm:7.0.2"
+  dependencies:
+    dotenv-defaults: ^2.0.1
+  peerDependencies:
+    webpack: ^4 || ^5
+  checksum: 63cb71dd1b1d0f77087c32341f2a2dea56facf13919a346890545a7b1b407a9bd323248e6a8bedd46cf17cb9a8f13ae37a85887cf5d97e1edf53ca87daa8758e
   languageName: node
   linkType: hard
 
@@ -4821,6 +4848,18 @@ __metadata:
   dependencies:
     flat-cache: ^3.0.4
   checksum: af83a412143100405a995bb7d9a31982ebcfabe6c545dac2e787fc5580b2da74e253ef62968057fa5bbfaf0811a8b85623aeea776e16c77e3ce4c2488b0e4821
+  languageName: node
+  linkType: hard
+
+"file-loader@npm:^6.2.0":
+  version: 6.2.0
+  resolution: "file-loader@npm:6.2.0"
+  dependencies:
+    loader-utils: ^2.0.0
+    schema-utils: ^3.0.0
+  peerDependencies:
+    webpack: ^4.0.0 || ^5.0.0
+  checksum: 0f103418c072ec66c081a9908cd7824ee19905e18be16889cb050f5f373998afaf7ca4c2fd2df4cabf703a2cd526aefe59105930e3f8d266a5b35e6d5f5b3cf4
   languageName: node
   linkType: hard
 
@@ -8481,6 +8520,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"path-browserify@npm:^1.0.1":
+  version: 1.0.1
+  resolution: "path-browserify@npm:1.0.1"
+  checksum: 45bb7389177dfe5cba5d1ee9589e578c8272ac330c00d388343845199c1d30227ca8d59bb3a15618e478673fcfa2fb7a5ad2bfcc1083d442a61a3a71aecd7dd6
+  languageName: node
+  linkType: hard
+
 "path-exists@npm:^3.0.0":
   version: 3.0.0
   resolution: "path-exists@npm:3.0.0"
@@ -11111,6 +11157,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "trueblocks-explorer@workspace:."
   dependencies:
+    "@ant-design/icons": ^4.6.2
     "@tsconfig/recommended": ^1.0.1
     "@types/dotenv-safe": ^8.1.1
     "@types/jest": ^26.0.20
@@ -11120,11 +11167,13 @@ __metadata:
     "@typescript-eslint/parser": ^4.17.0
     "@yarnpkg/pnpify": ^2.4.0
     antd: ^4.14.0
+    classnames: ^2.3.0
     concurrently: ^6.0.0
     css-loader: ^5.1.2
     cypress: ^6.6.0
     dotenv: ^8.2.0
     dotenv-safe: ^8.2.0
+    dotenv-webpack: ^7.0.2
     electron: ^12.0.0
     electron-is-dev: ^2.0.0
     electron-store: ^7.0.2
@@ -11134,11 +11183,13 @@ __metadata:
     eslint-plugin-jsx-a11y: ^6.4.1
     eslint-plugin-react: ^7.22.0
     eslint-plugin-react-hooks: ^4.2.0
+    file-loader: ^6.2.0
     fork-ts-checker-webpack-plugin: ^6.1.1
     fp-ts: ^2.9.5
     html-webpack-plugin: ^5.3.1
     jest: ^26.6.3
     jest-fetch-mock: ^3.0.3
+    path-browserify: ^1.0.1
     react: ^17.0.1
     react-dom: ^17.0.1
     style-loader: ^2.0.0

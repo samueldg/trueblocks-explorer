@@ -1,6 +1,7 @@
 const path = require('path');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const Dotenv = require('dotenv-webpack');
 
 const tsconfigLocation = path.resolve(__dirname, './tsconfig_ui.json');
 const getSourceLocation = (...subdirectories) => ['./src/ui', ...subdirectories].join('/');
@@ -13,6 +14,7 @@ module.exports = () => ({
   },
   resolve: {
     extensions: ['.ts', '.tsx', '.js'],
+    fallback: { path: require.resolve('path-browserify') },
   },
   module: {
     rules: [
@@ -30,9 +32,14 @@ module.exports = () => ({
         test: /\.css$/,
         use: ['style-loader', 'css-loader'],
       },
+      {
+        test: /\.svg$/,
+        use: ['file-loader'],
+      },
     ],
   },
   plugins: [
+    new Dotenv({ safe: true }),
     new ForkTsCheckerWebpackPlugin({
       typescript: {
         configFile: tsconfigLocation,

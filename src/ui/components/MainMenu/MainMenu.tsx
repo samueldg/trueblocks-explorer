@@ -1,8 +1,16 @@
 import React from 'react';
 import {
   Menu,
-  Divider
 } from 'antd';
+import {
+  BookOutlined,
+  CameraOutlined,
+  DesktopOutlined,
+  FundOutlined,
+  PhoneOutlined,
+  SettingOutlined,
+  UnorderedListOutlined,
+} from '@ant-design/icons';
 
 const { SubMenu } = Menu;
 
@@ -10,21 +18,30 @@ export const MainMenu = () => (
   <Menu
     mode="inline"
   >
-    <Menu.Item>
+    <Menu.Item
+      icon={<UnorderedListOutlined />}
+    >
       Entities
     </Menu.Item>
-    <Menu.Item>
+    <Menu.Item
+      icon={<DesktopOutlined />}
+    >
       Monitors
     </Menu.Item>
-    <Menu.Item>
+    <Menu.Item
+      icon={<BookOutlined />}
+    >
       Names
     </Menu.Item>
-    <Menu.Item>
+    <Menu.Item
+      icon={<FundOutlined />}
+    >
       Digests
     </Menu.Item>
     <SubMenu
       key="explorer"
       title="Explorer"
+      icon={<CameraOutlined />}
     >
       <Menu.Item>
         Blocks
@@ -43,26 +60,25 @@ export const MainMenu = () => (
       </Menu.Item>
     </SubMenu>
     <SubMenu
+      key="settings"
       title="Settings"
+      icon={<SettingOutlined />}
     >
       <Menu.Item>
         System Status
       </Menu.Item>
-      <Divider />
       <Menu.Item>
         Tags
       </Menu.Item>
       <Menu.Item>
         Signatures
       </Menu.Item>
-      <Divider />
       <Menu.Item>
         Caches
       </Menu.Item>
       <Menu.Item>
         Other
       </Menu.Item>
-      <Divider />
       <Menu.Item>
         Skins
       </Menu.Item>
@@ -71,12 +87,13 @@ export const MainMenu = () => (
       </Menu.Item>
     </SubMenu>
     <SubMenu
+      key="support"
       title="Support"
+      icon={<PhoneOutlined />}
     >
       <Menu.Item>
         Contact Us
       </Menu.Item>
-      <Divider />
       <Menu.Item>
         Hot Keys
       </Menu.Item>
@@ -86,7 +103,6 @@ export const MainMenu = () => (
       <Menu.Item>
         Documentation
       </Menu.Item>
-      <Divider />
       <Menu.Item>
         Licensing
       </Menu.Item>
