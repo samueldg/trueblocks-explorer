@@ -35,6 +35,7 @@ import './Accounts.css';
 import { currentPage } from 'components/utils';
 import { SidebarTable } from 'components';
 import { getIcon } from 'pages/utils';
+import { fmtNum } from 'components/utils';
 let g_focusValue = '';
 let g_Handler = null;
 const useMountEffect = (fun) => useEffect(fun, []);
@@ -898,6 +899,16 @@ function zeroFunc(record) {
 }
 
 //----------------------------------------------------------------------
+function fmt(num) {
+  return String(
+    Number(num ? num : 0).toLocaleString(undefined, {
+      minimumFractionDigits: 3,
+      maximumFractionDigits: 3,
+    })
+  );
+}
+
+//----------------------------------------------------------------------
 export const Reconciliations = ({ record, statement }) => {
   const head1 = {width: '10%', textAlign: 'left', border: '0px'}
   const head2 = {width: '10%', textAlign: 'left', border: '0px', backgroundColor: '#eeeedd', color: 'black'};
@@ -908,8 +919,10 @@ export const Reconciliations = ({ record, statement }) => {
   const tail1 = {width: '10%', textAlign: 'center', border: '0px'};
   const tail2 = {width: '10%', textAlign: 'center', border: '0px', backgroundColor: '#eeeedd', color: 'black'};
   const tail = statement.asset === 'ETH' ? tail1 : tail2;
-  const totalIn = String(totalIn1(statement));
-  const totalOut = String(totalOut1(statement));
+  const beg = fmt(statement.begBal);
+  const totalIn = fmt(totalIn1(statement));
+  const totalOut = fmt(totalOut1(statement));
+  const end = fmt(statement.endBal);
   const reconciled = isReconciled(statement);
   if (totalIn === 0 && totalOut === 0) return <Fragment></Fragment>
   return (
@@ -917,10 +930,10 @@ export const Reconciliations = ({ record, statement }) => {
       <td style={head}>
         <i>{statement.asset ? statement.asset.substr(0, 4) : ''}</i>
       </td>
-      <td style={style}>{statement.begBal ? statement.begBal.substr(0, 7) : '0'}</td>
-      <td style={style}>{totalIn ? totalIn.substr(0, 7) : '0'}</td>
-      <td style={style}>{totalOut ? totalOut.substr(0, 7) : '0'}</td>
-      <td style={style}>{statement.endBal ? statement.endBal.substr(0, 7) : '0'}</td>
+      <td style={style}>{beg ? beg : '0'}</td>
+      <td style={style}>{totalIn ? totalIn : '0'}</td>
+      <td style={style}>{totalOut ? totalOut : '0'}</td>
+      <td style={style}>{end ? end : '0'}</td>
       <td style={tail}>{reconciled}</td>
     </tr>
   );
