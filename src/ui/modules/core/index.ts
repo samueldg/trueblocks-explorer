@@ -6,7 +6,7 @@ import {
   pipe,
 } from 'fp-ts/function';
 
-type CoreCommand = 'export'
+export type CoreCommand = 'export'
 | 'list'
 | 'tags'
 | 'names'
@@ -28,7 +28,7 @@ type CoreCommand = 'export'
 | 'where'
 | 'dive';
 
-type CommandParams = Record<string, string>;
+export type CommandParams = Record<string, string>;
 
 /* Helper functions that transform the response */
 

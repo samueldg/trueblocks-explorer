@@ -22,8 +22,10 @@ module.exports = {
       },
     },
   },
+  ignorePatterns: ['.eslintrc.js'],
   parser: '@typescript-eslint/parser',
   parserOptions: {
+    project: './tsconfig_ui.json',
     ecmaFeatures: {
       jsx: true,
     },

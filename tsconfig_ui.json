@@ -2,7 +2,18 @@
     "extends": "./tsconfig.json",
     "compilerOptions": {
         "outDir": "dist/ui",
-        "jsx": "react"
+        "jsx": "react",
+        "paths": {
+            "@components/*": [
+                "src/ui/components/*"
+            ],
+            "@hooks/*": [
+                "src/ui/hooks/*"
+            ],
+            "@modules/*": [
+                "src/ui/modules/*"
+            ]
+        }
     },
     "exclude": [
         "src/electron"

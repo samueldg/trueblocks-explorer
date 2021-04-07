@@ -15,13 +15,21 @@ module.exports = () => ({
   resolve: {
     extensions: ['.ts', '.tsx', '.js'],
     fallback: { path: require.resolve('path-browserify') },
+    alias: {
+      '@components': path.resolve(__dirname, 'src/ui/components/'),
+      '@hooks': path.resolve(__dirname, 'src/ui/hooks'),
+      '@modules': path.resolve(__dirname, 'src/ui/modules'),
+    },
   },
   module: {
     rules: [
       {
         test: /\.tsx?$/,
         loader: 'ts-loader',
-        exclude: /node_modules/,
+        exclude: [
+          /node_modules/,
+          /\.test\./,
+        ],
         options: {
           // disable type checker - we will use it in fork plugin
           transpileOnly: true,
