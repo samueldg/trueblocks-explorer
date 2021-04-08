@@ -21,7 +21,6 @@ export const SidePanel = (props: PanelProps) => {
   return (
     <Sider
       theme="light"
-      collapsible
       collapsed={collapsed}
     >
       <Panel
