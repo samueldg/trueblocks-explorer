@@ -1,4 +1,5 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 import {
   Menu,
 } from 'antd';
@@ -21,7 +22,11 @@ export const MainMenu = () => (
     <Menu.Item
       icon={<UnorderedListOutlined />}
     >
-      Entities
+      <NavLink
+        to="/"
+      >
+        Entities
+      </NavLink>
     </Menu.Item>
     <Menu.Item
       icon={<DesktopOutlined />}

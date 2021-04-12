@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 
 import 'antd/dist/antd.css';
-import './app.css';
+import './App.css';
 
-import { Button, Layout, notification } from 'antd';
-import { createErrorNotification } from './modules/error_notification';
+import { Layout, Tabs } from 'antd';
+import { Routes } from './Routes';
 import { MainMenu } from './components/MainMenu';
 import {
   SidePanel,
@@ -20,10 +20,6 @@ const {
   Content,
 } = Layout;
 
-const showError = () => notification.error(
-  createErrorNotification({ description: 'Just testing' }),
-);
-
 export const App = () => {
   const [menuExpanded, setMenuExpanded] = useState(true);
   const [statusExpanded, setStatusExpanded] = useState(true);
@@ -31,7 +27,7 @@ export const App = () => {
 
   return (
     <Layout>
-      <Header>TrueBlocks Account Explorer</Header>
+      <Header className="app-header">TrueBlocks Account Explorer</Header>
       <Layout>
         <SidePanel
           header="Main menu"
@@ -44,9 +40,11 @@ export const App = () => {
         </SidePanel>
         <Layout>
           <Layout>
-            <Content>
-              Hello World
-              <Button type="primary" onClick={showError}>Error</Button>
+            <Content style={{ backgroundColor: 'white', padding: '1rem' }}>
+              {/* View */}
+
+              {/* TODO: move it */}
+              <Routes />
             </Content>
             <SidePanel
               header="Status"
