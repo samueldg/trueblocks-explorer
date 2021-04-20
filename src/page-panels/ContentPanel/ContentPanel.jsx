@@ -73,10 +73,11 @@ export const InnerContent = () => {
     loc = loc.replace('settings/', '') + '/';
     ret = thePages[loc];
   }
+  const stt = step < 2 ? <div onClick={(e) => handleClick(e, nextWizard, { type: 'reset' })}>wizardStep: {step}</div> : <Fragment></Fragment>;
   return (
     <PageContext.Provider value={[]}>
-      {<div onClick={(e) => handleClick(e, nextWizard, { type: 'reset' })}>wizardStep: {step}</div>}
-      {ret ? ret.component : <div className="warning">Missing Inner Content</div>}
+      {stt}
+      {ret ? ret.component : <div className='warning'>Missing Inner Content</div>}
     </PageContext.Provider>
   );
 };

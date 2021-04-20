@@ -1,9 +1,12 @@
 [settings]
 # pages are the top level menu choices only. Not to be confused with the generated code from_source
 pages = "\
-    entities|monitors|accounts|summary|tags|explorer|separator|\
-    names|signatures|digests|caches|other|separator|\
-    settings|support"
+    entities|separator|\
+    monitors|separator|\
+    names|separator|\
+    digests|explorer|separator|\
+    settings|support|\
+    accounts|summary|tags|signatures|caches|other"
 
 schemas = "\
     entities|monitors|accounts|summary|tags|\

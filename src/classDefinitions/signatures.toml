@@ -5,7 +5,7 @@ defaultSort = "encoding,type,name"
 defaultTags = "['Functions', 'Events', 'Constructors', '|', 'Known', 'Monitored', '|', 'Names Only', 'Signatures Only', 'Cross']"
 cmdUrl = "abis"
 dataUrl = "abis"
-dataQuery = "monitored&known"
+dataQuery = "known"
 imports = "||getServerData, sendServerCommand, sortArray, handleClick, replaceRecord, stateFromStorage|||"
 
 [[subpages]]

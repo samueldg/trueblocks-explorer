@@ -152,7 +152,7 @@ export const Summary = (props) => {
   // EXISTING_CODE
   // EXISTING_CODE
 
-  const table = <img height="1050px" className="summary" alt={sumImage} src={sumImage} />;
+  const table = <img height="920px" className="summary" alt={sumImage} src={sumImage} />;
   return (
     <div>
       {/* prettier-ignore */}
@@ -179,7 +179,7 @@ export const Summary = (props) => {
 //----------------------------------------------------------------------
 const getTagList = (summary) => {
   // prettier-ignore
-  let tagList = ['Eth', 'Not Eth', '|', 'Tokens', 'Grants', 'Hide Outgoing', 'Hide Airdrops', 'Show Airdrops', '|', 'Reconciled', 'Unreconciled', '|', 'Neighbors', 'Balances', 'Functions', 'Events', 'Messages', 'Creations', 'SelfDestructs'];
+  let tagList = ['Eth', 'Not Eth', '|', 'Tokens', 'Grants', 'Hide Outgoing', 'Hide Airdrops', 'Show Airdrops', '|', 'Reconciled', 'Unreconciled', '|', 'Creations', 'SelfDestructs'];
   tagList.unshift('|');
   tagList.unshift('All');
   tagList.push('|');

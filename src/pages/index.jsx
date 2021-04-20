@@ -32,11 +32,9 @@ export const thePages = {
   //
   'monitors/': { component: <Monitors /> },
   //
-  'accounts/': { component: <Accounts /> },
+  'names/': { component: <Names /> },
   //
-  'summary/': { component: <Summary /> },
-  //
-  'tags/': { component: <Tags /> },
+  'digests/': { component: <Digests /> },
   //
   'explorer/': { component: <Explorer /> },
   'explorer/blocks': { component: <Explorer /> },
@@ -45,33 +43,12 @@ export const thePages = {
   'explorer/logs': { component: <Explorer /> },
   'explorer/traces': { component: <Explorer /> },
   //
-  'names/': { component: <Names /> },
-  //
-  'signatures/': { component: <Signatures /> },
-  'signatures/known': { component: <Signatures /> },
-  'signatures/monitored': { component: <Signatures /> },
-  'signatures/names': { component: <Signatures /> },
-  'signatures/params': { component: <Signatures /> },
-  'signatures/cross': { component: <Signatures /> },
-  //
-  'digests/': { component: <Digests /> },
-  'digests/finalized': { component: <Digests /> },
-  'digests/staged': { component: <Digests /> },
-  'digests/unripe': { component: <Digests /> },
-  'digests/columns': { component: <Digests /> },
-  //
-  'caches/': { component: <Caches /> },
-  'caches/blocks': { component: <Caches /> },
-  'caches/transactions': { component: <Caches /> },
-  'caches/traces': { component: <Caches /> },
-  'caches/slurps': { component: <Caches /> },
-  'caches/prices': { component: <Caches /> },
-  'caches/abis': { component: <Caches /> },
-  //
-  'other/': { component: <Other /> },
-  //
   'settings/': { component: <Settings /> },
   'settings/status': { component: <Settings /> },
+  'settings/tags': { component: <Tags /> },
+  'settings/signatures': { component: <Signatures /> },
+  'settings/caches': { component: <Caches /> },
+  'settings/other': { component: <Other /> },
   'settings/skins': { component: <Settings /> },
   'settings/schemas': { component: <Settings /> },
   //
@@ -82,6 +59,18 @@ export const thePages = {
   'support/documentation': { component: <Support /> },
   'support/licensing': { component: <Support /> },
   'support/about': { component: <Support /> },
+  //
+  'accounts/': { component: <Accounts /> },
+  //
+  'summary/': { component: <Summary /> },
+  //
+  'tags/': { component: <Tags /> },
+  //
+  'signatures/': { component: <Signatures /> },
+  //
+  'caches/': { component: <Caches /> },
+  //
+  'other/': { component: <Other /> },
   //
   // auto-generate: pages
 };

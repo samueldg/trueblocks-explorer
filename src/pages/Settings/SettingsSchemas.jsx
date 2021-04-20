@@ -240,17 +240,17 @@ const useSchemas = () => {
     // auto-generate: use-schemas
     { group: 'pages_', name: 'entitiesSchema', schema: entitiesSchema },
     { group: 'pages_', name: 'monitorsSchema', schema: monitorsSchema },
+    { group: 'pages_', name: 'namesSchema', schema: namesSchema },
+    { group: 'pages_', name: 'digestsSchema', schema: digestsSchema },
+    { group: 'pages_', name: 'explorerSchema', schema: explorerSchema },
+    { group: 'pages_', name: 'settingsSchema', schema: settingsSchema },
+    { group: 'pages_', name: 'supportSchema', schema: supportSchema },
     { group: 'pages_', name: 'accountsSchema', schema: accountsSchema },
     { group: 'pages_', name: 'summarySchema', schema: summarySchema },
     { group: 'pages_', name: 'tagsSchema', schema: tagsSchema },
-    { group: 'pages_', name: 'explorerSchema', schema: explorerSchema },
-    { group: 'pages_', name: 'namesSchema', schema: namesSchema },
     { group: 'pages_', name: 'signaturesSchema', schema: signaturesSchema },
-    { group: 'pages_', name: 'digestsSchema', schema: digestsSchema },
     { group: 'pages_', name: 'cachesSchema', schema: cachesSchema },
     { group: 'pages_', name: 'otherSchema', schema: otherSchema },
-    { group: 'pages_', name: 'settingsSchema', schema: settingsSchema },
-    { group: 'pages_', name: 'supportSchema', schema: supportSchema },
     // auto-generate: use-schemas
 
     { group: 'explore', name: 'abisSchema', schema: abisSchema },

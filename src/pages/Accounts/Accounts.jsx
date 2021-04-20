@@ -8,10 +8,12 @@
  * of 'EXISTING_CODE' tags.
  */
 import React, { Fragment, useEffect, useState, useMemo, useCallback, useContext } from 'react';
+import {Tabs} from 'antd';
 import Mousetrap from 'mousetrap';
+import dateFormat from 'dateformat';
 
 import GlobalContext, { getApiUrl } from 'store';
-
+import { Summary } from '../Summary/Summary'
 import { DataTable, ObjectTable, ChartTable, PageCaddie, Dialog } from 'components';
 import {
   calcValue,
@@ -36,6 +38,8 @@ import { currentPage } from 'components/utils';
 import { SidebarTable } from 'components';
 import { getIcon } from 'pages/utils';
 import { fmtNum } from 'components/utils';
+import { dropRightWhile } from 'lodash';
+const { TabPane } = Tabs;
 let g_focusValue = '';
 let g_Handler = null;
 const useMountEffect = (fun) => useEffect(fun, []);
@@ -63,7 +67,7 @@ export const Accounts = (props) => {
   g_focusValue = addresses.value && addresses.value.toLowerCase();
   // EXISTING_CODE
 
-  const dataQuery = 'addrs=' + addresses.value + '&staging&accounting&tokens&ether&cache_txs';
+  const dataQuery = 'addrs=' + addresses.value + '&staging&accounting&tokens&ether&relevant&cache_txs';
   function addendum(record, record_id) {
     let ret = '';
     // EXISTING_CODE
@@ -283,6 +287,8 @@ export const Accounts = (props) => {
           case 'Neighbors':
             return false;
           case 'Events':
+            if (!item['compressedTx']) return true;
+            return !item.compressedTx.substr(0,8).includes('message:');
           case 'Balances':
           case 'All':
           default:
@@ -341,19 +347,57 @@ export const Accounts = (props) => {
     <div>
       {/* prettier-ignore */}
       <PageCaddie
-        caddieName="Tags"
-        caddieData={tagList}
-        current={curTag}
-        useProgress={true}
-        handler={accountsHandler}
-      />
+            caddieName="Tags"
+            caddieData={tagList}
+            current={curTag}
+            useProgress={true}
+            handler={accountsHandler}
+          />
       {mocked && (
         <span className='warning'>
           <b>&nbsp;&nbsp;MOCKED DATA&nbsp;&nbsp;</b>
         </span>
       )}
       {debug && <pre>{JSON.stringify(accounts, null, 2)}</pre>}
-      {table}
+      <Tabs
+        defaultActiveKey={'2'}
+        style={{display: 'grid', gridTemplateColumns: '1fr 15fr'}}
+        onTabClick={(newKey, e) => {
+          const isTriggeredByKeyboard = !e;
+          if (isTriggeredByKeyboard) return; // if event is triggered by keyboard, don't update key
+          // setKey(newKey);
+        }}>
+        <TabPane tab={'Activity'} key='2'>
+          <div>{table}</div>
+        </TabPane>
+        <TabPane tab={'Ledgers'} key='3'>
+          <Ledgers data={filtered} />
+        </TabPane>
+        <TabPane tab={'Summary'} key='1'>
+          <Summary />
+        </TabPane>
+        <TabPane tab={'Charts'} key='4'>
+          <BalanceView data={filtered} columns={accountsSchema} title={title} />;
+        </TabPane>
+        <TabPane tab={'Neighbors'} key='5'>
+          <ObjectTable data={accounts.meta} columns={metaSchema} title={'Direct Neighbors of ' + title} />;
+        </TabPane>
+        <TabPane tab={'Functions'} key='6'>
+          {getFunctionTable(filtered, title, searchFields, accountsHandler)}
+        </TabPane>
+        <TabPane tab={'Events'} key='7'>
+          {getFunctionTable(filtered, title, searchFields, accountsHandler)}
+        </TabPane>
+        <TabPane tab={'Messages'} key='8'>
+          {getMessageTable(filtered)}
+        </TabPane>
+        <TabPane tab={'Creations'} key='9'>
+          Creations
+        </TabPane>
+        <TabPane tab={'SelfDestructs'} key='10'>
+          SelfDestructs
+        </TabPane>
+      </Tabs>
       {/* prettier-ignore */}
       <Dialog showing={editDialog.showing} header={'Edit/Add Account'} handler={accountsHandler} object={editDialog.record} columns={accountsSchema}/>
       {custom}
@@ -362,9 +406,41 @@ export const Accounts = (props) => {
 };
 
 //----------------------------------------------------------------------
+const getMessageTable = (filtered) => {
+    const messageData = filtered.map((item) => {
+      return {
+        date: item.date,
+        to: item.to,
+        from: item.from,
+        message: <b>{item.compressedTx.replace('message:', '')}</b>,
+      };
+    });
+    return <DataTable data={messageData} columns={messagesSchema} title={'Messages sent'} />;
+
+}
+//----------------------------------------------------------------------
+const getFunctionTable = (filtered, title, searchFields, accountsHandler) => {
+    const functionCallData = filtered.map((item) => {
+      const parts = item.compressedTx.replace(/\)/, '').split('(');
+      return {date: item.date, to: item.to, functionName: <b>{parts[0]}</b>, parameters: parts[1]};
+    });
+    return (
+      <DataTable
+        data={functionCallData}
+        columns={functionCallSchema}
+        title={'Functions Called by ' + title}
+        search={true}
+        searchFields={searchFields}
+        pagination={true}
+        parentHandler={accountsHandler}
+      />
+    );
+}
+
+//----------------------------------------------------------------------
 const getTagList = (accounts) => {
   // prettier-ignore
-  let tagList = ['Eth', 'Not Eth', '|', 'Tokens', 'Grants', 'Hide Outgoing', 'Hide Airdrops', 'Show Airdrops', '|', 'Reconciled', 'Unreconciled', '|', 'Neighbors', 'Balances', 'Functions', 'Events', 'Messages', 'Creations', 'SelfDestructs'];
+  let tagList = ['Eth', 'Not Eth', '|', 'Tokens', 'Grants', 'Hide Outgoing', 'Hide Airdrops', 'Show Airdrops', '|', 'Reconciled', 'Unreconciled'];
   tagList.unshift('|');
   tagList.unshift('All');
   tagList.push('|');
@@ -386,37 +462,7 @@ const getInnerTable = (
 ) => {
   // EXISTING_CODE
   if (!accounts) return <Fragment></Fragment>;
-  if (curTag === 'Neighbors') {
-    return <ObjectTable data={accounts.meta} columns={metaSchema} title={'Direct Neighbors of ' + title} />;
-  } else if (curTag === 'Balances') {
-    const test = accountsSchema;
-    return <BalanceView data={filtered} columns={test} title={title} />;
-  } else if (curTag === 'Functions') {
-    const functionCallData = filtered.map((item) => {
-      const parts = item.compressedTx.replace(/\)/, '').split('(');
-      return { date: item.date, to: item.to, functionName: <b>{parts[0]}</b>, parameters: parts[1] };
-    });
-    return (
-      <DataTable
-        data={functionCallData}
-        columns={functionCallSchema}
-        title={'Functions Called by ' + title}
-        search={true}
-        searchFields={searchFields}
-        pagination={true}
-        parentHandler={accountsHandler}
-      />
-    );
-  } else if (curTag === 'Messages') {
-    const messageData = filtered.map((item) => {
-      return {
-        date: item.date,
-        to: item.to,
-        from: item.from,
-        message: <b>{item.compressedTx.replace('message:', '')}</b>,
-      };
-    });
-    return <DataTable data={messageData} columns={messagesSchema} title={'Functions Called by ' + title} />;
+  if (curTag === 'Messages') {
   }
   // EXISTING_CODE
   return (
@@ -938,4 +984,131 @@ export const Reconciliations = ({ record, statement }) => {
     </tr>
   );
 }
+
+function onlyUnique(value, index, self) {
+  return value && self.indexOf(value) === index;
+}
+
+//----------------------------------------------------------------------
+const LedgerLine = ({ row }) => {
+  const check = getIcon('reconciled', row.reconciled ? 'CheckCircle' : 'XCircle', false, false, 14);
+  const val = fmt(row.endBal) === "0.000" ? <div style={{ backgroundColor: 'lightyellow', border: '1px dashed orange' }}>{fmt(row.endBal)}</div> : fmt(row.endBal);
+
+  const milliseconds = row.timestamp * 1000
+  const dd = new Date(milliseconds);
+  const str = dateFormat(dd, 'yy/mm/dd');
+  return (
+    <tr>
+      <td>{str}</td>
+      <td> </td>
+      <td style={{textAlign: 'right'}}>{fmt(row.amountNet)}</td>
+      <td> </td>
+      <td style={{textAlign: 'right'}}>
+        {val}
+      </td>
+      <td style={{textAlign: 'center'}}>{check}</td>
+    </tr>
+  );
+}
+
+//----------------------------------------------------------------------
+const Ledger = ({ asset, data }) => {
+  return (
+    <table style={{padding: '2px', border: '1px dotted brown'}}>
+      <tr style={{backgroundColor: '#bbbb22', textAlign: 'center'}}>
+        <td colspan='6'>{asset + ' (' + data.length + ')'}</td>
+      </tr>
+      <tr>
+        <td
+          colspan='2'
+          style={{borderBottom: '1px dashed black', color: 'black', textWeight: '800', textAlign: 'center'}}>
+          Date
+        </td>
+        <td style={{borderBottom: '1px dashed black', color: 'black', textWeight: '800', textAlign: 'center'}}>
+          Amt
+        </td>
+        <td
+          colspan='2'
+          style={{borderBottom: '1px dashed black', color: 'black', textWeight: '800', textAlign: 'center'}}>
+          Bal
+        </td>
+        <td
+          style={{borderBottom: '1px dashed black', color: 'black', textWeight: '800', textAlign: 'center'}}>
+          Check
+        </td>
+      </tr>
+      {data.map((item) => {
+        return <LedgerLine row={item} />;
+      })}
+    </table>
+  );
+}
+
+//----------------------------------------------------------------------
+export const Ledgers = ({ data }) => {
+  // const [statements, setStatements] = useState([{}])
+  const [assetList, setAssetList] = useState([]);
+  const [ledgers, setLedgers] = useState([]);
+
+  useEffect(() => {
+    var lStatements = data
+      .map((record) => {
+        return record.statements;
+      })
+      .flat();
+    lStatements = lStatements.filter((st) => {
+      return true;
+    }); //(st.amountNet < -0.0001 || st.amountNet > 0.0001); });
+    lStatements = lStatements.map((item) => {
+      return {
+        timestamp: item.timestamp,
+        asset: item.asset,
+        endBal: item.endBal,
+        amountNet: item.amountNet,
+        reconciled: item.reconciled,
+      };
+    });
+    // setStatements(lStatements);
+
+    var lAssetList = data
+      .map((item, index) => {
+        if (!item) return null;
+        if (!item.statements) return null;
+        return item.statements.map((item) => {
+          return item.asset;
+        });
+      })
+      .flat();
+    lAssetList = lAssetList.filter(onlyUnique);
+    setAssetList(lAssetList);
+
+    const lLedgers = lAssetList.map((item) => {
+      const rows = lStatements.filter((st) => {
+        return item === st.asset && st.amountNet && st.amountNet !== 0;
+      });
+      if (rows.length === 0) return <Fragment></Fragment>;
+      return (
+        <div style={{display: 'grid', gridTemplateColumns: '10fr 1fr'}}>
+          <Ledger asset={item} data={rows} />
+          <div></div>
+        </div>
+      );
+    });
+    setLedgers(lLedgers);
+  }, [data]);
+
+  const val = 'repeat(' + ledgers.length + ', 1fr) 1fr';
+  return (
+    <Fragment>
+      <table>
+        <tr>
+          <td>{data.length}</td>
+          <td>{JSON.stringify(assetList, null, 2)}</td>
+        </tr>
+      </table>
+      <div style={{display: 'grid', gridTemplateColumns: val, margin: '12px'}}>{ledgers}</div>
+    </Fragment>
+  );
+};
+
 // EXISTING_CODE

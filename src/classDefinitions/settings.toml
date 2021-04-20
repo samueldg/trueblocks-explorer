@@ -6,6 +6,12 @@ list = [
     { page = "settings", subpage = "" },
     { page = "settings", subpage = "System Status", route = "status" },
     { page = "settings", subpage = "Separator" },
+    { page = "settings", subpage = "Tags", component = "<Tags />" },
+    { page = "settings", subpage = "Signatures", component = "<Signatures />" },
+    { page = "settings", subpage = "Separator" },
+    { page = "settings", subpage = "Caches", component = "<Caches />" },
+    { page = "settings", subpage = "Other", component = "<Other />" },
+    { page = "settings", subpage = "Separator" },
     { page = "settings", subpage = "Skins" },
     { page = "settings", subpage = "Schemas" },
 ]

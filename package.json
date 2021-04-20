@@ -28,10 +28,12 @@
   },
   "dependencies": {
     "@hookform/error-message": "^0.0.4",
+    "antd": "^4.15.0",
     "axios": "^0.21.1",
     "d3": "^5.15.1",
     "d3-array": "^2.4.0",
     "d3-scale": "^3.2.1",
+    "dateformat": "^4.5.1",
     "deepmerge": "^4.2.2",
     "documentation": "^13.0.2",
     "electron-is-dev": "^1.2.0",

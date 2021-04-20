@@ -7,7 +7,6 @@ query_receipts = "transactions=' + current + '"
 query_logs = "transactions=' + current + '"
 query_traces = "transactions=' + current + '"
 
-
 [[subpages]]
 list = [
     { page = "explorer", subpage = "", route = "" },

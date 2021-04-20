@@ -13,16 +13,7 @@ import Mousetrap from 'mousetrap';
 import GlobalContext, { getApiUrl } from 'store';
 
 import { DataTable, PageCaddie, Dialog } from 'components';
-import {
-  calcValue,
-  getServerData,
-  sendServerCommand,
-  sortArray,
-  sortStrings,
-  handleClick,
-  replaceRecord,
-  stateFromStorage,
-} from 'components/utils';
+import { calcValue, getServerData, sendServerCommand, sortArray, sortStrings, handleClick, replaceRecord, stateFromStorage } from 'components/utils';
 
 import { useStatus, LOADING, NOT_LOADING } from 'store/status_store';
 
@@ -194,16 +185,7 @@ export const Entities = (props) => {
   // EXISTING_CODE
   // EXISTING_CODE
 
-  const table = getInnerTable(
-    entities,
-    curTag,
-    filtered,
-    title,
-    detailLevel,
-    searchFields,
-    recordIconList,
-    entitiesHandler
-  );
+  const table = getInnerTable(entities, curTag, filtered, title, detailLevel, searchFields, recordIconList, entitiesHandler);
   return (
     <div>
       {/* prettier-ignore */}
@@ -230,10 +212,7 @@ export const Entities = (props) => {
 //----------------------------------------------------------------------
 const getTagList = (entities) => {
   // prettier-ignore
-  let tagList = sortStrings(
-    [...new Set(entities.data.map((item) => calcValue(item, { selector: 'tags', onDisplay: getFieldValue })))],
-    true
-  );
+  let tagList = sortStrings([...new Set(entities.data.map((item) => calcValue(item, { selector: 'tags', onDisplay: getFieldValue })))], true);
   tagList.unshift('|');
   tagList.unshift('All');
   tagList.push('|');
@@ -243,16 +222,7 @@ const getTagList = (entities) => {
 };
 
 //----------------------------------------------------------------------
-const getInnerTable = (
-  entities,
-  curTag,
-  filtered,
-  title,
-  detailLevel,
-  searchFields,
-  recordIconList,
-  entitiesHandler
-) => {
+const getInnerTable = (entities, curTag, filtered, title, detailLevel, searchFields, recordIconList, entitiesHandler) => {
   // EXISTING_CODE
   // EXISTING_CODE
   return (

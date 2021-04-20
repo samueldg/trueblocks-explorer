@@ -17,17 +17,17 @@ import { stateFromStorage } from 'components/utils';
 // auto-generate: imports
 import { entitiesDefault, entitiesReducer } from 'pages/Entities/Entities';
 import { monitorsDefault, monitorsReducer } from 'pages/Monitors/Monitors';
+import { namesDefault, namesReducer } from 'pages/Names/Names';
+import { digestsDefault, digestsReducer } from 'pages/Digests/Digests';
+import { explorerDefault, explorerReducer } from 'pages/Explorer/Explorer';
+import { settingsDefault, settingsReducer } from 'pages/Settings/Settings';
+import { supportDefault, supportReducer } from 'pages/Support/Support';
 import { accountsDefault, accountsReducer } from 'pages/Accounts/Accounts';
 import { summaryDefault, summaryReducer } from 'pages/Summary/Summary';
 import { tagsDefault, tagsReducer } from 'pages/Tags/Tags';
-import { explorerDefault, explorerReducer } from 'pages/Explorer/Explorer';
-import { namesDefault, namesReducer } from 'pages/Names/Names';
 import { signaturesDefault, signaturesReducer } from 'pages/Signatures/Signatures';
-import { digestsDefault, digestsReducer } from 'pages/Digests/Digests';
 import { cachesDefault, cachesReducer } from 'pages/Caches/Caches';
 import { otherDefault, otherReducer } from 'pages/Other/Other';
-import { settingsDefault, settingsReducer } from 'pages/Settings/Settings';
-import { supportDefault, supportReducer } from 'pages/Support/Support';
 // auto-generate: imports
 
 import 'App.css';
@@ -41,17 +41,17 @@ const defaultData = {
   // auto-generate: defaults
   entities: entitiesDefault,
   monitors: monitorsDefault,
+  names: namesDefault,
+  digests: digestsDefault,
+  explorer: explorerDefault,
+  settings: settingsDefault,
+  support: supportDefault,
   accounts: accountsDefault,
   summary: summaryDefault,
   tags: tagsDefault,
-  explorer: explorerDefault,
-  names: namesDefault,
   signatures: signaturesDefault,
-  digests: digestsDefault,
   caches: cachesDefault,
   other: otherDefault,
-  settings: settingsDefault,
-  support: supportDefault,
   // auto-generate: defaults
 };
 
@@ -63,17 +63,17 @@ function App() {
   // auto-generate: reducers
   const [entitiesState, entitiesDispatch] = useReducer(entitiesReducer, defaultData['entities']);
   const [monitorsState, monitorsDispatch] = useReducer(monitorsReducer, defaultData['monitors']);
+  const [namesState, namesDispatch] = useReducer(namesReducer, defaultData['names']);
+  const [digestsState, digestsDispatch] = useReducer(digestsReducer, defaultData['digests']);
+  const [explorerState, explorerDispatch] = useReducer(explorerReducer, defaultData['explorer']);
+  const [settingsState, settingsDispatch] = useReducer(settingsReducer, defaultData['settings']);
+  const [supportState, supportDispatch] = useReducer(supportReducer, defaultData['support']);
   const [accountsState, accountsDispatch] = useReducer(accountsReducer, defaultData['accounts']);
   const [summaryState, summaryDispatch] = useReducer(summaryReducer, defaultData['summary']);
   const [tagsState, tagsDispatch] = useReducer(tagsReducer, defaultData['tags']);
-  const [explorerState, explorerDispatch] = useReducer(explorerReducer, defaultData['explorer']);
-  const [namesState, namesDispatch] = useReducer(namesReducer, defaultData['names']);
   const [signaturesState, signaturesDispatch] = useReducer(signaturesReducer, defaultData['signatures']);
-  const [digestsState, digestsDispatch] = useReducer(digestsReducer, defaultData['digests']);
   const [cachesState, cachesDispatch] = useReducer(cachesReducer, defaultData['caches']);
   const [otherState, otherDispatch] = useReducer(otherReducer, defaultData['other']);
-  const [settingsState, settingsDispatch] = useReducer(settingsReducer, defaultData['settings']);
-  const [supportState, supportDispatch] = useReducer(supportReducer, defaultData['support']);
   // auto-generate: reducers
 
   const theGlobalState = {
@@ -83,17 +83,17 @@ function App() {
     // auto-generate: state
     entities: { entities: entitiesState, dispatch: entitiesDispatch },
     monitors: { monitors: monitorsState, dispatch: monitorsDispatch },
+    names: { names: namesState, dispatch: namesDispatch },
+    digests: { digests: digestsState, dispatch: digestsDispatch },
+    explorer: { explorer: explorerState, dispatch: explorerDispatch },
+    settings: { settings: settingsState, dispatch: settingsDispatch },
+    support: { support: supportState, dispatch: supportDispatch },
     accounts: { accounts: accountsState, dispatch: accountsDispatch },
     summary: { summary: summaryState, dispatch: summaryDispatch },
     tags: { tags: tagsState, dispatch: tagsDispatch },
-    explorer: { explorer: explorerState, dispatch: explorerDispatch },
-    names: { names: namesState, dispatch: namesDispatch },
     signatures: { signatures: signaturesState, dispatch: signaturesDispatch },
-    digests: { digests: digestsState, dispatch: digestsDispatch },
     caches: { caches: cachesState, dispatch: cachesDispatch },
     other: { other: otherState, dispatch: otherDispatch },
-    settings: { settings: settingsState, dispatch: settingsDispatch },
-    support: { support: supportState, dispatch: supportDispatch },
     // auto-generate: state
   };
 

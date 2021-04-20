@@ -4,9 +4,4 @@ class = "CDigests"
 [[subpages]]
 list = [
     { page = "digests", subpage = "" },
-    { page = "digests", subpage = "Finalized" },
-    { page = "digests", subpage = "Staged" },
-    { page = "digests", subpage = "Unripe" },
-    { page = "digests", subpage = "Separator" },
-    { page = "digests", subpage = "Columns" },
 ]
