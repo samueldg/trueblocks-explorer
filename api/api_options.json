@@ -766,25 +766,8 @@
     }
   },
   "pins": {
-    "list": {
-      "num": "10920",
-      "group": "apps",
-      "tags": "Admin",
-      "api_route": "pins",
-      "tool": "pinMan",
-      "command": "list",
-      "hotkey": "l",
-      "def_val": "",
-      "core_visible": true,
-      "docs_visible": true,
-      "generate": "header",
-      "option_kind": "flag",
-      "data_type": "enum[local*|remote]",
-      "real_type": "string_q",
-      "description": "list all pins either locally or at the pinning service"
-    },
     "compare": {
-      "num": "10960",
+      "num": "10930",
       "group": "apps",
       "tags": "Admin",
       "api_route": "pins",
@@ -814,6 +797,22 @@
       "data_type": "<boolean>",
       "real_type": "bool",
       "description": "initialize the local index by downloading bloom filters from the pinning service"
+    },
+    "freshen": {
+      "num": "10970",
+      "group": "apps",
+      "tags": "Admin",
+      "api_route": "pins",
+      "tool": "pinMan",
+      "command": "freshen",
+      "hotkey": "f",
+      "core_visible": true,
+      "docs_visible": true,
+      "generate": "header",
+      "option_kind": "switch",
+      "data_type": "<boolean>",
+      "real_type": "bool",
+      "description": "freshen the manifest from the hash found at the smart contract"
     },
     "": {
       "num": "10980",
