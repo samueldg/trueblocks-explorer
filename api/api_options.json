@@ -814,6 +814,22 @@
       "real_type": "bool",
       "description": "freshen the manifest from the hash found at the smart contract"
     },
+    "sleep": {
+      "num": "10980",
+      "group": "apps",
+      "tags": "Admin",
+      "api_route": "pins",
+      "tool": "pinMan",
+      "command": "sleep",
+      "hotkey": "s",
+      "def_val": ".25",
+      "core_visible": true,
+      "generate": "header",
+      "option_kind": "flag",
+      "data_type": "<double>",
+      "real_type": "double",
+      "description": "the number of seconds to sleep between requests during init (default .25)"
+    },
     "": {
       "num": "10980",
       "group": "apps",
