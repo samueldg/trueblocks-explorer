@@ -2404,6 +2404,22 @@
       "real_type": "bool",
       "description": "suppress the display of tables with zero records"
     },
+    "test": {
+      "num": "14060",
+      "group": "tools",
+      "tags": "Other",
+      "api_route": "dive",
+      "tool": "turboDive",
+      "command": "test",
+      "hotkey": "t",
+      "core_visible": true,
+      "docs_visible": true,
+      "generate": "header",
+      "option_kind": "switch",
+      "data_type": "<boolean>",
+      "real_type": "bool",
+      "description": "do tracing tests against turbo geth (and other nodes)"
+    },
     "": {
       "num": "14050",
       "group": "tools",
