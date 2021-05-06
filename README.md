@@ -1,4 +1,4 @@
-# TrueBlocks Account Explorer
+# TrueBlocks Explorer
 
 ![Image Logo](https://avatars1.githubusercontent.com/u/19167586?s=200&v=4)
 
