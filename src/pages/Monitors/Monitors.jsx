@@ -53,7 +53,7 @@ export const Monitors = (props) => {
   // EXISTING_CODE
   // EXISTING_CODE
 
-  const cmdUrl = getApiUrl('monitor');
+  const cmdUrl = getApiUrl('monitors');
 
   const dataQuery = 'modes=monitors&details';
   function addendum(record, record_id) {

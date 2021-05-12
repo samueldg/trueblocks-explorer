@@ -522,11 +522,11 @@ export function refreshAccountsData2(query, dispatch, firstRecord, maxRecords, n
       accounts = named;
     }
     theData.data = sortArray(accounts, defaultSort, ['asc', 'asc', 'asc']);
-    dispatch({ type: 'success', payload: theData });
+    dispatch({type: 'success', payload: theData});
 
     if (Number(firstRecord) + Number(maxRecords) < nRecords) {
       var newStart = Number(firstRecord) + Number(maxRecords);
-      var newEnd = (maxRecords * 2 > 50 ? 50 : maxRecords * 2);
+      var newEnd = maxRecords * 2 > 50 ? 50 : maxRecords * 2;
       var max = 100;
       if (newStart + max < newEnd) newEnd = newStart + max;
       refreshAccountsData2(query, dispatch, newStart, newEnd, nRecords);
