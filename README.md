@@ -68,8 +68,9 @@ Once you've installed the core, you may install the Explorer interface, the api 
 ```
 git clone https://github.com/Great-Hill-Corporation/trueblocks-explorer
 cd trueblocks-explorer
-npm install
-npm run develop
+cp .env.example .env
+yarn
+yarn develop
 ```
 
 Your should see the **TrueBlocks Account Explorer** screen:
