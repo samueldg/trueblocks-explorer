@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import 'antd/dist/antd.css';
 import './App.css';
 
-import { Layout, Tabs } from 'antd';
+import { Layout } from 'antd';
 import { Routes } from './Routes';
 import { MainMenu } from './components/MainMenu';
 import {
@@ -40,7 +40,7 @@ export const App = () => {
         </SidePanel>
         <Layout>
           <Layout>
-            <Content style={{ backgroundColor: 'white', padding: '1rem' }}>
+            <Content style={{ backgroundColor: 'white', padding: '1rem', overflowY: 'auto' }}>
               {/* View */}
 
               {/* TODO: move it */}

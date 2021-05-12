@@ -5,13 +5,17 @@ import {
 } from 'react-router-dom';
 
 import {
-  EntitiesView
+  EntitiesView,
+  NamesView,
 } from './views';
 
 export const Routes = () => (
   <Switch>
     <Route exact path="/">
       <EntitiesView />
+    </Route>
+    <Route path="/names">
+      <NamesView />
     </Route>
     <Route path="/monitors">
       <div>Monitors</div>

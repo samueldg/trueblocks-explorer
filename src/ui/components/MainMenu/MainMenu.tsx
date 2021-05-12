@@ -36,7 +36,11 @@ export const MainMenu = () => (
     <Menu.Item
       icon={<BookOutlined />}
     >
-      Names
+      <NavLink
+        to="/names"
+      >
+        Names
+      </NavLink>
     </Menu.Item>
     <Menu.Item
       icon={<FundOutlined />}

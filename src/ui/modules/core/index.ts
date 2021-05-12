@@ -28,7 +28,7 @@ export type CoreCommand = 'export'
 | 'where'
 | 'dive';
 
-export type CommandParams = Record<string, string>;
+export type CommandParams = Record<string, string | boolean | number>;
 
 /* Helper functions that transform the response */
 
@@ -66,7 +66,8 @@ function validateStatus(response: Response): TaskEither.TaskEither<Error, Respon
 
 export function runCommand(command: CoreCommand, params?: CommandParams) {
   const url = new URL(command, process.env.CORE_URL);
-  url.search = new URLSearchParams(params).toString();
+  // We rely on JS to cast booleans and numbers to strings automatically, hence type cast
+  url.search = new URLSearchParams(params as Record<string, string>).toString();
 
   return pipe(
     // Try to call a command and retrieve its output through HTTP

@@ -15,7 +15,7 @@ import {
 
 type SuccessfulResult = {
   status: 'success',
-  content: JsonResponse,
+  content: JsonResponse[],
 };
 
 type FailedResult = {
@@ -32,7 +32,7 @@ function toFailedResult(error: Error): FailedResult {
   };
 }
 
-function toSuccessfulResult(responseData: JsonResponse): SuccessfulResult {
+function toSuccessfulResult(responseData: JsonResponse[]): SuccessfulResult {
   return {
     status: 'success',
     content: responseData,
@@ -40,7 +40,7 @@ function toSuccessfulResult(responseData: JsonResponse): SuccessfulResult {
 }
 
 export function useCommand(command: CoreCommand, params?: CommandParams) {
-  const [response, setResponse] = useState<Result>(toSuccessfulResult({}));
+  const [response, setResponse] = useState<Result>(toSuccessfulResult([{}]));
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {

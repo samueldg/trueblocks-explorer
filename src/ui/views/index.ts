@@ -1,1 +1,2 @@
-export { EntitiesView } from './Entities';
+export * from './Entities';
+export * from './Names';

@@ -21,6 +21,9 @@ module.exports = () => ({
       '@modules': path.resolve(__dirname, 'src/ui/modules'),
     },
   },
+  devServer: {
+    historyApiFallback: true,
+  },
   module: {
     rules: [
       {
