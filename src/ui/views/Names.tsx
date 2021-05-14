@@ -6,14 +6,37 @@ import {
 } from 'antd';
 import React, { useCallback } from 'react';
 import { NamesFilters } from '@components/Filters';
+import {
+  DeleteOutlined,
+  EditOutlined,
+  InfoCircleOutlined,
+  PlusCircleOutlined,
+} from '@ant-design/icons';
 import { useCommand } from '../hooks/useCommand';
 
 import './Names.css';
-import { DeleteOutlined, EditOutlined, InfoCircleOutlined, PlusCircleOutlined } from '@ant-design/icons';
+import { ColumnsType } from 'antd/lib/table';
 
 type ColumnListItem = [string, string, string?];
 
-function generateColumns(columnsList: ColumnListItem[]) {
+type Name = {
+  /* eslint-disable camelcase */
+  address: string,
+  decimals: number,
+  deleted: boolean,
+  description: string,
+  is_contract: boolean,
+  is_custom: boolean,
+  is_erc20: boolean,
+  is_erc721: boolean,
+  is_prefund: boolean,
+  name: string,
+  source: string,
+  symbol: string,
+  tags: string,
+};
+
+function generateColumns(columnsList: ColumnListItem[]): ColumnsType<Name> {
   const taggedFlag = {
     render(flag: boolean) {
       return (
@@ -36,13 +59,42 @@ function generateColumns(columnsList: ColumnListItem[]) {
     },
   };
   const actions = {
-    render() {
+    fixed: 'right',
+    width: 150,
+    render(text: string, record: Name) {
+      const createOnClick = (action: string) => () => console.log(action, { text, record });
+
       return (
         <>
-          <Button shape="circle"><InfoCircleOutlined /></Button>
-          <Button danger><DeleteOutlined /></Button>
-          <Button><EditOutlined /></Button>
-          <Button><PlusCircleOutlined /></Button>
+          <Button
+            shape="circle"
+            type="text"
+            onClick={createOnClick('details')}
+          >
+            <InfoCircleOutlined />
+          </Button>
+          <Button
+            danger
+            shape="circle"
+            type="text"
+            onClick={createOnClick('remove')}
+          >
+            <DeleteOutlined />
+          </Button>
+          <Button
+            shape="circle"
+            type="text"
+            onClick={createOnClick('edit')}
+          >
+            <EditOutlined />
+          </Button>
+          <Button
+            shape="circle"
+            type="text"
+            onClick={createOnClick('addMonitor')}
+          >
+            <PlusCircleOutlined />
+          </Button>
         </>
       );
     },
@@ -57,7 +109,7 @@ function generateColumns(columnsList: ColumnListItem[]) {
     ...(/pre|erc|con|mon/.test(dataIndex) ? taggedFlag : {}),
     ...(dataIndex === 'tags' ? tags : {}),
     ...(dataIndex === 'actions' ? actions : {}),
-  }));
+  })) as ColumnsType<Name>;
 }
 
 export const NamesView = () => {
@@ -91,12 +143,13 @@ export const NamesView = () => {
       />
       <NamesFilters />
 
-      <Table
+      <Table<Name>
         rowKey={rowKey}
         columns={columns}
         dataSource={getNames(names)}
         loading={loadingNames}
         size="small"
+        scroll={{ x: 1300 }}
       />
     </>
   );
