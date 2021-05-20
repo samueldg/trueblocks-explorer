@@ -7,6 +7,7 @@ import {
 import {
   EntitiesView,
   NamesView,
+  BlocksView,
 } from './views';
 
 export const Routes = () => (
@@ -19,6 +20,9 @@ export const Routes = () => (
     </Route>
     <Route path="/monitors">
       <div>Monitors</div>
+    </Route>
+    <Route path="/blocks">
+      <BlocksView />
     </Route>
   </Switch>
 );

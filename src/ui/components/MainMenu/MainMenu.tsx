@@ -53,7 +53,11 @@ export const MainMenu = () => (
       icon={<CameraOutlined />}
     >
       <Menu.Item>
-        Blocks
+        <NavLink
+          to="/blocks"
+        >
+          Blocks
+        </NavLink>
       </Menu.Item>
       <Menu.Item>
         Transactions
