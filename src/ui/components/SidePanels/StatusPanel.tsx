@@ -8,9 +8,7 @@ export const StatusPanel = () => {
 
   return (
     <Loading loading={loading}>
-      <span>
-        {status.content.toString()}
-      </span>
+      <span>{JSON.stringify(status, null, 2)}</span>
     </Loading>
   );
 };
