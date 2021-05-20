@@ -54,7 +54,7 @@ export const ExplorerBlocks = () => {
   useArrowKeys(blocksHandler, [dispatch, explorer.blockNumber, explorer.transactionIndex, blocksHandler]);
 
   const url = getApiUrl('blocks');
-  let query = 'blocks=' + current + '&hashes_only';
+  let query = 'blocks=' + current + '&hashes';
   useEffect(() => {
     getServerData(url, query + (mocked ? '&mocked' : '')).then((theData) => {
       let result = theData.data;

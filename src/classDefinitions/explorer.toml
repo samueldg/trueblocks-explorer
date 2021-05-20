@@ -1,8 +1,8 @@
 [settings]
 class = "CExplorer"
 dataUrl = "[{LONG}]"
-query_blocks = "blocks=' + current + '&hashes_only"
-query_transactions = "transactions=' + current + '&force"
+query_blocks = "blocks=' + current + '&hashes"
+query_transactions = "transactions=' + current + '&cache"
 query_receipts = "transactions=' + current + '"
 query_logs = "transactions=' + current + '"
 query_traces = "transactions=' + current + '"
@@ -10,7 +10,7 @@ query_traces = "transactions=' + current + '"
 [[subpages]]
 list = [
     { page = "explorer", subpage = "", route = "" },
-    { page = "explorer", subpage = "Blocks", options = "blocks_EQ_latest&hashes_only" },
+    { page = "explorer", subpage = "Blocks", options = "blocks_EQ_latest&hashes" },
     { page = "explorer", subpage = "Transactions", options = "transactions_EQ_8001001.0" },
     { page = "explorer", subpage = "Receipts", options = "transactions_EQ_8001001.0" },
     { page = "explorer", subpage = "Logs", options = "transactions_EQ_46147.0" },
