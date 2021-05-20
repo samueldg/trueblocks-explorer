@@ -10,9 +10,8 @@ import {
   SidePanel,
   PanelDirection,
 } from './components/SidePanels/SidePanel';
-import {
-  StatusPanel,
-} from './components/SidePanels/StatusPanel';
+import {StatusPanel} from './components/SidePanels/StatusPanel';
+import {HelpPanel} from './components/SidePanels/HelpPanel';
 
 const {
   Header,
@@ -21,7 +20,7 @@ const {
 } = Layout;
 
 export const App = () => {
-  const [menuExpanded, setMenuExpanded] = useState(true);
+  const [menuExpanded, setMenuExpanded] = useState(false);
   const [statusExpanded, setStatusExpanded] = useState(true);
   const [helpExpanded, setHelpExpanded] = useState(true);
 
@@ -60,7 +59,7 @@ export const App = () => {
               onToggle={setHelpExpanded}
               dir={PanelDirection.Right}
             >
-              Help
+              <HelpPanel />
             </SidePanel>
           </Layout>
           <Footer>
