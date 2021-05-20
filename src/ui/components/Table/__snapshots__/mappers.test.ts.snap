@@ -1,0 +1,58 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Table/mappers module renderFlag returns correct components 1`] = `null`;
+
+exports[`Table/mappers module renderFlag returns correct components 2`] = `
+<span
+  className="ant-tag ant-tag-green"
+  style={
+    Object {
+      "backgroundColor": undefined,
+    }
+  }
+>
+  Yes
+</span>
+`;
+
+exports[`Table/mappers module renderFlag returns correct components 3`] = `
+<span
+  className="ant-tag ant-tag-volcano"
+  style={
+    Object {
+      "backgroundColor": undefined,
+    }
+  }
+>
+  No
+</span>
+`;
+
+exports[`Table/mappers module renderTagsWithClickHandler returns correct components 1`] = `null`;
+
+exports[`Table/mappers module renderTagsWithClickHandler returns correct components 2`] = `
+Array [
+  <span
+    className="ant-tag"
+    onClick={[Function]}
+    style={
+      Object {
+        "backgroundColor": undefined,
+      }
+    }
+  >
+    31-Gitcoin Grants
+  </span>,
+  <span
+    className="ant-tag"
+    onClick={[Function]}
+    style={
+      Object {
+        "backgroundColor": undefined,
+      }
+    }
+  >
+    Friends
+  </span>,
+]
+`;

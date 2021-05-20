@@ -20,7 +20,11 @@ module.exports = {
       node: {
         extensions: ['.js', '.jsx', '.ts', '.tsx'],
       },
+      typescript: {},
     },
+  },
+  globals: {
+    JSX: true,
   },
   ignorePatterns: ['.eslintrc.js'],
   parser: '@typescript-eslint/parser',
