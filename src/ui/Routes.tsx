@@ -8,6 +8,10 @@ import {
   EntitiesView,
   NamesView,
   BlocksView,
+  TransactionsView,
+  ReceiptsView,
+  LogsView,
+  TracesView,
 } from './views';
 
 export const Routes = () => (
@@ -23,6 +27,18 @@ export const Routes = () => (
     </Route>
     <Route path="/blocks">
       <BlocksView />
+    </Route>
+    <Route path="/transactions">
+      <TransactionsView />
+    </Route>
+    <Route path="/receipts">
+      <ReceiptsView />
+    </Route>
+    <Route path="/logs">
+      <LogsView />
+    </Route>
+    <Route path="/traces">
+      <TracesView />
     </Route>
   </Switch>
 );

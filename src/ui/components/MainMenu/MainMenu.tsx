@@ -60,16 +60,32 @@ export const MainMenu = () => (
         </NavLink>
       </Menu.Item>
       <Menu.Item>
-        Transactions
+        <NavLink
+          to="/transactions"
+        >
+          Transactions
+        </NavLink>
       </Menu.Item>
       <Menu.Item>
-        Receipts
+        <NavLink
+          to="/receipts"
+        >
+          Receipts
+        </NavLink>
       </Menu.Item>
       <Menu.Item>
-        Logs
+        <NavLink
+          to="/logs"
+        >
+          Logs
+        </NavLink>
       </Menu.Item>
       <Menu.Item>
-        Traces
+        <NavLink
+          to="/traces"
+        >
+          Traces
+        </NavLink>
       </Menu.Item>
     </SubMenu>
     <SubMenu
