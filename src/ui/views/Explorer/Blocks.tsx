@@ -7,8 +7,8 @@ import { useCommand } from '../../hooks/useCommand';
 const { TabPane } = Tabs;
 
 export const BlocksView = () => {
-  const [data, loading1] = useCommand('blocks', { blocks: 'latest', hashes: true, cache: true });
-  const [detail, loading2] = useCommand('blocks', { blocks: 'latest', cache: true });
+  const [data, loadingBlock] = useCommand('blocks', { blocks: 46147, hashes: true, cache: true });
+  const [detail, loadingDetail] = useCommand('blocks', { blocks: 46147, cache: true });
   const getData = useCallback((response) => (response.status === 'fail' ? [] : response.content), []);
   if (data.status === 'fail') {
     createErrorNotification({
@@ -20,7 +20,7 @@ export const BlocksView = () => {
   const title = `Exploring transaction [${theItem}]`;
 
   return (
-    <Loading loading={loading1 && loading2}>
+    <Loading loading={loadingBlock || loadingDetail}>
       <PageHeader title={title} />
       <Tabs>
         <TabPane tab="Summary" key="summary">
