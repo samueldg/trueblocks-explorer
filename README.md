@@ -7,65 +7,27 @@
 [![React](https://img.shields.io/badge/React-node.js-purple.svg)](https://reactjs.org/)
 [![Twitter](https://img.shields.io/twitter/follow/espadrine.svg?style=social&label=Twitter)](https://twitter.com/quickblocks?lang=es)
 
-TrueBlocks creates an index of Ethereum addresses on commerial-grade hardware providing fast access to **everything that ever happened** to your accounts on your own machine. This enables a fully decentralized blockchain browsing experience -- and this translates directly into _privacy-preserving user-centric_ browsing. We can't invade your privacy because we can't see what you're doing!
+The TrueBlocks system allows you to access your own personal account history in a fully-local and therefore fully-private way. It relies on two components. The frontend (this repo) and the backend [https://github.com/TrueBlocks/trueblocks-core](TrueBlocks core).
 
----
+## Prerequisites
+
+Prior to proceeding, you must [install the TrueBlocks Core](http://docs.trueblocks.io).
 
 ## Installing
 
-### Installing TrueBlocks Core and Core Applications
+Assuming you have the TrueBlocks core properly installed and can successfully run the following command:
 
-First, let's test your build environment. From a command line, type:
-
-```
-cmake version
-go --version
-```
-
-If both commands return without error, skip to the next section. If either of the commands fails, please see these [installation instructions](https://github.com/Great-Hill-Corporation/trueblocks-core/blob/master/src/other/install/INSTALL.md) on preparing the build environment.
-
-### Building TrueBlocks Core and Chifra
-
-`Chifra` is the core application of TrueBlocks' back end. Similar to `git` it provides access to all of TrueBlocks' commands. Assuming you're build environment is properly configured, complete these commands from the root of your `Development` folder:
-
-```
-git clone https://github.com/Great-Hill-Corporation/trueblocks-core
-cd trueblocks-core
-mkdir build && cd build
-cmake ../src
-make
-```
-
-If `cmake` doesn't run and/or the build breaks when it tries to run the `go` command, see the above link. The build will take a while to complete, but you only have to do it once, so be patient.
-
-After the build completes, you will be in the folder `./trueblocks-core/build`. Type these commands to test the installation:
-
-```
-cd ../bin
-./chifra --version
-```
-
-You should get a valid version.
-
-**Important:** You must add the TrueBlocks `./bin` folder your `$PATH`. If you don't know how to do that, this software isn't for you. If you do know how to do that, do so now.
-
-### One Final Test
-
-If everything is working properly and you've added TrueBlocks to your \$PATH, try this command:
-
-```
+```[shell]
 > chifra --version
 ```
 
-should respond with the current version of the tools.
+you may proceed with installing and running the Account Explorer.
 
----
+### Installing the TrueBlocks Account Explorer
 
-### Installing the User Interface, API, and Documentation
+From your development folder:
 
-Once you've installed the core, you may install the Explorer interface, the api (which requires the above tools), and the documentation server. All of this functionality is maintained in a single repo (this one). Again, from your development folder:
-
-```
+```[shell]
 git clone git@github.com:TrueBlocks/trueblocks-explorer.git
 cd trueblocks-explorer
 cp .env.example .env
@@ -85,7 +47,7 @@ Your should see the **TrueBlocks Account Explorer** screen:
 
 ## Requirements
 
-- **Note:** In order for the TrueBlocks to work, you must have access to an Ethereum node with **--tracing** enabled. TrueBlocks defaults to using Parity at the RPC endpoint http://localhost:8545, but you may use any node supporting tracing and any endpoint (Infura, Quiknodes, for example). Performance will be _greatly reduced_ if you use a remote server. A good solution to this problem is to run a node on the [dAppNode](https://dappnode.io/) or [Ava.do](https://ava.do/) platforms and use [http://gtihub.com/Great-Hill-Corporation/trueblocks-docker](the TrueBlocks docker image).
+- **Note:** In order for the TrueBlocks to work, you must have access to an Ethereum node with **--tracing** enabled. An excellent choice is Turbo-Geth (now called XXX). TrueBlocks defaults to using Parity at the RPC endpoint http://localhost:8545, but you may use any node supporting tracing and any endpoint (Infura, Quiknodes, for example). Performance will be _greatly reduced_ if you use a remote server. A good solution to this problem is to run a node on the [dAppNode](https://dappnode.io/) or [Ava.do](https://ava.do/) platforms and use [http://gtihub.com/Great-Hill-Corporation/trueblocks-docker](the TrueBlocks docker image).
 
 ## Getting Data on the Command Line
 
