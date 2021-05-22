@@ -115,29 +115,14 @@ export const MainMenu = () => (
         Schemas
       </Menu.Item>
     </SubMenu>
-    <SubMenu
-      key="support"
-      title="Support"
+    <Menu.Item
       icon={<PhoneOutlined />}
     >
-      <Menu.Item>
-        Contact Us
-      </Menu.Item>
-      <Menu.Item>
-        Hot Keys
-      </Menu.Item>
-      <Menu.Item>
-        Icons
-      </Menu.Item>
-      <Menu.Item>
-        Documentation
-      </Menu.Item>
-      <Menu.Item>
-        Licensing
-      </Menu.Item>
-      <Menu.Item>
-        About Us
-      </Menu.Item>
-    </SubMenu>
+      <NavLink
+        to="/support"
+      >
+        Support
+      </NavLink>
+    </Menu.Item>
   </Menu>
 );
