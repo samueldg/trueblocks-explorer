@@ -1,16 +1,16 @@
 export type Name = {
   /* eslint-disable camelcase */
-  address: string,
-  decimals: number,
-  deleted: boolean,
-  description: string,
-  is_contract: boolean,
-  is_custom: boolean,
-  is_erc20: boolean,
-  is_erc721: boolean,
-  is_prefund: boolean,
-  name: string,
-  source: string,
-  symbol: string,
-  tags: string,
+  address: string, /* address */
+  decimals: number, /* uint64 */
+  deleted: boolean, /* boolean */
+  description: string, /* string */
+  is_contract: boolean, /* boolean */
+  is_custom: boolean, /* boolean */
+  is_erc20: boolean, /* boolean */
+  is_erc721: boolean, /* boolean */
+  is_prefund: boolean, /* boolean */
+  name: string, /* string */
+  source: string, /* string */
+  symbol: string, /* string */
+  tags: string, /* string */
 };
