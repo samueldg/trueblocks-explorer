@@ -5,4 +5,4 @@ export * from './Explorer/Transactions';
 export * from './Explorer/Receipts';
 export * from './Explorer/Logs';
 export * from './Explorer/Traces';
-export * from './Support';
+export * from './Support/Support';
