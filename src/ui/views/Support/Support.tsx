@@ -1,6 +1,11 @@
 import { PageHeader, Tabs } from 'antd';
 import React from 'react';
-import {About} from './About';
+
+import { Contact } from './Contact';
+import { Documentation } from './Documentation';
+import { HotKeys } from './HotKeys';
+import { Licensing } from './Licensing';
+import { About } from './About';
 
 const { TabPane } = Tabs;
 
@@ -11,19 +16,16 @@ export const SupportView = () => {
       <PageHeader title={title} />
       <Tabs>
         <TabPane tab="Contact Us" key="contact">
-          <pre>Contact Us</pre>
+          <Contact />
         </TabPane>
         <TabPane tab="Documentation" key="documentation">
-          <pre>Documentation</pre>
-        </TabPane>
-        <TabPane tab="Icons" key="icons">
-          <pre>Icons</pre>
+          <Documentation />
         </TabPane>
         <TabPane tab="Hot Keys" key="hotkeys">
-          <pre>Hot Keys</pre>
+          <HotKeys />
         </TabPane>
         <TabPane tab="Licensing" key="licensing">
-          <pre>Licensing</pre>
+          <Licensing />
         </TabPane>
         <TabPane tab="About Us" key="about">
           <About />

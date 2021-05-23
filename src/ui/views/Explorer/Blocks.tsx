@@ -10,15 +10,22 @@ export const BlocksView = () => {
   const [data, loadingBlock] = useCommand('blocks', { blocks: 46147, hashes: true, cache: true });
   const [detail, loadingDetail] = useCommand('blocks', { blocks: 46147, cache: true });
   const getData = useCallback((response) => (response.status === 'fail' ? [] : response.content), []);
+
+  const theItem = getData(data);
   if (data.status === 'fail') {
     createErrorNotification({
-      description: 'Could not fetch blocks',
+      description: 'Could not fetch block',
     });
   }
-  const theItem = getData(data);
-  const theDetail = getData(detail);
-  const title = `Exploring transaction [${theItem}]`;
 
+  const theDetail = getData(detail);
+  if (detail.status === 'fail') {
+    createErrorNotification({
+      description: 'Could not fetch block detail',
+    });
+  }
+
+  const title = `Exploring transaction [${theItem}]`;
   return (
     <Loading loading={loadingBlock || loadingDetail}>
       <PageHeader title={title} />
