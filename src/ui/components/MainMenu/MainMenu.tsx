@@ -28,11 +28,13 @@ export const MainMenu = () => (
         Entities
       </NavLink>
     </Menu.Item>
+
     <Menu.Item
       icon={<DesktopOutlined />}
     >
       Monitors
     </Menu.Item>
+
     <Menu.Item
       icon={<BookOutlined />}
     >
@@ -42,11 +44,13 @@ export const MainMenu = () => (
         Names
       </NavLink>
     </Menu.Item>
+
     <Menu.Item
       icon={<FundOutlined />}
     >
       Digests
     </Menu.Item>
+
     <SubMenu
       key="explorer"
       title="Explorer"
@@ -88,33 +92,17 @@ export const MainMenu = () => (
         </NavLink>
       </Menu.Item>
     </SubMenu>
-    <SubMenu
-      key="settings"
-      title="Settings"
+
+    <Menu.Item
       icon={<SettingOutlined />}
     >
-      <Menu.Item>
-        System Status
-      </Menu.Item>
-      <Menu.Item>
-        Tags
-      </Menu.Item>
-      <Menu.Item>
-        Signatures
-      </Menu.Item>
-      <Menu.Item>
-        Caches
-      </Menu.Item>
-      <Menu.Item>
-        Other
-      </Menu.Item>
-      <Menu.Item>
-        Skins
-      </Menu.Item>
-      <Menu.Item>
-        Schemas
-      </Menu.Item>
-    </SubMenu>
+      <NavLink
+        to="/system"
+      >
+        System
+      </NavLink>
+    </Menu.Item>
+
     <Menu.Item
       icon={<PhoneOutlined />}
     >

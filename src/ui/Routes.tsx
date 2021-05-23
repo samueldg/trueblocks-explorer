@@ -13,6 +13,7 @@ import {
   LogsView,
   TracesView,
   SupportView,
+  SystemView,
 } from './views';
 
 export const Routes = () => (
@@ -43,6 +44,9 @@ export const Routes = () => (
     </Route>
     <Route path="/support">
       <SupportView />
+    </Route>
+    <Route path="/system">
+      <SystemView />
     </Route>
   </Switch>
 );
