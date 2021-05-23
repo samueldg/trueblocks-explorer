@@ -6,8 +6,5 @@
   "eslint.nodePath": ".yarn/sdks",
   "typescript.tsdk": "node_modules/typescript/lib",
   "typescript.enablePromptUseWorkspaceTsdk": true,
-  "cSpell.enabled": true,
-  "cSpell.ignoreWords": [
-    "formerlier"
-  ]
+  "cSpell.enabled": true
 }
