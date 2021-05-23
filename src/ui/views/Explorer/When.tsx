@@ -3,10 +3,7 @@ import {
 } from 'antd';
 import React, { useCallback } from 'react';
 
-import { NamesFilters } from '@components/Filters';
 import { useCommand } from '../../hooks/useCommand';
-
-// import './Names.css';
 import { WhenTable } from './WhenTable';
 
 export const WhenView = () => {

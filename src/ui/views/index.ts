@@ -1,5 +1,5 @@
 export * from './Entities';
-export * from './Names/Names';
+export * from './Named/Names';
 export * from './Explorer/Blocks';
 export * from './Explorer/Transactions';
 export * from './Explorer/Receipts';

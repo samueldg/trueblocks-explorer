@@ -41,7 +41,7 @@ export const MainMenu = () => (
       <NavLink
         to="/names"
       >
-        Names
+        Named Items
       </NavLink>
     </Menu.Item>
 
