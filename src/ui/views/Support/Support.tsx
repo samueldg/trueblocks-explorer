@@ -1,11 +1,11 @@
 import { PageHeader, Tabs } from 'antd';
 import React from 'react';
 
-import { Contact } from './Contact';
-import { Documentation } from './Documentation';
-import { HotKeys } from './HotKeys';
-import { Licensing } from './Licensing';
-import { About } from './About';
+import { Contact } from './Tabs/Contact';
+import { Documentation } from './Tabs/Documentation';
+import { HotKeys } from './Tabs/HotKeys';
+import { Licensing } from './Tabs/Licensing';
+import { About } from './Tabs/About';
 
 const { TabPane } = Tabs;
 
