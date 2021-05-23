@@ -1,7 +1,6 @@
 import { PageHeader, Tabs } from 'antd';
 import React from 'react';
 
-import { Status } from './Tabs/Status';
 import { Caches } from './Tabs/Caches';
 import { Skins } from './Tabs/Skins';
 import { Schemas } from './Tabs/Schemas';
@@ -14,9 +13,6 @@ export const SystemView = () => {
     <>
       <PageHeader title={title} />
       <Tabs>
-        <TabPane tab="Status" key="status">
-          <Status />
-        </TabPane>
         <TabPane tab="Caches" key="caches">
           <Caches />
         </TabPane>

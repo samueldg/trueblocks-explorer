@@ -31,17 +31,6 @@ export const NamesTable = ({
 
   const columns: ColumnsType<Name> = [
     addColumn<Name>({
-      title: 'ID',
-      dataIndex: 'address',
-    }),
-    addTagsColumn({
-      title: 'Tags',
-      dataIndex: 'tags',
-      configuration: {
-        ellipsis: false,
-      },
-    }, onTagClick),
-    addColumn({
       title: 'Address',
       dataIndex: 'address',
     }),
@@ -65,6 +54,13 @@ export const NamesTable = ({
       title: 'Description',
       dataIndex: 'description',
     }),
+    addTagsColumn({
+      title: 'Tags',
+      dataIndex: 'tags',
+      configuration: {
+        ellipsis: false,
+      },
+    }, onTagClick),
     addFlagColumn({
       title: 'Prefund',
       dataIndex: 'is_prefund',

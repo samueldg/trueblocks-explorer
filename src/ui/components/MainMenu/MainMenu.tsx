@@ -25,23 +25,17 @@ export const MainMenu = () => (
       <NavLink
         to="/"
       >
-        Entities
+        Dashboard
       </NavLink>
-    </Menu.Item>
-
-    <Menu.Item
-      icon={<DesktopOutlined />}
-    >
-      Monitors
     </Menu.Item>
 
     <Menu.Item
       icon={<BookOutlined />}
     >
       <NavLink
-        to="/names"
+        to="/monitors"
       >
-        Names
+        Monitors
       </NavLink>
     </Menu.Item>
 

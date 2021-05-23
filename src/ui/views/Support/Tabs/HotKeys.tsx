@@ -3,7 +3,7 @@ import ReactMarkdown from 'react-markdown';
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 
 const l1: string = '#### Accessing Screens...';
-const t1: string = `ts c     Open Entities screen
+const t1: string = `ts c     Open Dashboard screen
 ts m     Open Monitors screen
 ts a     Open Accounts screen
 ts n     Open Names screen

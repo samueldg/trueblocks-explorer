@@ -1,4 +1,4 @@
-export * from './Entities';
+export * from './Dashboard/Dashboard';
 export * from './Names/Names';
 export * from './Explorer/Explorer';
 export * from './Support/Support';
