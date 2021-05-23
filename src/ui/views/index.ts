@@ -5,5 +5,6 @@ export * from './Explorer/Transactions';
 export * from './Explorer/Receipts';
 export * from './Explorer/Logs';
 export * from './Explorer/Traces';
+export * from './Explorer/When';
 export * from './Support/Support';
-export * from './System/System';
+export * from './Settings/Settings';

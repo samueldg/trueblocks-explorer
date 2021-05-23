@@ -91,6 +91,13 @@ export const MainMenu = () => (
           Traces
         </NavLink>
       </Menu.Item>
+      <Menu.Item>
+        <NavLink
+          to="/when"
+        >
+          When
+        </NavLink>
+      </Menu.Item>
     </SubMenu>
 
     <Menu.Item
@@ -99,7 +106,7 @@ export const MainMenu = () => (
       <NavLink
         to="/system"
       >
-        System
+        Settings
       </NavLink>
     </Menu.Item>
 

@@ -19,7 +19,6 @@ export const NamesView = () => {
         title="Names"
       />
       <NamesFilters />
-
       <NamesTable getNames={() => getNames(names)} loadingNames={loadingNames} />
     </>
   );
