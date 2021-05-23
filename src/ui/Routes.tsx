@@ -7,11 +7,7 @@ import {
 import {
   EntitiesView,
   NamesView,
-  BlocksView,
-  TransactionsView,
-  ReceiptsView,
-  LogsView,
-  TracesView,
+  ExplorerView,
   SupportView,
   SystemView,
 } from './views';
@@ -27,20 +23,8 @@ export const Routes = () => (
     <Route path="/monitors">
       <div>Monitors</div>
     </Route>
-    <Route path="/blocks">
-      <BlocksView />
-    </Route>
-    <Route path="/transactions">
-      <TransactionsView />
-    </Route>
-    <Route path="/receipts">
-      <ReceiptsView />
-    </Route>
-    <Route path="/logs">
-      <LogsView />
-    </Route>
-    <Route path="/traces">
-      <TracesView />
+    <Route path="/explorer">
+      <ExplorerView />
     </Route>
     <Route path="/support">
       <SupportView />

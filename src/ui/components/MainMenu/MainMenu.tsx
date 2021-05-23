@@ -51,47 +51,15 @@ export const MainMenu = () => (
       Digests
     </Menu.Item>
 
-    <SubMenu
-      key="explorer"
-      title="Explorer"
+    <Menu.Item
       icon={<CameraOutlined />}
     >
-      <Menu.Item>
-        <NavLink
-          to="/blocks"
-        >
-          Blocks
-        </NavLink>
-      </Menu.Item>
-      <Menu.Item>
-        <NavLink
-          to="/transactions"
-        >
-          Transactions
-        </NavLink>
-      </Menu.Item>
-      <Menu.Item>
-        <NavLink
-          to="/receipts"
-        >
-          Receipts
-        </NavLink>
-      </Menu.Item>
-      <Menu.Item>
-        <NavLink
-          to="/logs"
-        >
-          Logs
-        </NavLink>
-      </Menu.Item>
-      <Menu.Item>
-        <NavLink
-          to="/traces"
-        >
-          Traces
-        </NavLink>
-      </Menu.Item>
-    </SubMenu>
+      <NavLink
+        to="/explorer"
+      >
+        Explorer
+      </NavLink>
+    </Menu.Item>
 
     <Menu.Item
       icon={<SettingOutlined />}
