@@ -41,7 +41,7 @@ export const MainMenu = () => (
       <NavLink
         to="/names"
       >
-        Named Items
+        Names
       </NavLink>
     </Menu.Item>
 
@@ -89,13 +89,6 @@ export const MainMenu = () => (
           to="/traces"
         >
           Traces
-        </NavLink>
-      </Menu.Item>
-      <Menu.Item>
-        <NavLink
-          to="/when"
-        >
-          When
         </NavLink>
       </Menu.Item>
     </SubMenu>
