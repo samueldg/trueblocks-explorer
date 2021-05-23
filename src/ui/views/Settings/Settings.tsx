@@ -1,12 +1,10 @@
 import { PageHeader, Tabs } from 'antd';
 import React from 'react';
 
-import { Status } from './Status';
-import { Tags } from './Tags';
-import { Signatures } from './Signatures';
-import { Caches } from './Caches';
-import { Skins } from './Skins';
-import { Schemas } from './Schemas';
+import { Status } from './Tabs/Status';
+import { Caches } from './Tabs/Caches';
+import { Skins } from './Tabs/Skins';
+import { Schemas } from './Tabs/Schemas';
 
 const { TabPane } = Tabs;
 
@@ -18,12 +16,6 @@ export const SystemView = () => {
       <Tabs>
         <TabPane tab="Status" key="status">
           <Status />
-        </TabPane>
-        <TabPane tab="Tags" key="tags">
-          <Tags />
-        </TabPane>
-        <TabPane tab="Signatures" key="signatures">
-          <Signatures />
         </TabPane>
         <TabPane tab="Caches" key="caches">
           <Caches />
