@@ -46,12 +46,6 @@ export const MainMenu = () => (
     </Menu.Item>
 
     <Menu.Item
-      icon={<FundOutlined />}
-    >
-      Digests
-    </Menu.Item>
-
-    <Menu.Item
       icon={<CameraOutlined />}
     >
       <NavLink

@@ -1,6 +1,7 @@
 import { PageHeader, Tabs } from 'antd';
 import React from 'react';
 
+import { Indexes } from './Tabs/Indexes';
 import { Blocks } from './Tabs/Blocks';
 import { Transactions } from './Tabs/Transactions';
 import { Receipts } from './Tabs/Receipts';
@@ -15,6 +16,9 @@ export const ExplorerView = () => {
     <>
       <PageHeader title={title} />
       <Tabs>
+        <TabPane tab="Indexes" key="indexes">
+          <Indexes />
+        </TabPane>
         <TabPane tab="Blocks" key="blocks">
           <Blocks />
         </TabPane>

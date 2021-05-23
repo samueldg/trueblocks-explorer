@@ -6,13 +6,8 @@ const l1: string = '#### Accessing Screens...';
 const t1: string = `ts c     Open Entities screen
 ts m     Open Monitors screen
 ts a     Open Accounts screen
-ts e     Open Explorers screen
 ts n     Open Names screen
-ts t     Open Tags screen
-ts g     Open Signatures screen
-ts i     Open Digests screen
-ts h     Open Caches screen
-ts o     Open Other screen
+ts e     Open Explorer screen
 ts s     Open Settings screen
 ts u     Open Support screen
 ts k     Show hotkeys (this screen)`;
