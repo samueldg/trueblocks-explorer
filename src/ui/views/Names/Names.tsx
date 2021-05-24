@@ -14,7 +14,7 @@ export const MonitorsView = () => {
   return (
     <>
       <PageHeader title={title} />
-      <Tabs>
+      <Tabs defaultActiveKey="signatures">
         <TabPane tab="All Monitors" key="monitors">
           <Monitors />
         </TabPane>

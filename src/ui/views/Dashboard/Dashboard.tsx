@@ -2,6 +2,7 @@ import { PageHeader, Tabs } from 'antd';
 import React from 'react';
 
 import { Overview } from './Tabs/Overview';
+import { Collections } from './Tabs/Collections';
 import { Status } from './Tabs/Status';
 
 const { TabPane } = Tabs;
@@ -15,7 +16,10 @@ export const DashboardView = () => {
         <TabPane tab="Overview" key="overview">
           <Overview />
         </TabPane>
-        <TabPane tab="Status" key="status">
+        <TabPane tab="Collections" key="collections">
+          <Collections />
+        </TabPane>
+        <TabPane tab="System Status" key="status">
           <Status />
         </TabPane>
       </Tabs>

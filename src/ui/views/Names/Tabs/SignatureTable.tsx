@@ -29,7 +29,11 @@ export const SignatureTable = ({
 
   const columns: ColumnsType<Signature> = [
     addColumn<Signature>({
-      title: 'ID',
+      title: 'Source',
+      dataIndex: 'source',
+    }),
+    addColumn<Signature>({
+      title: 'Encoding',
       dataIndex: 'encoding',
     }),
     addColumn<Signature>({
@@ -43,14 +47,6 @@ export const SignatureTable = ({
     addColumn<Signature>({
       title: 'Signature',
       dataIndex: 'signature',
-    }),
-    addColumn<Signature>({
-      title: 'Input',
-      dataIndex: 'input_names',
-    }),
-    addColumn<Signature>({
-      title: 'Output',
-      dataIndex: 'output_names',
     }),
     addActionsColumn<Signature>({
       title: '',
