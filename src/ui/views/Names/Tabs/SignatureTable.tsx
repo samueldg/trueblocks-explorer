@@ -30,7 +30,7 @@ export const SignatureTable = ({
   const columns: ColumnsType<Signature> = [
     addColumn<Signature>({
       title: 'Source',
-      dataIndex: 'source',
+      dataIndex: 'abi_source',
     }),
     addColumn<Signature>({
       title: 'Encoding',
