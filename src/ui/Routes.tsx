@@ -5,20 +5,29 @@ import {
 } from 'react-router-dom';
 
 import {
-  EntitiesView,
-  NamesView,
+  DashboardView,
+  MonitorsView,
+  ExplorerView,
+  SupportView,
+  SystemView,
 } from './views';
 
 export const Routes = () => (
   <Switch>
     <Route exact path="/">
-      <EntitiesView />
-    </Route>
-    <Route path="/names">
-      <NamesView />
+      <DashboardView />
     </Route>
     <Route path="/monitors">
-      <div>Monitors</div>
+      <MonitorsView />
+    </Route>
+    <Route path="/explorer">
+      <ExplorerView />
+    </Route>
+    <Route path="/support">
+      <SupportView />
+    </Route>
+    <Route path="/system">
+      <SystemView />
     </Route>
   </Switch>
 );

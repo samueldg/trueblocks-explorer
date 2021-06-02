@@ -1,26 +1,36 @@
-import {
-  PageHeader,
-} from 'antd';
-import React, { useCallback } from 'react';
+import { PageHeader, Tabs } from 'antd';
+import React from 'react';
 
-import { NamesFilters } from '@components/Filters';
-import { useCommand } from '../../hooks/useCommand';
+import { Monitors } from './Tabs/Monitors';
+import { NamedAddrs } from './Tabs/NamedAddrs';
+import { Tags } from './Tabs/Tag';
+import { Signatures } from './Tabs/Signature';
+import { When } from './Tabs/When';
 
-import './Names.css';
-import { NamesTable } from './NamesTable';
+const { TabPane } = Tabs;
 
-export const NamesView = () => {
-  const [names, loadingNames] = useCommand('names', { expand: true });
-  const getNames = useCallback((response) => (response.status === 'fail' ? [] : response.content), []);
-
+export const MonitorsView = () => {
+  const title = 'Monitors';
   return (
     <>
-      <PageHeader
-        title="Names"
-      />
-      <NamesFilters />
-
-      <NamesTable getNames={() => getNames(names)} loadingNames={loadingNames} />
+      <PageHeader title={title} />
+      <Tabs defaultActiveKey="signatures">
+        <TabPane tab="All Monitors" key="monitors">
+          <Monitors />
+        </TabPane>
+        <TabPane tab="All Names" key="addrs">
+          <NamedAddrs />
+        </TabPane>
+        <TabPane tab="Tags" key="tags">
+          <Tags />
+        </TabPane>
+        <TabPane tab="Signatures" key="signatures">
+          <Signatures />
+        </TabPane>
+        <TabPane tab="Named Blocks" key="blocks">
+          <When />
+        </TabPane>
+      </Tabs>
     </>
   );
 };

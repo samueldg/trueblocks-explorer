@@ -1,29 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
-import 'antd/dist/antd.css';
-import './App.css';
+import "antd/dist/antd.css";
+import "./App.css";
 
-import { Layout } from 'antd';
-import { Routes } from './Routes';
-import { MainMenu } from './components/MainMenu';
-import {
-  SidePanel,
-  PanelDirection,
-} from './components/SidePanels/SidePanel';
-import {
-  StatusPanel,
-} from './components/SidePanels/StatusPanel';
+import { Layout } from "antd";
+import { Routes } from "./Routes";
+import { MainMenu } from "./components/MainMenu";
+import { SidePanel, PanelDirection } from "./components/SidePanels/SidePanel";
+import { StatusPanel } from "./components/SidePanels/StatusPanel";
+import { HelpPanel } from "./components/SidePanels/HelpPanel";
+import { useCommand } from "@hooks/useCommand";
 
-const {
-  Header,
-  Footer,
-  Content,
-} = Layout;
+const { Header, Footer, Content } = Layout;
 
 export const App = () => {
-  const [menuExpanded, setMenuExpanded] = useState(true);
+  const [menuExpanded, setMenuExpanded] = useState(false);
   const [statusExpanded, setStatusExpanded] = useState(true);
   const [helpExpanded, setHelpExpanded] = useState(true);
+  const [status, loading] = useCommand("status");
 
   return (
     <Layout>
@@ -40,7 +34,13 @@ export const App = () => {
         </SidePanel>
         <Layout>
           <Layout>
-            <Content style={{ backgroundColor: 'white', padding: '1rem', overflowY: 'auto' }}>
+            <Content
+              style={{
+                backgroundColor: "white",
+                padding: "1rem",
+                overflowY: "auto",
+              }}
+            >
               {/* View */}
 
               {/* TODO: move it */}
@@ -52,7 +52,7 @@ export const App = () => {
               onToggle={setStatusExpanded}
               dir={PanelDirection.Right}
             >
-              <StatusPanel />
+              <StatusPanel status={status} loading={loading} />
             </SidePanel>
             <SidePanel
               header="Help"
@@ -60,12 +60,10 @@ export const App = () => {
               onToggle={setHelpExpanded}
               dir={PanelDirection.Right}
             >
-              Help
+              <HelpPanel />
             </SidePanel>
           </Layout>
-          <Footer>
-            Footer
-          </Footer>
+          <Footer>Footer</Footer>
         </Layout>
       </Layout>
     </Layout>
