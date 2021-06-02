@@ -1,9 +1,0 @@
-name         ,selector  ,type   ,unused ,width ,editable ,decimals ,isPill ,align ,cn ,download ,chart ,searchable ,detail ,wide ,underField ,onDisplay     ,onAccept ,onValidate
-ID           ,id        ,string ,       ,0     ,         ,         ,       ,      ,   ,         ,      ,true       ,       ,     ,           ,getFieldValue ,         ,
-Encoding     ,encoding  ,hash   ,       ,1     ,true     ,         ,       ,      ,   ,         ,      ,true       ,       ,     ,           ,              ,         ,
-Type         ,type      ,string ,       ,1     ,true     ,         ,true   ,      ,   ,         ,      ,true       ,       ,     ,           ,              ,         ,
-Name         ,name      ,string ,       ,2     ,true     ,         ,       ,      ,   ,         ,      ,true       ,       ,     ,           ,              ,         ,
-Signature    ,signature ,string ,       ,0     ,true     ,         ,       ,      ,   ,         ,      ,           ,       ,     ,           ,              ,         ,
-Input Names  ,inputs    ,string ,       ,0     ,true     ,         ,       ,      ,   ,         ,      ,           ,       ,     ,           ,getFieldValue ,         ,
-Output Names ,outputs   ,string ,       ,0     ,true     ,         ,       ,      ,   ,         ,      ,           ,       ,     ,           ,getFieldValue ,         ,
-Signature    ,function  ,string ,       ,6     ,true     ,         ,       ,      ,   ,         ,      ,true       ,       ,     ,           ,getFieldValue ,         ,

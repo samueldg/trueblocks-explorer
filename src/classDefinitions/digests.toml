@@ -1,7 +1,0 @@
-[settings]
-class = "CDigests"
-
-[[subpages]]
-list = [
-    { page = "digests", subpage = "" },
-]

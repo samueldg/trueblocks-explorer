@@ -1,0 +1,24 @@
+{
+    "extends": "@tsconfig/recommended/tsconfig.json",
+    "compilerOptions": {
+        "sourceMap": true,
+        "target": "ES2020",
+        "module": "ES6",
+        "moduleResolution": "node",
+        "baseUrl": "./",
+        "jsx": "react",
+        "paths": {
+            "@components/*": [
+                "src/ui/components/*"
+            ],
+            "@hooks/*": [
+                "src/ui/hooks/*"
+            ],
+            "@modules/*": [
+                "src/ui/modules/*"
+            ]
+        }
+    },
+    "include": ["src"],
+    "exclude": ["node_modules"],
+}
