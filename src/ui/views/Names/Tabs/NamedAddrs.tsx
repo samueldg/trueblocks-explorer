@@ -15,7 +15,11 @@ export const NamedAddrs = () => {
 
   return (
     <>
+      <PageHeader
+        title="Names"
+      />
       <NamesFilters />
+
       <NamesTable getNames={() => getNames(names)} loadingNames={loadingNames} />
     </>
   );
