@@ -1,6 +1,0 @@
-name         ,selector    ,type      ,unused ,width ,editable ,decimals ,isPill ,align  ,cn ,download ,chart ,searchable ,detail ,wide ,underField ,onDisplay     ,onAccept ,onValidate
-ID           ,id          ,string    ,       ,0     ,         ,         ,       ,       ,   ,         ,      ,true       ,       ,     ,           ,getFieldValue ,         ,
-Name         ,name        ,string    ,       ,1     ,         ,         ,       ,       ,   ,         ,      ,true       ,       ,     ,           ,              ,         ,
-Block Number ,blockNumber ,blknum    ,       ,2     ,         ,         ,       ,center ,   ,         ,      ,true       ,       ,     ,           ,              ,         ,
-Timestamp    ,timestamp   ,timestamp ,       ,2     ,         ,         ,       ,center ,   ,         ,      ,           ,       ,     ,           ,              ,         ,
-Date         ,date        ,string    ,       ,2     ,         ,         ,       ,center ,   ,         ,      ,true       ,       ,     ,           ,              ,         ,
