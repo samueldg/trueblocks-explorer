@@ -1,12 +1,12 @@
 import {PageHeader, Tabs} from 'antd';
 import React, {useState} from 'react';
 
+import Cookies from 'js-cookie';
 import {Monitors} from './Tabs/Monitors';
 import {NamedAddrs} from './Tabs/NamedAddrs';
 import {Tags} from './Tabs/Tag';
 import {Signatures} from './Tabs/Signature';
 import {When} from './Tabs/When';
-import Cookies from 'js-cookie';
 import {cookieVars} from '../../utils';
 
 const {TabPane} = Tabs;
@@ -24,10 +24,10 @@ export const MonitorsView = () => {
     <>
       <PageHeader title={title} />
       <Tabs defaultActiveKey={currentTab} onChange={(key) => onTabChange(key)}>
-        <TabPane tab='All Monitors' key='monitors'>
+        <TabPane tab='Monitors' key='monitors'>
           <Monitors />
         </TabPane>
-        <TabPane tab='All Names' key='addrs'>
+        <TabPane tab='Named Addresses' key='addrs'>
           <NamedAddrs />
         </TabPane>
         <TabPane tab='Tags' key='tags'>
