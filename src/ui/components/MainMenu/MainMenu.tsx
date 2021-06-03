@@ -33,9 +33,9 @@ export const MainMenu = () => (
       icon={<BookOutlined />}
     >
       <NavLink
-        to="/monitors"
+        to="/names"
       >
-        Monitors
+        Names
       </NavLink>
     </Menu.Item>
 

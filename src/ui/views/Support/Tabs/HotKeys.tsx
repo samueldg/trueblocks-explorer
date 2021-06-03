@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactMarkdown from 'react-markdown';
-import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 
 const l1: string = '#### Accessing Screens...';
 const t1: string = `ts c     Open Dashboard screen
-ts m     Open Monitors screen
+ts m     Open Dashboard screen
 ts a     Open Accounts screen
 ts n     Open Names screen
 ts e     Open Explorer screen
