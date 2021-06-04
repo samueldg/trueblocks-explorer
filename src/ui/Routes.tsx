@@ -6,7 +6,7 @@ import {
 
 import {
   DashboardView,
-  MonitorsView,
+  NamesView,
   ExplorerView,
   SupportView,
   SystemView,
@@ -17,8 +17,8 @@ export const Routes = () => (
     <Route exact path="/">
       <DashboardView />
     </Route>
-    <Route path="/monitors">
-      <MonitorsView />
+    <Route path="/names">
+      <NamesView />
     </Route>
     <Route path="/explorer">
       <ExplorerView />

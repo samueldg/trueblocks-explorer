@@ -11,9 +11,9 @@ import { cookieVars } from '../../utils';
 
 const { TabPane } = Tabs;
 
-export const MonitorsView = () => {
-  const title = 'Monitors';
-  const [currentTab, setCurrentTab] = useState(Cookies.get(cookieVars.names_current_tab) || 'monitors');
+export const NamesView = () => {
+  const title = 'Names';
+  const [currentTab, setCurrentTab] = useState(Cookies.get(cookieVars.monitors_current_tab) || 'monitors');
 
   const onTabChange = (key: string) => {
     Cookies.set(cookieVars.names_current_tab, key);
@@ -27,7 +27,7 @@ export const MonitorsView = () => {
         <TabPane tab="Monitors" key="monitors">
           <Monitors />
         </TabPane>
-        <TabPane tab="Named Addresses" key="addrs">
+        <TabPane tab="Addresses" key="addresses">
           <NamedAddrs />
         </TabPane>
         <TabPane tab="Tags" key="tags">
@@ -36,7 +36,7 @@ export const MonitorsView = () => {
         <TabPane tab="Signatures" key="signatures">
           <Signatures />
         </TabPane>
-        <TabPane tab="Named Blocks" key="blocks">
+        <TabPane tab="Blocks" key="blocks">
           <When />
         </TabPane>
       </Tabs>
