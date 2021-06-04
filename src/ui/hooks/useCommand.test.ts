@@ -1,12 +1,10 @@
 import { renderHook, RenderResult } from '@testing-library/react-hooks';
 import fetchMock, { enableFetchMocks } from 'jest-fetch-mock';
-
-import { useCommand, Result } from './useCommand';
+import { Result, useCommand } from './useCommand';
 
 enableFetchMocks();
 
-const extractLoadingFlag =
-  (hookResult: RenderResult<readonly [Result, boolean]>) => hookResult.current[1];
+const extractLoadingFlag = (hookResult: RenderResult<readonly [Result, boolean]>) => hookResult.current[1];
 
 describe('useCommand hook', () => {
   it('returns FailedResult if there is an error', async () => {

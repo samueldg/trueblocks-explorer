@@ -1,9 +1,8 @@
 import { ColumnType } from 'antd/lib/table';
-
 import {
-  renderFlag,
+  renderActionsAsColumn, renderFlag,
   renderTagsWithClickHandler,
-  renderActionsAsColumn,
+
   TagClickHandler,
 } from './mappers';
 

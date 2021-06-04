@@ -1,37 +1,36 @@
-import React from "react";
-
-import { Result, useCommand } from "@hooks/useCommand";
-import { Loading } from "@components/Loading";
-import { Badge, Divider } from "antd";
-import { createUseStyles } from "react-jss";
 import {
   ApiFilled,
   ClockCircleFilled,
   ExperimentFilled,
   EyeFilled,
-} from "@ant-design/icons";
-import { JsonResponse } from "@modules/core";
+} from '@ant-design/icons';
+import { Loading } from '@components/Loading';
+import { Result } from '@hooks/useCommand';
+import { JsonResponse } from '@modules/core';
+import { Badge } from 'antd';
+import React from 'react';
+import { createUseStyles } from 'react-jss';
 
 const useStyles = createUseStyles({
-  container: { paddingBottom: "16px" },
+  container: { paddingBottom: '16px' },
   header: {
-    fontSize: "16px",
+    fontSize: '16px',
     fontWeight: 600,
-    letterSpacing: "0.1em",
-    marginBottom: "20px",
+    letterSpacing: '0.1em',
+    marginBottom: '20px',
   },
-  itemContainer: { marginTop: "12px" },
+  itemContainer: { marginTop: '12px' },
   itemHeader: {
-    fontSize: "9px",
-    letterSpacing: "0.1em",
+    fontSize: '9px',
+    letterSpacing: '0.1em',
     fontWeight: 500,
   },
-  itemIcon: { fontSize: "10px", marginRight: "4px" },
+  itemIcon: { fontSize: '10px', marginRight: '4px' },
   statusItem: {
-    fontSize: "9px",
-    letterSpacing: "0.1em",
+    fontSize: '9px',
+    letterSpacing: '0.1em',
     fontWeight: 500,
-    marginLeft: "4px",
+    marginLeft: '4px',
   },
 });
 
@@ -52,8 +51,8 @@ export const StatusPanel = ({ status, loading }: StatusPanelProps) => {
         <div className={styles.itemContainer}>
           <div className={styles.itemHeader}>STATUS</div>
           <div>
-            <Badge status={status.status === "success" ? "success" : "error"} />
-            {status.status === "success" ? "Connected" : "Error"}
+            <Badge status={status.status === 'success' ? 'success' : 'error'} />
+            {status.status === 'success' ? 'Connected' : 'Error'}
           </div>
         </div>
         <div className={styles.itemContainer}>
@@ -63,21 +62,21 @@ export const StatusPanel = ({ status, loading }: StatusPanelProps) => {
             12,519,522
           </div>
         </div>
-        <div className={styles.header} style={{ marginTop: "24px" }}>
+        <div className={styles.header} style={{ marginTop: '24px' }}>
           TRUEBLOCKS
         </div>
         <div className={styles.itemContainer}>
           <div className={styles.itemHeader}>API</div>
           <div>
-            <Badge status={statusContent.is_api ? "success" : "error"} />
-            {statusContent.is_api ? "Connected" : "Not connected"}
+            <Badge status={statusContent.is_api ? 'success' : 'error'} />
+            {statusContent.is_api ? 'Connected' : 'Not connected'}
           </div>
         </div>
         <div className={styles.itemContainer}>
           <div className={styles.itemHeader}>SCRAPER</div>
           <div>
-            <Badge status={statusContent.is_scraping ? "success" : "error"} />
-            {statusContent.is_scraping ? "Scraping" : "Not scraping"}
+            <Badge status={statusContent.is_scraping ? 'success' : 'error'} />
+            {statusContent.is_scraping ? 'Scraping' : 'Not scraping'}
           </div>
         </div>
         <div className={styles.itemContainer}>
@@ -85,23 +84,29 @@ export const StatusPanel = ({ status, loading }: StatusPanelProps) => {
           <div>
             <ApiFilled
               className={styles.itemIcon}
-              style={{ color: "#52c41a" }}
+              style={{ color: '#52c41a' }}
             />
-            12,358.738 <span className={styles.statusItem}>FINAL</span>
+            12,358.738
+            {' '}
+            <span className={styles.statusItem}>FINAL</span>
           </div>
           <div>
             <ApiFilled
               className={styles.itemIcon}
-              style={{ color: "#fadb14" }}
+              style={{ color: '#fadb14' }}
             />
-            12,358.738 <span className={styles.statusItem}>STAGING</span>
+            12,358.738
+            {' '}
+            <span className={styles.statusItem}>STAGING</span>
           </div>
           <div>
             <ApiFilled
               className={styles.itemIcon}
-              style={{ color: "#f5222d" }}
+              style={{ color: '#f5222d' }}
             />
-            12,358.738 <span className={styles.statusItem}>UNRIPE</span>
+            12,358.738
+            {' '}
+            <span className={styles.statusItem}>UNRIPE</span>
           </div>
         </div>
         <div className={styles.itemContainer}>
@@ -118,7 +123,7 @@ export const StatusPanel = ({ status, loading }: StatusPanelProps) => {
             12,358.738
           </div>
         </div>
-        <div className={styles.header} style={{ marginTop: "24px" }}>
+        <div className={styles.header} style={{ marginTop: '24px' }}>
           OPTIONS
         </div>
         <div className={styles.itemContainer}>
@@ -141,7 +146,7 @@ export const StatusPanel = ({ status, loading }: StatusPanelProps) => {
           <div className={styles.itemHeader}>INDEX</div>
           <div>{statusContent.index_path}</div>
         </div>
-        <div className={styles.header} style={{ marginTop: "24px" }}>
+        <div className={styles.header} style={{ marginTop: '24px' }}>
           VERSIONS
         </div>
         <div className={styles.itemContainer}>

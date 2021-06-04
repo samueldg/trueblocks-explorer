@@ -12,9 +12,9 @@ const documentation: string = `
 `;
 
 export const Documentation = () => (
-    <div style={{width: "50%"}}>
-      <ReactMarkdown>
-        {documentation}
-      </ReactMarkdown>
-    </div>
+  <div style={{ width: '50%' }}>
+    <ReactMarkdown>
+      {documentation}
+    </ReactMarkdown>
+  </div>
 );

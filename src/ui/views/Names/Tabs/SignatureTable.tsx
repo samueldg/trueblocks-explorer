@@ -1,13 +1,12 @@
-import React from 'react';
-import Table, { ColumnsType } from 'antd/lib/table';
-import { GetRowKey } from 'antd/lib/table/interface';
-
-import { Signature } from '@modules/data/signature';
 import {
-  addColumn,
-  addActionsColumn,
+  addActionsColumn, addColumn,
+
   TableActions,
 } from '@components/Table';
+import { Signature } from '@modules/data/signature';
+import Table, { ColumnsType } from 'antd/lib/table';
+import { GetRowKey } from 'antd/lib/table/interface';
+import React from 'react';
 
 function getTableActions(item: Signature) {
   return (

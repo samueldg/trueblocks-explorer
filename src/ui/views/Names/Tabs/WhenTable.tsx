@@ -1,15 +1,12 @@
-import React from 'react';
-import Table, { ColumnsType } from 'antd/lib/table';
-import { GetRowKey } from 'antd/lib/table/interface';
-
-import { When } from '@modules/data/when';
 import {
-  addColumn,
-  addFlagColumn,
-  addTagsColumn,
-  addActionsColumn,
+  addActionsColumn, addColumn,
+
   TableActions,
 } from '@components/Table';
+import { When } from '@modules/data/when';
+import Table, { ColumnsType } from 'antd/lib/table';
+import { GetRowKey } from 'antd/lib/table/interface';
+import React from 'react';
 
 function getTableActions(item: When) {
   return (

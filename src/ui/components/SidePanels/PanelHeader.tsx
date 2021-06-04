@@ -1,13 +1,12 @@
-import classNames from "classnames";
-import React, { ReactNode } from "react";
-import { Button, Divider } from "antd";
-
-import "./PanelHeader.css";
+import { Button, Divider } from 'antd';
+import classNames from 'classnames';
+import React, { ReactNode } from 'react';
+import './PanelHeader.css';
 
 function ifExpanded<Type>(
   expanded: boolean,
   onTrue: () => Type,
-  onFalse: () => Type
+  onFalse: () => Type,
 ): Type {
   return expanded ? onTrue() : onFalse();
 }
@@ -34,15 +33,15 @@ export const PanelHeader = ({
   iconExpanded,
   onToggle,
 }: PanelHeaderProps) => {
-  const classes = classNames("panel-header", {
-    "dir-left": dir === PanelDirection.Left,
-    "dir-right": dir === PanelDirection.Right,
+  const classes = classNames('panel-header', {
+    'dir-left': dir === PanelDirection.Left,
+    'dir-right': dir === PanelDirection.Right,
     expanded,
     collapsed: !expanded,
   });
   const header = expanded ? (
     <h1
-      style={{ fontSize: "16px", padding: "4px 0px", letterSpacing: "0.1em" }}
+      style={{ fontSize: '16px', padding: '4px 0px', letterSpacing: '0.1em' }}
     >
       {children}
     </h1>
@@ -50,7 +49,7 @@ export const PanelHeader = ({
   const icon = ifExpanded(
     expanded,
     () => iconCollapsed,
-    () => iconExpanded
+    () => iconExpanded,
   );
 
   return (
@@ -61,7 +60,7 @@ export const PanelHeader = ({
           {icon}
         </Button>
       </header>
-      <Divider style={{ margin: 0, marginBottom: "16px" }} />
+      <Divider style={{ margin: 0, marginBottom: '16px' }} />
     </>
   );
 };

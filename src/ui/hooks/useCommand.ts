@@ -7,10 +7,9 @@ import {
   useState,
 } from 'react';
 import {
-  runCommand,
   CommandParams,
   CoreCommand,
-  JsonResponse,
+  JsonResponse, runCommand,
 } from '../modules/core';
 
 type SuccessfulResult = {

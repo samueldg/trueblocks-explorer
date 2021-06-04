@@ -1,15 +1,13 @@
-import React, { useState } from "react";
-
-import "antd/dist/antd.css";
-import "./App.css";
-
-import { Layout } from "antd";
-import { Routes } from "./Routes";
-import { MainMenu } from "./components/MainMenu";
-import { SidePanel, PanelDirection } from "./components/SidePanels/SidePanel";
-import { StatusPanel } from "./components/SidePanels/StatusPanel";
-import { HelpPanel } from "./components/SidePanels/HelpPanel";
-import { useCommand } from "@hooks/useCommand";
+import { useCommand } from '@hooks/useCommand';
+import { Layout } from 'antd';
+import 'antd/dist/antd.css';
+import React, { useState } from 'react';
+import './App.css';
+import { MainMenu } from './components/MainMenu';
+import { HelpPanel } from './components/SidePanels/HelpPanel';
+import { PanelDirection, SidePanel } from './components/SidePanels/SidePanel';
+import { StatusPanel } from './components/SidePanels/StatusPanel';
+import { Routes } from './Routes';
 
 const { Header, Footer, Content } = Layout;
 
@@ -17,7 +15,7 @@ export const App = () => {
   const [menuExpanded, setMenuExpanded] = useState(false);
   const [statusExpanded, setStatusExpanded] = useState(true);
   const [helpExpanded, setHelpExpanded] = useState(true);
-  const [status, loading] = useCommand("status");
+  const [status, loading] = useCommand('status');
 
   return (
     <Layout>
@@ -36,9 +34,9 @@ export const App = () => {
           <Layout>
             <Content
               style={{
-                backgroundColor: "white",
-                padding: "1rem",
-                overflowY: "auto",
+                backgroundColor: 'white',
+                padding: '1rem',
+                overflowY: 'auto',
               }}
             >
               {/* View */}

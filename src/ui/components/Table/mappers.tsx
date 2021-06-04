@@ -1,7 +1,7 @@
-import React, { ReactElement } from 'react';
 import { Tag } from 'antd';
 import { option as Option } from 'fp-ts';
 import { pipe } from 'fp-ts/function';
+import React, { ReactElement } from 'react';
 
 export function renderFlag(flag?: boolean): ReactElement {
   return pipe(

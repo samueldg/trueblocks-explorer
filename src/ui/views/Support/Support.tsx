@@ -1,13 +1,12 @@
 import { PageHeader, Tabs } from 'antd';
-import React, { useState } from 'react';
-
 import Cookies from 'js-cookie';
+import React, { useState } from 'react';
+import { cookieVars } from '../../utils';
+import { About } from './Tabs/About';
 import { Contact } from './Tabs/Contact';
 import { Documentation } from './Tabs/Documentation';
 import { HotKeys } from './Tabs/HotKeys';
 import { Licensing } from './Tabs/Licensing';
-import { About } from './Tabs/About';
-import { cookieVars } from '../../utils';
 
 const { TabPane } = Tabs;
 

@@ -2,8 +2,8 @@ import {
   DeleteOutlined, EditOutlined, InfoCircleOutlined, PlusCircleOutlined,
 } from '@ant-design/icons';
 import { Button } from 'antd';
-import React, { useCallback } from 'react';
 import PropTypes, { InferType } from 'prop-types';
+import React, { useCallback } from 'react';
 
 type Action = 'details' | 'remove' | 'edit' | 'addMonitor';
 

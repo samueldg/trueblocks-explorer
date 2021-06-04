@@ -1,5 +1,5 @@
-import { config } from 'dotenv-safe';
 import { DotenvParseOutput } from 'dotenv';
+import { config } from 'dotenv-safe';
 
 const envConfig = config();
 
@@ -12,5 +12,5 @@ interface EnvConfiguration extends DotenvParseOutput {
 }
 
 export function readEnvFile(): EnvConfiguration {
-    return envConfig.parsed as EnvConfiguration;
+  return envConfig.parsed as EnvConfiguration;
 }

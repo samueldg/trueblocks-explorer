@@ -1,9 +1,8 @@
-import React from "react";
-import { render } from "react-dom";
-import { BrowserRouter as Router } from "react-router-dom";
-import { GlobalStateProvider } from "./state";
-
-import { App } from "./App";
+import React from 'react';
+import { render } from 'react-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
+import { App } from './App';
+import { GlobalStateProvider } from './state';
 
 render(
   <GlobalStateProvider>
@@ -11,5 +10,5 @@ render(
       <App />
     </Router>
   </GlobalStateProvider>,
-  document.getElementById("root")
+  document.getElementById('root'),
 );

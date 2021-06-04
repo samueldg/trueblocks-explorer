@@ -1,15 +1,14 @@
-import React from 'react';
-import Table, { ColumnsType } from 'antd/lib/table';
-import { GetRowKey } from 'antd/lib/table/interface';
-
-import { Monitor } from '@modules/data/monitor';
 import {
-  addColumn,
+  addActionsColumn, addColumn,
   addFlagColumn,
   addTagsColumn,
-  addActionsColumn,
+
   TableActions,
 } from '@components/Table';
+import { Monitor } from '@modules/data/monitor';
+import Table, { ColumnsType } from 'antd/lib/table';
+import { GetRowKey } from 'antd/lib/table/interface';
+import React from 'react';
 
 function getTableActions(item: Monitor) {
   return (

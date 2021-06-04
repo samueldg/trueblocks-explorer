@@ -1,10 +1,10 @@
-import React, { createContext, useContext, useReducer } from "react";
-import Cookies from "js-cookie";
-import { ReactNode } from "react-markdown";
+import Cookies from 'js-cookie';
+import React, { createContext, useContext, useReducer } from 'react';
+import { ReactNode } from 'react-markdown';
 
 const GlobalStateContext = createContext<any[]>([]);
 
-const THEME = Cookies.get("theme");
+const THEME = Cookies.get('theme');
 
 const initialState = {
   theme: THEME || null,
@@ -12,8 +12,8 @@ const initialState = {
 
 const GlobalStateReducer = (state: any, action: any) => {
   switch (action.type) {
-    case "SET_THEME":
-      Cookies.set("theme", action.theme);
+    case 'SET_THEME':
+      Cookies.set('theme', action.theme);
       return {
         ...state,
         theme: action.theme,
@@ -27,7 +27,7 @@ const useGlobalState = () => {
   const [state, dispatch] = useContext(GlobalStateContext);
 
   const setTheme = (theme: any) => {
-    dispatch({ type: "SET_THEME", theme });
+    dispatch({ type: 'SET_THEME', theme });
   };
 
   return {

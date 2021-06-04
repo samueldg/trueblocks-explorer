@@ -1,5 +1,5 @@
 export * from './Dashboard/Dashboard';
-export * from './Names/Names';
 export * from './Explorer/Explorer';
-export * from './Support/Support';
+export * from './Names/Names';
 export * from './Settings/Settings';
+export * from './Support/Support';

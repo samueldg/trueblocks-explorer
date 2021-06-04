@@ -1,7 +1,7 @@
-import React, { useCallback } from 'react';
-import { createErrorNotification } from '@modules/error_notification';
 import { Loading } from '@components/Loading';
 import { useCommand } from '@hooks/useCommand';
+import { createErrorNotification } from '@modules/error_notification';
+import React, { useCallback } from 'react';
 
 export const Logs = () => {
   const [data, loading] = useCommand('logs', { transactions: 'latest', articulate: true });

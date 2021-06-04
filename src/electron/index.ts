@@ -1,8 +1,8 @@
 import { app, BrowserWindow } from 'electron';
 import developmentMode from 'electron-is-dev';
 import Store from 'electron-store';
-
 import { getUiUrl, readEnvFile } from './helpers';
+
 
 const {
   DEV_UI_URL,

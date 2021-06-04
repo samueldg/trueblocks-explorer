@@ -1,7 +1,5 @@
 import React, { useCallback } from 'react';
-
 import { useCommand } from '../../../hooks/useCommand';
-
 import { MonitorsTable } from './MonitorsTable';
 
 export const Monitors = () => {

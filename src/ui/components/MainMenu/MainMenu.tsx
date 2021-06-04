@@ -1,17 +1,16 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom';
-import {
-  Menu,
-} from 'antd';
 import {
   BookOutlined,
   CameraOutlined,
-  DesktopOutlined,
-  FundOutlined,
+
   PhoneOutlined,
   SettingOutlined,
   UnorderedListOutlined,
 } from '@ant-design/icons';
+import {
+  Menu,
+} from 'antd';
+import React from 'react';
+import { NavLink } from 'react-router-dom';
 
 const { SubMenu } = Menu;
 

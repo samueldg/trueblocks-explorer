@@ -1,5 +1,4 @@
 import renderer from 'react-test-renderer';
-
 import * as Mappers from './mappers';
 
 describe('Table/mappers module', () => {

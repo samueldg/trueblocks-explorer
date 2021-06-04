@@ -1,13 +1,12 @@
 import React from 'react';
 import {
-  Switch,
-  Route,
+  Route, Switch,
 } from 'react-router-dom';
-
 import {
   DashboardView,
-  NamesView,
-  ExplorerView,
+
+  ExplorerView, NamesView,
+
   SupportView,
   SystemView,
 } from './views';

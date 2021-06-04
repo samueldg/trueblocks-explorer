@@ -1,14 +1,13 @@
 import { PageHeader, Tabs } from 'antd';
-import React, { useState } from 'react';
-
 import Cookies from 'js-cookie';
-import { Indexes } from './Tabs/Indexes';
-import { Blocks } from './Tabs/Blocks';
-import { Transactions } from './Tabs/Transactions';
-import { Receipts } from './Tabs/Receipts';
-import { Logs } from './Tabs/Logs';
-import { Traces } from './Tabs/Traces';
+import React, { useState } from 'react';
 import { cookieVars } from '../../utils';
+import { Blocks } from './Tabs/Blocks';
+import { Indexes } from './Tabs/Indexes';
+import { Logs } from './Tabs/Logs';
+import { Receipts } from './Tabs/Receipts';
+import { Traces } from './Tabs/Traces';
+import { Transactions } from './Tabs/Transactions';
 
 const { TabPane } = Tabs;
 

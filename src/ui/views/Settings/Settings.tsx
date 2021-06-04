@@ -1,11 +1,10 @@
 import { PageHeader, Tabs } from 'antd';
-import React, { useState } from 'react';
-
 import Cookies from 'js-cookie';
-import { Caches } from './Tabs/Caches';
-import { Skins } from './Tabs/Skins';
-import { Schemas } from './Tabs/Schemas';
+import React, { useState } from 'react';
 import { cookieVars } from '../../utils';
+import { Caches } from './Tabs/Caches';
+import { Schemas } from './Tabs/Schemas';
+import { Skins } from './Tabs/Skins';
 
 const { TabPane } = Tabs;
 

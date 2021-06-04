@@ -4,7 +4,7 @@ import ReactMarkdown from 'react-markdown';
 const about: string = `
 #### Recent History
 
-In late 2015 and early 2016, we became completely obsessed with The DAO. We were among the first 
+In late 2015 and early 2016, we became completely obsessed with The DAO. We were among the first
 participants in The DAO's discussion site, DaoHub and the Ninja Warrior Training. We created a number
 of ancillary websites (now defunct): http://doadeepdive.com, http://whalewatch.io, http://daowatch.io, and during
 this time, we released our first blockchain-based product, [EthSlurp™](http://ethslurp.io). While we spent countless
@@ -40,9 +40,9 @@ same software today and serve many active daily users.
 `;
 
 export const About = () => (
-    <div style={{width: "50%"}}>
-      <ReactMarkdown>
-        {about}
-      </ReactMarkdown>
-    </div>
+  <div style={{ width: '50%' }}>
+    <ReactMarkdown>
+      {about}
+    </ReactMarkdown>
+  </div>
 );

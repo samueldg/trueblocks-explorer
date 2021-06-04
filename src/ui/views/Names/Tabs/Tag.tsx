@@ -1,5 +1,4 @@
 import React, { useCallback } from 'react';
-
 import { useCommand } from '../../../hooks/useCommand';
 import { TagTable } from './TagTable';
 

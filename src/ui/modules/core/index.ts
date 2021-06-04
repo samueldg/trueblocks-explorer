@@ -1,6 +1,5 @@
 import {
-  taskEither as TaskEither,
-  either as Either,
+  either as Either, taskEither as TaskEither,
 } from 'fp-ts';
 import {
   pipe,

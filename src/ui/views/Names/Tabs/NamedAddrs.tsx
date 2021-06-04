@@ -1,11 +1,9 @@
+import { NamesFilters } from '@components/Filters';
 import {
   PageHeader,
 } from 'antd';
 import React, { useCallback } from 'react';
-
-import { NamesFilters } from '@components/Filters';
 import { useCommand } from '../../../hooks/useCommand';
-
 import './NamedAddrs.css';
 import { NamesTable } from './NamedAddrsTable';
 
