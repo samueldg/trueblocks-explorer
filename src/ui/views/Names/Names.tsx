@@ -16,7 +16,7 @@ export const NamesView = () => {
   const [currentTab, setCurrentTab] = useState(Cookies.get(cookieVars.monitors_current_tab) || 'monitors');
 
   const onTabChange = (key: string) => {
-    Cookies.set(cookieVars.monitors_current_tab, key);
+    Cookies.set(cookieVars.names_current_tab, key);
     setCurrentTab(key);
   };
 
