@@ -13,7 +13,7 @@ const { TabPane } = Tabs;
 
 export const NamesView = () => {
   const title = 'Names';
-  const [currentTab, setCurrentTab] = useState(Cookies.get(cookieVars.monitors_current_tab) || 'monitors');
+  const [currentTab, setCurrentTab] = useState(Cookies.get(cookieVars.names_current_tab) || 'monitors');
 
   const onTabChange = (key: string) => {
     Cookies.set(cookieVars.names_current_tab, key);
