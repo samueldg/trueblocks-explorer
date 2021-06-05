@@ -42,11 +42,13 @@ interface StatusPanelProps {
 export const StatusPanel = ({ status, loading }: StatusPanelProps) => {
   const styles = useStyles();
 
-  const statusContent = status.content[0] as JsonResponse;
+  const statusData = status.data[0] as JsonResponse;
+  const statusMeta = status.meta as JsonResponse;
 
   return (
     <Loading loading={loading}>
       <div className={styles.container}>
+
         <div className={styles.header}>ETHEREUM NODE</div>
         <div className={styles.itemContainer}>
           <div className={styles.itemHeader}>STATUS</div>
@@ -59,26 +61,28 @@ export const StatusPanel = ({ status, loading }: StatusPanelProps) => {
           <div className={styles.itemHeader}>LATEST</div>
           <div>
             <ClockCircleFilled className={styles.itemIcon} />
-            12,519,522
+            {statusMeta.client}
           </div>
         </div>
+
         <div className={styles.header} style={{ marginTop: '24px' }}>
           TRUEBLOCKS
         </div>
         <div className={styles.itemContainer}>
           <div className={styles.itemHeader}>API</div>
           <div>
-            <Badge status={statusContent.is_api ? 'success' : 'error'} />
-            {statusContent.is_api ? 'Connected' : 'Not connected'}
+            <Badge status={statusData.is_api ? 'success' : 'error'} />
+            {statusData.is_api ? 'Connected' : 'Not connected'}
           </div>
         </div>
         <div className={styles.itemContainer}>
           <div className={styles.itemHeader}>SCRAPER</div>
           <div>
-            <Badge status={statusContent.is_scraping ? 'success' : 'error'} />
-            {statusContent.is_scraping ? 'Scraping' : 'Not scraping'}
+            <Badge status={statusData.is_scraping ? 'success' : 'error'} />
+            {statusData.is_scraping ? 'Scraping' : 'Not scraping'}
           </div>
         </div>
+
         <div className={styles.itemContainer}>
           <div className={styles.itemHeader}>BLOCKS</div>
           <div>
@@ -86,8 +90,7 @@ export const StatusPanel = ({ status, loading }: StatusPanelProps) => {
               className={styles.itemIcon}
               style={{ color: '#52c41a' }}
             />
-            12,358.738
-            {' '}
+            {statusMeta.finalized}
             <span className={styles.statusItem}>FINAL</span>
           </div>
           <div>
@@ -95,8 +98,7 @@ export const StatusPanel = ({ status, loading }: StatusPanelProps) => {
               className={styles.itemIcon}
               style={{ color: '#fadb14' }}
             />
-            12,358.738
-            {' '}
+            {statusMeta.staging}
             <span className={styles.statusItem}>STAGING</span>
           </div>
           <div>
@@ -104,8 +106,7 @@ export const StatusPanel = ({ status, loading }: StatusPanelProps) => {
               className={styles.itemIcon}
               style={{ color: '#f5222d' }}
             />
-            12,358.738
-            {' '}
+            {statusMeta.unripe}
             <span className={styles.statusItem}>UNRIPE</span>
           </div>
         </div>
@@ -113,49 +114,68 @@ export const StatusPanel = ({ status, loading }: StatusPanelProps) => {
           <div className={styles.itemHeader}>MONITORS</div>
           <div>
             <EyeFilled className={styles.itemIcon} />
-            12,358.738
+            {statusData.caches && statusData.caches[1].nFiles}
+            {' '}
+            (
+            {statusData.caches && statusData.caches[1].sizeInBytes}
+            {' '}
+            bytes)
           </div>
         </div>
+
         <div className={styles.itemContainer}>
           <div className={styles.itemHeader}>SLURPS</div>
           <div>
             <ExperimentFilled className={styles.itemIcon} />
-            12,358.738
+            {statusData.caches && statusData.caches[3].nFiles}
+            {' '}
+            (
+            {statusData.caches && statusData.caches[3].sizeInBytes}
+            {' '}
+            bytes)
           </div>
         </div>
+
         <div className={styles.header} style={{ marginTop: '24px' }}>
           OPTIONS
         </div>
+
         <div className={styles.itemContainer}>
           <div className={styles.itemHeader}>RPC</div>
-          <div>{statusContent.rpc_provider}</div>
+          <div>{statusData.rpc_provider}</div>
         </div>
+
         <div className={styles.itemContainer}>
           <div className={styles.itemHeader}>BALANCE PROVIDER</div>
-          <div>{statusContent.balance_provider}</div>
+          <div>{statusData.balance_provider}</div>
         </div>
+
         <div className={styles.itemContainer}>
           <div className={styles.itemHeader}>API</div>
           <div>{process.env.CORE_URL}</div>
         </div>
+
         <div className={styles.itemContainer}>
           <div className={styles.itemHeader}>CACHE</div>
-          <div>{statusContent.cache_path}</div>
+          <div>{statusData.cache_path}</div>
         </div>
+
         <div className={styles.itemContainer}>
           <div className={styles.itemHeader}>INDEX</div>
-          <div>{statusContent.index_path}</div>
+          <div>{statusData.index_path}</div>
         </div>
+
         <div className={styles.header} style={{ marginTop: '24px' }}>
           VERSIONS
         </div>
         <div className={styles.itemContainer}>
           <div className={styles.itemHeader}>CLIENT</div>
-          <div>{statusContent.client_version}</div>
+          <div>{statusData.client_version}</div>
         </div>
+
         <div className={styles.itemContainer}>
           <div className={styles.itemHeader}>TRUEBLOCKS</div>
-          <div>{statusContent.trueblocks_version}</div>
+          <div>{statusData.trueblocks_version}</div>
         </div>
       </div>
     </Loading>
