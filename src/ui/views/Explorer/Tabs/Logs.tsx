@@ -5,7 +5,7 @@ import React, { useCallback } from 'react';
 
 export const Logs = () => {
   const [data, loading] = useCommand('logs', { transactions: 'latest', articulate: true });
-  const getData = useCallback((response) => (response.status === 'fail' ? [] : response.content), []);
+  const getData = useCallback((response) => (response.status === 'fail' ? [] : response.data), []);
 
   const theItem = getData(data);
   if (data.status === 'fail') {

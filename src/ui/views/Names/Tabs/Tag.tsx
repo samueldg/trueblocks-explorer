@@ -4,7 +4,7 @@ import { TagTable } from './TagTable';
 
 export const Tags = () => {
   const [tag, loadingTag] = useCommand('names', { tags: true });
-  const getTag = useCallback((response) => (response.status === 'fail' ? [] : response.content), []);
+  const getTag = useCallback((response) => (response.status === 'fail' ? [] : response.data), []);
 
   return (
     <>

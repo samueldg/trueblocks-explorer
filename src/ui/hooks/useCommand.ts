@@ -1,45 +1,43 @@
-import {
-  either as Either,
-} from 'fp-ts';
+import { either as Either } from 'fp-ts';
 import { pipe } from 'fp-ts/function';
+import { useEffect, useState } from 'react';
 import {
-  useEffect,
-  useState,
-} from 'react';
-import {
-  CommandParams,
-  CoreCommand,
-  JsonResponse, runCommand,
+  CommandParams, CoreCommand, JsonResponse, runCommand,
 } from '../modules/core';
 
-type SuccessfulResult = {
+type DataResult = {
   status: 'success',
-  content: JsonResponse[],
+  data: JsonResponse[],
+  meta: {}
 };
 
 type FailedResult = {
   status: 'fail',
-  content: string,
+  data: string,
+  meta: {}
 };
 
-export type Result = SuccessfulResult | FailedResult;
+export type Result = DataResult | FailedResult;
 
 function toFailedResult(error: Error): FailedResult {
   return {
     status: 'fail',
-    content: error.toString(),
+    data: error.toString(),
+    meta: {},
   };
 }
 
-function toSuccessfulResult(responseData: JsonResponse[]): SuccessfulResult {
+function toSuccessfulData(responseData: JsonResponse): DataResult {
   return {
     status: 'success',
-    content: responseData,
+    data: responseData.data,
+    meta: responseData.meta,
   };
 }
 
 export function useCommand(command: CoreCommand, params?: CommandParams) {
-  const [response, setResponse] = useState<Result>(toSuccessfulResult([{}]));
+  const emptyData = { data: [{}], meta: {} };
+  const [response, setData] = useState<Result>(toSuccessfulData(emptyData));
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -49,10 +47,10 @@ export function useCommand(command: CoreCommand, params?: CommandParams) {
         eitherResponse,
         Either.fold(
           toFailedResult,
-          (serverResponse) => toSuccessfulResult(serverResponse.data) as Result,
+          (serverResponse) => toSuccessfulData(serverResponse) as Result,
         ),
       );
-      setResponse(result);
+      setData(result);
       setLoading(false);
     })();
   }, []);

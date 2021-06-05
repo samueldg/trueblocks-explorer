@@ -21,7 +21,7 @@ describe('useCommand hook', () => {
     const [result] = hookResult.current;
 
     expect(result.status).toBe('fail');
-    expect(result.content).toEqual(error.toString());
+    expect(result.data).toEqual(error.toString());
   });
 
   it('returns SuccessfulResult if there was no error', async () => {
@@ -42,7 +42,7 @@ describe('useCommand hook', () => {
     const [result] = hookResult.current;
 
     expect(result.status).toBe('success');
-    expect(result.content).toEqual(response);
+    expect(result.data).toEqual(response);
   });
 
   it('sets correct loading flag', async () => {

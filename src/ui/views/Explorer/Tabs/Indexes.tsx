@@ -5,7 +5,7 @@ import React, { useCallback } from 'react';
 
 export const Indexes = () => {
   const [data, loading] = useCommand('status', { mode: 'index', details: true });
-  const getData = useCallback((response) => (response.status === 'fail' ? [] : response.content), []);
+  const getData = useCallback((response) => (response.status === 'fail' ? [] : response.data), []);
 
   const theItem = getData(data);
   if (data.status === 'fail') {

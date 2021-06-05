@@ -5,7 +5,7 @@ import { useCommand } from '../../../hooks/useCommand';
 
 export const Blocks = () => {
   const [data, loading] = useCommand('blocks', { blocks: 'latest', hashes: true, cache: true });
-  const getData = useCallback((response) => (response.status === 'fail' ? [] : response.content), []);
+  const getData = useCallback((response) => (response.status === 'fail' ? [] : response.data), []);
 
   const theItem = getData(data);
   if (data.status === 'fail') {
