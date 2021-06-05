@@ -2,7 +2,7 @@ import { useCommand } from '@hooks/useCommand';
 import { Layout } from 'antd';
 import 'antd/dist/antd.css';
 import React, { useState } from 'react';
-import './App.css';
+import './app.css';
 import { MainMenu } from './components/MainMenu';
 import { HelpPanel } from './components/SidePanels/HelpPanel';
 import { PanelDirection, SidePanel } from './components/SidePanels/SidePanel';

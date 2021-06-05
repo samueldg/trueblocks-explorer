@@ -11,7 +11,7 @@
     "develop:electron": "yarn compile:electron && electron dist/electron/index.js",
     "compile": "concurrently 'yarn compile:ui' 'yarn compile:electron'",
     "develop": "concurrently 'yarn develop:ui' 'yarn develop:electron'",
-    "test": "jest --setupFiles dotenv/config",
+    "test": "jest --setupFiles dotenv/config --verbose",
     "test:e2e": "cypress open"
   },
   "browserslist": [
