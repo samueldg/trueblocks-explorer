@@ -3,12 +3,12 @@ import Cookies from 'js-cookie';
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import {
-  NamesAdressesLocation,
+  NamesAddressesLocation,
   NamesBlocksLocation,
   NamesMonitorsLocation,
   NamesSignaturesLocation,
   NamesTagsLocation,
-} from '../..//locations';
+} from '../../locations';
 import { cookieVars } from '../../utils';
 import { Monitors } from './Tabs/Monitors';
 import { NamedAddrs } from './Tabs/NamedAddrs';
@@ -22,7 +22,7 @@ export const NamesView = () => {
   const history = useHistory();
   const title = 'Names';
   const [currentTab, setCurrentTab] = useState(
-    Cookies.get(cookieVars.names_current_tab) || NamesMonitorsLocation
+    Cookies.get(cookieVars.names_current_tab) || NamesMonitorsLocation,
   );
 
   const onTabChange = (key: string) => {
@@ -38,7 +38,7 @@ export const NamesView = () => {
         <TabPane tab="Monitors" key={NamesMonitorsLocation}>
           <Monitors />
         </TabPane>
-        <TabPane tab="Addresses" key={NamesAdressesLocation}>
+        <TabPane tab="Addresses" key={NamesAddressesLocation}>
           <NamedAddrs />
         </TabPane>
         <TabPane tab="Tags" key={NamesTagsLocation}>

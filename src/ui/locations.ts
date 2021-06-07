@@ -7,7 +7,7 @@ export const DashboardSystemStatusLocation = '/dashboard/system-status';
 
 export const NamesLocation = '/names';
 export const NamesMonitorsLocation = '/names/monitors';
-export const NamesAdressesLocation = '/names/addresses';
+export const NamesAddressesLocation = '/names/addresses';
 export const NamesTagsLocation = '/names/tags';
 export const NamesSignaturesLocation = '/names/signatures';
 export const NamesBlocksLocation = '/names/blocks';

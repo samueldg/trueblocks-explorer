@@ -12,7 +12,7 @@ import {
   ExplorerReceiptsLocation,
   ExplorerTracesLocation,
   ExplorerTransactionsLocation,
-  NamesAdressesLocation,
+  NamesAddressesLocation,
   NamesBlocksLocation,
   NamesLocation,
   NamesMonitorsLocation,
@@ -77,7 +77,7 @@ const routes = [
     component: NamesView,
   },
   {
-    path: NamesAdressesLocation,
+    path: NamesAddressesLocation,
     exact: true,
     component: NamesView,
   },
