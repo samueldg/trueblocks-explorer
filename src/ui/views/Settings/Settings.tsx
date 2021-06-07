@@ -3,10 +3,10 @@ import Cookies from 'js-cookie';
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import {
-  SystemCachesLocation,
-  SystemSchemasLocation,
-  SystemScrapersLocation,
-  SystemSkinsLocation,
+  SettingsCachesLocation,
+  SettingsSchemasLocation,
+  SettingsScrapersLocation,
+  SettingsSkinsLocation,
 } from '../../locations';
 import { cookieVars } from '../../utils';
 import { Caches } from './Tabs/Caches';
@@ -16,10 +16,10 @@ import { Skins } from './Tabs/Skins';
 
 const { TabPane } = Tabs;
 
-export const SystemView = () => {
+export const SettingsView = () => {
   const history = useHistory();
   const [currentTab, setCurrentTab] = useState(
-    Cookies.get(cookieVars.settings_current_tab) || SystemScrapersLocation
+    Cookies.get(cookieVars.settings_current_tab) || SettingsScrapersLocation,
   );
 
   const onTabChange = (key: string) => {
@@ -33,16 +33,16 @@ export const SystemView = () => {
     <>
       <PageHeader title={title} />
       <Tabs defaultActiveKey={currentTab} onChange={(key) => onTabChange(key)}>
-        <TabPane tab="Scrapers" key={SystemScrapersLocation}>
+        <TabPane tab="Scrapers" key={SettingsScrapersLocation}>
           <Scrapers />
         </TabPane>
-        <TabPane tab="Caches" key={SystemCachesLocation}>
+        <TabPane tab="Caches" key={SettingsCachesLocation}>
           <Caches />
         </TabPane>
-        <TabPane tab="Skins" key={SystemSkinsLocation}>
+        <TabPane tab="Skins" key={SettingsSkinsLocation}>
           <Skins />
         </TabPane>
-        <TabPane tab="Schemas" key={SystemSchemasLocation}>
+        <TabPane tab="Schemas" key={SettingsSchemasLocation}>
           <Schemas />
         </TabPane>
       </Tabs>

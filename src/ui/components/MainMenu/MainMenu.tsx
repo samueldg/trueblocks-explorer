@@ -9,11 +9,10 @@ import { Menu } from 'antd';
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import {
-  RootLocation,
   ExplorerLocation,
-  NamesLocation,
-  SupportLocation,
-  SystemLocation,
+  NamesLocation, RootLocation,
+
+  SettingsLocation, SupportLocation,
 } from '../../locations';
 
 const { SubMenu } = Menu;
@@ -33,7 +32,7 @@ export const MainMenu = () => (
     </Menu.Item>
 
     <Menu.Item icon={<SettingOutlined />}>
-      <NavLink to={SystemLocation}>Settings</NavLink>
+      <NavLink to={SettingsLocation}>Settings</NavLink>
     </Menu.Item>
 
     <Menu.Item icon={<PhoneOutlined />}>

@@ -20,11 +20,11 @@ export const ExplorerReceiptsLocation = '/explorer/receipts';
 export const ExplorerLogsLocation = '/explorer/logs';
 export const ExplorerTracesLocation = '/explorer/traces';
 
-export const SystemLocation = '/system';
-export const SystemScrapersLocation = '/system/scrapers';
-export const SystemCachesLocation = '/system/caches';
-export const SystemSkinsLocation = '/system/skins';
-export const SystemSchemasLocation = '/system/schemas';
+export const SettingsLocation = '/settings';
+export const SettingsScrapersLocation = '/settings/scrapers';
+export const SettingsCachesLocation = '/settings/caches';
+export const SettingsSkinsLocation = '/settings/skins';
+export const SettingsSchemasLocation = '/settings/schemas';
 
 export const SupportLocation = '/support';
 export const SupportContactUsLocation = '/support/contact-us';

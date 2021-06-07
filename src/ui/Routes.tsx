@@ -19,25 +19,24 @@ import {
   NamesSignaturesLocation,
   NamesTagsLocation,
   RootLocation,
-  SupportAboutUsLocation,
+
+  SettingsCachesLocation,
+  SettingsLocation,
+  SettingsSchemasLocation,
+  SettingsScrapersLocation,
+  SettingsSkinsLocation, SupportAboutUsLocation,
   SupportContactUsLocation,
   SupportDocumentationLocation,
   SupportHotKeysLocation,
   SupportLicensingLocation,
   SupportLocation,
-  SystemCachesLocation,
-  SystemLocation,
-  SystemSchemasLocation,
-  SystemScrapersLocation,
-  SystemSkinsLocation,
 } from './locations';
-
 import {
   DashboardView,
   ExplorerView,
   NamesView,
-  SupportView,
-  SystemView,
+
+  SettingsView, SupportView,
 } from './views';
 
 const routes = [
@@ -132,29 +131,29 @@ const routes = [
     component: ExplorerView,
   },
   {
-    path: SystemLocation,
+    path: SettingsLocation,
     exact: true,
-    component: SystemView,
+    component: SettingsView,
   },
   {
-    path: SystemScrapersLocation,
+    path: SettingsScrapersLocation,
     exact: true,
-    component: SystemView,
+    component: SettingsView,
   },
   {
-    path: SystemCachesLocation,
+    path: SettingsCachesLocation,
     exact: true,
-    component: SystemView,
+    component: SettingsView,
   },
   {
-    path: SystemSkinsLocation,
+    path: SettingsSkinsLocation,
     exact: true,
-    component: SystemView,
+    component: SettingsView,
   },
   {
-    path: SystemSchemasLocation,
+    path: SettingsSchemasLocation,
     exact: true,
-    component: SystemView,
+    component: SettingsView,
   },
   {
     path: SupportLocation,
