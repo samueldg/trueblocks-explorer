@@ -15,8 +15,6 @@ import {
   SettingsLocation, SupportLocation,
 } from '../../locations';
 
-const { SubMenu } = Menu;
-
 export const MainMenu = () => (
   <Menu mode="inline">
     <Menu.Item icon={<UnorderedListOutlined />}>

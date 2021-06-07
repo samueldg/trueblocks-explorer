@@ -1,4 +1,3 @@
-import { WarningTwoTone } from '@ant-design/icons';
 import { Loading } from '@components/Loading';
 import { useCommand } from '@hooks/useCommand';
 import React from 'react';
