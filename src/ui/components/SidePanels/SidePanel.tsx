@@ -1,6 +1,7 @@
 import { Layout } from 'antd';
-import React from 'react';
-import { Panel, PanelDirection, PanelProps } from './Panel';
+import Cookies from 'js-cookie';
+import React, { ReactNode, useState } from 'react';
+import { Panel, PanelDirection } from './Panel';
 
 const { Sider } = Layout;
 
