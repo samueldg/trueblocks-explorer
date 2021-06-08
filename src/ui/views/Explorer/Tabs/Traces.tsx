@@ -10,7 +10,7 @@ export const Traces = () => {
   const theItem = getData(data);
   if (data.status === 'fail') {
     createErrorNotification({
-      description: 'Could not fetch block',
+      description: 'Could not fetch traces',
     });
   }
 
