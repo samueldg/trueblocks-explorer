@@ -3,6 +3,7 @@ import { useCommand } from '@hooks/useCommand';
 import { Layout } from 'antd';
 import 'antd/dist/antd.css';
 import React from 'react';
+import { createUseStyles } from 'react-jss';
 import './app.css';
 import { MainMenu } from './components/MainMenu';
 import { HelpPanel } from './components/SidePanels/HelpPanel';
@@ -13,8 +14,13 @@ import { cookieVars } from './utils';
 
 const { Header, Footer, Content } = Layout;
 
+const useStyles = createUseStyles({
+  help_icon: { color: 'green' },
+});
+
 export const App = () => {
   const [status, loading] = useCommand('status');
+  const styles = useStyles();
 
   return (
     <Layout>
@@ -44,8 +50,8 @@ export const App = () => {
               header='Help'
               name={cookieVars.help_expanded}
               dir={PanelDirection.Right}
-              customCollapseIcon={<QuestionCircleFilled style={{color: 'green'}}/>}
-              customExpandIcon={<QuestionCircleFilled style={{color: 'green'}}/>}
+              customCollapseIcon={<QuestionCircleFilled className={styles.help_icon}/>}
+              customExpandIcon={<QuestionCircleFilled className={styles.help_icon}/>}
             >
               <HelpPanel />
             </SidePanel>
