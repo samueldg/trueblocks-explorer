@@ -19,7 +19,7 @@ describe('getUiUrl', () => {
     const result = Helpers.getUiUrl({
       developmentMode: false,
       developmentUrl: '',
-      productionAssetDirectory
+      productionAssetDirectory,
     });
 
     expect(result).toMatch(productionAssetDirectory);

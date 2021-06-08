@@ -1,21 +1,17 @@
-import { NamesFilters } from '@components/Filters';
-import {
-  PageHeader,
-} from 'antd';
-import React, { useCallback } from 'react';
-import { useCommand } from '../../../hooks/useCommand';
+import {NamesFilters} from '@components/Filters';
+import {PageHeader} from 'antd';
+import React, {useCallback} from 'react';
+import {useCommand} from '../../../hooks/useCommand';
 import './NamedAddrs.css';
-import { NamesTable } from './NamedAddrsTable';
+import {NamesTable} from './NamedAddrsTable';
 
 export const NamedAddrs = () => {
-  const [names, loadingNames] = useCommand('names', { expand: true });
+  const [names, loadingNames] = useCommand('names', {expand: true});
   const getNames = useCallback((response) => (response.status === 'fail' ? [] : response.data), []);
 
   return (
     <>
-      <PageHeader
-        title="Names"
-      />
+      <PageHeader title='Names' />
       <NamesFilters />
 
       <NamesTable getNames={() => getNames(names)} loadingNames={loadingNames} />

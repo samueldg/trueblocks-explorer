@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
+import {Route, Switch} from 'react-router-dom';
 import {
   DashboardCollectionsLocation,
   DashboardLocation,
@@ -19,25 +19,19 @@ import {
   NamesSignaturesLocation,
   NamesTagsLocation,
   RootLocation,
-
   SettingsCachesLocation,
   SettingsLocation,
   SettingsSchemasLocation,
   SettingsScrapersLocation,
-  SettingsSkinsLocation, SupportAboutUsLocation,
+  SettingsSkinsLocation,
+  SupportAboutUsLocation,
   SupportContactUsLocation,
   SupportDocumentationLocation,
   SupportHotKeysLocation,
   SupportLicensingLocation,
   SupportLocation,
 } from './locations';
-import {
-  DashboardView,
-  ExplorerView,
-  NamesView,
-
-  SettingsView, SupportView,
-} from './views';
+import {DashboardView, ExplorerView, NamesView, SettingsView, SupportView} from './views';
 
 const routes = [
   {
@@ -188,7 +182,7 @@ const routes = [
 ];
 
 const CustomRoute = (props: any) => {
-  const { path, component, exact } = props;
+  const {path, component, exact} = props;
 
   return <Route path={path} component={component} exact={exact} />;
 };

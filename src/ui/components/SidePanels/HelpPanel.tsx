@@ -1,12 +1,9 @@
-import { Loading } from '@components/Loading';
-import { useCommand } from '@hooks/useCommand';
+import {Loading} from '@components/Loading';
+import {useCommand} from '@hooks/useCommand';
 import React from 'react';
-import { createUseStyles } from 'react-jss';
-import { useLocation } from 'react-router-dom';
-import {
-  DashboardCollectionsLocation,
-  DashboardOverviewLocation,
-} from '../../locations';
+import {createUseStyles} from 'react-jss';
+import {useLocation} from 'react-router-dom';
+import {DashboardCollectionsLocation, DashboardOverviewLocation} from '../../locations';
 
 const useStyles = createUseStyles({});
 
@@ -28,9 +25,7 @@ export const HelpPanel = () => {
   const [help, loading] = useCommand('help');
   const styles = useStyles();
 
-  const matchedRoute = helpRoutes.find(
-    (item) => item.route === location.pathname
-  );
+  const matchedRoute = helpRoutes.find((item) => item.route === location.pathname);
 
   return (
     <Loading loading={loading}>
@@ -41,12 +36,11 @@ export const HelpPanel = () => {
           marginTop: '16px',
           alignItems: 'center',
           letterSpacing: '0.1em',
-        }}
-      >
+        }}>
         {matchedRoute && (
           <div>
             <div>{matchedRoute.helpText}</div>
-            <a href={matchedRoute.helpLink} target="_blank" rel="noreferrer">
+            <a href={matchedRoute.helpLink} target='_blank' rel='noreferrer'>
               Learn more...
             </a>
           </div>

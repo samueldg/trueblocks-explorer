@@ -1,5 +1,3 @@
 import React from 'react';
 
-export const Status = () => (
-  <h4>Status</h4>
-);
+export const Status = () => <h4>Status</h4>;

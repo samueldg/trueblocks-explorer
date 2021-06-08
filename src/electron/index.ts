@@ -1,13 +1,9 @@
-import { app, BrowserWindow } from 'electron';
+import {app, BrowserWindow} from 'electron';
 import developmentMode from 'electron-is-dev';
 import Store from 'electron-store';
-import { getUiUrl, readEnvFile } from './helpers';
+import {getUiUrl, readEnvFile} from './helpers';
 
-
-const {
-  DEV_UI_URL,
-  PRODUCTION_ASSET_DIRECTORY,
-} = readEnvFile();
+const {DEV_UI_URL, PRODUCTION_ASSET_DIRECTORY} = readEnvFile();
 
 const store = new Store();
 

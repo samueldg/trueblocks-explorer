@@ -1,20 +1,18 @@
-import { ColumnType } from 'antd/lib/table';
-import {
-  renderActionsAsColumn, renderFlag,
-  renderTagsWithClickHandler,
-
-  TagClickHandler,
-} from './mappers';
+import {ColumnType} from 'antd/lib/table';
+import {renderActionsAsColumn, renderFlag, renderTagsWithClickHandler, TagClickHandler} from './mappers';
 
 export type ColumnConfiguration<RecordType> = {
-  title: string,
-  dataIndex: string,
-  key?: string,
-  configuration?: ColumnType<RecordType>,
+  title: string;
+  dataIndex: string;
+  key?: string;
+  configuration?: ColumnType<RecordType>;
 };
 
 export function addColumn<RecordType>({
-  title, dataIndex, key, configuration,
+  title,
+  dataIndex,
+  key,
+  configuration,
 }: ColumnConfiguration<RecordType>): ColumnType<RecordType> {
   return {
     title,
@@ -36,7 +34,7 @@ export function addFlagColumn<RecordType>(configuration: ColumnConfiguration<Rec
 
 export function addTagsColumn<RecordType>(
   configuration: ColumnConfiguration<RecordType>,
-  onActionClick: TagClickHandler,
+  onActionClick: TagClickHandler
 ) {
   return {
     ...addColumn(configuration),
@@ -53,9 +51,9 @@ export function addActionsColumn<RecordType>(
     width,
     getComponent,
   }: {
-    width: number,
-    getComponent: (item: RecordType) => JSX.Element,
-  },
+    width: number;
+    getComponent: (item: RecordType) => JSX.Element;
+  }
 ) {
   return {
     ...addColumn(configuration),

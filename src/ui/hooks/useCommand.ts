@@ -1,12 +1,7 @@
-import { either as Either } from 'fp-ts';
-import { pipe } from 'fp-ts/function';
-import { useEffect, useState } from 'react';
-import {
-  CommandParams,
-  CoreCommand,
-  JsonResponse,
-  runCommand,
-} from '../modules/core';
+import {either as Either} from 'fp-ts';
+import {pipe} from 'fp-ts/function';
+import {useEffect, useState} from 'react';
+import {CommandParams, CoreCommand, JsonResponse, runCommand} from '../modules/core';
 
 type DataResult = {
   status: 'success';
@@ -60,9 +55,7 @@ export function toSuccessfulData(responseData: JsonResponse): DataResult {
   };
 }
 
-export function toSuccessfulScraperData(
-  responseData: JsonResponse
-): ScrapeResult {
+export function toSuccessfulScraperData(responseData: JsonResponse): ScrapeResult {
   return {
     status: 'success',
     monitor: responseData.monitor,
@@ -71,7 +64,7 @@ export function toSuccessfulScraperData(
 }
 
 export function useCommand(command: CoreCommand, params?: CommandParams) {
-  const emptyData = { data: [{}], meta: {} };
+  const emptyData = {data: [{}], meta: {}};
   const [response, setData] = useState<Result>(toSuccessfulData(emptyData));
   const [loading, setLoading] = useState(true);
 
@@ -80,10 +73,7 @@ export function useCommand(command: CoreCommand, params?: CommandParams) {
       const eitherResponse = await runCommand(command, params);
       const result: Result = pipe(
         eitherResponse,
-        Either.fold(
-          toFailedResult,
-          (serverResponse) => toSuccessfulData(serverResponse) as Result
-        )
+        Either.fold(toFailedResult, (serverResponse) => toSuccessfulData(serverResponse) as Result)
       );
       setData(result);
       setLoading(false);

@@ -1,9 +1,9 @@
-import React, { useCallback } from 'react';
-import { useCommand } from '../../../hooks/useCommand';
-import { TagTable } from './TagTable';
+import React, {useCallback} from 'react';
+import {useCommand} from '../../../hooks/useCommand';
+import {TagTable} from './TagTable';
 
 export const Tags = () => {
-  const [tag, loadingTag] = useCommand('names', { tags: true });
+  const [tag, loadingTag] = useCommand('names', {tags: true});
   const getTag = useCallback((response) => (response.status === 'fail' ? [] : response.data), []);
 
   return (

@@ -1,18 +1,14 @@
-import { PageHeader, Tabs } from 'antd';
+import {PageHeader, Tabs} from 'antd';
 import Cookies from 'js-cookie';
-import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
-import {
-  DashboardCollectionsLocation,
-  DashboardOverviewLocation,
-  DashboardSystemStatusLocation,
-} from '../..//locations';
-import { cookieVars } from '../../utils';
-import { Collections } from './Tabs/Collections';
-import { Overview } from './Tabs/Overview';
-import { Status } from './Tabs/Status';
+import React, {useState} from 'react';
+import {useHistory} from 'react-router-dom';
+import {DashboardCollectionsLocation, DashboardOverviewLocation, DashboardSystemStatusLocation} from '../..//locations';
+import {cookieVars} from '../../utils';
+import {Collections} from './Tabs/Collections';
+import {Overview} from './Tabs/Overview';
+import {Status} from './Tabs/Status';
 
-const { TabPane } = Tabs;
+const {TabPane} = Tabs;
 
 export const DashboardView = () => {
   const history = useHistory();
@@ -31,13 +27,13 @@ export const DashboardView = () => {
     <>
       <PageHeader title={title} />
       <Tabs defaultActiveKey={currentTab} onChange={(key) => onTabChange(key)}>
-        <TabPane tab="Overview" key={DashboardOverviewLocation}>
+        <TabPane tab='Overview' key={DashboardOverviewLocation}>
           <Overview />
         </TabPane>
-        <TabPane tab="Collections" key={DashboardCollectionsLocation}>
+        <TabPane tab='Collections' key={DashboardCollectionsLocation}>
           <Collections />
         </TabPane>
-        <TabPane tab="System Status" key={DashboardSystemStatusLocation}>
+        <TabPane tab='System Status' key={DashboardSystemStatusLocation}>
           <Status />
         </TabPane>
       </Tabs>

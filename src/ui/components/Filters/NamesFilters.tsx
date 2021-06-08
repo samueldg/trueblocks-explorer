@@ -1,16 +1,16 @@
-import { Checkbox } from 'antd';
-import React, { useCallback, useState } from 'react';
+import {Checkbox} from 'antd';
+import React, {useCallback, useState} from 'react';
 
 export const NamesFilters = () => {
   const [filters, setFilters] = useState<string[]>([]);
   const addFilter = (filterName: string) => setFilters([...filters, filterName]);
-  const removeFilter = (filterToRemove: string) => setFilters(
-    filters.filter((filterName) => filterName !== filterToRemove),
-  );
+  const removeFilter = (filterToRemove: string) =>
+    setFilters(filters.filter((filterName) => filterName !== filterToRemove));
 
-  const onInputChange = useCallback((event, filterName) => (
-    event.target.value ? addFilter(filterName) : removeFilter(filterName)
-  ), []);
+  const onInputChange = useCallback(
+    (event, filterName) => (event.target.value ? addFilter(filterName) : removeFilter(filterName)),
+    []
+  );
 
   return (
     <section>

@@ -1,38 +1,35 @@
-import {
-  either as Either, taskEither as TaskEither,
-} from 'fp-ts';
-import {
-  pipe,
-} from 'fp-ts/function';
+import {either as Either, taskEither as TaskEither} from 'fp-ts';
+import {pipe} from 'fp-ts/function';
 
-export type CoreCommand = 'export'
-| 'list'
-| 'tags'
-| 'names'
-| 'collections'
-| 'abis'
-| 'rm'
-| 'status'
-| 'help'
-| 'scraper'
-| 'blocks'
-| 'transactions'
-| 'receipts'
-| 'logs'
-| 'traces'
-| 'when'
-| 'state'
-| 'tokens'
-| 'quotes'
-| 'slurp'
-| 'where'
-| 'dive';
+export type CoreCommand =
+  | 'export'
+  | 'list'
+  | 'tags'
+  | 'names'
+  | 'collections'
+  | 'abis'
+  | 'rm'
+  | 'status'
+  | 'help'
+  | 'scraper'
+  | 'blocks'
+  | 'transactions'
+  | 'receipts'
+  | 'logs'
+  | 'traces'
+  | 'when'
+  | 'state'
+  | 'tokens'
+  | 'quotes'
+  | 'slurp'
+  | 'where'
+  | 'dive';
 
 export type CommandParams = Record<string, string | boolean | number>;
 
 /* Helper functions that transform the response */
 
-export type JsonResponse = Record<string, any>
+export type JsonResponse = Record<string, any>;
 
 // Extracts JSON from the response
 function turnResponseIntoJson(response: Response) {
@@ -40,7 +37,7 @@ function turnResponseIntoJson(response: Response) {
     // Try to parse response as JSON
     (): Promise<JsonResponse> => response.json(),
     // If there is an error, just keep it
-    Either.toError,
+    Either.toError
   );
 }
 
@@ -57,8 +54,8 @@ function validateStatus(response: Response): TaskEither.TaskEither<Error, Respon
     // is fine, this will use `response` from the line above
     TaskEither.fromPredicate(
       () => response.ok,
-      () => Either.toError(response.statusText),
-    ),
+      () => Either.toError(response.statusText)
+    )
   );
 }
 
@@ -71,13 +68,10 @@ export function runCommand(command: CoreCommand, params?: CommandParams) {
 
   return pipe(
     // Try to call a command and retrieve its output through HTTP
-    TaskEither.tryCatch(
-      () => fetch(url.toString()),
-      Either.toError,
-    ),
+    TaskEither.tryCatch(() => fetch(url.toString()), Either.toError),
     // Validate response status (only if there was no Error)
     TaskEither.chain(validateStatus),
     // Extract JSON from the response
-    TaskEither.chain(turnResponseIntoJson),
+    TaskEither.chain(turnResponseIntoJson)
   )();
 }

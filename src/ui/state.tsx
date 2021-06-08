@@ -1,6 +1,6 @@
 import Cookies from 'js-cookie';
-import React, { createContext, useContext, useReducer } from 'react';
-import { ReactNode } from 'react-markdown';
+import React, {createContext, useContext, useReducer} from 'react';
+import {ReactNode} from 'react-markdown';
 
 const GlobalStateContext = createContext<any[]>([]);
 
@@ -27,7 +27,7 @@ const useGlobalState = () => {
   const [state, dispatch] = useContext(GlobalStateContext);
 
   const setTheme = (theme: any) => {
-    dispatch({ type: 'SET_THEME', theme });
+    dispatch({type: 'SET_THEME', theme});
   };
 
   return {
@@ -36,14 +36,10 @@ const useGlobalState = () => {
   };
 };
 
-export const GlobalStateProvider = ({ children }: { children: ReactNode }) => {
+export const GlobalStateProvider = ({children}: {children: ReactNode}) => {
   const [state, dispatch] = useReducer(GlobalStateReducer, initialState);
 
-  return (
-    <GlobalStateContext.Provider value={[state, dispatch]}>
-      {children}
-    </GlobalStateContext.Provider>
-  );
+  return <GlobalStateContext.Provider value={[state, dispatch]}>{children}</GlobalStateContext.Provider>;
 };
 
 export default useGlobalState;

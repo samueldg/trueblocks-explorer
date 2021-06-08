@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactMarkdown from 'react-markdown';
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import {Prism as SyntaxHighlighter} from 'react-syntax-highlighter';
 
 const t1: string = 'All files in the folder `./src/apps` and in all files in subfolders of that folder are:';
 const l1: string = `Confidential proprietary information of TrueBlocks, LLC

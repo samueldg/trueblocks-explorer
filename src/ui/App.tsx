@@ -1,15 +1,15 @@
-import { useCommand } from '@hooks/useCommand';
-import { Layout } from 'antd';
+import {useCommand} from '@hooks/useCommand';
+import {Layout} from 'antd';
 import 'antd/dist/antd.css';
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import './app.css';
-import { MainMenu } from './components/MainMenu';
-import { HelpPanel } from './components/SidePanels/HelpPanel';
-import { PanelDirection, SidePanel } from './components/SidePanels/SidePanel';
-import { StatusPanel } from './components/SidePanels/StatusPanel';
-import { Routes } from './Routes';
+import {MainMenu} from './components/MainMenu';
+import {HelpPanel} from './components/SidePanels/HelpPanel';
+import {PanelDirection, SidePanel} from './components/SidePanels/SidePanel';
+import {StatusPanel} from './components/SidePanels/StatusPanel';
+import {Routes} from './Routes';
 
-const { Header, Footer, Content } = Layout;
+const {Header, Footer, Content} = Layout;
 
 export const App = () => {
   const [menuExpanded, setMenuExpanded] = useState(false);
@@ -19,15 +19,14 @@ export const App = () => {
 
   return (
     <Layout>
-      <Header className="app-header">TrueBlocks Account Explorer</Header>
+      <Header className='app-header'>TrueBlocks Account Explorer</Header>
       <Layout>
         <SidePanel
-          header="Main menu"
+          header='Main menu'
           dir={PanelDirection.Left}
           expanded={menuExpanded}
           onToggle={setMenuExpanded}
-          collapsibleContent={false}
-        >
+          collapsibleContent={false}>
           <MainMenu />
         </SidePanel>
         <Layout>
@@ -37,27 +36,20 @@ export const App = () => {
                 backgroundColor: 'white',
                 padding: '1rem',
                 overflowY: 'auto',
-              }}
-            >
+              }}>
               {/* View */}
 
               {/* TODO: move it */}
               <Routes />
             </Content>
             <SidePanel
-              header="Status"
+              header='Status'
               expanded={statusExpanded}
               onToggle={setStatusExpanded}
-              dir={PanelDirection.Right}
-            >
+              dir={PanelDirection.Right}>
               <StatusPanel status={status} loading={loading} />
             </SidePanel>
-            <SidePanel
-              header="Help"
-              expanded={helpExpanded}
-              onToggle={setHelpExpanded}
-              dir={PanelDirection.Right}
-            >
+            <SidePanel header='Help' expanded={helpExpanded} onToggle={setHelpExpanded} dir={PanelDirection.Right}>
               <HelpPanel />
             </SidePanel>
           </Layout>

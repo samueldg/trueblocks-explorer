@@ -1,9 +1,9 @@
-import { LeftOutlined, RightOutlined } from '@ant-design/icons';
+import {LeftOutlined, RightOutlined} from '@ant-design/icons';
 import classNames from 'classnames';
-import React, { ReactNode } from 'react';
-import { PanelDirection, PanelHeader } from './PanelHeader';
+import React, {ReactNode} from 'react';
+import {PanelDirection, PanelHeader} from './PanelHeader';
 
-export { PanelDirection };
+export {PanelDirection};
 
 export type PanelProps = {
   children: ReactNode;
@@ -27,10 +27,7 @@ export const Panel = ({
   onToggle,
 }: PanelProps) => {
   const classes = classNames('side-panel');
-  const icons = [
-    customCollapseIcon || <RightOutlined />,
-    customExpandIcon || <LeftOutlined />,
-  ];
+  const icons = [customCollapseIcon || <RightOutlined />, customExpandIcon || <LeftOutlined />];
 
   const [collapseIcon, expandIcon] = (() => {
     if (customCollapseIcon || customExpandIcon) return icons;
@@ -55,15 +52,13 @@ export const Panel = ({
         expanded={expanded}
         iconCollapsed={collapseIcon}
         iconExpanded={expandIcon}
-        onToggle={onToggle}
-      >
+        onToggle={onToggle}>
         <div
           style={{
             display: 'flex',
             justifyContent: 'center',
             padding: '4px 16px',
-          }}
-        >
+          }}>
           {header}
         </div>
       </PanelHeader>

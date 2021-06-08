@@ -1,5 +1,3 @@
 import React from 'react';
 
-export const Schemas = () => (
-  <h4>Schemas</h4>
-);
+export const Schemas = () => <h4>Schemas</h4>;

@@ -1,28 +1,19 @@
-import {
-  addActionsColumn, addColumn,
-
-  TableActions,
-} from '@components/Table';
-import { Signature } from '@modules/data/signature';
-import Table, { ColumnsType } from 'antd/lib/table';
-import { GetRowKey } from 'antd/lib/table/interface';
+import {addActionsColumn, addColumn, TableActions} from '@components/Table';
+import {Signature} from '@modules/data/signature';
+import Table, {ColumnsType} from 'antd/lib/table';
+import {GetRowKey} from 'antd/lib/table/interface';
 import React from 'react';
 
 function getTableActions(item: Signature) {
-  return (
-    <TableActions
-      item={item}
-      onClick={(action, tableItem) => console.log('Clicked action', action, tableItem)}
-    />
-  );
+  return <TableActions item={item} onClick={(action, tableItem) => console.log('Clicked action', action, tableItem)} />;
 }
 
 export const SignatureTable = ({
   getSignature,
   loadingSignature,
 }: {
-  getSignature: () => Signature[],
-  loadingSignature: boolean,
+  getSignature: () => Signature[];
+  loadingSignature: boolean;
 }) => {
   const onSignatureClick = (encoding: string) => console.log('tag click', encoding);
 
@@ -47,16 +38,19 @@ export const SignatureTable = ({
       title: 'Signature',
       dataIndex: 'signature',
     }),
-    addActionsColumn<Signature>({
-      title: '',
-      dataIndex: '',
-    }, {
-      width: 150,
-      getComponent: getTableActions,
-    }),
+    addActionsColumn<Signature>(
+      {
+        title: '',
+        dataIndex: '',
+      },
+      {
+        width: 150,
+        getComponent: getTableActions,
+      }
+    ),
   ];
 
-  const rowKey: GetRowKey<Signature> = ({ signature }, index) => `${signature}${index}`;
+  const rowKey: GetRowKey<Signature> = ({signature}, index) => `${signature}${index}`;
 
   return (
     <Table<Signature>
@@ -64,8 +58,8 @@ export const SignatureTable = ({
       columns={columns}
       dataSource={getSignature()}
       loading={loadingSignature}
-      size="small"
-      scroll={{ x: 1300 }}
+      size='small'
+      scroll={{x: 1300}}
     />
   );
 };

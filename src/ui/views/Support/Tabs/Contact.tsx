@@ -18,7 +18,7 @@ const contact: string = `#### Free Support
 `;
 
 export const Contact = () => (
-  <div style={{ width: '50%' }}>
+  <div style={{width: '50%'}}>
     <ReactMarkdown>{contact}</ReactMarkdown>
   </div>
 );

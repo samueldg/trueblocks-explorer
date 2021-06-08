@@ -1,7 +1,7 @@
 import path from 'path';
-import { pathToFileURL } from 'url';
+import {pathToFileURL} from 'url';
 
-export { readEnvFile } from '../common/readEnvFile';
+export {readEnvFile} from '../common/readEnvFile';
 
 /**
  * Locates the UI and returns the URL to it. Should return react dev server URL
@@ -9,14 +9,12 @@ export { readEnvFile } from '../common/readEnvFile';
  * @param developmentMode - true if in development mode.
  */
 interface GetUiUrl {
-  developmentMode: boolean,
-  developmentUrl: string,
-  productionAssetDirectory: string,
+  developmentMode: boolean;
+  developmentUrl: string;
+  productionAssetDirectory: string;
 }
 
-export function getUiUrl(
-  { developmentMode, developmentUrl, productionAssetDirectory }: GetUiUrl,
-): string {
+export function getUiUrl({developmentMode, developmentUrl, productionAssetDirectory}: GetUiUrl): string {
   if (developmentMode) {
     return developmentUrl;
   }

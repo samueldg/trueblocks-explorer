@@ -1,30 +1,19 @@
-import {
-  addActionsColumn, addColumn,
-  addFlagColumn,
-  addTagsColumn,
-
-  TableActions,
-} from '@components/Table';
-import { Monitor } from '@modules/data/monitor';
-import Table, { ColumnsType } from 'antd/lib/table';
-import { GetRowKey } from 'antd/lib/table/interface';
+import {addActionsColumn, addColumn, addFlagColumn, addTagsColumn, TableActions} from '@components/Table';
+import {Monitor} from '@modules/data/monitor';
+import Table, {ColumnsType} from 'antd/lib/table';
+import {GetRowKey} from 'antd/lib/table/interface';
 import React from 'react';
 
 function getTableActions(item: Monitor) {
-  return (
-    <TableActions
-      item={item}
-      onClick={(action, tableItem) => console.log('Clicked action', action, tableItem)}
-    />
-  );
+  return <TableActions item={item} onClick={(action, tableItem) => console.log('Clicked action', action, tableItem)} />;
 }
 
 export const MonitorsTable = ({
   getMonitors,
   loadingMonitors,
 }: {
-  getMonitors: () => Monitor[],
-  loadingMonitors: boolean,
+  getMonitors: () => Monitor[];
+  loadingMonitors: boolean;
 }) => {
   const onTagClick = (tag: string) => console.log('tag click', tag);
 
@@ -53,13 +42,16 @@ export const MonitorsTable = ({
       title: 'Description',
       dataIndex: 'description',
     }),
-    addTagsColumn({
-      title: 'Tags',
-      dataIndex: 'tags',
-      configuration: {
-        ellipsis: false,
+    addTagsColumn(
+      {
+        title: 'Tags',
+        dataIndex: 'tags',
+        configuration: {
+          ellipsis: false,
+        },
       },
-    }, onTagClick),
+      onTagClick
+    ),
     addFlagColumn({
       title: 'Prefund',
       dataIndex: 'is_prefund',
@@ -80,16 +72,19 @@ export const MonitorsTable = ({
       title: 'Monitor',
       dataIndex: 'mon',
     }),
-    addActionsColumn<Monitor>({
-      title: '',
-      dataIndex: '',
-    }, {
-      width: 150,
-      getComponent: getTableActions,
-    }),
+    addActionsColumn<Monitor>(
+      {
+        title: '',
+        dataIndex: '',
+      },
+      {
+        width: 150,
+        getComponent: getTableActions,
+      }
+    ),
   ];
 
-  const rowKey: GetRowKey<Monitor> = ({ address }, index) => `${address}${index}`;
+  const rowKey: GetRowKey<Monitor> = ({address}, index) => `${address}${index}`;
 
   return (
     <Table<Monitor>
@@ -97,8 +92,8 @@ export const MonitorsTable = ({
       columns={columns}
       dataSource={getMonitors()}
       loading={loadingMonitors}
-      size="small"
-      scroll={{ x: 1300 }}
+      size='small'
+      scroll={{x: 1300}}
     />
   );
 };
