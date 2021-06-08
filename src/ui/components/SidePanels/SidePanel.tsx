@@ -18,7 +18,7 @@ export type SidePanelProps = {
 };
 
 export const SidePanel = (props: SidePanelProps) => {
-  const { children, collapsibleContent, dir, header, name } = props;
+  const { children, collapsibleContent, customCollapseIcon, customExpandIcon, dir, header, name } = props;
   const [expanded, setExpanded] = useState(Cookies.get(name) === 'true');
 
   const onToggle = (expanded: boolean) => {
@@ -28,7 +28,15 @@ export const SidePanel = (props: SidePanelProps) => {
 
   return (
     <Sider style={{ overflowY: 'scroll' }} theme='light' collapsed={!expanded}>
-      <Panel header={header} dir={dir} expanded={expanded} onToggle={onToggle} collapsibleContent={collapsibleContent}>
+      <Panel
+        header={header}
+        dir={dir}
+        expanded={expanded}
+        onToggle={onToggle}
+        collapsibleContent={collapsibleContent}
+        customCollapseIcon={customCollapseIcon}
+        customExpandIcon={customExpandIcon}
+      >
         {children}
       </Panel>
     </Sider>

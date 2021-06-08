@@ -1,3 +1,4 @@
+import { QuestionCircleFilled } from '@ant-design/icons';
 import { useCommand } from '@hooks/useCommand';
 import { Layout } from 'antd';
 import 'antd/dist/antd.css';
@@ -39,7 +40,13 @@ export const App = () => {
             <SidePanel header='Status' name={cookieVars.status_expanded} dir={PanelDirection.Right}>
               <StatusPanel status={status} loading={loading} />
             </SidePanel>
-            <SidePanel header='Help' name={cookieVars.help_expanded} dir={PanelDirection.Right}>
+            <SidePanel
+              header='Help'
+              name={cookieVars.help_expanded}
+              dir={PanelDirection.Right}
+              customCollapseIcon={<QuestionCircleFilled style={{color: 'green'}}/>}
+              customExpandIcon={<QuestionCircleFilled style={{color: 'green'}}/>}
+            >
               <HelpPanel />
             </SidePanel>
           </Layout>
