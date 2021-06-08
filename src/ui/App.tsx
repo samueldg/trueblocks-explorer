@@ -1,20 +1,18 @@
 import { useCommand } from '@hooks/useCommand';
 import { Layout } from 'antd';
 import 'antd/dist/antd.css';
-import React, { useState } from 'react';
+import React from 'react';
 import './app.css';
 import { MainMenu } from './components/MainMenu';
 import { HelpPanel } from './components/SidePanels/HelpPanel';
 import { PanelDirection, SidePanel } from './components/SidePanels/SidePanel';
 import { StatusPanel } from './components/SidePanels/StatusPanel';
 import { Routes } from './Routes';
+import { cookieVars } from './utils';
 
 const { Header, Footer, Content } = Layout;
 
 export const App = () => {
-  const [menuExpanded, setMenuExpanded] = useState(false);
-  const [statusExpanded, setStatusExpanded] = useState(true);
-  const [helpExpanded, setHelpExpanded] = useState(true);
   const [status, loading] = useCommand('status');
 
   return (
@@ -24,8 +22,7 @@ export const App = () => {
         <SidePanel
           header='Main menu'
           dir={PanelDirection.Left}
-          expanded={menuExpanded}
-          onToggle={setMenuExpanded}
+          name={cookieVars.menu_expanded}
           collapsibleContent={false}>
           <MainMenu />
         </SidePanel>
@@ -37,19 +34,12 @@ export const App = () => {
                 padding: '1rem',
                 overflowY: 'auto',
               }}>
-              {/* View */}
-
-              {/* TODO: move it */}
               <Routes />
             </Content>
-            <SidePanel
-              header='Status'
-              expanded={statusExpanded}
-              onToggle={setStatusExpanded}
-              dir={PanelDirection.Right}>
+            <SidePanel header='Status' name={cookieVars.status_expanded} dir={PanelDirection.Right}>
               <StatusPanel status={status} loading={loading} />
             </SidePanel>
-            <SidePanel header='Help' expanded={helpExpanded} onToggle={setHelpExpanded} dir={PanelDirection.Right}>
+            <SidePanel header='Help' name={cookieVars.help_expanded} dir={PanelDirection.Right}>
               <HelpPanel />
             </SidePanel>
           </Layout>

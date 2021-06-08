@@ -6,12 +6,27 @@ const { Sider } = Layout;
 
 export { PanelDirection };
 
-export const SidePanel = (props: PanelProps) => {
-  const { children, collapsibleContent, dir, expanded, header, onToggle } = props;
-  const collapsed = !expanded;
+export type SidePanelProps = {
+  children: ReactNode;
+  collapsibleContent?: boolean;
+  customCollapseIcon?: ReactNode;
+  customExpandIcon?: ReactNode;
+  dir: PanelDirection;
+  header: ReactNode;
+  name: string;
+};
+
+export const SidePanel = (props: SidePanelProps) => {
+  const { children, collapsibleContent, dir, header, name } = props;
+  const [expanded, setExpanded] = useState(Cookies.get(name) === 'true');
+
+  const onToggle = (expanded: boolean) => {
+    Cookies.set(name, expanded ? 'true' : 'false');
+    setExpanded(expanded ? true : false);
+  };
 
   return (
-    <Sider style={{ overflowY: 'scroll' }} theme='light' collapsed={collapsed}>
+    <Sider style={{ overflowY: 'scroll' }} theme='light' collapsed={!expanded}>
       <Panel header={header} dir={dir} expanded={expanded} onToggle={onToggle} collapsibleContent={collapsibleContent}>
         {children}
       </Panel>
