@@ -40,7 +40,7 @@ same software today and serve many active daily users.
 `;
 
 export const About = () => (
-  <div style={{width: '50%'}}>
+  <div style={{ width: '50%' }}>
     <ReactMarkdown>{about}</ReactMarkdown>
   </div>
 );

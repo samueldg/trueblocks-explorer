@@ -1,7 +1,7 @@
-import {addActionsColumn, addColumn, addFlagColumn, addTagsColumn, TableActions} from '@components/Table';
-import {Monitor} from '@modules/data/monitor';
-import Table, {ColumnsType} from 'antd/lib/table';
-import {GetRowKey} from 'antd/lib/table/interface';
+import { addActionsColumn, addColumn, addFlagColumn, addTagsColumn, TableActions } from '@components/Table';
+import { Monitor } from '@modules/data/monitor';
+import Table, { ColumnsType } from 'antd/lib/table';
+import { GetRowKey } from 'antd/lib/table/interface';
 import React from 'react';
 
 function getTableActions(item: Monitor) {
@@ -84,7 +84,7 @@ export const MonitorsTable = ({
     ),
   ];
 
-  const rowKey: GetRowKey<Monitor> = ({address}, index) => `${address}${index}`;
+  const rowKey: GetRowKey<Monitor> = ({ address }, index) => `${address}${index}`;
 
   return (
     <Table<Monitor>
@@ -93,7 +93,7 @@ export const MonitorsTable = ({
       dataSource={getMonitors()}
       loading={loadingMonitors}
       size='small'
-      scroll={{x: 1300}}
+      scroll={{ x: 1300 }}
     />
   );
 };

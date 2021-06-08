@@ -1,27 +1,27 @@
-import {ApiFilled, ClockCircleFilled, ExperimentFilled, EyeFilled} from '@ant-design/icons';
-import {Loading} from '@components/Loading';
-import {Result} from '@hooks/useCommand';
-import {JsonResponse} from '@modules/core';
-import {Badge} from 'antd';
+import { ApiFilled, ClockCircleFilled, ExperimentFilled, EyeFilled } from '@ant-design/icons';
+import { Loading } from '@components/Loading';
+import { Result } from '@hooks/useCommand';
+import { JsonResponse } from '@modules/core';
+import { Badge } from 'antd';
 import filesize from 'filesize';
 import React from 'react';
-import {createUseStyles} from 'react-jss';
+import { createUseStyles } from 'react-jss';
 
 const useStyles = createUseStyles({
-  container: {paddingBottom: '16px'},
+  container: { paddingBottom: '16px' },
   header: {
     fontSize: '16px',
     fontWeight: 600,
     letterSpacing: '0.1em',
     marginBottom: '20px',
   },
-  itemContainer: {marginTop: '12px'},
+  itemContainer: { marginTop: '12px' },
   itemHeader: {
     fontSize: '9px',
     letterSpacing: '0.1em',
     fontWeight: 500,
   },
-  itemIcon: {fontSize: '10px', marginRight: '4px'},
+  itemIcon: { fontSize: '10px', marginRight: '4px' },
   statusItem: {
     fontSize: '9px',
     letterSpacing: '0.1em',
@@ -35,7 +35,7 @@ interface StatusPanelProps {
   loading: boolean;
 }
 
-export const StatusPanel = ({status, loading}: StatusPanelProps) => {
+export const StatusPanel = ({ status, loading }: StatusPanelProps) => {
   const styles = useStyles();
 
   const statusData = status.data[0] as JsonResponse;
@@ -60,7 +60,7 @@ export const StatusPanel = ({status, loading}: StatusPanelProps) => {
           </div>
         </div>
 
-        <div className={styles.header} style={{marginTop: '24px'}}>
+        <div className={styles.header} style={{ marginTop: '24px' }}>
           TRUEBLOCKS
         </div>
         <div className={styles.itemContainer}>
@@ -81,17 +81,17 @@ export const StatusPanel = ({status, loading}: StatusPanelProps) => {
         <div className={styles.itemContainer}>
           <div className={styles.itemHeader}>BLOCKS</div>
           <div>
-            <ApiFilled className={styles.itemIcon} style={{color: '#52c41a'}} />
+            <ApiFilled className={styles.itemIcon} style={{ color: '#52c41a' }} />
             {Intl.NumberFormat().format(statusMeta.finalized)}
             <span className={styles.statusItem}>FINAL</span>
           </div>
           <div>
-            <ApiFilled className={styles.itemIcon} style={{color: '#fadb14'}} />
+            <ApiFilled className={styles.itemIcon} style={{ color: '#fadb14' }} />
             {Intl.NumberFormat().format(statusMeta.staging)}
             <span className={styles.statusItem}>STAGING</span>
           </div>
           <div>
-            <ApiFilled className={styles.itemIcon} style={{color: '#f5222d'}} />
+            <ApiFilled className={styles.itemIcon} style={{ color: '#f5222d' }} />
             {Intl.NumberFormat().format(statusMeta.unripe)}
             <span className={styles.statusItem}>UNRIPE</span>
           </div>
@@ -114,7 +114,7 @@ export const StatusPanel = ({status, loading}: StatusPanelProps) => {
           </div>
         </div>
 
-        <div className={styles.header} style={{marginTop: '24px'}}>
+        <div className={styles.header} style={{ marginTop: '24px' }}>
           OPTIONS
         </div>
 
@@ -143,7 +143,7 @@ export const StatusPanel = ({status, loading}: StatusPanelProps) => {
           <div>{statusData.index_path}</div>
         </div>
 
-        <div className={styles.header} style={{marginTop: '24px'}}>
+        <div className={styles.header} style={{ marginTop: '24px' }}>
           VERSIONS
         </div>
         <div className={styles.itemContainer}>

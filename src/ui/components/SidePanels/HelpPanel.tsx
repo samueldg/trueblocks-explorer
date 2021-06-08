@@ -1,9 +1,9 @@
-import {Loading} from '@components/Loading';
-import {useCommand} from '@hooks/useCommand';
+import { Loading } from '@components/Loading';
+import { useCommand } from '@hooks/useCommand';
 import React from 'react';
-import {createUseStyles} from 'react-jss';
-import {useLocation} from 'react-router-dom';
-import {DashboardCollectionsLocation, DashboardOverviewLocation} from '../../locations';
+import { createUseStyles } from 'react-jss';
+import { useLocation } from 'react-router-dom';
+import { DashboardCollectionsLocation, DashboardOverviewLocation } from '../../locations';
 
 const useStyles = createUseStyles({});
 

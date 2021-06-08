@@ -1,7 +1,7 @@
-import {PageHeader, Tabs} from 'antd';
+import { PageHeader, Tabs } from 'antd';
 import Cookies from 'js-cookie';
-import React, {useState} from 'react';
-import {useHistory} from 'react-router-dom';
+import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import {
   ExplorerBlocksLocation,
   ExplorerIndexesLocation,
@@ -10,15 +10,15 @@ import {
   ExplorerTracesLocation,
   ExplorerTransactionsLocation,
 } from '../../locations';
-import {cookieVars} from '../../utils';
-import {Blocks} from './Tabs/Blocks';
-import {Indexes} from './Tabs/Indexes';
-import {Logs} from './Tabs/Logs';
-import {Receipts} from './Tabs/Receipts';
-import {Traces} from './Tabs/Traces';
-import {Transactions} from './Tabs/Transactions';
+import { cookieVars } from '../../utils';
+import { Blocks } from './Tabs/Blocks';
+import { Indexes } from './Tabs/Indexes';
+import { Logs } from './Tabs/Logs';
+import { Receipts } from './Tabs/Receipts';
+import { Traces } from './Tabs/Traces';
+import { Transactions } from './Tabs/Transactions';
 
-const {TabPane} = Tabs;
+const { TabPane } = Tabs;
 
 export const ExplorerView = () => {
   const history = useHistory();

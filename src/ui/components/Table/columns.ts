@@ -1,5 +1,5 @@
-import {ColumnType} from 'antd/lib/table';
-import {renderActionsAsColumn, renderFlag, renderTagsWithClickHandler, TagClickHandler} from './mappers';
+import { ColumnType } from 'antd/lib/table';
+import { renderActionsAsColumn, renderFlag, renderTagsWithClickHandler, TagClickHandler } from './mappers';
 
 export type ColumnConfiguration<RecordType> = {
   title: string;

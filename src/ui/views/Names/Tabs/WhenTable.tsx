@@ -1,14 +1,14 @@
-import {addActionsColumn, addColumn, TableActions} from '@components/Table';
-import {When} from '@modules/data/when';
-import Table, {ColumnsType} from 'antd/lib/table';
-import {GetRowKey} from 'antd/lib/table/interface';
+import { addActionsColumn, addColumn, TableActions } from '@components/Table';
+import { When } from '@modules/data/when';
+import Table, { ColumnsType } from 'antd/lib/table';
+import { GetRowKey } from 'antd/lib/table/interface';
 import React from 'react';
 
 function getTableActions(item: When) {
   return <TableActions item={item} onClick={(action, tableItem) => console.log('Clicked action', action, tableItem)} />;
 }
 
-export const WhenTable = ({getWhen, loadingWhen}: {getWhen: () => When[]; loadingWhen: boolean}) => {
+export const WhenTable = ({ getWhen, loadingWhen }: { getWhen: () => When[]; loadingWhen: boolean }) => {
   const onTagClick = (tag: string) => console.log('tag click', tag);
 
   const columns: ColumnsType<When> = [
@@ -40,7 +40,7 @@ export const WhenTable = ({getWhen, loadingWhen}: {getWhen: () => When[]; loadin
     ),
   ];
 
-  const rowKey: GetRowKey<When> = ({blockNumber}, index) => `${blockNumber}${index}`;
+  const rowKey: GetRowKey<When> = ({ blockNumber }, index) => `${blockNumber}${index}`;
 
   return (
     <Table<When>
@@ -49,7 +49,7 @@ export const WhenTable = ({getWhen, loadingWhen}: {getWhen: () => When[]; loadin
       dataSource={getWhen()}
       loading={loadingWhen}
       size='small'
-      scroll={{x: 1300}}
+      scroll={{ x: 1300 }}
     />
   );
 };

@@ -1,9 +1,9 @@
-import {ScraperResult, toFailedScrapeResult, toSuccessfulScraperData} from '@hooks/useCommand';
-import {runCommand} from '@modules/core';
-import {Switch} from 'antd';
-import {either} from 'fp-ts';
-import {pipe} from 'fp-ts/lib/function';
-import React, {useEffect, useState} from 'react';
+import { ScraperResult, toFailedScrapeResult, toSuccessfulScraperData } from '@hooks/useCommand';
+import { runCommand } from '@modules/core';
+import { Switch } from 'antd';
+import { either } from 'fp-ts';
+import { pipe } from 'fp-ts/lib/function';
+import React, { useEffect, useState } from 'react';
 
 const formatResponse = (response: either.Either<Error, Record<string, any>>) => {
   const result: ScraperResult = pipe(
@@ -48,7 +48,7 @@ export const Scrapers = () => {
 
   useEffect(() => {
     (async () => {
-      const response = await runCommand('scraper', {status: 'both'});
+      const response = await runCommand('scraper', { status: 'both' });
       const result = formatResponse(response);
       setIndexerOn(result.indexer);
       setMonitorsOn(result.monitor);

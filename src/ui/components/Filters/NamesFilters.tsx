@@ -1,5 +1,5 @@
-import {Checkbox} from 'antd';
-import React, {useCallback, useState} from 'react';
+import { Checkbox } from 'antd';
+import React, { useCallback, useState } from 'react';
 
 export const NamesFilters = () => {
   const [filters, setFilters] = useState<string[]>([]);

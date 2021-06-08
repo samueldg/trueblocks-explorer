@@ -1,8 +1,8 @@
-import {BookOutlined, CameraOutlined, PhoneOutlined, SettingOutlined, UnorderedListOutlined} from '@ant-design/icons';
-import {Menu} from 'antd';
+import { BookOutlined, CameraOutlined, PhoneOutlined, SettingOutlined, UnorderedListOutlined } from '@ant-design/icons';
+import { Menu } from 'antd';
 import React from 'react';
-import {NavLink} from 'react-router-dom';
-import {ExplorerLocation, NamesLocation, RootLocation, SettingsLocation, SupportLocation} from '../../locations';
+import { NavLink } from 'react-router-dom';
+import { ExplorerLocation, NamesLocation, RootLocation, SettingsLocation, SupportLocation } from '../../locations';
 
 export const MainMenu = () => (
   <Menu mode='inline'>

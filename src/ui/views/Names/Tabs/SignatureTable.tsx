@@ -1,7 +1,7 @@
-import {addActionsColumn, addColumn, TableActions} from '@components/Table';
-import {Signature} from '@modules/data/signature';
-import Table, {ColumnsType} from 'antd/lib/table';
-import {GetRowKey} from 'antd/lib/table/interface';
+import { addActionsColumn, addColumn, TableActions } from '@components/Table';
+import { Signature } from '@modules/data/signature';
+import Table, { ColumnsType } from 'antd/lib/table';
+import { GetRowKey } from 'antd/lib/table/interface';
 import React from 'react';
 
 function getTableActions(item: Signature) {
@@ -50,7 +50,7 @@ export const SignatureTable = ({
     ),
   ];
 
-  const rowKey: GetRowKey<Signature> = ({signature}, index) => `${signature}${index}`;
+  const rowKey: GetRowKey<Signature> = ({ signature }, index) => `${signature}${index}`;
 
   return (
     <Table<Signature>
@@ -59,7 +59,7 @@ export const SignatureTable = ({
       dataSource={getSignature()}
       loading={loadingSignature}
       size='small'
-      scroll={{x: 1300}}
+      scroll={{ x: 1300 }}
     />
   );
 };

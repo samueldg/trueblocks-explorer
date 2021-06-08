@@ -1,9 +1,9 @@
-import {LeftOutlined, RightOutlined} from '@ant-design/icons';
+import { LeftOutlined, RightOutlined } from '@ant-design/icons';
 import classNames from 'classnames';
-import React, {ReactNode} from 'react';
-import {PanelDirection, PanelHeader} from './PanelHeader';
+import React, { ReactNode } from 'react';
+import { PanelDirection, PanelHeader } from './PanelHeader';
 
-export {PanelDirection};
+export { PanelDirection };
 
 export type PanelProps = {
   children: ReactNode;

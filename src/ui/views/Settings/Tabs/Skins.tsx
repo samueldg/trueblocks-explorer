@@ -1,10 +1,10 @@
 import React from 'react';
-import {createUseStyles} from 'react-jss';
+import { createUseStyles } from 'react-jss';
 import useGlobalState from '../../../state';
 
 const themeList = [
-  {theme: 'Theme 1', primaryColor: '#FF0000'},
-  {theme: 'Theme 2', primaryColor: '#00FF00'},
+  { theme: 'Theme 1', primaryColor: '#FF0000' },
+  { theme: 'Theme 2', primaryColor: '#00FF00' },
 ];
 
 const useStyles = createUseStyles({
@@ -25,7 +25,7 @@ const useStyles = createUseStyles({
 });
 
 export const Skins = () => {
-  const {theme, setTheme} = useGlobalState();
+  const { theme, setTheme } = useGlobalState();
 
   const styles = useStyles(theme);
 
@@ -35,7 +35,7 @@ export const Skins = () => {
       {themeList.map((theme) => (
         <div className={styles.skinContainer} onClick={() => setTheme(theme)}>
           <div>{theme.theme}:</div>
-          <div style={{backgroundColor: theme.primaryColor}} className={styles.skinItem} />
+          <div style={{ backgroundColor: theme.primaryColor }} className={styles.skinItem} />
         </div>
       ))}
     </div>

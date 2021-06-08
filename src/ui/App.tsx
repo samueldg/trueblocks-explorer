@@ -1,15 +1,15 @@
-import {useCommand} from '@hooks/useCommand';
-import {Layout} from 'antd';
+import { useCommand } from '@hooks/useCommand';
+import { Layout } from 'antd';
 import 'antd/dist/antd.css';
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import './app.css';
-import {MainMenu} from './components/MainMenu';
-import {HelpPanel} from './components/SidePanels/HelpPanel';
-import {PanelDirection, SidePanel} from './components/SidePanels/SidePanel';
-import {StatusPanel} from './components/SidePanels/StatusPanel';
-import {Routes} from './Routes';
+import { MainMenu } from './components/MainMenu';
+import { HelpPanel } from './components/SidePanels/HelpPanel';
+import { PanelDirection, SidePanel } from './components/SidePanels/SidePanel';
+import { StatusPanel } from './components/SidePanels/StatusPanel';
+import { Routes } from './Routes';
 
-const {Header, Footer, Content} = Layout;
+const { Header, Footer, Content } = Layout;
 
 export const App = () => {
   const [menuExpanded, setMenuExpanded] = useState(false);

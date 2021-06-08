@@ -1,5 +1,5 @@
-import {DotenvParseOutput} from 'dotenv';
-import {config} from 'dotenv-safe';
+import { DotenvParseOutput } from 'dotenv';
+import { config } from 'dotenv-safe';
 
 const envConfig = config();
 

@@ -1,5 +1,5 @@
-import {either as Either, taskEither as TaskEither} from 'fp-ts';
-import {pipe} from 'fp-ts/function';
+import { either as Either, taskEither as TaskEither } from 'fp-ts';
+import { pipe } from 'fp-ts/function';
 
 export type CoreCommand =
   | 'export'

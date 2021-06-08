@@ -3,7 +3,7 @@ import * as Mappers from './mappers';
 
 describe('Table/mappers module', () => {
   test('renderFlag returns correct components', () => {
-    const {renderFlag} = Mappers;
+    const { renderFlag } = Mappers;
 
     const treeWhenNoFlag = renderer.create(renderFlag(undefined)).toJSON();
 
@@ -31,7 +31,7 @@ describe('Table/mappers module', () => {
   test('renderActionsAsColumn uses getActions function', () => {
     const getActions = jest.fn();
     const expectedColumnWidth = 100;
-    const record = {a: 1};
+    const record = { a: 1 };
 
     const getColumn = Mappers.renderActionsAsColumn(expectedColumnWidth);
     const result = getColumn(getActions);

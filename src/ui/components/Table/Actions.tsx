@@ -1,11 +1,11 @@
-import {DeleteOutlined, EditOutlined, InfoCircleOutlined, PlusCircleOutlined} from '@ant-design/icons';
-import {Button} from 'antd';
-import PropTypes, {InferType} from 'prop-types';
-import React, {useCallback} from 'react';
+import { DeleteOutlined, EditOutlined, InfoCircleOutlined, PlusCircleOutlined } from '@ant-design/icons';
+import { Button } from 'antd';
+import PropTypes, { InferType } from 'prop-types';
+import React, { useCallback } from 'react';
 
 type Action = 'details' | 'remove' | 'edit' | 'addMonitor';
 
-export function TableActions({item, onClick}: InferType<typeof TableActions.propTypes>) {
+export function TableActions({ item, onClick }: InferType<typeof TableActions.propTypes>) {
   const createOnClick = useCallback((action: Action) => () => onClick(action, item), []);
 
   return (

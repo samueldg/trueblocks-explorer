@@ -1,5 +1,5 @@
 import * as Either from 'fp-ts/lib/Either';
-import fetchMock, {enableFetchMocks} from 'jest-fetch-mock';
+import fetchMock, { enableFetchMocks } from 'jest-fetch-mock';
 import * as Core from './index';
 
 enableFetchMocks();
@@ -8,7 +8,7 @@ describe('runCommand', () => {
   it('returns JSON response', async () => {
     expect.assertions(2);
 
-    const expectedResponse = {test: true};
+    const expectedResponse = { test: true };
     fetchMock.mockImplementationOnce(() =>
       Promise.resolve({
         status: 200,
@@ -17,7 +17,7 @@ describe('runCommand', () => {
       } as Response)
     );
 
-    const eitherResponse = await Core.runCommand('abis', {param1: 'value'});
+    const eitherResponse = await Core.runCommand('abis', { param1: 'value' });
 
     expect(Either.isRight(eitherResponse)).toBe(true);
 
@@ -42,7 +42,7 @@ describe('runCommand', () => {
       } as Response)
     );
 
-    const eitherResponse = await Core.runCommand('abis', {param1: 'value'});
+    const eitherResponse = await Core.runCommand('abis', { param1: 'value' });
 
     expect(Either.isLeft(eitherResponse)).toBe(true);
 
@@ -60,7 +60,7 @@ describe('runCommand', () => {
     const connectionError = new Error('Connection broken');
     fetchMock.mockImplementationOnce(() => Promise.reject(connectionError));
 
-    const eitherResponse = await Core.runCommand('abis', {param1: 'value'});
+    const eitherResponse = await Core.runCommand('abis', { param1: 'value' });
 
     expect(Either.isLeft(eitherResponse)).toBe(true);
 

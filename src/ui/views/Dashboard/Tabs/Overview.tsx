@@ -1,8 +1,8 @@
-import {createErrorNotification} from '@modules/error_notification';
-import {Button, notification} from 'antd';
+import { createErrorNotification } from '@modules/error_notification';
+import { Button, notification } from 'antd';
 import React from 'react';
 
-const showError = () => notification.error(createErrorNotification({description: 'Just testing'}));
+const showError = () => notification.error(createErrorNotification({ description: 'Just testing' }));
 
 export const Overview = () => (
   <>
