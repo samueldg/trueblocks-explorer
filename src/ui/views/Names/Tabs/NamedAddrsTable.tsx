@@ -1,16 +1,26 @@
 import { addActionsColumn, addColumn, addFlagColumn, addTagsColumn, TableActions } from '@components/Table';
 import { Name } from '@modules/data/name';
 import Table, { ColumnsType } from 'antd/lib/table';
-import { GetRowKey } from 'antd/lib/table/interface';
-import React from 'react';
+import React, { useState } from 'react';
+import { useKeyBindings } from '../../../utils';
 
 function getTableActions(item: Name) {
   return <TableActions item={item} onClick={(action, tableItem) => console.log('Clicked action', action, tableItem)} />;
 }
 
+export const CustomRow = (props: any) => {
+  if (props.className.indexOf('ant-table-expanded-row') >= 0) return <tr {...props} />;
+  else return <tr {...props} tabindex={0} />;
+};
+
 export const NamesTable = ({ getNames, loadingNames }: { getNames: () => Name[]; loadingNames: boolean }) => {
   const onTagClick = (tag: string) => console.log('tag click', tag);
+  const [expandedRowKeys, setExpandedRowKeys] = useState<readonly React.ReactText[]>([]);
+  const { handleOnFocus, handleOnBlur } = useKeyBindings(expandedRowKeys, setExpandedRowKeys);
 
+  const components = {
+    body: { row: CustomRow },
+  };
   const columns: ColumnsType<Name> = [
     addColumn<Name>({
       title: 'Address',
@@ -94,16 +104,33 @@ export const NamesTable = ({ getNames, loadingNames }: { getNames: () => Name[];
     ),
   ];
 
-  const rowKey: GetRowKey<Name> = ({ address }, index) => `${address}${index}`;
+  const dataSource = getNames().map((item, i) => {
+    return {
+      id: (i + 1).toString(),
+      ...item,
+    };
+  });
 
   return (
-    <Table<Name>
-      rowKey={rowKey}
-      columns={columns}
-      dataSource={getNames()}
-      loading={loadingNames}
-      size='small'
-      scroll={{ x: 1300 }}
-    />
+    <div onFocus={handleOnFocus} onBlur={handleOnBlur}>
+      <Table<Name>
+        rowKey={'id'}
+        components={components}
+        columns={columns}
+        dataSource={dataSource}
+        loading={loadingNames}
+        rowClassName={(record, index) => 'row-' + index}
+        size='small'
+        scroll={{ x: 1300 }}
+        expandable={{
+          onExpandedRowsChange: (expandedRowKeys) => {
+            // console.log(expandedRowKeys);
+            setExpandedRowKeys(expandedRowKeys);
+          },
+          expandedRowKeys: expandedRowKeys,
+          expandedRowRender: (rowset) => <div>hello</div>,
+        }}
+      />
+    </div>
   );
 };
