@@ -63,13 +63,13 @@ export const useKeyBindings = (expandedRowKeys: readonly React.ReactText[], setE
   const handleUpKey = useCallback(
     (event) => {
       // If activeElement is a TR element or has any of it's parent as TR element, then we must look for next TR element
-      if (isFocused && event.target) {
+      if (event.target) {
         // let's check if this itself is a TR element, if not, lets find one
         const currentRow =
           event.target.tagName === 'TR'
             ? event.target
             : event.target.parents?.find((element: HTMLElement) => element.tagName === 'TR') ??
-              event.target.querySelector('tr');
+              event.target.querySelector(`tr[data-row-key]`);
 
         if (currentRow) {
           if (document.activeElement?.isSameNode(currentRow)) {
@@ -94,15 +94,16 @@ export const useKeyBindings = (expandedRowKeys: readonly React.ReactText[], setE
   const handleDownKey = useCallback(
     (event) => {
       // If activeElement is a TR element or has any of it's parent as TR element, then we must look for next TR element
-      if (isFocused && event.target) {
+      if (event.target) {
         // let's check if this itself is a TR element, if not, lets find one
         const currentRow =
           event.target.tagName === 'TR'
             ? event.target
             : event.target.parents?.find((element: HTMLElement) => element.tagName === 'TR') ??
-              event.target.querySelector('tr');
+              event.target.querySelector(`tr[data-row-key]`);
 
         if (currentRow) {
+          console.log('yo');
           if (document.activeElement?.isSameNode(currentRow)) {
             // look for next sibling
             let nextSibling = currentRow.nextElementSibling;
@@ -150,13 +151,13 @@ export const useKeyBindings = (expandedRowKeys: readonly React.ReactText[], setE
   const handleHomeKey = useCallback(
     (event) => {
       // If activeElement is a TR element or has any of it's parent as TR element, then we must look for next TR element
-      if (isFocused && event.target) {
+      if (event.target) {
         // let's check if this itself is a TR element, if not, lets find one
         const currentRow =
           event.target.tagName === 'TR'
             ? event.target
             : event.target.parents?.find((element: HTMLElement) => element.tagName === 'TR') ??
-              event.target.querySelector('tr');
+              event.target.querySelector(`tr[data-row-key]`);
 
         if (currentRow) {
           if (document.activeElement?.isSameNode(currentRow)) {
@@ -178,13 +179,13 @@ export const useKeyBindings = (expandedRowKeys: readonly React.ReactText[], setE
   const handleEndKey = useCallback(
     (event) => {
       // If activeElement is a TR element or has any of it's parent as TR element, then we must look for next TR element
-      if (isFocused && event.target) {
+      if (event.target) {
         // let's check if this itself is a TR element, if not, lets find one
         const currentRow =
           event.target.tagName === 'TR'
             ? event.target
-            : event.target.parents.find((element: HTMLElement) => element.tagName === 'TR') ??
-              event.target.querySelector('tr');
+            : event.target.parents?.find((element: HTMLElement) => element.tagName === 'TR') ??
+              event.target.querySelector(`tr[data-row-key]`);
 
         if (currentRow) {
           if (document.activeElement?.isSameNode(currentRow)) {
