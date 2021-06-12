@@ -3,8 +3,9 @@ import { Result, toFailedResult, toSuccessfulData } from '@hooks/useCommand';
 import { runCommand } from '@modules/core';
 import { Layout } from 'antd';
 import 'antd/dist/antd.css';
+import { either as Either } from 'fp-ts';
 import { pipe } from 'fp-ts/lib/function';
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { createUseStyles } from 'react-jss';
 import './app.css';
 import { MainMenu } from './components/MainMenu';
@@ -12,7 +13,6 @@ import { HelpPanel } from './components/SidePanels/HelpPanel';
 import { PanelDirection, SidePanel } from './components/SidePanels/SidePanel';
 import { StatusPanel } from './components/SidePanels/StatusPanel';
 import { Routes } from './Routes';
-import { either as Either } from 'fp-ts';
 import { cookieVars } from './utils';
 
 const { Header, Footer, Content } = Layout;
@@ -28,22 +28,22 @@ export const App = () => {
 
   useEffect(() => {
     (async () => {
-      setLoadingStatus(true);
+      // setLoadingStatus(true);
       const eitherResponse = await runCommand('status');
       const result: Result = pipe(
         eitherResponse,
         Either.fold(toFailedResult, (serverResponse) => toSuccessfulData(serverResponse) as Result)
       );
-      setLoadingStatus(false);
+      // setLoadingStatus(false);
       setStatus(result);
       setInterval(async () => {
-        setLoadingStatus(true);
+        // setLoadingStatus(true);
         const eitherResponse = await runCommand('status');
         const result: Result = pipe(
           eitherResponse,
           Either.fold(toFailedResult, (serverResponse) => toSuccessfulData(serverResponse) as Result)
         );
-        setLoadingStatus(false);
+        // setLoadingStatus(false);
         setStatus(result);
       }, 10 * 1000);
     })();

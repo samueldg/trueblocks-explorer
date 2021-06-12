@@ -20,11 +20,11 @@ import {
 export const helpRoutes = [
   {
     route: RootLocation,
-    helpText: 'You are on the dashboard page.',
+    helpText: 'The dashboard overview page gives you an overview of your holdings among other things.',
   },
   {
     route: DashboardLocation,
-    helpText: 'You are on the dashboard page.',
+    helpText: 'The dashboard overview page gives you an overview of your holdings among other things.',
   },
   {
     route: DashboardOverviewLocation,
@@ -40,7 +40,7 @@ export const helpRoutes = [
   },
   {
     route: NamesLocation,
-    helpText: 'The names component allows you to manage and edit various named objects including addresses, function signatures, and blocks',
+    helpText: 'Monitors are named addresses that you\'ve indicated are \'of interest\' and should be monitored by the scrapers.',
   },
   {
     route: NamesMonitorsLocation,
@@ -64,7 +64,7 @@ export const helpRoutes = [
   },
   {
     route: ExplorerLocation,
-    helpText: 'The Explorer gives basic block chain explorer options.',
+    helpText: 'View the contents of the TrueBlocks index cache.',
   },
   {
     route: ExplorerIndexesLocation,
@@ -92,7 +92,7 @@ export const helpRoutes = [
   },
   {
     route: SettingsLocation,
-    helpText: 'The settings menu item allows you to modify / edit settings.',
+    helpText: 'This screen allows you to adjust the way TrueBlocks two scrapers work.',
   },
   {
     route: SettingsScrapersLocation,
@@ -112,7 +112,7 @@ export const helpRoutes = [
   },
   {
     route: SupportLocation,
-    helpText: 'Support provides various access to the explorer\'s screens.',
+    helpText: 'Information on contacting TrueBlocks, LLC.',
   },
   {
     route: SupportContactUsLocation,
