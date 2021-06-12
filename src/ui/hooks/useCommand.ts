@@ -11,8 +11,8 @@ type DataResult = {
 
 type ScrapeResult = {
   status: 'success';
-  monitor: boolean;
-  indexer: boolean;
+  monitor: JsonResponse;
+  indexer: JsonResponse;
 };
 
 type FailedResult = {
@@ -23,8 +23,8 @@ type FailedResult = {
 
 type FailedScrapeResult = {
   status: 'fail';
-  monitor: boolean;
-  indexer: boolean;
+  monitor: JsonResponse;
+  indexer: JsonResponse;
 };
 
 export type Result = DataResult | FailedResult;
@@ -42,8 +42,8 @@ export function toFailedResult(error: Error): FailedResult {
 export function toFailedScrapeResult(error: Error): FailedScrapeResult {
   return {
     status: 'fail',
-    monitor: false,
-    indexer: false,
+    monitor: {Running: false},
+    indexer: {Running: false},
   };
 }
 
