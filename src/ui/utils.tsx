@@ -32,7 +32,13 @@ const getSiblings = (e: any) => {
   return siblings;
 };
 
-export const useKeyBindings = (expandedRowKeys: readonly React.ReactText[], setExpandedRowKeys: any) => {
+export const useKeyBindings = (
+  expandedRowKeys: readonly React.ReactText[],
+  setExpandedRowKeys: any,
+  currentPage: number,
+  nextPage: () => void,
+  previousPage: () => void
+) => {
   const [isFocused, setIsFocused] = useState(false);
 
   useEffect(() => {
@@ -79,11 +85,15 @@ export const useKeyBindings = (expandedRowKeys: readonly React.ReactText[], setE
           if (document.activeElement?.isSameNode(currentRow)) {
             // look for previous sibling
             let previousSibling = currentRow.previousElementSibling;
-            while (!previousSibling?.getAttribute('data-row-key')) {
-              previousSibling = previousSibling.previousElementSibling;
-              if (!previousSibling) break;
+            if (!previousSibling.getAttribute('data-row-key')) {
+              previousPage();
+            } else {
+              while (!previousSibling?.getAttribute('data-row-key')) {
+                previousSibling = previousSibling.previousElementSibling;
+                if (!previousSibling) break;
+              }
+              previousSibling?.focus();
             }
-            previousSibling?.focus();
           } else {
             // highlight itself
             currentRow.focus();
@@ -91,7 +101,7 @@ export const useKeyBindings = (expandedRowKeys: readonly React.ReactText[], setE
         }
       }
     },
-    [isFocused]
+    [isFocused, currentPage]
   );
 
   // Go to next row
@@ -110,11 +120,15 @@ export const useKeyBindings = (expandedRowKeys: readonly React.ReactText[], setE
           if (document.activeElement?.isSameNode(currentRow)) {
             // look for next sibling
             let nextSibling = currentRow.nextElementSibling;
-            while (!nextSibling?.getAttribute('data-row-key')) {
-              nextSibling = nextSibling.nextElementSibling;
-              if (!nextSibling) break;
+            if (!nextSibling) {
+              nextPage();
+            } else {
+              while (!nextSibling?.getAttribute('data-row-key')) {
+                nextSibling = nextSibling.nextElementSibling;
+                if (!nextSibling) break;
+              }
+              nextSibling?.focus();
             }
-            nextSibling?.focus();
           } else {
             // highlight itself
             currentRow.focus();
@@ -122,7 +136,7 @@ export const useKeyBindings = (expandedRowKeys: readonly React.ReactText[], setE
         }
       }
     },
-    [isFocused]
+    [isFocused, currentPage]
   );
 
   const handleEnterKey = useCallback(

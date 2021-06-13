@@ -17,8 +17,14 @@ export const CustomRow = (props: any) => {
 export const NamesTable = ({ getNames, loadingNames }: { getNames: () => Name[]; loadingNames: boolean }) => {
   const onTagClick = (tag: string) => console.log('tag click', tag);
   const [expandedRowKeys, setExpandedRowKeys] = useState<readonly React.ReactText[]>([]);
-  const { handleOnFocus, handleOnBlur } = useKeyBindings(expandedRowKeys, setExpandedRowKeys);
   const [currentPage, setCurrentPage] = useState(1);
+  const { handleOnFocus, handleOnBlur } = useKeyBindings(
+    expandedRowKeys,
+    setExpandedRowKeys,
+    currentPage,
+    () => setCurrentPage(currentPage + 1),
+    () => currentPage > 1 && setCurrentPage(currentPage - 1)
+  );
 
   useHotkeys('left', () => currentPage > 1 && setCurrentPage(currentPage - 1), [currentPage]);
   useHotkeys('right', () => setCurrentPage(currentPage + 1), [currentPage]);
