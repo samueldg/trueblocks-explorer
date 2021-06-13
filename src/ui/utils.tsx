@@ -105,7 +105,7 @@ export const useKeyBindings = (
         }
       }
     },
-    [isFocused, currentPage]
+    [isFocused, currentPage, dataLength]
   );
 
   // Go to next row
@@ -166,7 +166,7 @@ export const useKeyBindings = (
         }
       }
     },
-    [isFocused, setExpandedRowKeys, expandedRowKeys]
+    [isFocused, setExpandedRowKeys, expandedRowKeys, dataLength]
   );
 
   const handleHomeKey = useCallback(
@@ -194,7 +194,7 @@ export const useKeyBindings = (
         }
       }
     },
-    [isFocused, currentPage]
+    [isFocused, currentPage, dataLength]
   );
 
   const handleEndKey = useCallback(
