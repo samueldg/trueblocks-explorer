@@ -2,6 +2,7 @@ import { addActionsColumn, addColumn, addFlagColumn, addTagsColumn, TableActions
 import { Name } from '@modules/data/name';
 import Table, { ColumnsType } from 'antd/lib/table';
 import React, { useState } from 'react';
+import { useHotkeys } from 'react-hotkeys-hook';
 import { useKeyBindings } from '../../../utils';
 
 function getTableActions(item: Name) {
@@ -17,6 +18,10 @@ export const NamesTable = ({ getNames, loadingNames }: { getNames: () => Name[];
   const onTagClick = (tag: string) => console.log('tag click', tag);
   const [expandedRowKeys, setExpandedRowKeys] = useState<readonly React.ReactText[]>([]);
   const { handleOnFocus, handleOnBlur } = useKeyBindings(expandedRowKeys, setExpandedRowKeys);
+  const [currentPage, setCurrentPage] = useState(1);
+
+  useHotkeys('left', () => currentPage > 1 && setCurrentPage(currentPage - 1), [currentPage]);
+  useHotkeys('right', () => setCurrentPage(currentPage + 1), [currentPage]);
 
   const components = {
     body: { row: CustomRow },
@@ -119,6 +124,7 @@ export const NamesTable = ({ getNames, loadingNames }: { getNames: () => Name[];
         columns={columns}
         dataSource={dataSource}
         loading={loadingNames}
+        pagination={{ current: currentPage, onChange: (page) => setCurrentPage(page) }}
         rowClassName={(record, index) => 'row-' + index}
         size='small'
         scroll={{ x: 1300 }}

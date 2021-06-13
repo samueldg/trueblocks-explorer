@@ -12,6 +12,26 @@ export const cookieVars = {
   help_expanded: 'HELP_EXPANDED',
 };
 
+const getSiblings = (e: any) => {
+  // for collecting siblings
+  let siblings: any[] = [];
+  // if no parent, return no sibling
+  if (!e.parentNode) {
+    return siblings;
+  }
+  // first child of the parent node
+  let sibling = e.parentNode.firstChild;
+
+  // collecting siblings
+  while (sibling) {
+    if (sibling.nodeType === 1 && sibling !== e) {
+      siblings.push(sibling);
+    }
+    sibling = sibling.nextSibling;
+  }
+  return siblings;
+};
+
 export const useKeyBindings = (expandedRowKeys: readonly React.ReactText[], setExpandedRowKeys: any) => {
   const [isFocused, setIsFocused] = useState(false);
 
@@ -43,13 +63,13 @@ export const useKeyBindings = (expandedRowKeys: readonly React.ReactText[], setE
   const handleUpKey = useCallback(
     (event) => {
       // If activeElement is a TR element or has any of it's parent as TR element, then we must look for next TR element
-      if (isFocused && event.target) {
+      if (event.target) {
         // let's check if this itself is a TR element, if not, lets find one
         const currentRow =
           event.target.tagName === 'TR'
             ? event.target
-            : event.target.parents.find((element: HTMLElement) => element.tagName === 'TR') ??
-              event.target.querySelector('tr');
+            : event.target.parents?.find((element: HTMLElement) => element.tagName === 'TR') ??
+              event.target.querySelector(`tr[data-row-key]`);
 
         if (currentRow) {
           if (document.activeElement?.isSameNode(currentRow)) {
@@ -74,15 +94,16 @@ export const useKeyBindings = (expandedRowKeys: readonly React.ReactText[], setE
   const handleDownKey = useCallback(
     (event) => {
       // If activeElement is a TR element or has any of it's parent as TR element, then we must look for next TR element
-      if (isFocused && event.target) {
+      if (event.target) {
         // let's check if this itself is a TR element, if not, lets find one
         const currentRow =
           event.target.tagName === 'TR'
             ? event.target
-            : event.target.parents.find((element: HTMLElement) => element.tagName === 'TR') ??
-              event.target.querySelector('tr');
+            : event.target.parents?.find((element: HTMLElement) => element.tagName === 'TR') ??
+              event.target.querySelector(`tr[data-row-key]`);
 
         if (currentRow) {
+          console.log('yo');
           if (document.activeElement?.isSameNode(currentRow)) {
             // look for next sibling
             let nextSibling = currentRow.nextElementSibling;
@@ -101,8 +122,7 @@ export const useKeyBindings = (expandedRowKeys: readonly React.ReactText[], setE
     [isFocused]
   );
 
-  // Expand Row
-  const handleRightKey = useCallback(
+  const handleEnterKey = useCallback(
     (event) => {
       // If activeElement is a TR element or has any of it's parent as TR element, then we must look for next TR element
       if (isFocused && event.target) {
@@ -110,14 +130,17 @@ export const useKeyBindings = (expandedRowKeys: readonly React.ReactText[], setE
         const currentRow =
           event.target.tagName === 'TR'
             ? event.target
-            : event.target.parents.find((element: HTMLElement) => element.tagName === 'TR') ??
+            : event.target.parents?.find((element: HTMLElement) => element.tagName === 'TR') ??
               event.target.querySelector('tr');
 
         if (currentRow) {
           if (document.activeElement?.isSameNode(currentRow)) {
-            // look for previous sibling
             const rowKey = currentRow.getAttribute('data-row-key');
-            setExpandedRowKeys(Array.from(new Set([...expandedRowKeys, rowKey])));
+            if (expandedRowKeys.find((key) => key === rowKey)) {
+              setExpandedRowKeys(expandedRowKeys.filter((keys) => keys !== rowKey));
+            } else {
+              setExpandedRowKeys(Array.from(new Set([...expandedRowKeys, rowKey])));
+            }
           }
         }
       }
@@ -125,37 +148,86 @@ export const useKeyBindings = (expandedRowKeys: readonly React.ReactText[], setE
     [isFocused, setExpandedRowKeys, expandedRowKeys]
   );
 
-  // Collapse Row
-  const handleLeftKey = useCallback(
+  const handleHomeKey = useCallback(
     (event) => {
       // If activeElement is a TR element or has any of it's parent as TR element, then we must look for next TR element
-      if (isFocused && event.target) {
+      if (event.target) {
         // let's check if this itself is a TR element, if not, lets find one
         const currentRow =
           event.target.tagName === 'TR'
             ? event.target
-            : event.target.parents.find((element: HTMLElement) => element.tagName === 'TR') ??
-              event.target.querySelector('tr');
+            : event.target.parents?.find((element: HTMLElement) => element.tagName === 'TR') ??
+              event.target.querySelector(`tr[data-row-key]`);
 
         if (currentRow) {
           if (document.activeElement?.isSameNode(currentRow)) {
             // look for previous sibling
-            const rowKey = currentRow.getAttribute('data-row-key');
-            setExpandedRowKeys(expandedRowKeys.filter((keys) => keys !== rowKey));
+            const siblings = getSiblings(currentRow);
+            if (siblings && siblings.length > 0) {
+              siblings[1].focus();
+            }
+          } else {
+            // highlight itself
+            currentRow.focus();
           }
         }
       }
     },
-    [isFocused, setExpandedRowKeys, expandedRowKeys]
+    [isFocused]
+  );
+
+  const handleEndKey = useCallback(
+    (event) => {
+      // If activeElement is a TR element or has any of it's parent as TR element, then we must look for next TR element
+      if (event.target) {
+        // let's check if this itself is a TR element, if not, lets find one
+        const currentRow =
+          event.target.tagName === 'TR'
+            ? event.target
+            : event.target.parents?.find((element: HTMLElement) => element.tagName === 'TR') ??
+              event.target.querySelector(`tr[data-row-key]`);
+
+        if (currentRow) {
+          if (document.activeElement?.isSameNode(currentRow)) {
+            // look for previous sibling
+            const siblings = getSiblings(currentRow);
+            if (siblings && siblings.length > 0) {
+              siblings[siblings.length - 1].focus();
+            }
+          } else {
+            // highlight itself
+            currentRow.focus();
+          }
+        }
+      }
+    },
+    [isFocused]
   );
 
   useHotkeys('up', handleUpKey, [handleUpKey]);
   useHotkeys('down', handleDownKey, [handleDownKey]);
-  useHotkeys('right', handleRightKey, [handleRightKey]);
-  useHotkeys('left', handleLeftKey, [handleLeftKey]);
+  useHotkeys('enter', handleEnterKey, [handleEnterKey]);
+  useHotkeys(',, home', handleHomeKey, [handleHomeKey]);
+  useHotkeys('., end', handleEndKey, [handleEndKey]);
 
   return {
     handleOnFocus,
     handleOnBlur,
   };
 };
+
+export function triggerFocus(element: any) {
+  var eventType = 'onfocusin' in element ? 'focusin' : 'focus',
+    bubbles = 'onfocusin' in element,
+    event;
+
+  if ('createEvent' in document) {
+    event = document.createEvent('Event');
+    event.initEvent(eventType, bubbles, true);
+  } else if ('Event' in window) {
+    event = new Event(eventType, { bubbles: bubbles, cancelable: true });
+  }
+
+  element.focus();
+  element.dispatchEvent(event);
+}
