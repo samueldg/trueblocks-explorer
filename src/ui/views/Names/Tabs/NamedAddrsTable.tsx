@@ -39,9 +39,10 @@ export const NamesTable = ({ getNames, loadingNames }: { getNames: () => Name[];
     () => setCurrentPage(Math.ceil(dataSource.length / pageSize))
   );
 
-  useHotkeys('left', () => currentPage > 1 && setCurrentPage(currentPage - 1), [currentPage]);
+  useHotkeys('left', () => currentPage > 1 && setCurrentPage(currentPage - 1), [currentPage, dataSource]);
   useHotkeys('right', () => currentPage < Math.ceil(dataSource.length / pageSize) && setCurrentPage(currentPage + 1), [
     currentPage,
+    dataSource,
   ]);
 
   const components = {

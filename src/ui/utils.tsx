@@ -140,7 +140,7 @@ export const useKeyBindings = (
         }
       }
     },
-    [isFocused, currentPage]
+    [isFocused, currentPage, dataLength]
   );
 
   const handleEnterKey = useCallback(
