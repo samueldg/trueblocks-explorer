@@ -37,7 +37,8 @@ export const useKeyBindings = (
   setExpandedRowKeys: any,
   currentPage: number,
   nextPage: () => void,
-  previousPage: () => void
+  previousPage: () => void,
+  firstPage: () => void
 ) => {
   const [isFocused, setIsFocused] = useState(false);
 
@@ -167,30 +168,30 @@ export const useKeyBindings = (
 
   const handleHomeKey = useCallback(
     (event) => {
-      // If activeElement is a TR element or has any of it's parent as TR element, then we must look for next TR element
-      if (event.target) {
-        // let's check if this itself is a TR element, if not, lets find one
-        const currentRow =
-          event.target.tagName === 'TR'
-            ? event.target
-            : event.target.parents?.find((element: HTMLElement) => element.tagName === 'TR') ??
-              event.target.querySelector(`tr[data-row-key]`);
+      if (currentPage !== 1) {
+        firstPage();
+      } else {
+        if (event.target) {
+          const currentRow =
+            event.target.tagName === 'TR'
+              ? event.target
+              : event.target.parents?.find((element: HTMLElement) => element.tagName === 'TR') ??
+                event.target.querySelector(`tr[data-row-key]`);
 
-        if (currentRow) {
-          if (document.activeElement?.isSameNode(currentRow)) {
-            // look for previous sibling
-            const siblings = getSiblings(currentRow);
-            if (siblings && siblings.length > 0) {
-              siblings[1].focus();
+          if (currentRow) {
+            if (document.activeElement?.isSameNode(currentRow)) {
+              const siblings = getSiblings(currentRow);
+              if (siblings && siblings.length > 0 && currentRow.getAttribute('data-row-key').toString() !== '1') {
+                siblings[1].focus();
+              }
+            } else {
+              currentRow.focus();
             }
-          } else {
-            // highlight itself
-            currentRow.focus();
           }
         }
       }
     },
-    [isFocused]
+    [isFocused, currentPage]
   );
 
   const handleEndKey = useCallback(
@@ -208,7 +209,11 @@ export const useKeyBindings = (
           if (document.activeElement?.isSameNode(currentRow)) {
             // look for previous sibling
             const siblings = getSiblings(currentRow);
-            if (siblings && siblings.length > 0) {
+            if (
+              siblings &&
+              siblings.length > 0 &&
+              currentRow.getAttribute('data-row-key').toString() !== siblings.length.toString()
+            ) {
               siblings[siblings.length - 1].focus();
             }
           } else {
