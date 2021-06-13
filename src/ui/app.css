@@ -13,6 +13,23 @@ body,
 }
 
 .ant-table-tbody > tr:focus {
-  background-color: rgb(238, 235, 235);
+  background-color: rgb(238, 235, 235) !important;
   border: none;
+  outline: none;
+}
+
+.ant-table-thead > tr.ant-table-row-hover:not(.ant-table-expanded-row) > td,
+.ant-table-tbody > tr.ant-table-row-hover:not(.ant-table-expanded-row) > td,
+.ant-table-thead > tr:focus:not(.ant-table-expanded-row) > td,
+.ant-table-tbody > tr:focus:not(.ant-table-expanded-row) > td {
+  background-color: rgb(238, 235, 235) !important;
+  border: none;
+  outline: none;
+}
+
+.ant-table-thead > tr.ant-table-row-hover:not(.ant-table-expanded-row) > td,
+.ant-table-tbody > tr.ant-table-row-hover:not(.ant-table-expanded-row) > td,
+.ant-table-thead > tr:hover:not(.ant-table-expanded-row) > td,
+.ant-table-tbody > tr:hover:not(.ant-table-expanded-row) > td {
+  background: unset;
 }

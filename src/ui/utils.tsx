@@ -1,5 +1,5 @@
 import { useHotkeys } from 'react-hotkeys-hook';
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 export const cookieVars = {
   dashboard_current_tab: 'DASHBOARD_CURRENT_TAB',
@@ -34,6 +34,10 @@ const getSiblings = (e: any) => {
 
 export const useKeyBindings = (expandedRowKeys: readonly React.ReactText[], setExpandedRowKeys: any) => {
   const [isFocused, setIsFocused] = useState(false);
+
+  useEffect(() => {
+    setIsFocused(true);
+  }, []);
 
   const handleOnFocus = useCallback((event) => {
     // Check if the element with querySelector string is
@@ -103,7 +107,6 @@ export const useKeyBindings = (expandedRowKeys: readonly React.ReactText[], setE
               event.target.querySelector(`tr[data-row-key]`);
 
         if (currentRow) {
-          console.log('yo');
           if (document.activeElement?.isSameNode(currentRow)) {
             // look for next sibling
             let nextSibling = currentRow.nextElementSibling;
