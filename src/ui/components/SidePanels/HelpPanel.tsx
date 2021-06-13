@@ -1,34 +1,15 @@
 import { Loading } from '@components/Loading';
-import { useCommand } from '@hooks/useCommand';
 import React from 'react';
-import { createUseStyles } from 'react-jss';
 import { useLocation } from 'react-router-dom';
-import { DashboardCollectionsLocation, DashboardOverviewLocation } from '../../locations';
-
-const useStyles = createUseStyles({});
-
-const helpRoutes = [
-  {
-    route: DashboardOverviewLocation,
-    helpText: 'Example help text',
-    helpLink: 'https://google.com',
-  },
-  {
-    route: DashboardCollectionsLocation,
-    helpText: 'Another help text',
-    helpLink: 'https://github.com',
-  },
-];
+import { helpRoutes } from './HelpPanelHelp';
 
 export const HelpPanel = () => {
   const location = useLocation();
-  const [help, loading] = useCommand('help');
-  const styles = useStyles();
-
   const matchedRoute = helpRoutes.find((item) => item.route === location.pathname);
+  const url = matchedRoute && new URL("docs/explorer" + matchedRoute.route, "https://docs.trueblocks.io/");
 
   return (
-    <Loading loading={loading}>
+    <Loading loading={false}>
       <div
         style={{
           display: 'flex',
@@ -40,7 +21,7 @@ export const HelpPanel = () => {
         {matchedRoute && (
           <div>
             <div>{matchedRoute.helpText}</div>
-            <a href={matchedRoute.helpLink} target='_blank' rel='noreferrer'>
+            <a href={url?.toString()} target='_blank' rel='noreferrer'>
               Learn more...
             </a>
           </div>
