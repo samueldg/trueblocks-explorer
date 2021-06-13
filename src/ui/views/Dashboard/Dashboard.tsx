@@ -4,13 +4,12 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import {
   DashboardCollectionsLocation,
-  DashboardOverviewLocation,
-  DashboardSystemStatusLocation,
-} from '../..//locations';
+  DashboardMonitorsLocation, DashboardOverviewLocation
+} from '../../locations';
 import { cookieVars } from '../../utils';
 import { Collections } from './Tabs/Collections';
+import { Monitors } from './Tabs/Monitors';
 import { Overview } from './Tabs/Overview';
-import { Status } from './Tabs/Status';
 
 const { TabPane } = Tabs;
 
@@ -34,11 +33,11 @@ export const DashboardView = () => {
         <TabPane tab='Overview' key={DashboardOverviewLocation}>
           <Overview />
         </TabPane>
+        <TabPane tab='Monitors' key={DashboardMonitorsLocation}>
+          <Monitors />
+        </TabPane>
         <TabPane tab='Collections' key={DashboardCollectionsLocation}>
           <Collections />
-        </TabPane>
-        <TabPane tab='System Status' key={DashboardSystemStatusLocation}>
-          <Status />
         </TabPane>
       </Tabs>
     </>

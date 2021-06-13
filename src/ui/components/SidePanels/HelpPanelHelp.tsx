@@ -1,12 +1,10 @@
 import {
   DashboardCollectionsLocation, DashboardLocation,
-  DashboardOverviewLocation,
-  DashboardSystemStatusLocation,
+  DashboardMonitorsLocation, DashboardOverviewLocation,
   ExplorerBlocksLocation, ExplorerIndexesLocation, ExplorerLocation,
   ExplorerLogsLocation, ExplorerReceiptsLocation,
   ExplorerTracesLocation, ExplorerTransactionsLocation, NamesAddressesLocation,
   NamesBlocksLocation, NamesLocation,
-  NamesMonitorsLocation,
   NamesSignaturesLocation, NamesTagsLocation, RootLocation,
   SettingsCachesLocation, SettingsLocation,
   SettingsSchemasLocation, SettingsScrapersLocation,
@@ -31,19 +29,15 @@ export const helpRoutes = [
     helpText: 'The dashboard overview page gives you an overview of your holdings among other things.',
   },
   {
+    route: DashboardMonitorsLocation,
+    helpText: 'Monitors are named addresses that you\'ve indicated are \'of interest\' and should be monitored by the scrapers.',
+  },
+  {
     route: DashboardCollectionsLocation,
     helpText: 'Collections allow you to group together multiple monitored addresses.',
   },
   {
-    route: DashboardSystemStatusLocation,
-    helpText: 'This screen shows you the system\'s status',
-  },
-  {
     route: NamesLocation,
-    helpText: 'Monitors are named addresses that you\'ve indicated are \'of interest\' and should be monitored by the scrapers.',
-  },
-  {
-    route: NamesMonitorsLocation,
     helpText: 'Monitors are named addresses that you\'ve indicated are \'of interest\' and should be monitored by the scrapers.',
   },
   {

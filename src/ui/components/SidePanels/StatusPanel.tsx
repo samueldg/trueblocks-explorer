@@ -81,11 +81,11 @@ export const StatusPanel = ({ status, loading }: StatusPanelProps) => {
         <div className={styles.itemContainer}>
           <div className={styles.itemHeader}>BLOCKS</div>
           <div>
-            <ApiFilled className={styles.itemIcon} style={{ color: '#f5222d' }} />
-            {Intl.NumberFormat().format(statusMeta.unripe)}
-            <span className={styles.statusItem}>UNRIPE<br/></span>
+            <ApiFilled className={styles.itemIcon} style={{ color: '#52c41a' }} />
+            {Intl.NumberFormat().format(statusMeta.finalized)}
+            <span className={styles.statusItem}>FINAL<br/></span>
             <ApiFilled className={styles.itemIcon} style={{ color: 'white' }} />
-            <div style={{display: 'inline'}}>{statusMeta.client - statusMeta.unripe} behind head</div>
+            <div style={{display: 'inline'}}>{statusMeta.client - statusMeta.finalized} behind head</div>
           </div>
           <div>
             <ApiFilled className={styles.itemIcon} style={{ color: '#fadb14' }} />
@@ -95,11 +95,11 @@ export const StatusPanel = ({ status, loading }: StatusPanelProps) => {
             <div style={{display: 'inline'}}>{statusMeta.client - statusMeta.staging} behind head</div>
           </div>
           <div>
-            <ApiFilled className={styles.itemIcon} style={{ color: '#52c41a' }} />
-            {Intl.NumberFormat().format(statusMeta.finalized)}
-            <span className={styles.statusItem}>FINAL<br/></span>
+            <ApiFilled className={styles.itemIcon} style={{ color: '#f5222d' }} />
+            {Intl.NumberFormat().format(statusMeta.unripe)}
+            <span className={styles.statusItem}>UNRIPE<br/></span>
             <ApiFilled className={styles.itemIcon} style={{ color: 'white' }} />
-            <div style={{display: 'inline'}}>{statusMeta.client - statusMeta.finalized} behind head</div>
+            <div style={{display: 'inline'}}>{statusMeta.client - statusMeta.unripe} behind head</div>
           </div>
         </div>
         <div className={styles.itemContainer}>
