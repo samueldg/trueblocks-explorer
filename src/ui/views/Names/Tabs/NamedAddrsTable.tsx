@@ -140,14 +140,14 @@ export const NamesTable = ({ getNames, loadingNames }: { getNames: () => Name[];
         rowClassName={(record, index) => 'row-' + index}
         size='small'
         scroll={{ x: 1300 }}
-        expandable={{
+        /*expandable={{
           onExpandedRowsChange: (expandedRowKeys) => {
             // console.log(expandedRowKeys);
             setExpandedRowKeys(expandedRowKeys);
           },
           expandedRowKeys: expandedRowKeys,
           expandedRowRender: (rowset) => <div>hello</div>,
-        }}
+        }}*/
       />
     </div>
   );
