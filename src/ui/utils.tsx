@@ -12,7 +12,7 @@ export const cookieVars = {
   help_expanded: 'HELP_EXPANDED',
 };
 
-const getSiblings = (e: any) => {
+export const getSiblings = (e: any) => {
   // for collecting siblings
   let siblings: any[] = [];
   // if no parent, return no sibling
@@ -36,9 +36,12 @@ export const useKeyBindings = (
   expandedRowKeys: readonly React.ReactText[],
   setExpandedRowKeys: any,
   currentPage: number,
+  pageSize: number,
+  dataLength: number,
   nextPage: () => void,
   previousPage: () => void,
-  firstPage: () => void
+  firstPage: () => void,
+  lastPage: (event: any) => void
 ) => {
   const [isFocused, setIsFocused] = useState(false);
 
@@ -196,6 +199,7 @@ export const useKeyBindings = (
 
   const handleEndKey = useCallback(
     (event) => {
+      lastPage(event);
       // If activeElement is a TR element or has any of it's parent as TR element, then we must look for next TR element
       if (event.target) {
         // let's check if this itself is a TR element, if not, lets find one
@@ -223,7 +227,7 @@ export const useKeyBindings = (
         }
       }
     },
-    [isFocused]
+    [isFocused, currentPage, pageSize, dataLength]
   );
 
   useHotkeys('up', handleUpKey, [handleUpKey]);

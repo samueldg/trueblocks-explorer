@@ -3,7 +3,7 @@ import { Name } from '@modules/data/name';
 import Table, { ColumnsType } from 'antd/lib/table';
 import React, { useEffect, useState } from 'react';
 import { useHotkeys } from 'react-hotkeys-hook';
-import { triggerFocus, useKeyBindings } from '../../../utils';
+import { getSiblings, useKeyBindings } from '../../../utils';
 
 function getTableActions(item: Name) {
   return <TableActions item={item} onClick={(action, tableItem) => console.log('Clicked action', action, tableItem)} />;
@@ -18,17 +18,31 @@ export const NamesTable = ({ getNames, loadingNames }: { getNames: () => Name[];
   const onTagClick = (tag: string) => console.log('tag click', tag);
   const [expandedRowKeys, setExpandedRowKeys] = useState<readonly React.ReactText[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
+  const [pageSize, setPageSize] = useState(10);
+
+  const dataSource = getNames().map((item, i) => {
+    return {
+      id: (i + 1).toString(),
+      ...item,
+    };
+  });
+
   const { handleOnFocus, handleOnBlur } = useKeyBindings(
     expandedRowKeys,
     setExpandedRowKeys,
     currentPage,
-    () => setCurrentPage(currentPage + 1),
+    pageSize,
+    dataSource.length,
+    () => currentPage < Math.ceil(dataSource.length / pageSize) && setCurrentPage(currentPage + 1),
     () => currentPage > 1 && setCurrentPage(currentPage - 1),
-    () => setCurrentPage(1)
+    () => setCurrentPage(1),
+    () => setCurrentPage(Math.ceil(dataSource.length / pageSize))
   );
 
   useHotkeys('left', () => currentPage > 1 && setCurrentPage(currentPage - 1), [currentPage]);
-  useHotkeys('right', () => setCurrentPage(currentPage + 1), [currentPage]);
+  useHotkeys('right', () => currentPage < Math.ceil(dataSource.length / pageSize) && setCurrentPage(currentPage + 1), [
+    currentPage,
+  ]);
 
   const components = {
     body: { row: CustomRow },
@@ -116,17 +130,19 @@ export const NamesTable = ({ getNames, loadingNames }: { getNames: () => Name[];
     ),
   ];
 
-  const dataSource = getNames().map((item, i) => {
-    return {
-      id: (i + 1).toString(),
-      ...item,
-    };
-  });
-
   useEffect(() => {
     const tr = document.querySelector('tr[data-row-key]');
     //@ts-ignore
     tr.focus();
+    const siblings = getSiblings(tr);
+    if (
+      siblings &&
+      siblings.length > 0 &&
+      currentPage === Math.ceil(dataSource.length / pageSize) &&
+      tr?.getAttribute('data-row-key')?.toString() !== siblings.length.toString()
+    ) {
+      siblings[siblings.length - 1].focus();
+    }
   }, [currentPage]);
 
   return (
@@ -137,7 +153,14 @@ export const NamesTable = ({ getNames, loadingNames }: { getNames: () => Name[];
         columns={columns}
         dataSource={dataSource}
         loading={loadingNames}
-        pagination={{ current: currentPage, onChange: (page) => setCurrentPage(page) }}
+        pagination={{
+          current: currentPage,
+          pageSize: pageSize,
+          onChange: (page, pageSize) => {
+            setCurrentPage(page);
+            pageSize && setPageSize(pageSize);
+          },
+        }}
         rowClassName={(record, index) => 'row-' + index}
         size='small'
         scroll={{ x: 1300 }}
