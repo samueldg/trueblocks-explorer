@@ -28,22 +28,18 @@ export const App = () => {
 
   useEffect(() => {
     (async () => {
-      // setLoadingStatus(true);
       const eitherResponse = await runCommand('status');
       const result: Result = pipe(
         eitherResponse,
         Either.fold(toFailedResult, (serverResponse) => toSuccessfulData(serverResponse) as Result)
       );
-      // setLoadingStatus(false);
       setStatus(result);
       setInterval(async () => {
-        // setLoadingStatus(true);
         const eitherResponse = await runCommand('status');
         const result: Result = pipe(
           eitherResponse,
           Either.fold(toFailedResult, (serverResponse) => toSuccessfulData(serverResponse) as Result)
         );
-        // setLoadingStatus(false);
         setStatus(result);
       }, 10 * 1000);
     })();
