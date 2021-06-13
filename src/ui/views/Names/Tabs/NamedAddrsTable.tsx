@@ -23,7 +23,8 @@ export const NamesTable = ({ getNames, loadingNames }: { getNames: () => Name[];
     setExpandedRowKeys,
     currentPage,
     () => setCurrentPage(currentPage + 1),
-    () => currentPage > 1 && setCurrentPage(currentPage - 1)
+    () => currentPage > 1 && setCurrentPage(currentPage - 1),
+    () => setCurrentPage(1)
   );
 
   useHotkeys('left', () => currentPage > 1 && setCurrentPage(currentPage - 1), [currentPage]);
