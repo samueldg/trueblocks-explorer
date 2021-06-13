@@ -70,7 +70,7 @@ export const Scrapers = () => {
     <>
       <Row>
         <Col>
-          <Card hoverable title={indexer.Name} className={styles.card}>
+          <Card style={{height: '500px'}} hoverable title={indexer.Name} className={styles.card}>
             both scrapers:{' '}
             <Switch checked={indexer.Running && monitors.Running} checkedChildren='on' unCheckedChildren='off' onClick={toggleBoth} /><br />
             index scraper:
@@ -79,7 +79,7 @@ export const Scrapers = () => {
           </Card>
         </Col>
         <Col>
-          <Card hoverable title={monitors.Name} className={styles.card}>
+          <Card style={{height: '500px'}}  hoverable title={monitors.Name} className={styles.card}>
             both scrapers:{' '}
             <Switch checked={indexer.Running && monitors.Running} checkedChildren='on' unCheckedChildren='off' onClick={toggleBoth} /><br />
             monitor scraper:{' '}
