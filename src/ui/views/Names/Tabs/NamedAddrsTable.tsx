@@ -1,9 +1,9 @@
 import { addActionsColumn, addColumn, addFlagColumn, addTagsColumn, TableActions } from '@components/Table';
 import { Name } from '@modules/data/name';
 import Table, { ColumnsType } from 'antd/lib/table';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHotkeys } from 'react-hotkeys-hook';
-import { useKeyBindings } from '../../../utils';
+import { triggerFocus, useKeyBindings } from '../../../utils';
 
 function getTableActions(item: Name) {
   return <TableActions item={item} onClick={(action, tableItem) => console.log('Clicked action', action, tableItem)} />;
@@ -115,6 +115,12 @@ export const NamesTable = ({ getNames, loadingNames }: { getNames: () => Name[];
       ...item,
     };
   });
+
+  useEffect(() => {
+    const tr = document.querySelector('tr[data-row-key]');
+    //@ts-ignore
+    tr.focus();
+  }, [currentPage]);
 
   return (
     <div onFocus={handleOnFocus} onBlur={handleOnBlur}>
