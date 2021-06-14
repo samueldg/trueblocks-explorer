@@ -1,13 +1,14 @@
 import { PageHeader, Tabs } from 'antd';
 import Cookies from 'js-cookie';
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import {
   ExplorerBlocksLocation,
+  ExplorerLocation,
   ExplorerLogsLocation,
   ExplorerReceiptsLocation,
   ExplorerTracesLocation,
-  ExplorerTransactionsLocation
+  ExplorerTransactionsLocation,
 } from '../../locations';
 import { cookieVars } from '../../utils';
 import { Blocks } from './Tabs/Blocks';
@@ -20,7 +21,13 @@ const { TabPane } = Tabs;
 
 export const ExplorerView = () => {
   const history = useHistory();
-  const [currentTab, setCurrentTab] = useState(Cookies.get(cookieVars.explorer_current_tab) || ExplorerBlocksLocation);
+  const location = useLocation();
+  let subPath = location.pathname.replace(ExplorerLocation, '');
+  const [currentTab, setCurrentTab] = useState(
+    (subPath && subPath.length > 0 ? location.pathname : null) ||
+      Cookies.get(cookieVars.explorer_current_tab) ||
+      ExplorerBlocksLocation
+  );
 
   const onTabChange = (key: string) => {
     Cookies.set(cookieVars.explorer_current_tab, key);

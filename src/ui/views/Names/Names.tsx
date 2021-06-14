@@ -1,12 +1,13 @@
 import { PageHeader, Tabs } from 'antd';
 import Cookies from 'js-cookie';
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import {
   NamesAddressesLocation,
   NamesBlocksLocation,
+  NamesLocation,
   NamesSignaturesLocation,
-  NamesTagsLocation
+  NamesTagsLocation,
 } from '../../locations';
 import { cookieVars } from '../../utils';
 import { NamedAddrs } from './Tabs/NamedAddrs';
@@ -19,7 +20,13 @@ const { TabPane } = Tabs;
 export const NamesView = () => {
   const history = useHistory();
   const title = 'Names';
-  const [currentTab, setCurrentTab] = useState(Cookies.get(cookieVars.names_current_tab) || NamesAddressesLocation);
+  const location = useLocation();
+  let subPath = location.pathname.replace(NamesLocation, '');
+  const [currentTab, setCurrentTab] = useState(
+    (subPath && subPath.length > 0 ? location.pathname : null) ||
+      Cookies.get(cookieVars.names_current_tab) ||
+      NamesAddressesLocation
+  );
 
   const onTabChange = (key: string) => {
     Cookies.set(cookieVars.names_current_tab, key);

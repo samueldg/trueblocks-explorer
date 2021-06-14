@@ -4,7 +4,11 @@ import React, { useState } from 'react';
 import { Link, useHistory, useLocation } from 'react-router-dom';
 import {
   DashboardAccountsLocation,
-  DashboardCollectionsLocation, DashboardIndexesLocation, DashboardMonitorsLocation, DashboardOverviewLocation
+  DashboardCollectionsLocation,
+  DashboardIndexesLocation,
+  DashboardLocation,
+  DashboardMonitorsLocation,
+  DashboardOverviewLocation
 } from '../../locations';
 import { cookieVars } from '../../utils';
 import { Collections } from './Tabs/Collections';
@@ -14,13 +18,16 @@ import { Overview } from './Tabs/Overview';
 
 const { TabPane } = Tabs;
 
-// const Accounts = () => (location.pathname === DashboardIndexesLocation ? <TabPane tab="Accounts" key={DashboardIndexesLocation}><div>Shit</div></TabPane> : <><div>Shat</div></>);
 const Accounts = () => <div>Display accounting on an address</div>;
 
 export const DashboardView = () => {
   const history = useHistory();
+  const location = useLocation();
+  let subPath = location.pathname.replace(DashboardLocation, '');
   const [currentTab, setCurrentTab] = useState(
-    Cookies.get(cookieVars.dashboard_current_tab) || DashboardOverviewLocation
+    (subPath && subPath.length > 0 ? location.pathname : null) ||
+      Cookies.get(cookieVars.dashboard_current_tab) ||
+      DashboardOverviewLocation
   );
 
   const onTabChange = (key: string) => {
@@ -29,9 +36,7 @@ export const DashboardView = () => {
     setCurrentTab(key);
   };
 
-  const location = useLocation();
   const title = 'Dashboard';
-
   var tabs = [
     {name: "Overview", location: DashboardOverviewLocation, component: <Overview />, disabled: false},
     {name: "Accounts", location: DashboardAccountsLocation, component: <Accounts />, disabled: true},

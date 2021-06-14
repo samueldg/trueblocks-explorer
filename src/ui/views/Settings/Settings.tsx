@@ -1,9 +1,10 @@
 import { PageHeader, Tabs } from 'antd';
 import Cookies from 'js-cookie';
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import {
   SettingsCachesLocation,
+  SettingsLocation,
   SettingsSchemasLocation,
   SettingsScrapersLocation,
   SettingsSkinsLocation,
@@ -18,8 +19,13 @@ const { TabPane } = Tabs;
 
 export const SettingsView = () => {
   const history = useHistory();
+  const location = useLocation();
+  let subPath = location.pathname.replace(SettingsLocation, '');
+
   const [currentTab, setCurrentTab] = useState(
-    Cookies.get(cookieVars.settings_current_tab) || SettingsScrapersLocation
+    (subPath && subPath.length > 0 ? location.pathname : null) ||
+      Cookies.get(cookieVars.settings_current_tab) ||
+      SettingsScrapersLocation
   );
 
   const onTabChange = (key: string) => {
