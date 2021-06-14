@@ -19,6 +19,7 @@ export const NamesTable = ({ getNames, loadingNames }: { getNames: () => Name[];
   const [expandedRowKeys, setExpandedRowKeys] = useState<readonly React.ReactText[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(10);
+  const [focusedRow, setFocusedRow] = useState(1);
 
   const dataSource = getNames().map((item, i) => {
     return {
@@ -34,15 +35,38 @@ export const NamesTable = ({ getNames, loadingNames }: { getNames: () => Name[];
     pageSize,
     dataSource.length,
     () => currentPage < Math.ceil(dataSource.length / pageSize) && setCurrentPage(currentPage + 1),
-    () => currentPage > 1 && setCurrentPage(currentPage - 1),
+    () => {
+      currentPage > 1 && setCurrentPage(currentPage - 1);
+      const tr = document.querySelector('tr[data-row-key]');
+      const siblings = getSiblings(tr);
+      siblings[siblings.length - 1].focus();
+    },
     () => setCurrentPage(1),
-    () => setCurrentPage(Math.ceil(dataSource.length / pageSize))
+    () => setCurrentPage(Math.ceil(dataSource.length / pageSize)),
+    focusedRow,
+    (row) => setFocusedRow(row)
   );
 
-  useHotkeys('left', () => currentPage > 1 && setCurrentPage(currentPage - 1), [currentPage]);
-  useHotkeys('right', () => currentPage < Math.ceil(dataSource.length / pageSize) && setCurrentPage(currentPage + 1), [
-    currentPage,
-  ]);
+  useHotkeys(
+    'left',
+    () => {
+      currentPage > 1 && setCurrentPage(currentPage - 1);
+      const tr = document.querySelector('tr[data-row-key]');
+      const siblings = getSiblings(tr);
+      siblings[focusedRow].focus();
+    },
+    [currentPage, dataSource, focusedRow, setFocusedRow]
+  );
+  useHotkeys(
+    'right',
+    () => {
+      currentPage < Math.ceil(dataSource.length / pageSize) && setCurrentPage(currentPage + 1);
+      const tr = document.querySelector('tr[data-row-key]');
+      const siblings = getSiblings(tr);
+      siblings[focusedRow].focus();
+    },
+    [currentPage, dataSource, focusedRow, setFocusedRow]
+  );
 
   const components = {
     body: { row: CustomRow },

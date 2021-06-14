@@ -41,7 +41,9 @@ export const useKeyBindings = (
   nextPage: () => void,
   previousPage: () => void,
   firstPage: () => void,
-  lastPage: (event: any) => void
+  lastPage: (event: any) => void,
+  focusedRow: number,
+  setFocusedRow: (row: number) => void
 ) => {
   const [isFocused, setIsFocused] = useState(false);
 
@@ -96,6 +98,10 @@ export const useKeyBindings = (
                 previousSibling = previousSibling.previousElementSibling;
                 if (!previousSibling) break;
               }
+              const index = getSiblings(currentRow)
+                .map((e) => e.getAttribute('data-row-key'))
+                .indexOf(previousSibling.getAttribute('data-row-key'));
+              setFocusedRow(index - 1);
               previousSibling?.focus();
             }
           } else {
@@ -105,7 +111,7 @@ export const useKeyBindings = (
         }
       }
     },
-    [isFocused, currentPage]
+    [isFocused, currentPage, dataLength, focusedRow, setFocusedRow]
   );
 
   // Go to next row
@@ -131,6 +137,10 @@ export const useKeyBindings = (
                 nextSibling = nextSibling.nextElementSibling;
                 if (!nextSibling) break;
               }
+              const index = getSiblings(currentRow)
+                .map((e) => e.getAttribute('data-row-key'))
+                .indexOf(nextSibling.getAttribute('data-row-key'));
+              setFocusedRow(index);
               nextSibling?.focus();
             }
           } else {
@@ -140,7 +150,7 @@ export const useKeyBindings = (
         }
       }
     },
-    [isFocused, currentPage]
+    [isFocused, currentPage, dataLength, focusedRow, setFocusedRow]
   );
 
   const handleEnterKey = useCallback(
@@ -166,7 +176,7 @@ export const useKeyBindings = (
         }
       }
     },
-    [isFocused, setExpandedRowKeys, expandedRowKeys]
+    [isFocused, setExpandedRowKeys, expandedRowKeys, dataLength]
   );
 
   const handleHomeKey = useCallback(
@@ -185,6 +195,7 @@ export const useKeyBindings = (
             if (document.activeElement?.isSameNode(currentRow)) {
               const siblings = getSiblings(currentRow);
               if (siblings && siblings.length > 0 && currentRow.getAttribute('data-row-key').toString() !== '1') {
+                setFocusedRow(1);
                 siblings[1].focus();
               }
             } else {
@@ -194,7 +205,7 @@ export const useKeyBindings = (
         }
       }
     },
-    [isFocused, currentPage]
+    [isFocused, currentPage, dataLength, focusedRow, setFocusedRow]
   );
 
   const handleEndKey = useCallback(
@@ -218,6 +229,7 @@ export const useKeyBindings = (
               siblings.length > 0 &&
               currentRow.getAttribute('data-row-key').toString() !== siblings.length.toString()
             ) {
+              setFocusedRow(siblings.length - 1);
               siblings[siblings.length - 1].focus();
             }
           } else {
@@ -227,7 +239,7 @@ export const useKeyBindings = (
         }
       }
     },
-    [isFocused, currentPage, pageSize, dataLength]
+    [isFocused, currentPage, pageSize, dataLength, focusedRow, setFocusedRow]
   );
 
   useHotkeys('up', handleUpKey, [handleUpKey]);
