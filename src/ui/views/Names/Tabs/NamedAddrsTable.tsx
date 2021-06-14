@@ -68,8 +68,6 @@ export const NamesTable = ({ getNames, loadingNames }: { getNames: () => Name[];
     [currentPage, dataSource, focusedRow, setFocusedRow]
   );
 
-  console.log(focusedRow);
-
   const components = {
     body: { row: CustomRow },
   };
