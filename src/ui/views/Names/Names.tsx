@@ -5,12 +5,10 @@ import { useHistory } from 'react-router-dom';
 import {
   NamesAddressesLocation,
   NamesBlocksLocation,
-  NamesMonitorsLocation,
   NamesSignaturesLocation,
-  NamesTagsLocation,
+  NamesTagsLocation
 } from '../../locations';
 import { cookieVars } from '../../utils';
-import { Monitors } from './Tabs/Monitors';
 import { NamedAddrs } from './Tabs/NamedAddrs';
 import { Signatures } from './Tabs/Signature';
 import { Tags } from './Tabs/Tag';
@@ -21,7 +19,7 @@ const { TabPane } = Tabs;
 export const NamesView = () => {
   const history = useHistory();
   const title = 'Names';
-  const [currentTab, setCurrentTab] = useState(Cookies.get(cookieVars.names_current_tab) || NamesMonitorsLocation);
+  const [currentTab, setCurrentTab] = useState(Cookies.get(cookieVars.names_current_tab) || NamesAddressesLocation);
 
   const onTabChange = (key: string) => {
     Cookies.set(cookieVars.names_current_tab, key);
@@ -33,9 +31,6 @@ export const NamesView = () => {
     <>
       <PageHeader title={title} />
       <Tabs defaultActiveKey={currentTab} onChange={(key) => onTabChange(key)}>
-        <TabPane tab='Monitors' key={NamesMonitorsLocation}>
-          <Monitors />
-        </TabPane>
         <TabPane tab='Addresses' key={NamesAddressesLocation}>
           <NamedAddrs />
         </TabPane>

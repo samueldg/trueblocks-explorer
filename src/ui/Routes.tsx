@@ -2,11 +2,9 @@ import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import {
   DashboardCollectionsLocation,
-  DashboardLocation,
-  DashboardOverviewLocation,
-  DashboardSystemStatusLocation,
+  DashboardIndexesLocation, DashboardLocation,
+  DashboardMonitorsLocation, DashboardOverviewLocation,
   ExplorerBlocksLocation,
-  ExplorerIndexesLocation,
   ExplorerLocation,
   ExplorerLogsLocation,
   ExplorerReceiptsLocation,
@@ -15,7 +13,6 @@ import {
   NamesAddressesLocation,
   NamesBlocksLocation,
   NamesLocation,
-  NamesMonitorsLocation,
   NamesSignaturesLocation,
   NamesTagsLocation,
   RootLocation,
@@ -29,7 +26,7 @@ import {
   SupportDocumentationLocation,
   SupportHotKeysLocation,
   SupportLicensingLocation,
-  SupportLocation,
+  SupportLocation
 } from './locations';
 import { DashboardView, ExplorerView, NamesView, SettingsView, SupportView } from './views';
 
@@ -50,22 +47,22 @@ const routes = [
     component: DashboardView,
   },
   {
+    path: DashboardMonitorsLocation,
+    exact: true,
+    component: DashboardView,
+  },
+  {
     path: DashboardCollectionsLocation,
     exact: true,
     component: DashboardView,
   },
   {
-    path: DashboardSystemStatusLocation,
+    path: DashboardIndexesLocation,
     exact: true,
     component: DashboardView,
   },
   {
     path: NamesLocation,
-    exact: true,
-    component: NamesView,
-  },
-  {
-    path: NamesMonitorsLocation,
     exact: true,
     component: NamesView,
   },
@@ -91,11 +88,6 @@ const routes = [
   },
   {
     path: ExplorerLocation,
-    exact: true,
-    component: ExplorerView,
-  },
-  {
-    path: ExplorerIndexesLocation,
     exact: true,
     component: ExplorerView,
   },
