@@ -4,7 +4,7 @@ import React, { useCallback } from 'react';
 import { useCommand } from '../../../hooks/useCommand';
 
 export const Blocks = () => {
-  const [data, loading] = useCommand('blocks', { blocks: 'latest', hashes: true, cache: true });
+  const [data, loading] = useCommand('blocks', { list: 0, cache: true });
   const getData = useCallback((response) => (response.status === 'fail' ? [] : response.data), []);
 
   const theItem = getData(data);

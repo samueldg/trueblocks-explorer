@@ -4,11 +4,11 @@ import { WhenTable } from './WhenTable';
 
 export const When = () => {
   const [when, loadingWhen] = useCommand('when', { list: true });
-  const getWhen = useCallback((response) => (response.status === 'fail' ? [] : response.data), []);
+  const getData = useCallback((response) => (response.status === 'fail' ? [] : response.data), []);
 
   return (
     <>
-      <WhenTable getWhen={() => getWhen(when)} loadingWhen={loadingWhen} />
+      <WhenTable getWhen={() => getData(when)} loadingWhen={loadingWhen} />
     </>
   );
 };

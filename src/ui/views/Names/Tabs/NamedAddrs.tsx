@@ -7,14 +7,13 @@ import { NamesTable } from './NamedAddrsTable';
 
 export const NamedAddrs = () => {
   const [names, loadingNames] = useCommand('names', { expand: true });
-  const getNames = useCallback((response) => (response.status === 'fail' ? [] : response.data), []);
+  const getData = useCallback((response) => (response.status === 'fail' ? [] : response.data), []);
 
   return (
     <>
       <PageHeader title='Names' />
       <NamesFilters />
-
-      <NamesTable getNames={() => getNames(names)} loadingNames={loadingNames} />
+      <NamesTable getNames={() => getData(names)} loadingNames={loadingNames} />
     </>
   );
 };
