@@ -2,6 +2,7 @@ export const RootLocation = '/';
 
 export const DashboardLocation = '/dashboard';
 export const DashboardOverviewLocation = '/dashboard/overview';
+export const DashboardAccountsLocation = '/dashboard/accounts';
 export const DashboardMonitorsLocation = '/dashboard/monitors';
 export const DashboardCollectionsLocation = '/dashboard/collections';
 export const DashboardIndexesLocation = '/dashboard/indexes';

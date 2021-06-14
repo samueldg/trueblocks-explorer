@@ -1,5 +1,5 @@
 import {
-  DashboardCollectionsLocation,
+  DashboardAccountsLocation, DashboardCollectionsLocation,
   DashboardIndexesLocation, DashboardLocation,
   DashboardMonitorsLocation, DashboardOverviewLocation,
   ExplorerBlocksLocation, ExplorerLocation,
@@ -24,6 +24,10 @@ export const helpRoutes = [
   {
     route: DashboardLocation,
     helpText: 'The dashboard overview page gives you an overview of your holdings among other things.',
+  },
+  {
+    route: DashboardAccountsLocation,
+    helpText: 'View a particular account\'s transactional history.',
   },
   {
     route: DashboardOverviewLocation,

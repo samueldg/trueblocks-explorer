@@ -1,10 +1,14 @@
+import { Loading } from '@components/Loading';
 import React, { useCallback } from 'react';
 import { useCommand } from '../../../hooks/useCommand';
-import { MonitorsTable } from './MonitorsTable';
 
 export const Monitors = () => {
-  const [monitors, loadingMonitors] = useCommand('status', { mode: 'monitors', detail: true });
-  const getData = useCallback((response) => (response.status === 'fail' ? [] : response.data), []);
+  const [monitors, loading] = useCommand('status', { mode: 'monitors', details: true });
+  const getData = useCallback((response) => (response.status === 'fail' ? [] : response), []);
 
-  return <MonitorsTable getMonitors={() => getData(monitors)} loadingMonitors={loadingMonitors} />;
+  return (
+    <Loading loading={loading}>
+      <pre>{JSON.stringify(getData(monitors), null, 2)}</pre>
+    </Loading>
+  );
 };

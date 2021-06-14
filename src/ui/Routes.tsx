@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import {
-  DashboardCollectionsLocation,
+  DashboardAccountsLocation, DashboardCollectionsLocation,
   DashboardIndexesLocation, DashboardLocation,
   DashboardMonitorsLocation, DashboardOverviewLocation,
   ExplorerBlocksLocation,
@@ -33,6 +33,11 @@ import { DashboardView, ExplorerView, NamesView, SettingsView, SupportView } fro
 const routes = [
   {
     path: RootLocation,
+    exact: true,
+    component: DashboardView,
+  },
+  {
+    path: DashboardAccountsLocation,
     exact: true,
     component: DashboardView,
   },

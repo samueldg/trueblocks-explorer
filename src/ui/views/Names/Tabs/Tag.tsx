@@ -3,12 +3,12 @@ import { useCommand } from '../../../hooks/useCommand';
 import { TagTable } from './TagTable';
 
 export const Tags = () => {
-  const [tag, loadingTag] = useCommand('names', { tags: true });
+  const [tag, loading] = useCommand('names', { tags: true });
   const getData = useCallback((response) => (response.status === 'fail' ? [] : response.data), []);
 
   return (
     <>
-      <TagTable getTag={() => getData(tag)} loadingTag={loadingTag} />
+      <TagTable getTag={() => getData(tag)} loadingTag={loading} />
     </>
   );
 };
