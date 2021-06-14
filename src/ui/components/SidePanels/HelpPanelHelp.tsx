@@ -1,7 +1,8 @@
 import {
-  DashboardCollectionsLocation, DashboardLocation,
+  DashboardCollectionsLocation,
+  DashboardIndexesLocation, DashboardLocation,
   DashboardMonitorsLocation, DashboardOverviewLocation,
-  ExplorerBlocksLocation, ExplorerIndexesLocation, ExplorerLocation,
+  ExplorerBlocksLocation, ExplorerLocation,
   ExplorerLogsLocation, ExplorerReceiptsLocation,
   ExplorerTracesLocation, ExplorerTransactionsLocation, NamesAddressesLocation,
   NamesBlocksLocation, NamesLocation,
@@ -37,6 +38,10 @@ export const helpRoutes = [
     helpText: 'Collections allow you to group together multiple monitored addresses.',
   },
   {
+    route: DashboardIndexesLocation,
+    helpText: 'View the contents of the TrueBlocks index cache.',
+  },
+  {
     route: NamesLocation,
     helpText: 'Monitors are named addresses that you\'ve indicated are \'of interest\' and should be monitored by the scrapers.',
   },
@@ -58,10 +63,6 @@ export const helpRoutes = [
   },
   {
     route: ExplorerLocation,
-    helpText: 'View the contents of the TrueBlocks index cache.',
-  },
-  {
-    route: ExplorerIndexesLocation,
     helpText: 'View the contents of the TrueBlocks index cache.',
   },
   {

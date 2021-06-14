@@ -2,11 +2,9 @@ import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import {
   DashboardCollectionsLocation,
-  DashboardLocation,
-  DashboardMonitorsLocation,
-  DashboardOverviewLocation,
+  DashboardIndexesLocation, DashboardLocation,
+  DashboardMonitorsLocation, DashboardOverviewLocation,
   ExplorerBlocksLocation,
-  ExplorerIndexesLocation,
   ExplorerLocation,
   ExplorerLogsLocation,
   ExplorerReceiptsLocation,
@@ -59,6 +57,11 @@ const routes = [
     component: DashboardView,
   },
   {
+    path: DashboardIndexesLocation,
+    exact: true,
+    component: DashboardView,
+  },
+  {
     path: NamesLocation,
     exact: true,
     component: NamesView,
@@ -85,11 +88,6 @@ const routes = [
   },
   {
     path: ExplorerLocation,
-    exact: true,
-    component: ExplorerView,
-  },
-  {
-    path: ExplorerIndexesLocation,
     exact: true,
     component: ExplorerView,
   },

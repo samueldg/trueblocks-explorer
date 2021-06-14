@@ -4,6 +4,7 @@ export const DashboardLocation = '/dashboard';
 export const DashboardOverviewLocation = '/dashboard/overview';
 export const DashboardMonitorsLocation = '/dashboard/monitors';
 export const DashboardCollectionsLocation = '/dashboard/collections';
+export const DashboardIndexesLocation = '/dashboard/indexes';
 
 export const NamesLocation = '/names';
 export const NamesAddressesLocation = '/names/addresses';
@@ -12,7 +13,6 @@ export const NamesSignaturesLocation = '/names/signatures';
 export const NamesBlocksLocation = '/names/blocks';
 
 export const ExplorerLocation = '/explorer';
-export const ExplorerIndexesLocation = '/explorer/indexes';
 export const ExplorerBlocksLocation = '/explorer/blocks';
 export const ExplorerTransactionsLocation = '/explorer/transactions';
 export const ExplorerReceiptsLocation = '/explorer/receipts';
