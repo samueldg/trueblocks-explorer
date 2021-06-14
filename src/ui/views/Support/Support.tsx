@@ -1,13 +1,14 @@
 import { PageHeader, Tabs } from 'antd';
 import Cookies from 'js-cookie';
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import {
   SupportAboutUsLocation,
   SupportContactUsLocation,
   SupportDocumentationLocation,
   SupportHotKeysLocation,
   SupportLicensingLocation,
+  SupportLocation,
 } from '../..//locations';
 import { cookieVars } from '../../utils';
 import { About } from './Tabs/About';
@@ -20,7 +21,13 @@ const { TabPane } = Tabs;
 
 export const SupportView = () => {
   const history = useHistory();
-  const [currentTab, setCurrentTab] = useState(Cookies.get(cookieVars.support_current_tab) || SupportContactUsLocation);
+  const location = useLocation();
+  let subPath = location.pathname.replace(SupportLocation, '');
+  const [currentTab, setCurrentTab] = useState(
+    (subPath && subPath.length > 0 ? location.pathname : null) ||
+      Cookies.get(cookieVars.support_current_tab) ||
+      SupportContactUsLocation
+  );
 
   const onTabChange = (key: string) => {
     Cookies.set(cookieVars.support_current_tab, key);

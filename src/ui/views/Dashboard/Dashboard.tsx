@@ -1,11 +1,14 @@
 import { PageHeader, Tabs } from 'antd';
 import Cookies from 'js-cookie';
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import {
   DashboardCollectionsLocation,
-  DashboardIndexesLocation, DashboardMonitorsLocation, DashboardOverviewLocation
-} from '../../locations';
+  DashboardIndexesLocation,
+  DashboardLocation,
+  DashboardMonitorsLocation,
+  DashboardOverviewLocation,
+} from '../..//locations';
 import { cookieVars } from '../../utils';
 import { Collections } from './Tabs/Collections';
 import { Indexes } from './Tabs/Indexes';
@@ -16,8 +19,12 @@ const { TabPane } = Tabs;
 
 export const DashboardView = () => {
   const history = useHistory();
+  const location = useLocation();
+  let subPath = location.pathname.replace(DashboardLocation, '');
   const [currentTab, setCurrentTab] = useState(
-    Cookies.get(cookieVars.dashboard_current_tab) || DashboardOverviewLocation
+    (subPath && subPath.length > 0 ? location.pathname : null) ||
+      Cookies.get(cookieVars.dashboard_current_tab) ||
+      DashboardOverviewLocation
   );
 
   const onTabChange = (key: string) => {
