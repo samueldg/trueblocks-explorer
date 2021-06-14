@@ -34,7 +34,12 @@ export const NamesTable = ({ getNames, loadingNames }: { getNames: () => Name[];
     pageSize,
     dataSource.length,
     () => currentPage < Math.ceil(dataSource.length / pageSize) && setCurrentPage(currentPage + 1),
-    () => currentPage > 1 && setCurrentPage(currentPage - 1),
+    () => {
+      currentPage > 1 && setCurrentPage(currentPage - 1);
+      const tr = document.querySelector('tr[data-row-key]');
+      const siblings = getSiblings(tr);
+      siblings[siblings.length - 1].focus();
+    },
     () => setCurrentPage(1),
     () => setCurrentPage(Math.ceil(dataSource.length / pageSize))
   );
