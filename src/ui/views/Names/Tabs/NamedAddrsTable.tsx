@@ -48,7 +48,7 @@ export const NamesTable = ({ getNames, loadingNames }: { getNames: () => Name[];
   );
 
   useHotkeys(
-    'left',
+    'left,pageup',
     () => {
       currentPage > 1 && setCurrentPage(currentPage - 1);
       const tr = document.querySelector('tr[data-row-key]');
@@ -58,7 +58,7 @@ export const NamesTable = ({ getNames, loadingNames }: { getNames: () => Name[];
     [currentPage, dataSource, focusedRow, setFocusedRow]
   );
   useHotkeys(
-    'right',
+    'right,pagedown',
     () => {
       currentPage < Math.ceil(dataSource.length / pageSize) && setCurrentPage(currentPage + 1);
       const tr = document.querySelector('tr[data-row-key]');
