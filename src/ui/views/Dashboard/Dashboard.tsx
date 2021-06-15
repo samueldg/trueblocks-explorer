@@ -8,7 +8,7 @@ import {
   DashboardOverviewLocation
 } from '../../locations';
 import { cookieVars } from '../../utils';
-import { Accounts } from './Tabs/Accounts';
+import { AccountsView } from './Tabs/Accounts/Accounts';
 import { Collections } from './Tabs/Collections';
 import { Indexes } from './Tabs/Indexes';
 import { Monitors } from './Tabs/Monitors';
@@ -18,13 +18,11 @@ export const DashboardView = () => {
   const title = 'Dashboard';
   var tabs = [
     {name: "Overview", location: DashboardOverviewLocation, component: <Overview />, disabled: false},
-    {name: "Accounts", location: DashboardAccountsLocation, component: <Accounts />, disabled: true},
+    {name: "Accounts", location: DashboardAccountsLocation, component: <AccountsView />, disabled: false},
     {name: "Monitors", location: DashboardMonitorsLocation, component: <Monitors />, disabled: false},
     {name: "Collections", location: DashboardCollectionsLocation, component: <Collections />, disabled: false},
     {name: "Indexes", location: DashboardIndexesLocation, component: <Indexes />, disabled: false},
   ];
-  if (location.pathname === DashboardAccountsLocation)
-    tabs[1].disabled = false;
   return (
     <BaseView
       title={title}

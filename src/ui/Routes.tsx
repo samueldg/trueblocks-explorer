@@ -1,7 +1,8 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import {
-  DashboardAccountsLocation, DashboardCollectionsLocation,
+  AccountFunctionsLocation, AccountTransactionsLocation, DashboardAccountsLocation,
+  DashboardCollectionsLocation,
   DashboardIndexesLocation, DashboardLocation,
   DashboardMonitorsLocation, DashboardOverviewLocation,
   ExplorerBlocksLocation,
@@ -37,17 +38,27 @@ const routes = [
     component: DashboardView,
   },
   {
-    path: DashboardAccountsLocation,
-    exact: true,
-    component: DashboardView,
-  },
-  {
     path: DashboardLocation,
     exact: true,
     component: DashboardView,
   },
   {
     path: DashboardOverviewLocation,
+    exact: true,
+    component: DashboardView,
+  },
+  {
+    path: DashboardAccountsLocation,
+    exact: true,
+    component: DashboardView,
+  },
+  {
+    path:AccountTransactionsLocation,
+    exact: true,
+    component: DashboardView,
+  },
+  {
+    path:AccountFunctionsLocation,
     exact: true,
     component: DashboardView,
   },

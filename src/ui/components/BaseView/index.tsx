@@ -12,14 +12,16 @@ export type ViewTab = {
   disabled?: boolean,
 };
 
+declare type TabsPosition = 'top' | 'right' | 'bottom' | 'left';
 interface ViewParams {
   title: string,
   defaultActive: string,
   cookieName: string,
   tabs: ViewTab[];
+  position?: TabsPosition
 }
 
-export const BaseView = ({title, cookieName, defaultActive, tabs}: ViewParams) => {
+export const BaseView = ({title, cookieName, defaultActive, tabs, position = 'top'}: ViewParams) => {
   const history = useHistory();
   const location = useLocation();
   const parts = location.pathname.split('/');
@@ -36,10 +38,11 @@ export const BaseView = ({title, cookieName, defaultActive, tabs}: ViewParams) =
     setCurrentTab(key);
   };
 
+  const titleComponent = (title.length === 0 ? <></> : <PageHeader title={title} />);
   return (
     <>
-      <PageHeader title={title} />
-      <Tabs defaultActiveKey={currentTab} onChange={(key) => onTabChange(key)}>
+      {titleComponent}
+      <Tabs tabPosition={position} defaultActiveKey={currentTab} onChange={(key) => onTabChange(key)}>
         {tabs.map((tab) => (
           <TabPane tab={tab.name} key={tab.location} disabled={tab.disabled}>
             {tab.component}

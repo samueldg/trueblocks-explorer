@@ -3,8 +3,8 @@ import { useCommand } from '@hooks/useCommand';
 import { createErrorNotification } from '@modules/error_notification';
 import React, { useCallback } from 'react';
 
-export const Accounts = () => {
-  const [data, loading] = useCommand('export', { addrs: '0xf503017d7baf7fbc0fff7492b751025c6a78179b', fmt: 'json' });
+export const AccountTransactions = () => {
+  const [data, loading] = useCommand('export', { addrs: '0xf503017d7baf7fbc0fff7492b751025c6a78179b', fmt: 'json', articulate: true, accounting: true, max_records: 15, ether: true });
   const getData = useCallback((response) => (response.status === 'fail' ? [] : response.data), []);
 
   const theItem = getData(data);
