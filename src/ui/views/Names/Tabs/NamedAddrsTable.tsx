@@ -11,7 +11,7 @@ function getTableActions(item: Name) {
 
 export const CustomRow = (props: any) => {
   if (props.className.indexOf('ant-table-expanded-row') >= 0) return <tr {...props} />;
-  else return <tr {...props} tabindex={0} />;
+  else return <tr {...props} tabIndex={0} />;
 };
 
 export const NamesTable = ({ getNames, loadingNames }: { getNames: () => Name[]; loadingNames: boolean }) => {
