@@ -1,14 +1,11 @@
-import { PageHeader, Tabs } from 'antd';
-import Cookies from 'js-cookie';
-import React, { useState } from 'react';
-import { useHistory, useLocation } from 'react-router-dom';
+import { BaseView } from '@components/BaseView';
+import React from 'react';
 import {
   ExplorerBlocksLocation,
-  ExplorerLocation,
   ExplorerLogsLocation,
   ExplorerReceiptsLocation,
   ExplorerTracesLocation,
-  ExplorerTransactionsLocation,
+  ExplorerTransactionsLocation
 } from '../../locations';
 import { cookieVars } from '../../utils';
 import { Blocks } from './Tabs/Blocks';
@@ -17,45 +14,21 @@ import { Receipts } from './Tabs/Receipts';
 import { Traces } from './Tabs/Traces';
 import { Transactions } from './Tabs/Transactions';
 
-const { TabPane } = Tabs;
-
 export const ExplorerView = () => {
-  const history = useHistory();
-  const location = useLocation();
-  let subPath = location.pathname.replace(ExplorerLocation, '');
-  const [currentTab, setCurrentTab] = useState(
-    (subPath && subPath.length > 0 ? location.pathname : null) ||
-      Cookies.get(cookieVars.explorer_current_tab) ||
-      ExplorerBlocksLocation
-  );
-
-  const onTabChange = (key: string) => {
-    Cookies.set(cookieVars.explorer_current_tab, key);
-    history.push(key);
-    setCurrentTab(key);
-  };
-
   const title = 'Explorer';
+  const tabs = [
+    {name: "Blocks", location: ExplorerBlocksLocation, component: <Blocks />},
+    {name: "Transactions", location: ExplorerTransactionsLocation, component: <Transactions />},
+    {name: "Receipts", location: ExplorerReceiptsLocation, component: <Receipts />},
+    {name: "Logs", location: ExplorerLogsLocation, component: <Logs />},
+    {name: "Traces", location: ExplorerTracesLocation, component: <Traces />},
+  ];
   return (
-    <>
-      <PageHeader title={title} />
-      <Tabs defaultActiveKey={currentTab} onChange={(key) => onTabChange(key)}>
-        <TabPane tab='Blocks' key={ExplorerBlocksLocation}>
-          <Blocks />
-        </TabPane>
-        <TabPane tab='Transactions' key={ExplorerTransactionsLocation}>
-          <Transactions />
-        </TabPane>
-        <TabPane tab='Receipts' key={ExplorerReceiptsLocation}>
-          <Receipts />
-        </TabPane>
-        <TabPane tab='Logs' key={ExplorerLogsLocation}>
-          <Logs />
-        </TabPane>
-        <TabPane tab='Traces' key={ExplorerTracesLocation}>
-          <Traces />
-        </TabPane>
-      </Tabs>
-    </>
+    <BaseView
+      title={title}
+      defaultActive={ExplorerBlocksLocation}
+      cookieName={cookieVars.explorer_current_tab}
+      tabs={tabs}
+    />
   );
 };
