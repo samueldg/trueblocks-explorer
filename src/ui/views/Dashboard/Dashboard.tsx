@@ -11,14 +11,13 @@ import {
   DashboardOverviewLocation
 } from '../../locations';
 import { cookieVars } from '../../utils';
+import { Accounts } from './Tabs/Accounts';
 import { Collections } from './Tabs/Collections';
 import { Indexes } from './Tabs/Indexes';
 import { Monitors } from './Tabs/Monitors';
 import { Overview } from './Tabs/Overview';
 
 const { TabPane } = Tabs;
-
-const Accounts = () => <div>Display accounting on an address</div>;
 
 export const DashboardView = () => {
   const history = useHistory();
