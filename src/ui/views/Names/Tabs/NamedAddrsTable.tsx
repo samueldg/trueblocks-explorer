@@ -11,17 +11,17 @@ function getTableActions(item: Name) {
 
 export const CustomRow = (props: any) => {
   if (props.className.indexOf('ant-table-expanded-row') >= 0) return <tr {...props} />;
-  else return <tr {...props} tabindex={0} />;
+  else return <tr {...props} tabIndex={0} />;
 };
 
-export const NamesTable = ({ getNames, loadingNames }: { getNames: () => Name[]; loadingNames: boolean }) => {
+export const NamesTable = ({ getData, loading }: { getData: () => Name[]; loading: boolean }) => {
   const onTagClick = (tag: string) => console.log('tag click', tag);
   const [expandedRowKeys, setExpandedRowKeys] = useState<readonly React.ReactText[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(10);
   const [focusedRow, setFocusedRow] = useState(0);
 
-  const dataSource = getNames().map((item, i) => {
+  const dataSource = getData().map((item, i) => {
     return {
       id: (i + 1).toString(),
       ...item,
@@ -76,30 +76,30 @@ export const NamesTable = ({ getNames, loadingNames }: { getNames: () => Name[];
   const components = {
     body: { row: CustomRow },
   };
+
+  useEffect(() => {
+    const tr = document.querySelector('tr[data-row-key]');
+    //@ts-ignore
+    tr.focus();
+    const siblings = getSiblings(tr);
+    if (
+      siblings &&
+      siblings.length > 0 &&
+      currentPage === Math.ceil(dataSource.length / pageSize) &&
+      tr?.getAttribute('data-row-key')?.toString() !== siblings.length.toString()
+    ) {
+      siblings[siblings.length - 1].focus();
+    }
+  }, [currentPage]);
+
   const columns: ColumnsType<Name> = [
     addColumn<Name>({
       title: 'Address',
       dataIndex: 'address',
-      configuration: {
-        sorter: {
-          compare(a, b) {
-            if (a.address === b.address) return 0;
-            return a.address < b.address ? -1 : 1;
-          },
-        },
-      },
     }),
     addColumn({
       title: 'Name',
       dataIndex: 'name',
-      configuration: {
-        sorter: {
-          compare(a, b) {
-            if (a.name === b.name) return 0;
-            return a.name < b.name ? -1 : 1;
-          },
-        },
-      },
     }),
     addColumn({
       title: 'Symbol',
@@ -159,21 +159,6 @@ export const NamesTable = ({ getNames, loadingNames }: { getNames: () => Name[];
     ),
   ];
 
-  useEffect(() => {
-    const tr = document.querySelector('tr[data-row-key]');
-    //@ts-ignore
-    tr.focus();
-    const siblings = getSiblings(tr);
-    if (
-      siblings &&
-      siblings.length > 0 &&
-      currentPage === Math.ceil(dataSource.length / pageSize) &&
-      tr?.getAttribute('data-row-key')?.toString() !== siblings.length.toString()
-    ) {
-      siblings[siblings.length - 1].focus();
-    }
-  }, [currentPage]);
-
   return (
     <div onFocus={handleOnFocus} onBlur={handleOnBlur}>
       <Table<Name>
@@ -181,7 +166,7 @@ export const NamesTable = ({ getNames, loadingNames }: { getNames: () => Name[];
         components={components}
         columns={columns}
         dataSource={dataSource}
-        loading={loadingNames}
+        loading={loading}
         pagination={{
           current: currentPage,
           pageSize: pageSize,
@@ -199,14 +184,13 @@ export const NamesTable = ({ getNames, loadingNames }: { getNames: () => Name[];
         rowClassName={(record, index) => 'row-' + index}
         size='small'
         scroll={{ x: 1300 }}
-        /*expandable={{
+        expandable={{
           onExpandedRowsChange: (expandedRowKeys) => {
-            // console.log(expandedRowKeys);
             setExpandedRowKeys(expandedRowKeys);
           },
           expandedRowKeys: expandedRowKeys,
-          expandedRowRender: (rowset) => <div>hello</div>,
-        }}*/
+          expandedRowRender: (rowset) => <div>{JSON.stringify(rowset, null, 2)}</div>,
+        }}
       />
     </div>
   );

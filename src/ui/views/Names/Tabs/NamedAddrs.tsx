@@ -11,7 +11,7 @@ export const NamedAddrs = () => {
   return (
     <>
       <NamesFilters />
-      <NamesTable getNames={() => getData(names)} loadingNames={loading} />
+      <NamesTable getData={() => getData(names)} loading={loading} />
     </>
   );
 };
