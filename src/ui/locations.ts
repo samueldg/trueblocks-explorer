@@ -12,7 +12,8 @@ export const DashboardIndexesLocation = '/dashboard/indexes';
 export const NamesLocation = '/names';
 export const NamesAddressesLocation = '/names/addresses';
 export const NamesTagsLocation = '/names/tags';
-export const NamesSignaturesLocation = '/names/signatures';
+export const NamesFuncSigsLocation = '/names/funcsigs';
+export const NamesEventSigsLocation = '/names/eventsigs';
 export const NamesBlocksLocation = '/names/blocks';
 
 export const ExplorerLocation = '/explorer';

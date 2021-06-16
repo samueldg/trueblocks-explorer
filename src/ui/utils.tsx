@@ -1,8 +1,9 @@
-import { useHotkeys } from 'react-hotkeys-hook';
 import { useCallback, useEffect, useState } from 'react';
+import { useHotkeys } from 'react-hotkeys-hook';
 
 export const cookieVars = {
   dashboard_current_tab: 'DASHBOARD_CURRENT_TAB',
+  dashboard_account_sub_tab: 'DASHBOARD_ACCOUNT_SUB_TAB',
   explorer_current_tab: 'EXPLORER_CURRENT_TAB',
   names_current_tab: 'NAMES_CURRENT_TAB',
   settings_current_tab: 'SETTINGS_CURRENT_TAB',
@@ -16,7 +17,7 @@ export const getSiblings = (e: any) => {
   // for collecting siblings
   let siblings: any[] = [];
   // if no parent, return no sibling
-  if (!e.parentNode) {
+  if (!e || !e.parentNode) {
     return siblings;
   }
   // first child of the parent node
@@ -100,7 +101,7 @@ export const useKeyBindings = (
               }
               const index = getSiblings(currentRow)
                 .map((e) => e.getAttribute('data-row-key'))
-                .indexOf(previousSibling.getAttribute('data-row-key'));
+                .indexOf(previousSibling ? previousSibling.getAttribute('data-row-key') : 0);
               setFocusedRow(index - 1);
               previousSibling?.focus();
             }

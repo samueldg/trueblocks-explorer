@@ -5,8 +5,9 @@ import {
   ExplorerBlocksLocation, ExplorerLocation,
   ExplorerLogsLocation, ExplorerReceiptsLocation,
   ExplorerTracesLocation, ExplorerTransactionsLocation, NamesAddressesLocation,
-  NamesBlocksLocation, NamesLocation,
-  NamesSignaturesLocation, NamesTagsLocation, RootLocation,
+  NamesBlocksLocation,
+  NamesEventSigsLocation, NamesFuncSigsLocation, NamesLocation,
+  NamesTagsLocation, RootLocation,
   SettingsCachesLocation, SettingsLocation,
   SettingsSchemasLocation, SettingsScrapersLocation,
   SettingsSkinsLocation,
@@ -66,8 +67,12 @@ export const helpRoutes = [
     helpText: 'Tags are groupings used to collect together named addresses.',
   },
   {
-    route: NamesSignaturesLocation,
-    helpText: 'The signatures tab allows you to add/edit/delete four byte and event signatures.',
+    route: NamesFuncSigsLocation,
+    helpText: 'The function signatures tab allows you to add/edit/delete four byte signatures.',
+  },
+  {
+    route: NamesEventSigsLocation,
+    helpText: 'The event signatures tab allows you to add/edit/delete event signatures.',
   },
   {
     route: NamesBlocksLocation,

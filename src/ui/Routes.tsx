@@ -13,8 +13,11 @@ import {
   ExplorerTransactionsLocation,
   NamesAddressesLocation,
   NamesBlocksLocation,
-  NamesLocation,
-  NamesSignaturesLocation,
+
+
+  NamesEventSigsLocation, NamesFuncSigsLocation, NamesLocation,
+
+
   NamesTagsLocation,
   RootLocation,
   SettingsCachesLocation,
@@ -93,7 +96,12 @@ const routes = [
     component: NamesView,
   },
   {
-    path: NamesSignaturesLocation,
+    path: NamesFuncSigsLocation,
+    exact: true,
+    component: NamesView,
+  },
+  {
+    path: NamesEventSigsLocation,
     exact: true,
     component: NamesView,
   },

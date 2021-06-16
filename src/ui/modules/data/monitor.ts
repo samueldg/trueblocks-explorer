@@ -1,4 +1,4 @@
-export type Monitor = {
+export type MonitorType = {
   /* eslint-disable camelcase */
   address: string /* address */;
   decimals: number /* uint64 */;
