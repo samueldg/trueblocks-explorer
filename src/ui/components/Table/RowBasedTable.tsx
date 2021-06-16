@@ -1,27 +1,22 @@
-import { addActionsColumn, addColumn, addFlagColumn, addTagsColumn, TableActions } from '@components/Table';
-import { Name } from '@modules/data/name';
+import { Result } from '@hooks/useCommand';
 import Table, { ColumnsType } from 'antd/lib/table';
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useHotkeys } from 'react-hotkeys-hook';
-import { getSiblings, useKeyBindings } from '../../../utils';
-
-function getTableActions(item: Name) {
-  return <TableActions item={item} onClick={(action, tableItem) => console.log('Clicked action', action, tableItem)} />;
-}
+import { getSiblings, useKeyBindings } from '../../utils';
 
 export const CustomRow = (props: any) => {
   if (props.className.indexOf('ant-table-expanded-row') >= 0) return <tr {...props} />;
   else return <tr {...props} tabIndex={0} />;
 };
 
-export const NamesTable = ({ getData, loading }: { getData: () => Name[]; loading: boolean }) => {
-  const onTagClick = (tag: string) => console.log('tag click', tag);
+export const RowBasedTable = ({ data, columns, loading }: { data: Result, columns: ColumnsType<any>, loading: boolean }) => {
   const [expandedRowKeys, setExpandedRowKeys] = useState<readonly React.ReactText[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(10);
   const [focusedRow, setFocusedRow] = useState(0);
 
-  const dataSource = getData().map((item, i) => {
+  const getData = useCallback((response) => (response.status === 'fail' ? [] : response.data), []);
+  const dataSource = getData(data).map((item: any, i: number) => {
     return {
       id: (i + 1).toString(),
       ...item,
@@ -92,76 +87,9 @@ export const NamesTable = ({ getData, loading }: { getData: () => Name[]; loadin
     }
   }, [currentPage]);
 
-  const columns: ColumnsType<Name> = [
-    addColumn<Name>({
-      title: 'Address',
-      dataIndex: 'address',
-    }),
-    addColumn({
-      title: 'Name',
-      dataIndex: 'name',
-    }),
-    addColumn({
-      title: 'Symbol',
-      dataIndex: 'symbol',
-    }),
-    addColumn({
-      title: 'Source',
-      dataIndex: 'source',
-    }),
-    addColumn({
-      title: 'Decimals',
-      dataIndex: 'decimals',
-    }),
-    addColumn({
-      title: 'Description',
-      dataIndex: 'description',
-    }),
-    addTagsColumn(
-      {
-        title: 'Tags',
-        dataIndex: 'tags',
-        configuration: {
-          ellipsis: false,
-        },
-      },
-      onTagClick
-    ),
-    addFlagColumn({
-      title: 'Prefund',
-      dataIndex: 'is_prefund',
-    }),
-    addFlagColumn({
-      title: 'ERC20',
-      dataIndex: 'is_erc20',
-    }),
-    addFlagColumn({
-      title: 'ERC721',
-      dataIndex: 'is_erc721',
-    }),
-    addFlagColumn({
-      title: 'Contract',
-      dataIndex: 'is_contract',
-    }),
-    addFlagColumn({
-      title: 'Monitor',
-      dataIndex: 'mon',
-    }),
-    addActionsColumn<Name>(
-      {
-        title: '',
-        dataIndex: '',
-      },
-      {
-        width: 150,
-        getComponent: getTableActions,
-      }
-    ),
-  ];
-
   return (
     <div onFocus={handleOnFocus} onBlur={handleOnBlur}>
-      <Table<Name>
+      <Table<any>
         rowKey={'id'}
         components={components}
         columns={columns}

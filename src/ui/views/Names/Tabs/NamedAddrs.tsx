@@ -1,17 +1,88 @@
 import { NamesFilters } from '@components/Filters';
-import React, { useCallback } from 'react';
-import { useCommand } from '../../../hooks/useCommand';
+import { addActionsColumn, addColumn, addFlagColumn, addTagsColumn, RowBasedTable, TableActions } from '@components/Table';
+import { useCommand } from '@hooks/useCommand';
+import { Name } from '@modules/data/name';
+import { ColumnsType } from 'antd/lib/table';
+import React from 'react';
 import './NamedAddrs.css';
-import { NamesTable } from './NamedAddrsTable';
 
 export const NamedAddrs = () => {
   const [names, loading] = useCommand('names', { expand: true });
-  const getData = useCallback((response) => (response.status === 'fail' ? [] : response.data), []);
-
   return (
     <>
       <NamesFilters />
-      <NamesTable getData={() => getData(names)} loading={loading} />
+      <RowBasedTable data={names} columns={namesSchema} loading={loading} />
     </>
   );
 };
+
+const namesSchema: ColumnsType<Name> = [
+  addColumn<Name>({
+    title: 'Address',
+    dataIndex: 'address',
+  }),
+  addColumn({
+    title: 'Name',
+    dataIndex: 'name',
+  }),
+  addColumn({
+    title: 'Symbol',
+    dataIndex: 'symbol',
+  }),
+  addColumn({
+    title: 'Source',
+    dataIndex: 'source',
+  }),
+  addColumn({
+    title: 'Decimals',
+    dataIndex: 'decimals',
+  }),
+  addColumn({
+    title: 'Description',
+    dataIndex: 'description',
+  }),
+  addTagsColumn(
+    {
+      title: 'Tags',
+      dataIndex: 'tags',
+      configuration: {
+        ellipsis: false,
+      },
+    },
+    (tag: string) => console.log('tag click', tag)
+  ),
+  addFlagColumn({
+    title: 'Prefund',
+    dataIndex: 'is_prefund',
+  }),
+  addFlagColumn({
+    title: 'ERC20',
+    dataIndex: 'is_erc20',
+  }),
+  addFlagColumn({
+    title: 'ERC721',
+    dataIndex: 'is_erc721',
+  }),
+  addFlagColumn({
+    title: 'Contract',
+    dataIndex: 'is_contract',
+  }),
+  addFlagColumn({
+    title: 'Monitor',
+    dataIndex: 'mon',
+  }),
+  addActionsColumn<Name>(
+    {
+      title: '',
+      dataIndex: '',
+    },
+    {
+      width: 150,
+      getComponent: getTableActions,
+    }
+  ),
+];
+
+function getTableActions(item: Name) {
+  return <TableActions item={item} onClick={(action, tableItem) => console.log('Clicked action', action, tableItem)} />;
+}
