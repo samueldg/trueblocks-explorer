@@ -1,4 +1,4 @@
-import { addActionsColumn, addColumn, RowBasedTable, TableActions } from '@components/Table';
+import { addActionsColumn, addColumn, addNumColumn, RowBasedTable, TableActions } from '@components/Table';
 import { useCommand } from '@hooks/useCommand';
 import { WhenType } from '@modules/data/when';
 import { createErrorNotification } from '@modules/error_notification';
@@ -18,12 +18,10 @@ export const When = () => {
 };
 
 const whenSchema: ColumnsType<WhenType> = [
-  addColumn({
+  addNumColumn({
     title: 'Block Number',
     dataIndex: 'blockNumber',
     configuration: {
-      render: (num: number) => Intl.NumberFormat().format(num),
-      align: 'right',
       width: 100,
     }
   }),

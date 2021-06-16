@@ -1,5 +1,5 @@
 import { NamesFilters } from '@components/Filters';
-import { addActionsColumn, addColumn, addTagsColumn, RowBasedTable, TableActions } from '@components/Table';
+import { addActionsColumn, addColumn, addNumColumn, addTagsColumn, RowBasedTable, TableActions } from '@components/Table';
 import { useCommand } from '@hooks/useCommand';
 import { MonitorType } from '@modules/data/monitor';
 import { createErrorNotification } from '@modules/error_notification';
@@ -47,37 +47,21 @@ const monitorSchema: ColumnsType<MonitorType> = [
     },
     (tag: string) => console.log('tag click', tag)
   ),
-  addColumn({
+  addNumColumn({
     title: 'nAppearances',
     dataIndex: 'nAppearances',
-    configuration: {
-      render: (num: number) => Intl.NumberFormat().format(num),
-      align: 'right',
-    }
   }),
-  addColumn({
+  addNumColumn({
     title: 'firstAppearance',
     dataIndex: 'firstAppearance',
-    configuration: {
-      render: (num: number) => Intl.NumberFormat().format(num),
-      align: 'right',
-    }
   }),
-  addColumn({
+  addNumColumn({
     title: 'latestAppearance',
     dataIndex: 'latestAppearance',
-    configuration: {
-      render: (num: number) => Intl.NumberFormat().format(num),
-      align: 'right',
-    }
   }),
-  addColumn({
+  addNumColumn({
     title: 'sizeInBytes',
     dataIndex: 'sizeInBytes',
-    configuration: {
-      render: (num: number) => Intl.NumberFormat().format(num),
-      align: 'right',
-    }
   }),
   addActionsColumn<MonitorType>(
     {
