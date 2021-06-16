@@ -17,7 +17,7 @@ export const AccountsView = () => {
     <BaseView
       title={title}
       defaultActive={AccountTransactionsLocation}
-      cookieName={cookieVars.dashboard_current_tab}
+      cookieName={cookieVars.dashboard_account_sub_tab}
       tabs={tabs}
       position='left'
     />
