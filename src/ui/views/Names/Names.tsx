@@ -4,22 +4,25 @@ import {
   NamesAddressesLocation,
   NamesBlocksLocation,
 
-  NamesSignaturesLocation,
+  NamesEventSigsLocation, NamesFuncSigsLocation,
+
   NamesTagsLocation
 } from '../../locations';
 import { cookieVars } from '../../utils';
 import { Addresses } from './Tabs/Addresses';
-import { Signatures } from './Tabs/Signatures';
+import { EventSignatures } from './Tabs/EventSignatures';
+import { FunctionSignatures } from './Tabs/FunctionSignatures';
 import { Tags } from './Tabs/Tag';
 import { When } from './Tabs/When';
 
 export const NamesView = () => {
   const title = 'Names';
   const tabs = [
-    {name: "Addresses", location: NamesAddressesLocation, component: <Addresses />},
-    {name: "Tags", location: NamesTagsLocation, component: <Tags />},
-    {name: "Signatures", location: NamesSignaturesLocation, component: <Signatures />},
-    {name: "Blocks", location: NamesBlocksLocation, component: <When />},
+    {name: "Named Addresses", location: NamesAddressesLocation, component: <Addresses />},
+    {name: "Address Tags", location: NamesTagsLocation, component: <Tags />},
+    {name: "Function Signatures", location: NamesFuncSigsLocation, component: <FunctionSignatures />},
+    {name: "Event Signatures", location: NamesEventSigsLocation, component: <EventSignatures />},
+    {name: "Named Blocks", location: NamesBlocksLocation, component: <When />},
   ];
   return (
     <BaseView
