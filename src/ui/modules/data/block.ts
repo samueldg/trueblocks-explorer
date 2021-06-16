@@ -1,4 +1,4 @@
-export type Name = {
+export type BlockType = {
   /* eslint-disable camelcase */
   blockNumber: number /* blknum */;
   difficulty: number /* uint64 */;

@@ -1,4 +1,4 @@
-export type Signature = {
+export type SignatureType = {
   /* eslint-disable camelcase */
   encoding: string /* hash */;
   type: string /* string */;

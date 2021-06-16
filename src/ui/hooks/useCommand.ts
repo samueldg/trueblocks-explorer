@@ -1,7 +1,7 @@
+import { CommandParams, CoreCommand, JsonResponse, runCommand } from '@modules/core';
 import { either as Either } from 'fp-ts';
 import { pipe } from 'fp-ts/function';
 import { useEffect, useState } from 'react';
-import { CommandParams, CoreCommand, JsonResponse, runCommand } from '../modules/core';
 
 type DataResult = {
   status: 'success';

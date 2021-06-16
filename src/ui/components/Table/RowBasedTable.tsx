@@ -1,6 +1,6 @@
-import { Result } from '@hooks/useCommand';
+import { JsonResponse } from '@modules/core';
 import Table, { ColumnsType } from 'antd/lib/table';
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHotkeys } from 'react-hotkeys-hook';
 import { getSiblings, useKeyBindings } from '../../utils';
 
@@ -9,14 +9,13 @@ export const CustomRow = (props: any) => {
   else return <tr {...props} tabIndex={0} />;
 };
 
-export const RowBasedTable = ({ data, columns, loading }: { data: Result, columns: ColumnsType<any>, loading: boolean }) => {
+export const RowBasedTable = ({ data, columns, loading }: { data: JsonResponse, columns: ColumnsType<any>, loading: boolean }) => {
   const [expandedRowKeys, setExpandedRowKeys] = useState<readonly React.ReactText[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(10);
   const [focusedRow, setFocusedRow] = useState(0);
 
-  const getData = useCallback((response) => (response.status === 'fail' ? [] : response.data), []);
-  const dataSource = getData(data).map((item: any, i: number) => {
+  const dataSource = data.map((item: any, i: number) => {
     return {
       id: (i + 1).toString(),
       ...item,

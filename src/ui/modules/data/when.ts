@@ -1,4 +1,4 @@
-export type When = {
+export type WhenType = {
   /* eslint-disable camelcase */
   blockNumber: number /* blknum */;
   timestamp: number /* timestamp */;

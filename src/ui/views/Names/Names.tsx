@@ -8,15 +8,15 @@ import {
   NamesTagsLocation
 } from '../../locations';
 import { cookieVars } from '../../utils';
-import { NamedAddrs } from './Tabs/NamedAddrs';
-import { Signatures } from './Tabs/Signature';
+import { Addresses } from './Tabs/Addresses';
+import { Signatures } from './Tabs/Signatures';
 import { Tags } from './Tabs/Tag';
 import { When } from './Tabs/When';
 
 export const NamesView = () => {
   const title = 'Names';
   const tabs = [
-    {name: "Addresses", location: NamesAddressesLocation, component: <NamedAddrs />},
+    {name: "Addresses", location: NamesAddressesLocation, component: <Addresses />},
     {name: "Tags", location: NamesTagsLocation, component: <Tags />},
     {name: "Signatures", location: NamesSignaturesLocation, component: <Signatures />},
     {name: "Blocks", location: NamesBlocksLocation, component: <When />},

@@ -1,23 +1,31 @@
 import { NamesFilters } from '@components/Filters';
 import { addActionsColumn, addColumn, addFlagColumn, addTagsColumn, RowBasedTable, TableActions } from '@components/Table';
 import { useCommand } from '@hooks/useCommand';
-import { Name } from '@modules/data/name';
+import { NameType } from '@modules/data/name';
+import { createErrorNotification } from '@modules/error_notification';
 import { ColumnsType } from 'antd/lib/table';
-import React from 'react';
-import './NamedAddrs.css';
+import React, { useCallback } from 'react';
+import './Addresses.css';
 
-export const NamedAddrs = () => {
-  const [names, loading] = useCommand('names', { expand: true });
+export const Addresses = () => {
+  const [addresses, loading] = useCommand('names', { expand: true });
+  if (addresses.status === 'fail') {
+    createErrorNotification({
+      description: 'Could not fetch addresses',
+    });
+  }
+
+  const getData = useCallback((response) => (response.status === 'fail' ? [] : response.data), []);
   return (
     <>
       <NamesFilters />
-      <RowBasedTable data={names} columns={namesSchema} loading={loading} />
+      <RowBasedTable data={getData(addresses)} columns={addressSchema} loading={loading} />
     </>
   );
 };
 
-const namesSchema: ColumnsType<Name> = [
-  addColumn<Name>({
+const addressSchema: ColumnsType<NameType> = [
+  addColumn<NameType>({
     title: 'Address',
     dataIndex: 'address',
   }),
@@ -71,7 +79,7 @@ const namesSchema: ColumnsType<Name> = [
     title: 'Monitor',
     dataIndex: 'mon',
   }),
-  addActionsColumn<Name>(
+  addActionsColumn<NameType>(
     {
       title: '',
       dataIndex: '',
@@ -83,6 +91,6 @@ const namesSchema: ColumnsType<Name> = [
   ),
 ];
 
-function getTableActions(item: Name) {
+function getTableActions(item: NameType) {
   return <TableActions item={item} onClick={(action, tableItem) => console.log('Clicked action', action, tableItem)} />;
 }

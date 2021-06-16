@@ -1,10 +1,10 @@
 import { addActionsColumn, addColumn, addFlagColumn, addTagsColumn, TableActions } from '@components/Table';
-import { Monitor } from '@modules/data/monitor';
+import { MonitorType } from '@modules/data/monitor';
 import Table, { ColumnsType } from 'antd/lib/table';
 import { GetRowKey } from 'antd/lib/table/interface';
 import React from 'react';
 
-function getTableActions(item: Monitor) {
+function getTableActions(item: MonitorType) {
   return <TableActions item={item} onClick={(action, tableItem) => console.log('Clicked action', action, tableItem)} />;
 }
 
@@ -12,13 +12,13 @@ export const MonitorsTable = ({
   getMonitors,
   loadingMonitors,
 }: {
-  getMonitors: () => Monitor[];
+  getMonitors: () => MonitorType[];
   loadingMonitors: boolean;
 }) => {
   const onTagClick = (tag: string) => console.log('tag click', tag);
 
-  const columns: ColumnsType<Monitor> = [
-    addColumn<Monitor>({
+  const columns: ColumnsType<MonitorType> = [
+    addColumn<MonitorType>({
       title: 'Address',
       dataIndex: 'address',
     }),
@@ -72,7 +72,7 @@ export const MonitorsTable = ({
       title: 'Monitor',
       dataIndex: 'mon',
     }),
-    addActionsColumn<Monitor>(
+    addActionsColumn<MonitorType>(
       {
         title: '',
         dataIndex: '',
@@ -84,10 +84,10 @@ export const MonitorsTable = ({
     ),
   ];
 
-  const rowKey: GetRowKey<Monitor> = ({ address }, index) => `${address}${index}`;
+  const rowKey: GetRowKey<MonitorType> = ({ address }, index) => `${address}${index}`;
 
   return (
-    <Table<Monitor>
+    <Table<MonitorType>
       rowKey={rowKey}
       columns={columns}
       dataSource={getMonitors()}
