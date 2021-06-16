@@ -62,7 +62,8 @@ export const RowBasedTable = ({ data, columns, loading }: { data: JsonResponse, 
       currentPage < Math.ceil(dataSource.length / pageSize) && setCurrentPage(currentPage + 1);
       const tr = document.querySelector('tr[data-row-key]');
       const siblings = getSiblings(tr);
-      siblings[focusedRow].focus();
+      if (siblings[focusedRow])
+        siblings[focusedRow].focus();
     },
     [currentPage, dataSource, focusedRow, setFocusedRow]
   );
@@ -73,8 +74,10 @@ export const RowBasedTable = ({ data, columns, loading }: { data: JsonResponse, 
 
   useEffect(() => {
     const tr = document.querySelector('tr[data-row-key]');
-    //@ts-ignore
-    tr.focus();
+    if (tr) {
+      //@ts-ignore
+      tr.focus();
+    }
     const siblings = getSiblings(tr);
     if (
       siblings &&
