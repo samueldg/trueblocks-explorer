@@ -13,11 +13,7 @@ import {
   ExplorerTransactionsLocation,
   NamesAddressesLocation,
   NamesBlocksLocation,
-
-
   NamesEventSigsLocation, NamesFuncSigsLocation, NamesLocation,
-
-
   NamesTagsLocation,
   RootLocation,
   SettingsCachesLocation,
@@ -32,7 +28,7 @@ import {
   SupportLicensingLocation,
   SupportLocation
 } from './locations';
-import { DashboardView, ExplorerView, NamesView, SettingsView, SupportView } from './views';
+import { AccountsView, DashboardView, ExplorerView, NamesView, SettingsView, SupportView } from './views';
 
 const routes = [
   {
@@ -58,12 +54,12 @@ const routes = [
   {
     path:AccountTransactionsLocation,
     exact: true,
-    component: DashboardView,
+    component: AccountsView,
   },
   {
     path:AccountFunctionsLocation,
     exact: true,
-    component: DashboardView,
+    component: AccountsView,
   },
   {
     path: DashboardMonitorsLocation,
