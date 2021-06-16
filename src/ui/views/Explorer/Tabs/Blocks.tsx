@@ -1,4 +1,4 @@
-import { addColumn, RowBasedTable, TableActions } from '@components/Table';
+import { addColumn, BaseTableRows, TableActions } from '@components/Table';
 import { BlockType } from '@modules/data/block';
 import { createErrorNotification } from '@modules/error_notification';
 import { ColumnsType } from 'antd/lib/table';
@@ -14,7 +14,7 @@ export const Blocks = () => {
   }
 
   const getData = useCallback((response) => (response.status === 'fail' ? [] : response.data), []);
-  return <RowBasedTable data={getData(blocks)} columns={blockSchema} loading={loading} />
+  return <BaseTableRows data={getData(blocks)} columns={blockSchema} loading={loading} />
 };
 
 const blockSchema: ColumnsType<BlockType> = [

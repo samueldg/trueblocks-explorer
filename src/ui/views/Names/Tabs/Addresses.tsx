@@ -1,5 +1,5 @@
 import { NamesFilters } from '@components/Filters';
-import { addActionsColumn, addColumn, addFlagColumn, addTagsColumn, RowBasedTable, TableActions } from '@components/Table';
+import { addActionsColumn, addColumn, addFlagColumn, addTagsColumn, BaseTableRows, TableActions } from '@components/Table';
 import { useCommand } from '@hooks/useCommand';
 import { NameType } from '@modules/data/name';
 import { createErrorNotification } from '@modules/error_notification';
@@ -19,7 +19,7 @@ export const Addresses = () => {
   return (
     <>
       <NamesFilters />
-      <RowBasedTable data={getData(addresses)} columns={addressSchema} loading={loading} />
+      <BaseTableRows data={getData(addresses)} columns={addressSchema} loading={loading} />
     </>
   );
 };

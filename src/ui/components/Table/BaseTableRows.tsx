@@ -9,7 +9,7 @@ export const CustomRow = (props: any) => {
   else return <tr {...props} tabIndex={0} />;
 };
 
-export const RowBasedTable = ({ data, columns, loading }: { data: JsonResponse, columns: ColumnsType<any>, loading: boolean }) => {
+export const BaseTableRows = ({ data, columns, loading }: { data: JsonResponse, columns: ColumnsType<any>, loading: boolean }) => {
   const [expandedRowKeys, setExpandedRowKeys] = useState<readonly React.ReactText[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(10);

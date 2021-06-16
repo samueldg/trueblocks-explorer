@@ -1,5 +1,5 @@
 import { NamesFilters } from '@components/Filters';
-import { addActionsColumn, addColumn, addNumColumn, addTagsColumn, RowBasedTable, TableActions } from '@components/Table';
+import { addActionsColumn, addColumn, addNumColumn, addTagsColumn, BaseTableRows, TableActions } from '@components/Table';
 import { useCommand } from '@hooks/useCommand';
 import { MonitorType } from '@modules/data/monitor';
 import { createErrorNotification } from '@modules/error_notification';
@@ -23,7 +23,7 @@ export const Monitors = () => {
   return (
     <>
       <NamesFilters />
-      <RowBasedTable data={getData(monitors)} columns={monitorSchema} loading={loading} />
+      <BaseTableRows data={getData(monitors)} columns={monitorSchema} loading={loading} />
     </>
   );
 };

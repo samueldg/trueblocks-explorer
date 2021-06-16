@@ -1,4 +1,4 @@
-import { addColumn, RowBasedTable } from '@components/Table';
+import { addColumn, BaseTableRows } from '@components/Table';
 import { useCommand } from '@hooks/useCommand';
 import { MonitorType } from '@modules/data/monitor';
 import { createErrorNotification } from '@modules/error_notification';
@@ -18,7 +18,7 @@ export const AccountTransactions = () => {
     <>
       {/*<pre>{JSON.stringify(getData(transactions), null, 2)}</pre>*/}
       <pre>count: {getData(transactions).length}</pre>
-      <RowBasedTable data={getData(transactions)} columns={transactionSchema} loading={loading} />
+      <BaseTableRows data={getData(transactions)} columns={transactionSchema} loading={loading} />
     </>
   );
 };

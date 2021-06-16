@@ -1,4 +1,4 @@
-import { addActionsColumn, addColumn, addNumColumn, RowBasedTable, TableActions } from '@components/Table';
+import { addActionsColumn, addColumn, addNumColumn, BaseTableRows, TableActions } from '@components/Table';
 import { useCommand } from '@hooks/useCommand';
 import { WhenType } from '@modules/data/when';
 import { createErrorNotification } from '@modules/error_notification';
@@ -14,7 +14,7 @@ export const When = () => {
   }
 
   const getData = useCallback((response) => (response.status === 'fail' ? [] : response.data), []);
-  return <RowBasedTable data={getData(when)} columns={whenSchema} loading={loading} />;
+  return <BaseTableRows data={getData(when)} columns={whenSchema} loading={loading} />;
 };
 
 const whenSchema: ColumnsType<WhenType> = [

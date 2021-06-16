@@ -1,4 +1,4 @@
-import { addActionsColumn, addColumn, RowBasedTable, TableActions } from '@components/Table';
+import { addActionsColumn, addColumn, BaseTableRows, TableActions } from '@components/Table';
 import { useCommand } from '@hooks/useCommand';
 import { TagType } from '@modules/data/tag';
 import { createErrorNotification } from '@modules/error_notification';
@@ -14,7 +14,7 @@ export const Tags = () => {
   }
 
   const getData = useCallback((response) => (response.status === 'fail' ? [] : response.data), []);
-  return <RowBasedTable data={getData(tags)} columns={tagSchema} loading={loading} />;
+  return <BaseTableRows data={getData(tags)} columns={tagSchema} loading={loading} />;
 };
 
 const tagSchema: ColumnsType<TagType> = [

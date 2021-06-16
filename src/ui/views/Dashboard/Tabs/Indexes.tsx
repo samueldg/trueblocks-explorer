@@ -1,4 +1,4 @@
-import { addColumn, addNumColumn, RowBasedTable, TableActions } from '@components/Table';
+import { addColumn, addNumColumn, BaseTableRows, TableActions } from '@components/Table';
 import { useCommand } from '@hooks/useCommand';
 import { MonitorType } from '@modules/data/monitor';
 import { createErrorNotification } from '@modules/error_notification';
@@ -20,7 +20,7 @@ export const Indexes = () => {
   }, []);
 
   return (
-    <RowBasedTable data={getData(indexes)} columns={indexSchema} loading={loading} />
+    <BaseTableRows data={getData(indexes)} columns={indexSchema} loading={loading} />
   );
 };
 
