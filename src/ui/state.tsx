@@ -5,11 +5,11 @@ import { ReactNode } from 'react-markdown';
 const GlobalStateContext = createContext<any[]>([]);
 
 const THEME = Cookies.get('theme');
-const DEBUG = Cookies.get('debug');
+const DEBUG = Cookies.get('debug') === "true" ? true : false;
 
 const initialState = {
   theme: THEME || null,
-  debug: DEBUG || null,
+  debug: DEBUG || false,
 };
 
 const GlobalStateReducer = (state: any, action: any) => {
@@ -21,7 +21,7 @@ const GlobalStateReducer = (state: any, action: any) => {
         theme: action.theme,
       };
     case 'SET_DEBUG':
-      Cookies.set('debug', action.debug);
+      Cookies.set('debug', action.debug ? "true" : "false");
       return {
         ...state,
         debug: action.debug,
@@ -38,7 +38,7 @@ const useGlobalState = () => {
     dispatch({ type: 'SET_THEME', theme });
   };
 
-  const setDebug = (debug: any) => {
+  const setDebug = (debug: boolean) => {
     dispatch({ type: 'SET_DEBUG', debug });
   };
 
