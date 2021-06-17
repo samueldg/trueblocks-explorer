@@ -2,6 +2,8 @@ import { createErrorNotification } from '@modules/error_notification';
 import { Card, Col, notification, Row } from 'antd';
 import React from 'react';
 import { createUseStyles } from 'react-jss';
+import { Link } from 'react-router-dom';
+import { DashboardMonitorsLocation } from "../../../locations";
 
 const showError = () => notification.error(createErrorNotification({ description: 'Just testing' }));
 
@@ -23,7 +25,7 @@ export const Overview = () => {
     <Card hoverable title="Balance Histories" extra={<a href="#">More...</a>} className={styles.card}>A chart of the history of balances in eth, tokens, dollars</Card>
     </Col>
     <Col>
-    <Card hoverable title="Monitors" extra={<a href="#">More...</a>} className={styles.card}>A list of all monitored addresses</Card>
+    <Card hoverable title="Monitors" extra={<Link to={DashboardMonitorsLocation}>More...</Link>} className={styles.card}>A list of all monitored addresses</Card>
     </Col>
     <Col>
     <Card hoverable title="Alerts" extra={<a href="#">More...</a>} className={styles.card}>A list of active alerts</Card>
