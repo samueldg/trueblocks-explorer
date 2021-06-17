@@ -6,30 +6,28 @@ import { useHistory, useLocation } from 'react-router-dom';
 const { TabPane } = Tabs;
 
 export type ViewTab = {
-  name: string,
-  location: string,
-  component: ReactNode,
-  disabled?: boolean,
+  name: string;
+  location: string;
+  component: ReactNode;
+  disabled?: boolean;
 };
 
 declare type TabsPosition = 'top' | 'right' | 'bottom' | 'left';
 interface ViewParams {
-  title: string,
-  defaultActive: string,
-  baseActive: string,
-  cookieName: string,
+  title: string;
+  defaultActive: string;
+  baseActive: string;
+  cookieName: string;
   tabs: ViewTab[];
-  position?: TabsPosition
+  position?: TabsPosition;
 }
 
-export const BaseView = ({title, cookieName, defaultActive, baseActive, tabs, position = 'top'}: ViewParams) => {
+export const BaseView = ({ title, cookieName, defaultActive, baseActive, tabs, position = 'top' }: ViewParams) => {
   const history = useHistory();
   const location = useLocation();
   const subPath = location.pathname.replace(baseActive, '');
   const [currentTab, setCurrentTab] = useState(
-    (subPath && subPath.length > 0 ? location.pathname : null) ||
-      Cookies.get(cookieName) ||
-      defaultActive
+    (subPath && subPath.length > 0 ? location.pathname : null) || Cookies.get(cookieName) || defaultActive
   );
 
   const onTabChange = (key: string) => {
@@ -38,7 +36,7 @@ export const BaseView = ({title, cookieName, defaultActive, baseActive, tabs, po
     setCurrentTab(key);
   };
 
-  const titleComponent = (title.length === 0 ? <></> : <PageHeader title={title} />);
+  const titleComponent = title.length === 0 ? <></> : <PageHeader title={title} />;
   return (
     <>
       {titleComponent}
@@ -51,4 +49,4 @@ export const BaseView = ({title, cookieName, defaultActive, baseActive, tabs, po
       </Tabs>
     </>
   );
-}
+};
