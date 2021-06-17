@@ -30,7 +30,7 @@ export const Console = (props: any) => {
       }
     });
     return () => removeListener(listener);
-  });
+  }, []);
 
   console.log(op, progPct, finished);
   const item = props.asText ? <div>{op}</div> : finished ? null : <progress max='100' value={progPct}></progress>;
