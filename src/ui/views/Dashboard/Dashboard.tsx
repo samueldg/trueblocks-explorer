@@ -10,7 +10,7 @@ import {
 import { cookieVars } from '../../utils';
 import { AccountsView } from './Tabs/Accounts/Accounts';
 import { Collections } from './Tabs/Collections';
-import { Indexes } from './Tabs/Indexes';
+import { IndexesView } from './Tabs/Indexes/Indexes';
 import { Monitors } from './Tabs/Monitors';
 import { Overview } from './Tabs/Overview';
 
@@ -21,7 +21,7 @@ export const DashboardView = () => {
     {name: "Accounts", location: DashboardAccountsLocation, component: <AccountsView />, disabled: false},
     {name: "Monitors", location: DashboardMonitorsLocation, component: <Monitors />, disabled: false},
     {name: "Collections", location: DashboardCollectionsLocation, component: <Collections />, disabled: false},
-    {name: "Indexes", location: DashboardIndexesLocation, component: <Indexes />, disabled: false},
+    {name: "Indexes", location: DashboardIndexesLocation, component: <IndexesView />, disabled: false},
   ];
   return (
     <BaseView

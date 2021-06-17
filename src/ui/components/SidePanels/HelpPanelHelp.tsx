@@ -4,7 +4,8 @@ import {
   DashboardMonitorsLocation, DashboardOverviewLocation,
   ExplorerBlocksLocation, ExplorerLocation,
   ExplorerLogsLocation, ExplorerReceiptsLocation,
-  ExplorerTracesLocation, ExplorerTransactionsLocation, NamesAddressesLocation,
+  ExplorerTracesLocation, ExplorerTransactionsLocation,
+  IndexChartsLocation, IndexGridLocation, IndexTableLocation, NamesAddressesLocation,
   NamesBlocksLocation,
   NamesEventSigsLocation, NamesFuncSigsLocation, NamesLocation,
   NamesTagsLocation, RootLocation,
@@ -53,6 +54,18 @@ export const helpRoutes = [
   {
     route: DashboardIndexesLocation,
     helpText: 'View the contents of the TrueBlocks index cache.',
+  },
+  {
+    route: IndexChartsLocation,
+    helpText: 'Charts related to the index cache.',
+  },
+  {
+    route: IndexGridLocation,
+    helpText: 'Grid view of the index cache.',
+  },
+  {
+    route: IndexTableLocation,
+    helpText: 'Table view of the index cache.',
   },
   {
     route: NamesLocation,
