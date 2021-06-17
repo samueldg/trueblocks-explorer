@@ -15,6 +15,7 @@ import { StatusPanel } from './components/SidePanels/StatusPanel';
 import { Routes } from './Routes';
 import useGlobalState from './state';
 import { cookieVars } from './utils';
+import { Console } from './components/Console';
 
 const { Header, Footer, Content } = Layout;
 
@@ -80,11 +81,12 @@ export const App = () => {
               <HelpPanel />
             </SidePanel>
           </Layout>
-          <Footer>
-            <Button
-              type={debug ? 'primary' : 'ghost'}
-              onClick={() => setDebug(!debug)}>{debug ? 'debug on' : 'debug off'}
+          <Footer style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+            <Button type={debug ? 'primary' : 'ghost'} onClick={() => setDebug(!debug)}>
+              {debug ? 'debug on' : 'debug off'}
             </Button>
+            <Console />
+            <div />
           </Footer>
         </Layout>
       </Layout>
