@@ -85,7 +85,7 @@ export const App = () => {
             <Button type={debug ? 'primary' : 'ghost'} onClick={() => setDebug(!debug)}>
               {debug ? 'debug on' : 'debug off'}
             </Button>
-            <Console />
+            <Console asText={true} />
             <div />
           </Footer>
         </Layout>
