@@ -5,7 +5,7 @@ import { createErrorNotification } from '@modules/error_notification';
 import { ColumnsType } from 'antd/lib/table';
 import React, { useCallback } from 'react';
 
-export const Indexes = () => {
+export const IndexTable = () => {
   const [indexes, loading] = useCommand('status', { mode: 'index', details: true });
   if (indexes.status === 'fail') {
     createErrorNotification({

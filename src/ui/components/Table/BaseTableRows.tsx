@@ -19,7 +19,7 @@ export const BaseTableRows = ({
   columns: ColumnsType<any>;
   loading: boolean;
 }) => {
-  const { debug, setDebug } = useGlobalState();
+  const { debug } = useGlobalState();
   const [expandedRowKeys, setExpandedRowKeys] = useState<readonly React.ReactText[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(10);

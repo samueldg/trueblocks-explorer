@@ -14,7 +14,7 @@ import {
   ExplorerLogsLocation,
   ExplorerReceiptsLocation,
   ExplorerTracesLocation,
-  ExplorerTransactionsLocation,
+  ExplorerTransactionsLocation, IndexChartsLocation, IndexGridLocation, IndexTableLocation,
   NamesAddressesLocation,
   NamesBlocksLocation,
   NamesEventSigsLocation,
@@ -34,7 +34,7 @@ import {
   SupportLicensingLocation,
   SupportLocation,
 } from './locations';
-import { AccountsView, DashboardView, ExplorerView, NamesView, SettingsView, SupportView } from './views';
+import { AccountsView, DashboardView, ExplorerView, IndexesView, NamesView, SettingsView, SupportView } from './views';
 
 const routes = [
   {
@@ -81,6 +81,21 @@ const routes = [
     path: DashboardIndexesLocation,
     exact: true,
     component: DashboardView,
+  },
+  {
+    path: IndexGridLocation,
+    exact: true,
+    component: IndexesView,
+  },
+  {
+    path: IndexTableLocation,
+    exact: true,
+    component: IndexesView,
+  },
+  {
+    path: IndexChartsLocation,
+    exact: true,
+    component: IndexesView,
   },
   {
     path: NamesLocation,

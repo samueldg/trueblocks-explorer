@@ -8,6 +8,9 @@ export const   AccountFunctionsLocation = '/dashboard/accounts/functions';
 export const DashboardMonitorsLocation = '/dashboard/monitors';
 export const DashboardCollectionsLocation = '/dashboard/collections';
 export const DashboardIndexesLocation = '/dashboard/indexes';
+export const   IndexGridLocation = '/dashboard/indexes/grid';
+export const   IndexTableLocation = '/dashboard/indexes/table';
+export const   IndexChartsLocation = '/dashboard/indexes/charts';
 
 export const NamesLocation = '/names';
 export const NamesAddressesLocation = '/names/addresses';

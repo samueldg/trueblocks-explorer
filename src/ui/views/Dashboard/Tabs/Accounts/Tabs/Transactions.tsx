@@ -21,13 +21,7 @@ export const AccountTransactions = () => {
   }
 
   const getData = useCallback((response) => (response.status === 'fail' ? [] : response.data), []);
-  return (
-    <>
-      {/*<pre>{JSON.stringify(getData(transactions), null, 2)}</pre>*/}
-      <pre>count: {getData(transactions)?.length}</pre>
-      <BaseTableRows data={getData(transactions)} columns={transactionSchema} loading={loading} />
-    </>
-  );
+  return <BaseTableRows data={getData(transactions)} columns={transactionSchema} loading={loading} />;
 };
 
 const transactionSchema: ColumnsType<MonitorType> = [
