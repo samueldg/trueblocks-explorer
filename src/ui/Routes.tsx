@@ -1,19 +1,25 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import {
-  AccountFunctionsLocation, AccountTransactionsLocation, DashboardAccountsLocation,
+  AccountEventsLocation, AccountFunctionsLocation,
+  AccountTransactionsLocation,
+  DashboardAccountsLocation,
   DashboardCollectionsLocation,
-  DashboardIndexesLocation, DashboardLocation,
-  DashboardMonitorsLocation, DashboardOverviewLocation,
+  DashboardIndexesLocation,
+  DashboardLocation,
+  DashboardMonitorsLocation,
+  DashboardOverviewLocation,
   ExplorerBlocksLocation,
   ExplorerLocation,
   ExplorerLogsLocation,
   ExplorerReceiptsLocation,
   ExplorerTracesLocation,
-  ExplorerTransactionsLocation,
+  ExplorerTransactionsLocation, IndexChartsLocation, IndexGridLocation, IndexTableLocation,
   NamesAddressesLocation,
   NamesBlocksLocation,
-  NamesEventSigsLocation, NamesFuncSigsLocation, NamesLocation,
+  NamesEventSigsLocation,
+  NamesFuncSigsLocation,
+  NamesLocation,
   NamesTagsLocation,
   RootLocation,
   SettingsCachesLocation,
@@ -28,7 +34,7 @@ import {
   SupportLicensingLocation,
   SupportLocation
 } from './locations';
-import { AccountsView, DashboardView, ExplorerView, NamesView, SettingsView, SupportView } from './views';
+import { DashboardView, ExplorerView, NamesView, SettingsView, SupportView } from './views';
 
 const routes = [
   {
@@ -52,14 +58,19 @@ const routes = [
     component: DashboardView,
   },
   {
-    path:AccountTransactionsLocation,
+    path: AccountTransactionsLocation,
     exact: true,
-    component: AccountsView,
+    component: DashboardView,
   },
   {
-    path:AccountFunctionsLocation,
+    path: AccountFunctionsLocation,
     exact: true,
-    component: AccountsView,
+    component: DashboardView,
+  },
+  {
+    path: AccountEventsLocation,
+    exact: true,
+    component: DashboardView,
   },
   {
     path: DashboardMonitorsLocation,
@@ -73,6 +84,21 @@ const routes = [
   },
   {
     path: DashboardIndexesLocation,
+    exact: true,
+    component: DashboardView,
+  },
+  {
+    path: IndexGridLocation,
+    exact: true,
+    component: DashboardView,
+  },
+  {
+    path: IndexTableLocation,
+    exact: true,
+    component: DashboardView,
+  },
+  {
+    path: IndexChartsLocation,
     exact: true,
     component: DashboardView,
   },

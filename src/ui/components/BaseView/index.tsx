@@ -20,14 +20,32 @@ interface ViewParams {
   cookieName: string;
   tabs: ViewTab[];
   position?: TabsPosition;
+  subBase?: boolean;
 }
 
-export const BaseView = ({ title, cookieName, defaultActive, baseActive, tabs, position = 'top' }: ViewParams) => {
+export const BaseView = ({
+  title,
+  cookieName,
+  defaultActive,
+  baseActive,
+  tabs,
+  position = 'top',
+  subBase,
+}: ViewParams) => {
   const history = useHistory();
   const location = useLocation();
+  const parts = location.pathname.split('/');
   const subPath = location.pathname.replace(baseActive, '');
   const [currentTab, setCurrentTab] = useState(
-    (subPath && subPath.length > 0 ? location.pathname : null) || Cookies.get(cookieName) || defaultActive
+    (subPath && subPath.length > 0
+      ? parts.length === 4
+        ? !subBase
+          ? location.pathname.replace(`/${parts[parts.length - 1]}`, '')
+          : location.pathname
+        : location.pathname
+      : null) ||
+      Cookies.get(cookieName) ||
+      defaultActive
   );
 
   const onTabChange = (key: string) => {

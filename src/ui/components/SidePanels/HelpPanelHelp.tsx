@@ -1,10 +1,11 @@
 import {
-  AccountFunctionsLocation, AccountTransactionsLocation, DashboardAccountsLocation, DashboardCollectionsLocation,
+  AccountEventsLocation, AccountFunctionsLocation, AccountTransactionsLocation, DashboardAccountsLocation, DashboardCollectionsLocation,
   DashboardIndexesLocation, DashboardLocation,
   DashboardMonitorsLocation, DashboardOverviewLocation,
   ExplorerBlocksLocation, ExplorerLocation,
   ExplorerLogsLocation, ExplorerReceiptsLocation,
-  ExplorerTracesLocation, ExplorerTransactionsLocation, NamesAddressesLocation,
+  ExplorerTracesLocation, ExplorerTransactionsLocation,
+  IndexChartsLocation, IndexGridLocation, IndexTableLocation, NamesAddressesLocation,
   NamesBlocksLocation,
   NamesEventSigsLocation, NamesFuncSigsLocation, NamesLocation,
   NamesTagsLocation, RootLocation,
@@ -31,6 +32,10 @@ export const helpRoutes = [
     helpText: 'View a particular account\'s transactional history.',
   },
   {
+    route: AccountEventsLocation,
+    helpText: 'View a particular account\'s event history.',
+  },
+  {
     route: AccountFunctionsLocation,
     helpText: 'View a particular account\'s functional history.',
   },
@@ -53,6 +58,18 @@ export const helpRoutes = [
   {
     route: DashboardIndexesLocation,
     helpText: 'View the contents of the TrueBlocks index cache.',
+  },
+  {
+    route: IndexChartsLocation,
+    helpText: 'Charts related to the index cache.',
+  },
+  {
+    route: IndexGridLocation,
+    helpText: 'Grid view of the index cache.',
+  },
+  {
+    route: IndexTableLocation,
+    helpText: 'Table view of the index cache.',
   },
   {
     route: NamesLocation,
