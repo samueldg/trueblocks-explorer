@@ -6,28 +6,44 @@ import { useHistory, useLocation } from 'react-router-dom';
 const { TabPane } = Tabs;
 
 export type ViewTab = {
-  name: string,
-  location: string,
-  component: ReactNode,
-  disabled?: boolean,
+  name: string;
+  location: string;
+  component: ReactNode;
+  disabled?: boolean;
 };
 
 declare type TabsPosition = 'top' | 'right' | 'bottom' | 'left';
 interface ViewParams {
-  title: string,
-  defaultActive: string,
-  baseActive: string,
-  cookieName: string,
+  title: string;
+  defaultActive: string;
+  baseActive: string;
+  cookieName: string;
   tabs: ViewTab[];
-  position?: TabsPosition
+  position?: TabsPosition;
+  subBase?: boolean;
 }
 
-export const BaseView = ({title, cookieName, defaultActive, baseActive, tabs, position = 'top'}: ViewParams) => {
+export const BaseView = ({
+  title,
+  cookieName,
+  defaultActive,
+  baseActive,
+  tabs,
+  position = 'top',
+  subBase,
+}: ViewParams) => {
   const history = useHistory();
   const location = useLocation();
+  const parts = location.pathname.split('/');
   const subPath = location.pathname.replace(baseActive, '');
   const [currentTab, setCurrentTab] = useState(
-    (subPath && subPath.length > 0 ? location.pathname : null) ||
+    (subPath && subPath.length > 0
+      ? parts.length === 4
+        ? !subBase
+          ? location.pathname.replace(`/${parts[parts.length - 1]}`, '')
+          : location.pathname
+        : location.pathname
+      : null) ||
       Cookies.get(cookieName) ||
       defaultActive
   );
@@ -38,7 +54,7 @@ export const BaseView = ({title, cookieName, defaultActive, baseActive, tabs, po
     setCurrentTab(key);
   };
 
-  const titleComponent = (title.length === 0 ? <></> : <PageHeader title={title} />);
+  const titleComponent = title.length === 0 ? <></> : <PageHeader title={title} />;
   return (
     <>
       {titleComponent}
@@ -51,4 +67,4 @@ export const BaseView = ({title, cookieName, defaultActive, baseActive, tabs, po
       </Tabs>
     </>
   );
-}
+};

@@ -10,14 +10,22 @@ export const CustomRow = (props: any) => {
   else return <tr {...props} tabIndex={0} />;
 };
 
-export const BaseTableRows = ({ data, columns, loading }: { data: JsonResponse, columns: ColumnsType<any>, loading: boolean }) => {
+export const BaseTableRows = ({
+  data,
+  columns,
+  loading,
+}: {
+  data: JsonResponse;
+  columns: ColumnsType<any>;
+  loading: boolean;
+}) => {
   const { debug, setDebug } = useGlobalState();
   const [expandedRowKeys, setExpandedRowKeys] = useState<readonly React.ReactText[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(10);
   const [focusedRow, setFocusedRow] = useState(0);
 
-  const dataSource = data.map((item: any, i: number) => {
+  const dataSource = data?.map((item: any, i: number) => {
     return {
       id: (i + 1).toString(),
       ...item,
@@ -29,8 +37,8 @@ export const BaseTableRows = ({ data, columns, loading }: { data: JsonResponse, 
     setExpandedRowKeys,
     currentPage,
     pageSize,
-    dataSource.length,
-    () => currentPage < Math.ceil(dataSource.length / pageSize) && setCurrentPage(currentPage + 1),
+    dataSource?.length,
+    () => currentPage < Math.ceil(dataSource?.length / pageSize) && setCurrentPage(currentPage + 1),
     () => {
       currentPage > 1 && setCurrentPage(currentPage - 1);
       const tr = document.querySelector('tr[data-row-key]');
@@ -38,7 +46,7 @@ export const BaseTableRows = ({ data, columns, loading }: { data: JsonResponse, 
       siblings[siblings.length - 1].focus();
     },
     () => setCurrentPage(1),
-    () => setCurrentPage(Math.ceil(dataSource.length / pageSize)),
+    () => setCurrentPage(Math.ceil(dataSource?.length / pageSize)),
     focusedRow,
     (row) => setFocusedRow(row)
   );
@@ -61,11 +69,10 @@ export const BaseTableRows = ({ data, columns, loading }: { data: JsonResponse, 
   useHotkeys(
     'right,pagedown',
     () => {
-      currentPage < Math.ceil(dataSource.length / pageSize) && setCurrentPage(currentPage + 1);
+      currentPage < Math.ceil(dataSource?.length / pageSize) && setCurrentPage(currentPage + 1);
       const tr = document.querySelector('tr[data-row-key]');
       const siblings = getSiblings(tr);
-      if (siblings[focusedRow])
-        siblings[focusedRow].focus();
+      if (siblings[focusedRow]) siblings[focusedRow].focus();
     },
     [currentPage, dataSource, focusedRow, setFocusedRow]
   );
@@ -84,7 +91,7 @@ export const BaseTableRows = ({ data, columns, loading }: { data: JsonResponse, 
     if (
       siblings &&
       siblings.length > 0 &&
-      currentPage === Math.ceil(dataSource.length / pageSize) &&
+      currentPage === Math.ceil(dataSource?.length / pageSize) &&
       tr?.getAttribute('data-row-key')?.toString() !== siblings.length.toString()
     ) {
       siblings[siblings.length - 1].focus();
@@ -124,7 +131,7 @@ export const BaseTableRows = ({ data, columns, loading }: { data: JsonResponse, 
           expandedRowRender: (rowset) => <div>{JSON.stringify(rowset, null, 2)}</div>,
         }}
       />
-      {debug ? <pre>records: {JSON.stringify(data.length)}</pre> : <></>}
+      {debug ? <pre>records: {JSON.stringify(data?.length)}</pre> : <></>}
       {debug ? <pre>{JSON.stringify(data, null, 2)}</pre> : <></>}
     </div>
   );
