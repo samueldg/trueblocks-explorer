@@ -5,6 +5,7 @@ export const DashboardOverviewLocation = '/dashboard/overview';
 export const DashboardAccountsLocation = '/dashboard/accounts';
 export const   AccountTransactionsLocation = '/dashboard/accounts/transactions';
 export const   AccountFunctionsLocation = '/dashboard/accounts/functions';
+export const   AccountEventsLocation = '/dashboard/accounts/events';
 export const DashboardMonitorsLocation = '/dashboard/monitors';
 export const DashboardCollectionsLocation = '/dashboard/collections';
 export const DashboardIndexesLocation = '/dashboard/indexes';

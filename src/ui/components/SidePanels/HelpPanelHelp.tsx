@@ -1,5 +1,5 @@
 import {
-  AccountFunctionsLocation, AccountTransactionsLocation, DashboardAccountsLocation, DashboardCollectionsLocation,
+  AccountEventsLocation, AccountFunctionsLocation, AccountTransactionsLocation, DashboardAccountsLocation, DashboardCollectionsLocation,
   DashboardIndexesLocation, DashboardLocation,
   DashboardMonitorsLocation, DashboardOverviewLocation,
   ExplorerBlocksLocation, ExplorerLocation,
@@ -30,6 +30,10 @@ export const helpRoutes = [
   {
     route: DashboardAccountsLocation,
     helpText: 'View a particular account\'s transactional history.',
+  },
+  {
+    route: AccountEventsLocation,
+    helpText: 'View a particular account\'s event history.',
   },
   {
     route: AccountFunctionsLocation,

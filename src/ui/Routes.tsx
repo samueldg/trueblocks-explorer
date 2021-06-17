@@ -1,7 +1,8 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import {
-  AccountFunctionsLocation,
+  AccountEventsLocation, AccountFunctionsLocation,
+
   AccountTransactionsLocation,
   DashboardAccountsLocation,
   DashboardCollectionsLocation,
@@ -32,9 +33,9 @@ import {
   SupportDocumentationLocation,
   SupportHotKeysLocation,
   SupportLicensingLocation,
-  SupportLocation,
+  SupportLocation
 } from './locations';
-import { AccountsView, DashboardView, ExplorerView, IndexesView, NamesView, SettingsView, SupportView } from './views';
+import { DashboardView, ExplorerView, NamesView, SettingsView, SupportView } from './views';
 
 const routes = [
   {
@@ -68,6 +69,11 @@ const routes = [
     component: DashboardView,
   },
   {
+    path: AccountEventsLocation,
+    exact: true,
+    component: DashboardView,
+  },
+  {
     path: DashboardMonitorsLocation,
     exact: true,
     component: DashboardView,
@@ -85,17 +91,17 @@ const routes = [
   {
     path: IndexGridLocation,
     exact: true,
-    component: IndexesView,
+    component: DashboardView,
   },
   {
     path: IndexTableLocation,
     exact: true,
-    component: IndexesView,
+    component: DashboardView,
   },
   {
     path: IndexChartsLocation,
     exact: true,
-    component: IndexesView,
+    component: DashboardView,
   },
   {
     path: NamesLocation,
