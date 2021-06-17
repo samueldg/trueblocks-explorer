@@ -1,10 +1,14 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import {
-  AccountFunctionsLocation, AccountTransactionsLocation, DashboardAccountsLocation,
+  AccountFunctionsLocation,
+  AccountTransactionsLocation,
+  DashboardAccountsLocation,
   DashboardCollectionsLocation,
-  DashboardIndexesLocation, DashboardLocation,
-  DashboardMonitorsLocation, DashboardOverviewLocation,
+  DashboardIndexesLocation,
+  DashboardLocation,
+  DashboardMonitorsLocation,
+  DashboardOverviewLocation,
   ExplorerBlocksLocation,
   ExplorerLocation,
   ExplorerLogsLocation,
@@ -13,7 +17,9 @@ import {
   ExplorerTransactionsLocation, IndexChartsLocation, IndexGridLocation, IndexTableLocation,
   NamesAddressesLocation,
   NamesBlocksLocation,
-  NamesEventSigsLocation, NamesFuncSigsLocation, NamesLocation,
+  NamesEventSigsLocation,
+  NamesFuncSigsLocation,
+  NamesLocation,
   NamesTagsLocation,
   RootLocation,
   SettingsCachesLocation,
@@ -26,7 +32,7 @@ import {
   SupportDocumentationLocation,
   SupportHotKeysLocation,
   SupportLicensingLocation,
-  SupportLocation
+  SupportLocation,
 } from './locations';
 import { AccountsView, DashboardView, ExplorerView, IndexesView, NamesView, SettingsView, SupportView } from './views';
 
@@ -52,14 +58,14 @@ const routes = [
     component: DashboardView,
   },
   {
-    path:AccountTransactionsLocation,
+    path: AccountTransactionsLocation,
     exact: true,
-    component: AccountsView,
+    component: DashboardView,
   },
   {
-    path:AccountFunctionsLocation,
+    path: AccountFunctionsLocation,
     exact: true,
-    component: AccountsView,
+    component: DashboardView,
   },
   {
     path: DashboardMonitorsLocation,

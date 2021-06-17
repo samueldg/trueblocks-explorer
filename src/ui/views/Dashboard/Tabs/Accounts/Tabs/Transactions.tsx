@@ -6,7 +6,14 @@ import { ColumnsType } from 'antd/lib/table';
 import React, { useCallback } from 'react';
 
 export const AccountTransactions = () => {
-  const [transactions, loading] = useCommand('export', { addrs: '0xf503017d7baf7fbc0fff7492b751025c6a78179b', fmt: 'json', articulate: true, accounting: true, max_records: 20, ether: true });
+  const [transactions, loading] = useCommand('export', {
+    addrs: '0xf503017d7baf7fbc0fff7492b751025c6a78179b',
+    fmt: 'json',
+    articulate: true,
+    accounting: true,
+    max_records: 20,
+    ether: true,
+  });
   if (transactions.status === 'fail') {
     createErrorNotification({
       description: 'Could not fetch transactions',
