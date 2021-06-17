@@ -21,8 +21,8 @@ export const IndexesView = () => {
       defaultActive={IndexGridLocation}
       baseActive={DashboardIndexesLocation}
       cookieName={cookieVars.dashboard_indexes_sub_tab}
+      subBase={true}
       tabs={tabs}
-      subBase
       position='left'
     />
   );

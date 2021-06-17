@@ -1,4 +1,4 @@
-import { addColumn, addNumColumn, BaseTableRows, TableActions } from '@components/Table';
+import { addColumn, addNumColumn, BaseTableRows } from '@components/Table';
 import { useCommand } from '@hooks/useCommand';
 import { MonitorType } from '@modules/data/monitor';
 import { createErrorNotification } from '@modules/error_notification';
@@ -36,6 +36,9 @@ const indexSchema: ColumnsType<MonitorType> = [
   addNumColumn({
     title: 'nAppearances',
     dataIndex: 'nAppearances',
+    configuration: {
+      render: (item: number) => <div style={{color: 'red', fontWeight: 800}}>{item}</div>
+    }
   }),
   addNumColumn({
     title: 'firstAppearance',
@@ -70,17 +73,3 @@ const indexSchema: ColumnsType<MonitorType> = [
     dataIndex: 'bloom_hash',
   }),
 ];
-
-function getTableActions(item: MonitorType) {
-  const onClick = (action: string, item: MonitorType) => {
-    switch (action) {
-      case 'remove':
-        console.log("Deleting the monitor", item);
-        break;
-      default:
-        console.log('Clicked action', action, item)
-    }
-  }
-
-  return <TableActions item={item} onClick={onClick} />;
-}

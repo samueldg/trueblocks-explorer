@@ -1,3 +1,4 @@
+import { GridTable } from '@components/GridTable';
 import { addColumn, addNumColumn, TableActions } from '@components/Table';
 import { useCommand } from '@hooks/useCommand';
 import { MonitorType } from '@modules/data/monitor';
@@ -19,9 +20,7 @@ export const IndexGrid = () => {
     );
   }, []);
 
-  return (
-    <div>Grid view</div>
-  );
+  return <GridTable data={getData(indexes)} columns={indexSchema} />;
 };
 
 const indexSchema: ColumnsType<MonitorType> = [
