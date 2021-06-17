@@ -23,6 +23,7 @@ export const DashboardView = () => {
     {name: "Collections", location: DashboardCollectionsLocation, component: <Collections />, disabled: false},
     {name: "Indexes", location: DashboardIndexesLocation, component: <IndexesView />, disabled: false},
   ];
+
   return (
     <BaseView
       title={title}
