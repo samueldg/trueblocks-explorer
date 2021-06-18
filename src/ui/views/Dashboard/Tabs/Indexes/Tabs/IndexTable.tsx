@@ -30,22 +30,22 @@ const indexSchema: ColumnsType<MonitorType> = [
     dataIndex: 'fileDate',
   }),
   addNumColumn({
-    title: 'nAddresses',
+    title: 'nAddrs',
     dataIndex: 'nAddrs',
   }),
   addNumColumn({
-    title: 'nAppearances',
+    title: 'nApps',
     dataIndex: 'nApps',
     configuration: {
       render: (item: number) => <div style={{color: 'red', fontWeight: 800}}>{item}</div>
     }
   }),
   addNumColumn({
-    title: 'firstAppearance',
+    title: 'firstApp',
     dataIndex: 'firstApp',
   }),
   addNumColumn({
-    title: 'latestAppearance',
+    title: 'latestApp',
     dataIndex: 'latestApp',
   }),
   addNumColumn({
