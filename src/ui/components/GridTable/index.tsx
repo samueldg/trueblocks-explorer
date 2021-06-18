@@ -159,7 +159,7 @@ export const DetailTable = (
 
   const range = { start: cellStart, end: cellStart + cellSpan };
   const filteredData = data.filter(
-    (item: any) => (item.firstAppearance >= range.start) && (item.firstAppearance < range.end)
+    (item: any) => (item.firstApp >= range.start) && (item.firstApp < range.end)
   );
   if (filteredData.length > 200 || cellSpan > 100000) {
     return (
@@ -194,8 +194,8 @@ export const DetailTable = (
     range.end;
 
   const details = [
-    'nAddresses',
-    'nAppearances',
+    'nAddrs',
+    'nApps',
     'indexSizeBytes',
     'bloomSizeBytes',
     'index_hash',
@@ -232,9 +232,9 @@ export const DetailTable = (
                   <div style={{fontWeight: 800, backgroundColor: 'lightgrey'}}>{record.filename.replace(/.bin/, '')}</div>
                   {details.map((field, i) => {
                     let val = <div style={{border: '1px black'}}>{record[field]}</div>;
-                    if (field === 'nAppearances' && record[field] >= 2000000) {
+                    if (field === 'nApps' && record[field] >= 2000000) {
                       val = <div style={{color: 'blue', fontWeight: 700, border: '1px black'}}>{record[field]}</div>;
-                    } else if (field === 'nAppearances') {
+                    } else if (field === 'nApps') {
                       val = <div style={{color: 'red', fontWeight: 700, border: '1px black'}}>{record[field]}</div>;
                     }
                     return (<div key={i} style={{textAlign: 'right', gridTemplateColumns: '1fr 1fr', display: 'grid'}}>

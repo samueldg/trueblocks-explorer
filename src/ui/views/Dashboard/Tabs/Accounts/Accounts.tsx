@@ -19,7 +19,7 @@ export const AccountsView = () => {
     fmt: 'json',
     articulate: true,
     accounting: true,
-    max_records: 41,
+    max_records: 2000,
     ether: true,
     cache_txs: true,
     cache_traces: true,

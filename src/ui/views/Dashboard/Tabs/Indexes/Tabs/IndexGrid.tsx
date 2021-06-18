@@ -30,19 +30,19 @@ const indexSchema: ColumnsType<MonitorType> = [
   }),
   addNumColumn({
     title: 'nAddresses',
-    dataIndex: 'nAddresses',
+    dataIndex: 'nAddrs',
   }),
   addNumColumn({
     title: 'nAppearances',
-    dataIndex: 'nAppearances',
+    dataIndex: 'nApps',
   }),
   addNumColumn({
     title: 'firstAppearance',
-    dataIndex: 'firstAppearance',
+    dataIndex: 'firstApp',
   }),
   addNumColumn({
     title: 'latestAppearance',
-    dataIndex: 'latestAppearance',
+    dataIndex: 'latestApp',
   }),
   addNumColumn({
   title: 'firstTs',
