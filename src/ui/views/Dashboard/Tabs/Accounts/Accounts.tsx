@@ -6,7 +6,7 @@ import {
   AccountEventsLocation,
   AccountFunctionsLocation,
   AccountTransactionsLocation,
-  DashboardAccountsLocation
+  DashboardAccountsLocation,
 } from '../../../../locations';
 import { cookieVars } from '../../../../utils';
 import { AccountEvents } from './Tabs/Events';
@@ -20,11 +20,11 @@ export const AccountsView = () => {
     articulate: true,
     accounting: true,
     first_record: 0,
-    max_records: 2000,
+    max_records: 200,
     ether: true,
     cache_txs: true,
     cache_traces: true,
-    reversed: true
+    reversed: true,
   });
   if (transactions.status === 'fail') {
     createErrorNotification({
@@ -38,17 +38,17 @@ export const AccountsView = () => {
     {
       name: 'Transactions',
       location: AccountTransactionsLocation,
-      component: <AccountTransactions data={getData(transactions)} loading={loading}/>
+      component: <AccountTransactions data={getData(transactions)} loading={loading} />,
     },
     {
       name: 'Functions',
       location: AccountFunctionsLocation,
-      component: <AccountFunctions data={getData(transactions)} loading={loading}/>
+      component: <AccountFunctions data={getData(transactions)} loading={loading} />,
     },
     {
       name: 'Events',
       location: AccountEventsLocation,
-      component: <AccountEvents data={getData(transactions)} loading={loading}/>
+      component: <AccountEvents data={getData(transactions)} loading={loading} />,
     },
   ];
 
