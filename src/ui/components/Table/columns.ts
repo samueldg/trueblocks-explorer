@@ -6,6 +6,7 @@ export type ColumnConfiguration<RecordType> = {
   dataIndex: string;
   key?: string;
   configuration?: ColumnType<RecordType>;
+  render?: any;
 };
 
 export function addColumn<RecordType>({
@@ -13,12 +14,14 @@ export function addColumn<RecordType>({
   dataIndex,
   key,
   configuration,
+  render,
 }: ColumnConfiguration<RecordType>): ColumnType<RecordType> {
   return {
     title,
     dataIndex,
     key,
     ellipsis: true,
+    render: render,
     ...configuration,
   };
 }
@@ -29,8 +32,7 @@ export function addNumColumn<RecordType>({
   key,
   configuration,
 }: ColumnConfiguration<RecordType>): ColumnType<RecordType> {
-  if (!configuration)
-    configuration = {}
+  if (!configuration) configuration = {};
   configuration.render = (num: number) => Intl.NumberFormat().format(num);
   configuration.align = 'right';
   return {
