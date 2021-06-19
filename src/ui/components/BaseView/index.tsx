@@ -38,9 +38,13 @@ export const BaseView = ({
   const subPath = location.pathname.replace(baseActive, '');
   const [currentTab, setCurrentTab] = useState(
     (subPath && subPath.length > 0
-      ? parts.length === 4
+      ? parts.length > 3
         ? !subBase
-          ? location.pathname.replace(`/${parts[parts.length - 1]}`, '')
+          ? parts.length === 4
+            ? location.pathname.replace(`/${parts[parts.length - 1]}`, '')
+            : parts.length === 5
+            ? location.pathname.replace(`/${parts[parts.length - 1]}`, '').replace(`/${parts[parts.length - 2]}`, '')
+            : location.pathname
           : location.pathname
         : location.pathname
       : null) ||
