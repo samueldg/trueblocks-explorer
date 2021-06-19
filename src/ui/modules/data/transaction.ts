@@ -148,10 +148,7 @@ export const transactionSchema: ColumnsType<TransactionType> = [
   // }),
   addColumn({
     title: 'Function Call',
-    dataIndex: 'compressedTx',
-    configuration: {
-      width: 500
-    }
+    dataIndex: 'function',
   }),
   // addColumn({
   //   title: 'Statements',
@@ -163,12 +160,67 @@ export const transactionSchema: ColumnsType<TransactionType> = [
   // }),
   addColumn({
     title: 'Ether',
-    dataIndex: 'ether',
+    dataIndex: 'statements',
+    configuration: {
+      render: (statements: any) => {
+        if (statements?.length) {
+          return statements[0].amountNet;
+        }
+        return '0.0';
+      }
+    }
   }),
+  /*
+    blknum_t blockNumber;
+    blknum_t transactionIndex;
+    timestamp_t timestamp;
+    string_q asset;
+    uint64_t decimals;
+    bigint_t begBal;
+    bigint_t begBalDiff;
+    bigint_t amountIn;
+    bigint_t amountOut;
+    bigint_t internalIn;
+    bigint_t internalOut;
+    bigint_t selfDestructIn;
+    bigint_t selfDestructOut;
+    bigint_t minerBaseRewardIn;
+    bigint_t minerNephewRewardIn;
+    bigint_t minerTxFeeIn;
+    bigint_t minerUncleRewardIn;
+    bigint_t prefundIn;
+    bigint_t gasCostOut;
+    bigint_t endBal;
+    bigint_t endBalCalc;
+    bigint_t endBalDiff;
+    bigint_t amountNet;
+    string_q reconciliationType;
+    bool reconciled;
+  */
   addColumn({
     title: 'Gas Cost',
-    dataIndex: 'etherGasCost',
+    dataIndex: 'statements',
+    configuration: {
+      render: (statements: any) => {
+        if (statements?.length) {
+          return statements[0].gasCostOut;
+        }
+        return '0.0';
+      }
+    }
   }),
+  addColumn({
+    title: 'Statement',
+    dataIndex: 'statements',
+    configuration: {
+      render: (statements: any) => {
+        if (statements?.length) {
+          return statements[0].endBal;
+        }
+        return '0.0';
+      }
+    }
+  })
   // addColumn({
   //   title: 'Function',
   //   dataIndex: 'function',

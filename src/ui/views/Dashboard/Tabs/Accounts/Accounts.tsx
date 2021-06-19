@@ -19,10 +19,12 @@ export const AccountsView = () => {
     fmt: 'json',
     articulate: true,
     accounting: true,
+    first_record: 0,
     max_records: 2000,
     ether: true,
     cache_txs: true,
     cache_traces: true,
+    reversed: true
   });
   if (transactions.status === 'fail') {
     createErrorNotification({
