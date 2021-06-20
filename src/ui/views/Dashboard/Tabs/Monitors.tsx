@@ -39,7 +39,7 @@ const monitorSchema: ColumnsType<MonitorType> = [
   addColumn<MonitorType>({
     title: 'Address',
     dataIndex: 'address',
-    render: (address: any) => <Link to={DashboardAccountsAddressLocation(address)}>{address}</Link>,
+    configuration: { render: (address: any) => <Link to={DashboardAccountsAddressLocation(address)}>{address}</Link> },
   }),
   addColumn({
     title: 'Name',

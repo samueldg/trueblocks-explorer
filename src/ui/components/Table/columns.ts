@@ -14,14 +14,12 @@ export function addColumn<RecordType>({
   dataIndex,
   key,
   configuration,
-  render,
 }: ColumnConfiguration<RecordType>): ColumnType<RecordType> {
   return {
     title,
     dataIndex,
     key,
     ellipsis: true,
-    render: render,
     ...configuration,
   };
 }
