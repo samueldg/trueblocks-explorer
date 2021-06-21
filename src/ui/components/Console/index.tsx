@@ -35,18 +35,24 @@ export const Console = (props: any) => {
   const item = props.asText ? <div>{op}</div> : finished ? null : <progress max='100' value={progPct}></progress>;
 
   return (
-    <div
-      style={{
-        backgroundColor: 'black',
-        color: 'white',
-        borderRadius: '8px',
-        height: '40px',
-        padding: '8px',
-        minWidth: '600px',
-        display: 'flex',
-        alignItems: 'center',
-      }}>
-      <div style={{ marginRight: '12px' }}>Console:</div> {item}
-    </div>
+    <>
+      {props.asText ? (
+        <div
+          style={{
+            backgroundColor: 'black',
+            color: 'white',
+            borderRadius: '8px',
+            height: '40px',
+            padding: '8px',
+            minWidth: '600px',
+            display: 'flex',
+            alignItems: 'center',
+          }}>
+          <div style={{ marginRight: '12px' }}>Console:</div> {item}
+        </div>
+      ) : (
+        <div style={{ ...props.style }}>{item}</div>
+      )}
+    </>
   );
 };

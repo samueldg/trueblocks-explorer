@@ -42,8 +42,8 @@ export function toFailedResult(error: Error): FailedResult {
 export function toFailedScrapeResult(error: Error): FailedScrapeResult {
   return {
     status: 'fail',
-    monitor: {Running: false},
-    indexer: {Running: false},
+    monitor: { Running: false },
+    indexer: { Running: false },
   };
 }
 
