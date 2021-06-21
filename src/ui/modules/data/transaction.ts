@@ -109,8 +109,12 @@ export const transactionSchema: ColumnsType<TransactionType> = [
       render: (field: any, record: TransactionType) => {
         if (!record) return '';
         return record.date + ': ' + record.blockNumber?.toString() + '.' + record.transactionIndex?.toString();
-        // const ret = () => <div>X</div>;
-        // return ret;
+        // return (
+        //   <>
+        //     <div>{record.date}</div>
+        //     <br />
+        //     <div>{record.blockNumber?.toString() + '.' + record.transactionIndex?.toString()}</div>
+        //   </>
       },
       width: 350,
     },
