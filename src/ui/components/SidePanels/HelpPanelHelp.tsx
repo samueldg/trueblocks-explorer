@@ -1,21 +1,40 @@
 import {
-  AccountEventsLocation, AccountFunctionsLocation, AccountTransactionsLocation, DashboardAccountsLocation, DashboardCollectionsLocation,
-  DashboardIndexesLocation, DashboardLocation,
-  DashboardMonitorsLocation, DashboardOverviewLocation,
-  ExplorerBlocksLocation, ExplorerLocation,
-  ExplorerLogsLocation, ExplorerReceiptsLocation,
-  ExplorerTracesLocation, ExplorerTransactionsLocation,
-  IndexChartsLocation, IndexGridLocation, IndexTableLocation, NamesAddressesLocation,
+  AccountEventsLocation,
+  AccountFunctionsLocation,
+  AccountTransactionsLocation,
+  DashboardAccountsLocation,
+  DashboardCollectionsLocation,
+  DashboardIndexesLocation,
+  DashboardLocation,
+  DashboardMonitorsLocation,
+  DashboardOverviewLocation,
+  ExplorerBlocksLocation,
+  ExplorerLocation,
+  ExplorerLogsLocation,
+  ExplorerReceiptsLocation,
+  ExplorerTracesLocation,
+  ExplorerTransactionsLocation,
+  IndexChartsLocation,
+  IndexGridLocation,
+  IndexTableLocation,
+  NamesAddressesLocation,
   NamesBlocksLocation,
-  NamesEventSigsLocation, NamesFuncSigsLocation, NamesLocation,
-  NamesTagsLocation, RootLocation,
-  SettingsCachesLocation, SettingsLocation,
-  SettingsSchemasLocation, SettingsScrapersLocation,
+  NamesEventSigsLocation,
+  NamesFuncSigsLocation,
+  NamesLocation,
+  NamesTagsLocation,
+  RootLocation,
+  SettingsCachesLocation,
+  SettingsLocation,
+  SettingsSchemasLocation,
+  SettingsScrapersLocation,
   SettingsSkinsLocation,
-  SupportAboutUsLocation, SupportContactUsLocation,
+  SupportAboutUsLocation,
+  SupportContactUsLocation,
   SupportDocumentationLocation,
   SupportHotKeysLocation,
-  SupportLicensingLocation, SupportLocation
+  SupportLicensingLocation,
+  SupportLocation,
 } from '../../locations';
 
 export const helpRoutes = [
@@ -29,19 +48,19 @@ export const helpRoutes = [
   },
   {
     route: DashboardAccountsLocation,
-    helpText: 'View a particular account\'s transactional history.',
+    helpText: 'View the transactional history of an account.',
   },
   {
     route: AccountEventsLocation,
-    helpText: 'View a particular account\'s event history.',
+    helpText: 'View the event history of an account.',
   },
   {
     route: AccountFunctionsLocation,
-    helpText: 'View a particular account\'s functional history.',
+    helpText: 'View the functional history of an account.',
   },
   {
     route: AccountTransactionsLocation,
-    helpText: 'View a particular account\'s transactional history.',
+    helpText: 'View transactional history of an account.',
   },
   {
     route: DashboardOverviewLocation,
@@ -49,7 +68,8 @@ export const helpRoutes = [
   },
   {
     route: DashboardMonitorsLocation,
-    helpText: 'Monitors are named addresses that you\'ve indicated are \'of interest\' and should be monitored by the scrapers.',
+    helpText:
+      'Monitors are named addresses that you have indicated are "of interest" and should be monitored by the scrapers.',
   },
   {
     route: DashboardCollectionsLocation,
@@ -73,7 +93,7 @@ export const helpRoutes = [
   },
   {
     route: NamesLocation,
-    helpText: 'Monitors are named addresses that you\'ve indicated are \'of interest\' and should be monitored by the scrapers.',
+    helpText: 'Names are common or known addresses that have been given a name.',
   },
   {
     route: NamesAddressesLocation,
@@ -93,7 +113,8 @@ export const helpRoutes = [
   },
   {
     route: NamesBlocksLocation,
-    helpText: 'The blocks tab allows you to name particular blocks such as notable smart contract deployments, hard forks, or other blocks.',
+    helpText:
+      'The blocks tab allows you to name particular blocks such as notable smart contract deployments, hard forks, or other blocks.',
   },
   {
     route: ExplorerLocation,
@@ -133,7 +154,7 @@ export const helpRoutes = [
   },
   {
     route: SettingsSkinsLocation,
-    helpText: 'Change the skin of the application you\'re using',
+    helpText: 'Change the skin or them of the application.',
   },
   {
     route: SettingsSchemasLocation,
@@ -162,6 +183,5 @@ export const helpRoutes = [
   {
     route: SupportAboutUsLocation,
     helpText: 'A short history of TrueBlocks, LLC.',
-  }
+  },
 ];
-

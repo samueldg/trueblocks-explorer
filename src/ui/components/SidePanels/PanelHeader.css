@@ -1,13 +1,13 @@
 .panel-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .panel-header h1 {
-    margin: 0;
+  margin: 0;
 }
 
 .panel-header.collapsed {
-    justify-content: center;
+  justify-content: center;
 }

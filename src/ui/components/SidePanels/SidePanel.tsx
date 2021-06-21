@@ -35,8 +35,7 @@ export const SidePanel = (props: SidePanelProps) => {
         onToggle={onToggle}
         collapsibleContent={collapsibleContent}
         customCollapseIcon={customCollapseIcon}
-        customExpandIcon={customExpandIcon}
-      >
+        customExpandIcon={customExpandIcon}>
         {children}
       </Panel>
     </Sider>
