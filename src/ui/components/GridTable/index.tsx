@@ -15,11 +15,11 @@ export const GridTable = ({
   meta = { max: 12500000, completed: 12300000 },
   rowSpan = 1e6,
 }: {
-  data: any,
-  columns: any,
-  title?: string,
-  meta?: any,
-  rowSpan?: any
+  data: any;
+  columns: any;
+  title?: string;
+  meta?: any;
+  rowSpan?: any;
 }) => {
   const [selected, setSelected] = useState(localStorage.getItem('grid-select'));
   const largest = meta.max;
@@ -61,7 +61,7 @@ export const GridTable = ({
 };
 
 //-----------------------------------------------------------------
-const GridHeader = ({ cols, rowSpan }: { cols: any, rowSpan: any}) => {
+const GridHeader = ({ cols, rowSpan }: { cols: any; rowSpan: any }) => {
   const colSpan = rowSpan / 10;
   const styles = useStyles();
   return (
@@ -75,17 +75,29 @@ const GridHeader = ({ cols, rowSpan }: { cols: any, rowSpan: any}) => {
 };
 
 //-----------------------------------------------------------------
-const GridRow = ({ row, cols, meta, rowSpan, selected, setSelected } :
-  {row: any, cols: any, meta: any, rowSpan: any, selected: any, setSelected: any}
-) => {
+const GridRow = ({
+  row,
+  cols,
+  meta,
+  rowSpan,
+  selected,
+  setSelected,
+}: {
+  row: any;
+  cols: any;
+  meta: any;
+  rowSpan: any;
+  selected: any;
+  setSelected: any;
+}) => {
   const colSpan: number = rowSpan / 10;
   const styles = useStyles();
   return (
     <div className={styles.row}>
       <div className={styles.sider}>{row * rowSpan}:</div>
-      {cols.map((col: {col: any}) => {
+      {cols.map((col: { col: any }) => {
         const x: any = col;
-        const cellStart = row * rowSpan + (x * colSpan);
+        const cellStart = row * rowSpan + x * colSpan;
         const cellEnd = row * rowSpan + (x + 1) * colSpan;
         let char = '';
         if (meta.completed >= cellEnd) {
@@ -94,7 +106,7 @@ const GridRow = ({ row, cols, meta, rowSpan, selected, setSelected } :
           char = '--';
         }
         let cn = styles.incomplete;
-        if (selected === cellStart && (meta.completed >= cellStart)) {
+        if (selected === cellStart && meta.completed >= cellStart) {
           cn = styles.selected;
         } else {
           if (meta.completed >= cellEnd) {
@@ -104,8 +116,7 @@ const GridRow = ({ row, cols, meta, rowSpan, selected, setSelected } :
           }
         }
         let handler = (e: any) => setSelected(row * 1e6 + x * 1e5);
-        if (char == '')
-          handler = () => {};
+        if (char == '') handler = () => {};
         return (
           <div key={x} className={cx(styles.cell, cn)} onClick={handler}>
             {char}
@@ -117,22 +128,21 @@ const GridRow = ({ row, cols, meta, rowSpan, selected, setSelected } :
 };
 
 //-----------------------------------------------------------------
-export const DetailTable = (
-  {
-    data,
-    columns,
-    title,
-    idCol,
-    cellStart,
-    cellSpan
-  } : {
-    data: any,
-    columns: any,
-    title?: string,
-    idCol: string,
-    cellStart: any,
-    cellSpan: any,
-  }) => {
+export const DetailTable = ({
+  data,
+  columns,
+  title,
+  idCol,
+  cellStart,
+  cellSpan,
+}: {
+  data: any;
+  columns: any;
+  title?: string;
+  idCol: string;
+  cellStart: any;
+  cellSpan: any;
+}) => {
   if (cellStart === undefined) {
     return (
       <div
@@ -140,16 +150,14 @@ export const DetailTable = (
           display: 'grid',
           gridTemplateColumns: '1fr 50fr 1fr',
           justifyItems: 'space between',
-        }}
-      >
+        }}>
         <div></div>
         <div
-          className="at-body"
+          className='at-body'
           style={{
             borderTop: '0px',
             paddingLeft: '10px',
-          }}
-        >
+          }}>
           <h4>Click a box to see details</h4>
         </div>
         <div></div>
@@ -158,9 +166,7 @@ export const DetailTable = (
   }
 
   const range = { start: cellStart, end: cellStart + cellSpan };
-  const filteredData = data.filter(
-    (item: any) => (item.firstApp >= range.start) && (item.firstApp < range.end)
-  );
+  const filteredData = data.filter((item: any) => item.firstApp >= range.start && item.firstApp < range.end);
   if (filteredData.length > 200 || cellSpan > 100000) {
     return (
       <div
@@ -168,16 +174,14 @@ export const DetailTable = (
           display: 'grid',
           gridTemplateColumns: '1fr 50fr 1fr',
           justifyItems: 'space between',
-        }}
-      >
+        }}>
         <div></div>
         <div
-          className="at-body"
+          className='at-body'
           style={{
             borderTop: '0px',
             paddingLeft: '10px',
-          }}
-        >
+          }}>
           <h4>Click a box to see details</h4>
         </div>
         <div></div>
@@ -193,29 +197,20 @@ export const DetailTable = (
     '-' +
     range.end;
 
-  const details = [
-    'nAddrs',
-    'nApps',
-    'indexSizeBytes',
-    'bloomSizeBytes',
-    'index_hash',
-    'bloom_hash'
-  ]
+  const details = ['nAddrs', 'nApps', 'blockRange', 'indexSizeBytes', 'bloomSizeBytes', 'index_hash', 'bloom_hash'];
   return (
     <div
       style={{
         display: 'grid',
         gridTemplateColumns: '1fr 50fr 1fr',
         justifyItems: 'space between',
-      }}
-    >
+      }}>
       <div></div>
       <div
-        className="at-body"
+        className='at-body'
         style={{
           borderTop: '0px',
-        }}
-      >
+        }}>
         <h4>{subtit}</h4>
         <div style={{ display: 'grid', gridTemplateColumns: '4fr 92 4fr', justifyItems: 'stretch', gridGap: '20px' }}>
           <div
@@ -224,23 +219,32 @@ export const DetailTable = (
               flexFlow: 'row wrap',
               justifyItems: 'stretch',
               gridGap: '4px',
-            }}
-          >
+            }}>
             {filteredData.map((record: any, i: number) => {
               return (
-                <div key={i} style={{padding: '2px', border: '1px solid black'}}>
-                  <div style={{fontWeight: 800, backgroundColor: 'lightgrey'}}>{record.filename.replace(/.bin/, '')}</div>
+                <div key={i} style={{ padding: '2px', border: '1px solid black' }}>
+                  <div style={{ fontWeight: 600, backgroundColor: 'lightgrey' }}>
+                    {record.filename.replace(/.bin/, '')}
+                  </div>
                   {details.map((field, i) => {
-                    let val = <div style={{border: '1px black'}}>{record[field]}</div>;
-                    if (field === 'nApps' && record[field] >= 2000000) {
-                      val = <div style={{color: 'blue', fontWeight: 700, border: '1px black'}}>{record[field]}</div>;
-                    } else if (field === 'nApps') {
-                      val = <div style={{color: 'red', fontWeight: 700, border: '1px black'}}>{record[field]}</div>;
+                    let val = <></>;
+                    if (field === 'blockRange') {
+                      const dist = record.latestApp - record.firstApp;
+                      val = <div style={{ border: '1px black' }}>{dist}</div>;
+                    } else {
+                      val = <div style={{ border: '1px black' }}>{record[field]}</div>;
                     }
-                    return (<div key={i} style={{textAlign: 'right', gridTemplateColumns: '1fr 1fr', display: 'grid'}}>
-                      <div style={{border: '1px black'}}>{field}: </div>
-                      {val}
-                    </div>);
+                    if (field === 'nApps' && record[field] >= 2000000) {
+                      val = <div style={{ color: 'blue', fontWeight: 600, border: '1px black' }}>{record[field]}</div>;
+                    } else if (field === 'nApps') {
+                      val = <div style={{ color: 'red', fontWeight: 600, border: '1px black' }}>{record[field]}</div>;
+                    }
+                    return (
+                      <div key={i} style={{ textAlign: 'right', gridTemplateColumns: '1fr 1fr', display: 'grid' }}>
+                        <div style={{ border: '1px black' }}>{field}: </div>
+                        {val}
+                      </div>
+                    );
                   })}
                 </div>
               );
@@ -257,7 +261,6 @@ export const DetailTable = (
 const useStyles = createUseStyles({
   header: {
     fontSize: '1em',
-    fontWeight: 500,
     fontFamily: 'Times',
     color: 'black',
     backgroundColor: 'white',
@@ -274,7 +277,7 @@ const useStyles = createUseStyles({
     display: 'grid',
     gridTemplateColumns: '1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr',
     textAlign: 'center' as 'center',
-    "&:last-child": {borderBottom: '1px lightgrey solid'}
+    '&:last-child': { borderBottom: '1px lightgrey solid' },
   },
   cell: {
     fontFamily: 'Times',
@@ -288,35 +291,34 @@ const useStyles = createUseStyles({
     borderRight: '1px solid lightgrey',
     display: 'block',
     backgroundColor: 'white',
-    "&:hover": {color: 'white', backgroundColor: 'purple'}
+    '&:hover': { color: 'white', backgroundColor: 'purple' },
   },
   sider: {
     fontSize: '1em',
-    fontWeight: 500,
     fontFamily: 'Times',
     color: 'black',
     backgroundColor: 'white',
     borderRight: '1px solid lightgrey',
     borderLeft: '1px solid lightgrey',
-    "&:first-child": {borderTop: '1px lightgrey solid'}
+    '&:first-child': { borderTop: '1px lightgrey solid' },
   },
   incomplete: {
     backgroundColor: 'lightgrey',
-    "&:hover": {color: 'lightgrey', backgroundColor: 'lightgrey'}
+    '&:hover': { color: 'lightgrey', backgroundColor: 'lightgrey' },
   },
   complete: {
-    backgroundColor: 'white'
+    backgroundColor: 'white',
   },
   partial: {
     background: 'linear-gradient(to right, white 30%, lightgrey 100%)',
     backgroundRepeat: 'repeat',
     borderRadius: '0px 0px 2 2',
-    "&:hover": {color: 'black', background: 'linear-gradient(to right, purple 30%, lightgrey 100%)'}
+    '&:hover': { color: 'black', background: 'linear-gradient(to right, purple 30%, lightgrey 100%)' },
   },
   selected: {
     backgroundColor: 'orange',
     color: 'black',
     padding: '1px',
-    "&:hover": {color: 'black', backgroundColor: 'orange'}
-  }
+    '&:hover': { color: 'black', backgroundColor: 'orange' },
+  },
 });

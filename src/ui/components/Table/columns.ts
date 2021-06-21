@@ -30,7 +30,7 @@ export function addNumColumn<RecordType>({
   configuration,
 }: ColumnConfiguration<RecordType>): ColumnType<RecordType> {
   if (!configuration) configuration = {};
-  configuration.render = (num: number) => Intl.NumberFormat().format(num);
+  if (!configuration.render) configuration.render = (num: number) => Intl.NumberFormat().format(num);
   configuration.align = 'right';
   return {
     title,

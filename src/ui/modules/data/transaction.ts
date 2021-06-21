@@ -3,20 +3,31 @@ import { ColumnsType } from 'antd/lib/table';
 
 export type TransactionType = {
   /* eslint-disable camelcase */
-  blockNumber: number /* blknum */;
-  difficulty: number /* uint64 */;
-  finalized: boolean /* bool */;
-  gasLimit: string /* gas */;
-  gasUsed: string /* gas */;
   hash: string /* hash */;
-  light: boolean /* bool */;
-  miner: string /* address */;
-  name: string /* string */;
-  parentHash: string /* hash */;
-  price: number /* double */;
+  blockHash: string /* hash */;
+  blockNumber: number /* blknum */;
+  transactionIndex: number /* blknum */;
+  date: string /* date */;
+  nonce: number /* uint64 */;
   timestamp: number /* timestamp */;
-  // transactions: array /* CTransactionArray */
-  // tx_hashes: array /* CStringArray */
+  from: string /* address */;
+  to: string /* address */;
+  value: string /* wei */;
+  extraValue1: string /* wei */;
+  extraValue2: string /* wei */;
+  gas: string /* gas */;
+  gasPrice: string /* gas */;
+  input: string /* string */;
+  isError: number /* uint8 */;
+  hasToken: number /* uint8 */;
+  cachebits: number /* uint8 */;
+  reserved2: number /* uint8 */;
+  receipt: any /* CReceipt */;
+  traces: any[] /* CTraceArray */;
+  articulatedTx: any /* CFunction */;
+  compressedTx: string /* string */;
+  statements: any /* CReconciliationArray */;
+  finalized: boolean /* bool */;
 };
 
 export const functionSchema: ColumnsType<TransactionType> = [
@@ -24,36 +35,36 @@ export const functionSchema: ColumnsType<TransactionType> = [
     title: 'Block Number',
     dataIndex: 'blockNumber',
     configuration: {
-      width: 100
-    }
+      width: 100,
+    },
   }),
   addNumColumn({
     title: 'Transaction ID',
     dataIndex: 'transactionIndex',
     configuration: {
-      width: 100
-    }
+      width: 100,
+    },
   }),
   addColumn({
     title: 'From',
     dataIndex: 'from',
     configuration: {
-      width: 150
-    }
+      width: 150,
+    },
   }),
   addColumn({
     title: 'To',
     dataIndex: 'to',
     configuration: {
-      width: 150
-    }
+      width: 150,
+    },
   }),
   addNumColumn({
     title: 'Ether',
     dataIndex: 'ether',
     configuration: {
-      width: 100
-    }
+      width: 100,
+    },
   }),
   addColumn({
     title: 'Function',
@@ -70,20 +81,23 @@ export const transactionSchema: ColumnsType<TransactionType> = [
   //   title: 'Block Hash',
   //   dataIndex: 'blockHash',
   // }),
-  addNumColumn({
-    title: 'Block Number',
-    dataIndex: 'blockNumber',
-    configuration: {
-      width: 100
-    }
-  }),
-  addNumColumn({
-    title: 'Transaction Index',
-    dataIndex: 'transactionIndex',
-    configuration: {
-      width: 100
-    }
-  }),
+  // addColumn({
+  //   title: 'Date',
+  //   dataIndex: 'blockNumber',
+  //   configuration: {
+  //     render: (field: any, record: TransactionType) => {
+  //       return record?.blockNumber?.toString() + '.' + record?.transactionIndex?.toString();
+  //     },
+  //     width: 120,
+  //   },
+  // }),
+  // addNumColumn({
+  //   title: 'Transaction Index',
+  //   dataIndex: 'transactionIndex',
+  //   configuration: {
+  //     width: 100,
+  //   },
+  // }),
   // addColumn({
   //   title: 'Timestamp',
   //   dataIndex: 'timestamp',
@@ -91,6 +105,15 @@ export const transactionSchema: ColumnsType<TransactionType> = [
   addColumn({
     title: 'Date',
     dataIndex: 'date',
+    configuration: {
+      render: (field: any, record: TransactionType) => {
+        if (!record) return '';
+        return record.date + ': ' + record.blockNumber?.toString() + '.' + record.transactionIndex?.toString();
+        // const ret = () => <div>X</div>;
+        // return ret;
+      },
+      width: 350,
+    },
   }),
   addColumn({
     title: 'From',
@@ -120,15 +143,15 @@ export const transactionSchema: ColumnsType<TransactionType> = [
     title: 'Err',
     dataIndex: 'isError',
     configuration: {
-      width: 50
-    }
+      width: 50,
+    },
   }),
   addFlagColumn({
     title: 'Tok',
     dataIndex: 'hasToken',
     configuration: {
-      width: 50
-    }
+      width: 50,
+    },
   }),
   // addColumn({
   //   title: 'Receipt',
@@ -167,8 +190,8 @@ export const transactionSchema: ColumnsType<TransactionType> = [
           return statements[0].amountNet;
         }
         return '0.0';
-      }
-    }
+      },
+    },
   }),
   /*
     blknum_t blockNumber;
@@ -206,8 +229,8 @@ export const transactionSchema: ColumnsType<TransactionType> = [
           return statements[0].gasCostOut;
         }
         return '0.0';
-      }
-    }
+      },
+    },
   }),
   addColumn({
     title: 'Statement',
@@ -218,9 +241,9 @@ export const transactionSchema: ColumnsType<TransactionType> = [
           return statements[0].endBal;
         }
         return '0.0';
-      }
-    }
-  })
+      },
+    },
+  }),
   // addColumn({
   //   title: 'Function',
   //   dataIndex: 'function',

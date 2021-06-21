@@ -1,7 +1,13 @@
 import { BaseView } from '@components/BaseView';
+import { Console } from '@components/Console';
+import { Result, toFailedResult, toSuccessfulData } from '@hooks/useCommand';
+import { runCommand } from '@modules/core';
 import { createErrorNotification } from '@modules/error_notification';
 import { Divider, Input } from 'antd';
+import { either as Either } from 'fp-ts';
+import { pipe } from 'fp-ts/lib/function';
 import React, { useCallback, useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import {
   AccountEventsLocation,
   AccountFunctionsLocation,
@@ -12,12 +18,6 @@ import { cookieVars } from '../../../../utils';
 import { AccountEvents } from './Tabs/Events';
 import { AccountFunctions } from './Tabs/Functions';
 import { AccountTransactions } from './Tabs/Transactions';
-import { either as Either } from 'fp-ts';
-import { runCommand } from '@modules/core';
-import { pipe } from 'fp-ts/lib/function';
-import { toSuccessfulData, toFailedResult, Result } from '@hooks/useCommand';
-import { Console } from '@components/Console';
-import { useLocation } from 'react-router-dom';
 
 export const AccountsView = () => {
   const [currentAddress, setCurrentAddress] = useState('');
@@ -41,8 +41,8 @@ export const AccountsView = () => {
         const eitherResponse = await runCommand('export', {
           addrs: currentAddress,
           fmt: 'json',
-          //articulate: true,
-          //accounting: true,
+          articulate: true,
+          // accounting: true,
           first_record: 0,
           max_records: 200,
           ether: true,
