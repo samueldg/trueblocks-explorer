@@ -5,7 +5,7 @@ import {
   SettingsLocation,
   SettingsSchemasLocation,
   SettingsScrapersLocation,
-  SettingsSkinsLocation
+  SettingsSkinsLocation,
 } from '../../locations';
 import { cookieVars } from '../../utils';
 import { Caches } from './Tabs/Caches';
@@ -16,10 +16,10 @@ import { Skins } from './Tabs/Skins';
 export const SettingsView = () => {
   const title = 'Settings';
   const tabs = [
-    {name: "Scrapers", location: SettingsScrapersLocation, component: <Scrapers />},
-    {name: "Caches", location: SettingsCachesLocation, component: <Caches />},
-    {name: "Skins", location: SettingsSkinsLocation, component: <Skins />},
-    {name: "Schemas", location: SettingsSchemasLocation, component: <Schemas />},
+    { name: 'Scrapers', location: SettingsScrapersLocation, component: <Scrapers /> },
+    { name: 'Caches', location: SettingsCachesLocation, component: <Caches /> },
+    { name: 'Skins', location: SettingsSkinsLocation, component: <Skins /> },
+    { name: 'Schemas', location: SettingsSchemasLocation, component: <Schemas /> },
   ];
   return (
     <BaseView

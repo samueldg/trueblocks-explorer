@@ -14,14 +14,10 @@ export const IndexCharts = () => {
   }
 
   const getData = useCallback((response) => {
-    return (
-      response.status === 'fail' || !response.data[0].caches ? [] : response.data[0].caches[0].items
-    );
+    return response.status === 'fail' || !response.data[0].caches ? [] : response.data[0].caches[0].items;
   }, []);
 
-  return (
-    <div>Charts of the index</div>
-  );
+  return <div>Charts of the index</div>;
 };
 
 const indexSchema: ColumnsType<MonitorType> = [
@@ -46,8 +42,8 @@ const indexSchema: ColumnsType<MonitorType> = [
     dataIndex: 'latestApp',
   }),
   addNumColumn({
-  title: 'firstTs',
-  dataIndex: 'firstTs',
+    title: 'firstTs',
+    dataIndex: 'firstTs',
   }),
   addNumColumn({
     title: 'latestTs',
@@ -75,12 +71,12 @@ function getTableActions(item: MonitorType) {
   const onClick = (action: string, item: MonitorType) => {
     switch (action) {
       case 'remove':
-        console.log("Deleting the monitor", item);
+        console.log('Deleting the monitor', item);
         break;
       default:
-        console.log('Clicked action', action, item)
+        console.log('Clicked action', action, item);
     }
-  }
+  };
 
   return <TableActions item={item} onClick={onClick} />;
 }

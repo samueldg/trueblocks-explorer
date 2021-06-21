@@ -1,7 +1,10 @@
 import { BaseView } from '@components/BaseView';
 import React from 'react';
 import {
-  DashboardIndexesLocation, IndexChartsLocation, IndexGridLocation, IndexTableLocation
+  DashboardIndexesLocation,
+  IndexChartsLocation,
+  IndexGridLocation,
+  IndexTableLocation,
 } from '../../../../locations';
 import { cookieVars } from '../../../../utils';
 import { IndexCharts } from './Tabs/IndexCharts';
@@ -11,9 +14,9 @@ import { IndexTable } from './Tabs/IndexTable';
 export const IndexesView = () => {
   const title = '';
   var tabs = [
-    {name: "Grid", location: IndexGridLocation, component: <IndexGrid />},
-    {name: "Table", location: IndexTableLocation, component: <IndexTable />},
-    {name: "Charts", location: IndexChartsLocation, component: <IndexCharts />},
+    { name: 'Grid', location: IndexGridLocation, component: <IndexGrid /> },
+    { name: 'Table', location: IndexTableLocation, component: <IndexTable /> },
+    { name: 'Charts', location: IndexChartsLocation, component: <IndexCharts /> },
   ];
   return (
     <BaseView

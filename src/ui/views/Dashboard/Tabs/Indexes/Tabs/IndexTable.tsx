@@ -14,14 +14,10 @@ export const IndexTable = () => {
   }
 
   const getData = useCallback((response) => {
-    return (
-      response.status === 'fail' || !response.data[0].caches ? [] : response.data[0].caches[0].items
-    );
+    return response.status === 'fail' || !response.data[0].caches ? [] : response.data[0].caches[0].items;
   }, []);
 
-  return (
-    <BaseTableRows data={getData(indexes)} columns={indexSchema} loading={loading} />
-  );
+  return <BaseTableRows data={getData(indexes)} columns={indexSchema} loading={loading} />;
 };
 
 const indexSchema: ColumnsType<MonitorType> = [
@@ -37,8 +33,8 @@ const indexSchema: ColumnsType<MonitorType> = [
     title: 'nApps',
     dataIndex: 'nApps',
     configuration: {
-      render: (item: number) => <div style={{color: 'red', fontWeight: 800}}>{item}</div>
-    }
+      render: (item: number) => <div style={{ color: 'red', fontWeight: 800 }}>{item}</div>,
+    },
   }),
   addNumColumn({
     title: 'firstApp',
@@ -49,8 +45,8 @@ const indexSchema: ColumnsType<MonitorType> = [
     dataIndex: 'latestApp',
   }),
   addNumColumn({
-  title: 'firstTs',
-  dataIndex: 'firstTs',
+    title: 'firstTs',
+    dataIndex: 'firstTs',
   }),
   addNumColumn({
     title: 'latestTs',

@@ -23,7 +23,7 @@ const whenSchema: ColumnsType<WhenType> = [
     dataIndex: 'blockNumber',
     configuration: {
       width: 100,
-    }
+    },
   }),
   addColumn({
     title: 'Date',
@@ -37,14 +37,16 @@ const whenSchema: ColumnsType<WhenType> = [
     title: 'Timestamp',
     dataIndex: 'timestamp',
   }),
-  addActionsColumn({
-    title: '',
-    dataIndex: '',
-  },
-  {
-    width: 150,
-    getComponent: getTableActions,
-  }),
+  addActionsColumn(
+    {
+      title: '',
+      dataIndex: '',
+    },
+    {
+      width: 150,
+      getComponent: getTableActions,
+    }
+  ),
 ];
 
 function getTableActions(item: WhenType) {

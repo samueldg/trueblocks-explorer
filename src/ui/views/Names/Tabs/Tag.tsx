@@ -22,14 +22,16 @@ const tagSchema: ColumnsType<TagType> = [
     title: 'ID',
     dataIndex: 'tags',
   }),
-  addActionsColumn<TagType>({
-    title: '',
-    dataIndex: '',
-  },
-  {
-    width: 150,
-    getComponent: getTableActions,
-  }),
+  addActionsColumn<TagType>(
+    {
+      title: '',
+      dataIndex: '',
+    },
+    {
+      width: 150,
+      getComponent: getTableActions,
+    }
+  ),
 ];
 
 function getTableActions(item: TagType) {

@@ -14,7 +14,7 @@ export const FunctionSignatures = () => {
   }
 
   const getData = useCallback((response) => {
-    return (response.status === 'fail' ? [] : response.data.filter((item: SignatureType) => item.type === 'function'));
+    return response.status === 'fail' ? [] : response.data.filter((item: SignatureType) => item.type === 'function');
   }, []);
   return <BaseTableRows data={getData(signatures)} columns={signatureSchema} loading={loading} />;
 };
@@ -24,8 +24,8 @@ const signatureSchema: ColumnsType<SignatureType> = [
     title: 'Source',
     dataIndex: 'abi_source',
     configuration: {
-      width: 200
-    }
+      width: 200,
+    },
   }),
   addColumn<SignatureType>({
     title: 'Encoding',

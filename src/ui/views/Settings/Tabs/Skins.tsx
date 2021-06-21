@@ -35,9 +35,9 @@ export const Skins = () => {
       <h2 className={styles.skinTitle}>Skins</h2>
       {themeList.map((theme) => (
         <div key={theme.theme} className={styles.skinContainer} onClick={() => setTheme(theme)}>
-          <div style={{ backgroundColor: theme.secondaryColor }} className={styles.skinItem} >
-          <div style={{color: theme.primaryColor }}>{theme.theme}</div>
-            </div>
+          <div style={{ backgroundColor: theme.secondaryColor }} className={styles.skinItem}>
+            <div style={{ color: theme.primaryColor }}>{theme.theme}</div>
+          </div>
         </div>
       ))}
     </div>

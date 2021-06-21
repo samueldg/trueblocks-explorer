@@ -15,9 +15,7 @@ export const IndexGrid = () => {
   }
 
   const getData = useCallback((response) => {
-    return (
-      response.status === 'fail' || !response.data[0].caches ? [] : response.data[0].caches[0].items
-    );
+    return response.status === 'fail' || !response.data[0].caches ? [] : response.data[0].caches[0].items;
   }, []);
 
   return <GridTable data={getData(indexes)} columns={indexSchema} />;
@@ -45,8 +43,8 @@ const indexSchema: ColumnsType<MonitorType> = [
     dataIndex: 'latestApp',
   }),
   addNumColumn({
-  title: 'firstTs',
-  dataIndex: 'firstTs',
+    title: 'firstTs',
+    dataIndex: 'firstTs',
   }),
   addNumColumn({
     title: 'latestTs',
