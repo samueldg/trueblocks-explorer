@@ -5,7 +5,8 @@ import {
   SupportContactUsLocation,
   SupportDocumentationLocation,
   SupportHotKeysLocation,
-  SupportLicensingLocation, SupportLocation
+  SupportLicensingLocation,
+  SupportLocation,
 } from '../..//locations';
 import { cookieVars } from '../../utils';
 import { About } from './Tabs/About';
@@ -17,11 +18,11 @@ import { Licensing } from './Tabs/Licensing';
 export const SupportView = () => {
   const title = 'Support';
   const tabs = [
-    {name: "Contact Us", location: SupportContactUsLocation, component: <Contact />},
-    {name: "Documentation", location: SupportDocumentationLocation, component: <Documentation />},
-    {name: "Hot Keys", location: SupportHotKeysLocation, component: <HotKeys />},
-    {name: "Licensing", location: SupportLicensingLocation, component: <Licensing />},
-    {name: "About Us", location: SupportAboutUsLocation, component: <About />},
+    { name: 'Contact Us', location: SupportContactUsLocation, component: <Contact /> },
+    { name: 'Documentation', location: SupportDocumentationLocation, component: <Documentation /> },
+    { name: 'Hot Keys', location: SupportHotKeysLocation, component: <HotKeys /> },
+    { name: 'Licensing', location: SupportLicensingLocation, component: <Licensing /> },
+    { name: 'About Us', location: SupportAboutUsLocation, component: <About /> },
   ];
   return (
     <BaseView
