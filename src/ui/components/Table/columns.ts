@@ -6,7 +6,6 @@ export type ColumnConfiguration<RecordType> = {
   dataIndex: string;
   key?: string;
   configuration?: ColumnType<RecordType>;
-  render?: any;
 };
 
 export function addColumn<RecordType>({
