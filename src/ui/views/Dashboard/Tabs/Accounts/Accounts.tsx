@@ -3,7 +3,7 @@ import { Console } from '@components/Console';
 import { Result, toFailedResult, toSuccessfulData } from '@hooks/useCommand';
 import { runCommand } from '@modules/core';
 import { createErrorNotification } from '@modules/error_notification';
-import { Divider, Input } from 'antd';
+import { Checkbox, Divider, Input } from 'antd';
 import { either as Either } from 'fp-ts';
 import { pipe } from 'fp-ts/lib/function';
 import React, { useCallback, useEffect, useState } from 'react';
@@ -12,7 +12,7 @@ import {
   AccountEventsLocation,
   AccountFunctionsLocation,
   AccountTransactionsLocation,
-  DashboardAccountsLocation,
+  DashboardAccountsLocation
 } from '../../../../locations';
 import { cookieVars } from '../../../../utils';
 import { AccountEvents } from './Tabs/Events';
@@ -20,6 +20,9 @@ import { AccountFunctions } from './Tabs/Functions';
 import { AccountTransactions } from './Tabs/Transactions';
 
 export const AccountsView = () => {
+  const [articulate, setArticulate] = useState(false);
+  const [accounting, setAccounting] = useState(false);
+  const [denom, setDenom] = useState('wei');
   const [currentAddress, setCurrentAddress] = useState('');
   const emptyData = { data: [{}], meta: {} };
   const [transactions, setTransactions] = useState<Result>(toSuccessfulData(emptyData));
@@ -41,14 +44,17 @@ export const AccountsView = () => {
         const eitherResponse = await runCommand('export', {
           addrs: currentAddress,
           fmt: 'json',
-          articulate: true,
-          // accounting: true,
           first_record: 0,
           max_records: 200,
-          ether: true,
           cache_txs: true,
           cache_traces: true,
           reversed: true,
+          // staging: true,
+          // unripe: true,
+          ether: denom === 'ether',
+          dollars: denom === 'dollars',
+          articulate: articulate,
+          accounting: accounting,
         });
         const result: Result = pipe(
           eitherResponse,
@@ -58,7 +64,7 @@ export const AccountsView = () => {
         setLoading(false);
       }
     })();
-  }, [currentAddress]);
+  }, [currentAddress, articulate, accounting, denom]);
 
   if (transactions.status === 'fail') {
     createErrorNotification({
@@ -86,8 +92,29 @@ export const AccountsView = () => {
     },
   ];
 
+  const onArticulate = useCallback(
+    () => setArticulate(!articulate),
+    []
+  );
+  const onAccounting = useCallback(
+    () => setAccounting(!accounting),
+    []
+  );
+  const onEther = useCallback(
+    () => denom === 'ether' ? setDenom('dollars') : setDenom('ether'),
+    []
+  );
+  const onDollars = useCallback(
+    () => denom === 'dollars' ? setDenom('ether') : setDenom('dollars'),
+    []
+  );
+
   return (
     <div>
+      <Checkbox checked={articulate} onChange={(event) => onArticulate()}>articulate</Checkbox>
+      <Checkbox checked={accounting} onChange={(event) => onAccounting()}>accounting</Checkbox>
+      <Checkbox checked={denom === 'ether'} onChange={(event) => onEther()}>ether</Checkbox>
+      <Checkbox checked={denom === 'dollars'} onChange={(event) => onDollars()}>dollars</Checkbox>
       <div style={{ marginTop: '8px', display: 'flex', alignItems: 'center', position: 'relative' }}>
         <h3 style={{ marginRight: '12px', flexShrink: 0 }}>Viewing account:</h3>
         <Input
