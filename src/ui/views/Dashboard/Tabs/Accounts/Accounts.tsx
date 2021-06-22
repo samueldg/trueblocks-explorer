@@ -12,7 +12,7 @@ import {
   AccountEventsLocation,
   AccountFunctionsLocation,
   AccountTransactionsLocation,
-  DashboardAccountsLocation
+  DashboardAccountsLocation,
 } from '../../../../locations';
 import { cookieVars } from '../../../../utils';
 import { AccountEvents } from './Tabs/Events';
@@ -22,7 +22,10 @@ import { AccountTransactions } from './Tabs/Transactions';
 export const AccountsView = () => {
   const [articulate, setArticulate] = useState(false);
   const [accounting, setAccounting] = useState(false);
-  const [denom, setDenom] = useState('wei');
+  const [reversed, setReversed] = useState(false);
+  const [max_records, setMaxRecords] = useState(100);
+  const [tokens, setTokens] = useState(true);
+  const [denom, setDenom] = useState('ether');
   const [currentAddress, setCurrentAddress] = useState('');
   const emptyData = { data: [{}], meta: {} };
   const [transactions, setTransactions] = useState<Result>(toSuccessfulData(emptyData));
@@ -37,6 +40,9 @@ export const AccountsView = () => {
     }
   }, [address]);
 
+  // To get count:
+  // nRecords = http://localhost:8080/list?count&appearances&addrs=0xf503017d7baf7fbc0fff7492b751025c6a78179b
+
   useEffect(() => {
     (async () => {
       if (currentAddress.slice(0, 2) === '0x') {
@@ -44,17 +50,18 @@ export const AccountsView = () => {
         const eitherResponse = await runCommand('export', {
           addrs: currentAddress,
           fmt: 'json',
-          first_record: 0,
-          max_records: 200,
           cache_txs: true,
           cache_traces: true,
-          reversed: true,
           // staging: true,
           // unripe: true,
           ether: denom === 'ether',
           dollars: denom === 'dollars',
           articulate: articulate,
           accounting: accounting,
+          reversed: reversed,
+          // first_record: 0,
+          max_records: max_records,
+          tokens: tokens,
         });
         const result: Result = pipe(
           eitherResponse,
@@ -64,7 +71,7 @@ export const AccountsView = () => {
         setLoading(false);
       }
     })();
-  }, [currentAddress, articulate, accounting, denom]);
+  }, [currentAddress, denom, articulate, accounting, reversed, max_records, tokens]);
 
   if (transactions.status === 'fail') {
     createErrorNotification({
@@ -92,29 +99,43 @@ export const AccountsView = () => {
     },
   ];
 
-  const onArticulate = useCallback(
-    () => setArticulate(!articulate),
-    []
-  );
-  const onAccounting = useCallback(
-    () => setAccounting(!accounting),
-    []
-  );
-  const onEther = useCallback(
-    () => denom === 'ether' ? setDenom('dollars') : setDenom('ether'),
-    []
-  );
-  const onDollars = useCallback(
-    () => denom === 'dollars' ? setDenom('ether') : setDenom('dollars'),
-    []
-  );
+  const onArticulate = () => setArticulate(!articulate);
+  const onAccounting = () => setAccounting(!accounting);
+  const onReversed = () => setReversed(!reversed);
+  const onMaxRecords = () => setMaxRecords(max_records > 20 ? 20 : 5000);
+  const onTokens = () => setTokens(!tokens);
+  const onEther = () => {
+    setAccounting(true);
+    denom === 'ether' ? setDenom('') : setDenom('ether');
+  };
+  const onDollars = useCallback(() => {
+    setAccounting(true);
+    denom === 'dollars' ? setDenom('') : setDenom('dollars');
+  }, []);
 
   return (
     <div>
-      <Checkbox checked={articulate} onChange={(event) => onArticulate()}>articulate</Checkbox>
-      <Checkbox checked={accounting} onChange={(event) => onAccounting()}>accounting</Checkbox>
-      <Checkbox checked={denom === 'ether'} onChange={(event) => onEther()}>ether</Checkbox>
-      <Checkbox checked={denom === 'dollars'} onChange={(event) => onDollars()}>dollars</Checkbox>
+      <Checkbox checked={max_records > 20} onChange={(event) => onMaxRecords()}>
+        max_records
+      </Checkbox>
+      <Checkbox checked={tokens} onChange={(event) => onTokens()}>
+        tokens
+      </Checkbox>
+      <Checkbox checked={reversed} onChange={(event) => onReversed()}>
+        reversed
+      </Checkbox>
+      <Checkbox checked={articulate} onChange={(event) => onArticulate()}>
+        articulate
+      </Checkbox>
+      <Checkbox checked={accounting} onChange={(event) => onAccounting()}>
+        accounting
+      </Checkbox>
+      <Checkbox checked={denom === 'ether'} onChange={(event) => onEther()}>
+        ether
+      </Checkbox>
+      <Checkbox checked={denom === 'dollars'} onChange={(event) => onDollars()}>
+        dollars
+      </Checkbox>
       <div style={{ marginTop: '8px', display: 'flex', alignItems: 'center', position: 'relative' }}>
         <h3 style={{ marginRight: '12px', flexShrink: 0 }}>Viewing account:</h3>
         <Input
