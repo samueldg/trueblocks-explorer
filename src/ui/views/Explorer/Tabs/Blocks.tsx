@@ -7,7 +7,7 @@ import React, { useCallback } from 'react';
 import { useCommand } from '../../../hooks/useCommand';
 
 export const Blocks = () => {
-  const [blocks, loading] = useCommand('blocks', { list: 0, list_count: 20, cache: true });
+  const [blocks, loading] = useCommand('blocks', { list: 0, list_count: 100, cache: true });
   if (blocks.status === 'fail') {
     createErrorNotification({
       description: 'Could not fetch blocks',
