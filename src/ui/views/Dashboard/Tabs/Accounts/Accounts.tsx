@@ -9,6 +9,7 @@ import { pipe } from 'fp-ts/lib/function';
 import React, { useCallback, useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import {
+  AccountReconciliationsLocation,
   AccountEventsLocation,
   AccountFunctionsLocation,
   AccountTransactionsLocation,
@@ -18,6 +19,7 @@ import { cookieVars } from '../../../../utils';
 import { AccountEvents } from './Tabs/Events';
 import { AccountFunctions } from './Tabs/Functions';
 import { AccountTransactions } from './Tabs/Transactions';
+import { AccountReconciliations } from './Tabs/Reconciliations';
 
 export const AccountsView = () => {
   const [articulate, setArticulate] = useState(false);
@@ -96,6 +98,11 @@ export const AccountsView = () => {
       name: 'Events',
       location: `${AccountEventsLocation}${currentAddress ? `/${currentAddress}` : ''}`,
       component: <AccountEvents data={getData(transactions)} loading={loading} />,
+    },
+    {
+      name: 'Reconciliations',
+      location: `${AccountReconciliationsLocation}${currentAddress ? `/${currentAddress}` : ''}`,
+      component: <AccountReconciliations data={getData(transactions)} loading={loading} />,
     },
   ];
 

@@ -2,6 +2,7 @@ import React from 'react';
 import {
   AccountEventsLocation,
   AccountFunctionsLocation,
+  AccountReconciliationsLocation,
   AccountTransactionsLocation,
   DashboardAccountsLocation,
   DashboardCollectionsLocation,
@@ -54,6 +55,10 @@ export const helpRoutes = [
   {
     route: AccountEventsLocation,
     helpText: 'View the event history of an account.',
+  },
+  {
+    route: AccountReconciliationsLocation,
+    helpText: 'View the reconciliation history of an account.',
   },
   {
     route: AccountFunctionsLocation,

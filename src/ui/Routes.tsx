@@ -2,12 +2,14 @@ import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import {
   AccountEventsLocation,
+  AccountEventsLocationAddressTemplate,
   AccountFunctionsLocation,
+  AccountFunctionsLocationAddressTemplate,
+  AccountReconciliationsLocation,
+  AccountReconciliationsLocationAddressTemplate,
   AccountTransactionsLocation,
   AccountTransactionsLocationAddressTemplate,
-  AccountEventsLocationAddressTemplate,
   DashboardAccountsAddressLocationTemplate,
-  AccountFunctionsLocationAddressTemplate,
   DashboardAccountsLocation,
   DashboardCollectionsLocation,
   DashboardIndexesLocation,
@@ -69,6 +71,7 @@ const routes = [
   { path: AccountTransactionsLocationAddressTemplate, component: DashboardView },
   { path: AccountFunctionsLocationAddressTemplate, component: DashboardView },
   { path: AccountEventsLocationAddressTemplate, component: DashboardView },
+  { path: AccountReconciliationsLocationAddressTemplate, component: DashboardView },
   {
     path: AccountTransactionsLocation,
     exact: true,
@@ -81,6 +84,11 @@ const routes = [
   },
   {
     path: AccountEventsLocation,
+    exact: true,
+    component: DashboardView,
+  },
+  {
+    path: AccountReconciliationsLocation,
     exact: true,
     component: DashboardView,
   },
