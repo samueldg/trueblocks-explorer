@@ -7,7 +7,7 @@ import React, { useCallback } from 'react';
 import { useCommand } from '../../../hooks/useCommand';
 
 export const Blocks = () => {
-  const [blocks, loading] = useCommand('blocks', { list: 0, list_count: 100, cache: true });
+  const [blocks, loading] = useCommand('blocks', { list: 0, list_count: 12, cache: true });
   if (blocks.status === 'fail') {
     createErrorNotification({
       description: 'Could not fetch blocks',
@@ -48,6 +48,17 @@ const blockListSchema: ColumnsType<Block> = [
       width: 650,
     },
   }),
+  addColumn<Block>({
+    title: 'Miner',
+    dataIndex: 'miner',
+    configuration: {
+      width: 400,
+    },
+  }),
+  addNumColumn<Block>({
+    title: 'Difficulty',
+    dataIndex: 'difficulty',
+  }),
   addNumColumn<Block>({
     title: 'nTransactions',
     dataIndex: 'transactionsCnt',
@@ -55,6 +66,9 @@ const blockListSchema: ColumnsType<Block> = [
   addNumColumn<Block>({
     title: 'Uncles',
     dataIndex: 'unclesCnt',
+    configuration: {
+      render: (value) => (value === null || value === 0 ? '' : value),
+    },
   }),
   addNumColumn<Block>({
     title: 'Gas Limit',

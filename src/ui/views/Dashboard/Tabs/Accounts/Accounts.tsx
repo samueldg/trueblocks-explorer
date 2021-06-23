@@ -23,7 +23,7 @@ export const AccountsView = () => {
   const [articulate, setArticulate] = useState(false);
   const [accounting, setAccounting] = useState(false);
   const [reversed, setReversed] = useState(false);
-  const [max_records, setMaxRecords] = useState(100);
+  const [max_records, setMaxRecords] = useState(200);
   const [tokens, setTokens] = useState(true);
   const [denom, setDenom] = useState('ether');
   const [currentAddress, setCurrentAddress] = useState('');
@@ -102,7 +102,7 @@ export const AccountsView = () => {
   const onArticulate = () => setArticulate(!articulate);
   const onAccounting = () => setAccounting(!accounting);
   const onReversed = () => setReversed(!reversed);
-  const onMaxRecords = () => setMaxRecords(max_records > 20 ? 20 : 5000);
+  const onMaxRecords = () => setMaxRecords(max_records > 200 ? 200 : 5000);
   const onTokens = () => setTokens(!tokens);
   const onEther = () => {
     setAccounting(true);
@@ -115,7 +115,7 @@ export const AccountsView = () => {
 
   return (
     <div>
-      <Checkbox checked={max_records > 20} onChange={(event) => onMaxRecords()}>
+      <Checkbox checked={max_records > 200} onChange={(event) => onMaxRecords()}>
         max_records
       </Checkbox>
       <Checkbox checked={tokens} onChange={(event) => onTokens()}>
