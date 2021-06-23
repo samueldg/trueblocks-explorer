@@ -1,5 +1,4 @@
 import { SearchOutlined } from '@ant-design/icons';
-import { NamesFilters } from '@components/Filters';
 import {
   addActionsColumn,
   addColumn,
@@ -89,7 +88,6 @@ export const Addresses = () => {
 
   return (
     <>
-      <NamesFilters />
       <BaseTableRows
         data={getData(addresses)}
         columns={addressSchema.map((item) => {

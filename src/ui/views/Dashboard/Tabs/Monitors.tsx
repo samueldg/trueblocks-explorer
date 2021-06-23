@@ -1,4 +1,3 @@
-import { NamesFilters } from '@components/Filters';
 import {
   addActionsColumn,
   addColumn,
@@ -29,7 +28,6 @@ export const Monitors = () => {
 
   return (
     <>
-      <NamesFilters />
       <BaseTableRows data={getData(monitors)} columns={monitorSchema} loading={loading} />
     </>
   );
