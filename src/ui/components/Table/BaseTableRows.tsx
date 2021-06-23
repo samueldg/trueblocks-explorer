@@ -14,10 +14,12 @@ export const BaseTableRows = ({
   data,
   columns,
   loading,
+  extraData,
 }: {
   data: JsonResponse;
   columns: ColumnsType<any>;
   loading: boolean;
+  extraData?: string;
 }) => {
   const { debug } = useGlobalState();
   const [expandedRowKeys, setExpandedRowKeys] = useState<readonly React.ReactText[]>([]);
@@ -28,6 +30,7 @@ export const BaseTableRows = ({
   const dataSource = data?.map((item: any, i: number) => {
     return {
       id: (i + 1).toString(),
+      extraData: extraData,
       ...item,
     };
   });

@@ -1,7 +1,7 @@
 import { addActionsColumn, addColumn, BaseTableRows, TableActions } from '@components/Table';
 import { useCommand } from '@hooks/useCommand';
-import { TagType } from '@modules/data/tag';
 import { createErrorNotification } from '@modules/error_notification';
+import { Tag } from '@modules/types/Tag';
 import { ColumnsType } from 'antd/lib/table';
 import React, { useCallback } from 'react';
 
@@ -17,12 +17,12 @@ export const Tags = () => {
   return <BaseTableRows data={getData(tags)} columns={tagSchema} loading={loading} />;
 };
 
-const tagSchema: ColumnsType<TagType> = [
-  addColumn<TagType>({
+const tagSchema: ColumnsType<Tag> = [
+  addColumn<Tag>({
     title: 'ID',
     dataIndex: 'tags',
   }),
-  addActionsColumn<TagType>(
+  addActionsColumn<Tag>(
     {
       title: '',
       dataIndex: '',
@@ -34,6 +34,6 @@ const tagSchema: ColumnsType<TagType> = [
   ),
 ];
 
-function getTableActions(item: TagType) {
+function getTableActions(item: Tag) {
   return <TableActions item={item} onClick={(action, tableItem) => console.log('Clicked action', action, tableItem)} />;
 }

@@ -1,7 +1,7 @@
 import { addColumn, addNumColumn, BaseTableRows } from '@components/Table';
 import { useCommand } from '@hooks/useCommand';
-import { MonitorType } from '@modules/data/monitor';
 import { createErrorNotification } from '@modules/error_notification';
+import { Monitor } from '@modules/types';
 import { ColumnsType } from 'antd/lib/table';
 import React, { useCallback } from 'react';
 
@@ -20,7 +20,7 @@ export const IndexTable = () => {
   return <BaseTableRows data={getData(indexes)} columns={indexSchema} loading={loading} />;
 };
 
-const indexSchema: ColumnsType<MonitorType> = [
+const indexSchema: ColumnsType<Monitor> = [
   addColumn({
     title: 'FileDate',
     dataIndex: 'fileDate',

@@ -9,13 +9,12 @@ import {
   TableActions,
 } from '@components/Table';
 import { useCommand } from '@hooks/useCommand';
-import { NameType } from '@modules/data/name';
 import { createErrorNotification } from '@modules/error_notification';
+import { Name } from '@modules/types';
 import { Button, Input, Space } from 'antd';
 import { ColumnsType } from 'antd/lib/table';
-import React, { useCallback, useState, useRef } from 'react';
+import React, { useCallback, useRef, useState } from 'react';
 import './Addresses.css';
-import Highlighter from 'react-highlight-words';
 
 export const Addresses = () => {
   const [searchText, setSearchText] = useState('');
@@ -103,8 +102,8 @@ export const Addresses = () => {
   );
 };
 
-const addressSchema: ColumnsType<NameType> = [
-  addColumn<NameType>({
+const addressSchema: ColumnsType<Name> = [
+  addColumn<Name>({
     title: 'Address',
     dataIndex: 'address',
   }),
@@ -158,7 +157,7 @@ const addressSchema: ColumnsType<NameType> = [
     title: 'Monitor',
     dataIndex: 'mon',
   }),
-  addActionsColumn<NameType>(
+  addActionsColumn<Name>(
     {
       title: '',
       dataIndex: '',
@@ -170,6 +169,6 @@ const addressSchema: ColumnsType<NameType> = [
   ),
 ];
 
-function getTableActions(item: NameType) {
+function getTableActions(item: Name) {
   return <TableActions item={item} onClick={(action, tableItem) => console.log('Clicked action', action, tableItem)} />;
 }

@@ -85,7 +85,7 @@ export const AccountsView = () => {
     {
       name: 'Transactions',
       location: `${AccountTransactionsLocation}${currentAddress ? `/${currentAddress}` : ''}`,
-      component: <AccountTransactions data={getData(transactions)} loading={loading} />,
+      component: <AccountTransactions data={getData(transactions)} loading={loading} currentAddress={currentAddress} />,
     },
     {
       name: 'Functions',

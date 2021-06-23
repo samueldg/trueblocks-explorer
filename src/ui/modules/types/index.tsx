@@ -1,0 +1,18 @@
+export declare type hash = string;
+export declare type blknum = number;
+export declare type date = string;
+export declare type address = string;
+export declare type timestamp = number;
+export declare type wei = string;
+export declare type gas = string;
+export declare type uint64 = number;
+export declare type double = number;
+export { Block, BlockArray } from '@modules/types/Block';
+export { Function, FunctionArray } from '@modules/types/Function';
+export { Monitor, MonitorArray } from '@modules/types/Monitor';
+export { Name, NameArray } from '@modules/types/Name';
+export { Receipt, ReceiptArray } from '@modules/types/Receipt';
+export { Reconciliation, ReconciliationArray } from '@modules/types/Reconciliation';
+export { Tag, TagArray } from '@modules/types/Tag';
+export { Trace, TraceArray } from '@modules/types/Trace';
+export { Transaction, TransactionArray } from '@modules/types/Transaction';

@@ -1,7 +1,7 @@
 import { addActionsColumn, addColumn, addNumColumn, BaseTableRows, TableActions } from '@components/Table';
 import { useCommand } from '@hooks/useCommand';
-import { WhenType } from '@modules/data/when';
 import { createErrorNotification } from '@modules/error_notification';
+import { Block } from '@modules/types';
 import { ColumnsType } from 'antd/lib/table';
 import React, { useCallback } from 'react';
 
@@ -17,7 +17,7 @@ export const When = () => {
   return <BaseTableRows data={getData(when)} columns={whenSchema} loading={loading} />;
 };
 
-const whenSchema: ColumnsType<WhenType> = [
+const whenSchema: ColumnsType<Block> = [
   addNumColumn({
     title: 'Block Number',
     dataIndex: 'blockNumber',
@@ -49,6 +49,6 @@ const whenSchema: ColumnsType<WhenType> = [
   ),
 ];
 
-function getTableActions(item: WhenType) {
+function getTableActions(item: Block) {
   return <TableActions item={item} onClick={(action, tableItem) => console.log('Clicked action', action, tableItem)} />;
 }

@@ -1,13 +1,30 @@
 import { addColumn, addFlagColumn, BaseTableRows } from '@components/Table';
-import { TransactionType } from '@modules/data/transaction';
+import { Transaction } from '@modules/types';
 import { ColumnsType } from 'antd/lib/table';
 import React from 'react';
 
-export const AccountTransactions = ({ data, columns, loading }: { data: any; columns?: any; loading: boolean }) => {
-  return <BaseTableRows data={data} columns={columns ? columns : transactionSchema} loading={loading} />;
+export const AccountTransactions = ({
+  data,
+  columns,
+  loading,
+  currentAddress,
+}: {
+  data: any;
+  columns?: any;
+  loading: boolean;
+  currentAddress: string;
+}) => {
+  return (
+    <BaseTableRows
+      data={data}
+      columns={columns ? columns : transactionSchema}
+      loading={loading}
+      extraData={currentAddress}
+    />
+  );
 };
 
-export const transactionSchema: ColumnsType<TransactionType> = [
+export const transactionSchema: ColumnsType<Transaction> = [
   // addColumn({
   //   title: 'Hash',
   //   dataIndex: 'hash',
@@ -20,7 +37,7 @@ export const transactionSchema: ColumnsType<TransactionType> = [
   //   title: 'Date',
   //   dataIndex: 'blockNumber',
   //   configuration: {
-  //     render: (field: any, record: TransactionType) => {
+  //     render: (field: any, record: Transaction) => {
   //       return record?.blockNumber?.toString() + '.' + record?.transactionIndex?.toString();
   //     },
   //     width: 120,
@@ -41,32 +58,37 @@ export const transactionSchema: ColumnsType<TransactionType> = [
     title: 'Date',
     dataIndex: 'date',
     configuration: {
-      render: (field: any, record: TransactionType) => {
+      render: (field: any, record: Transaction) => {
         if (!record) return <div></div>;
         return (
-          <div>
+          <pre>
             <div>{record.date}</div>
-            <br />
-            <div>{record.blockNumber?.toString() + '.' + record.transactionIndex?.toString()}</div>
-          </div>
+            <div style={{ fontSize: 'small', fontStyle: 'italic' }}>
+              {record.blockNumber?.toString() + '.' + record.transactionIndex?.toString()}
+            </div>
+          </pre>
         );
-        // return (
-        //   <>
-        //     <div>{record.date}</div>
-        //     <br />
-        //     <div>{record.blockNumber?.toString() + '.' + record.transactionIndex?.toString()}</div>
-        //   </>
       },
-      width: 350,
+      width: 250,
     },
   }),
   addColumn({
-    title: 'From',
+    title: 'From / To',
     dataIndex: 'from',
-  }),
-  addColumn({
-    title: 'To',
-    dataIndex: 'to',
+    configuration: {
+      width: 400,
+      render: (value: any, record: Transaction) => {
+        if (!record) return <div></div>;
+        const from = value === record.extraData ? <div style={{ color: 'red' }}>{value}</div> : value;
+        const to = record.to === record.extraData ? <div style={{ color: 'red' }}>{record.to}</div> : record.to;
+        return (
+          <pre>
+            <div>{from}</div>
+            <div>{to}</div>
+          </pre>
+        );
+      },
+    },
   }),
   // addColumn({
   //   title: 'Value',
@@ -138,13 +160,10 @@ export const transactionSchema: ColumnsType<TransactionType> = [
   // }),
   addColumn({
     title: 'Ether',
-    dataIndex: 'statements',
+    dataIndex: 'ether',
     configuration: {
-      render: (statements: any) => {
-        if (statements?.length) {
-          return statements[0].amountNet;
-        }
-        return '0.0';
+      render: (value) => {
+        return value;
       },
     },
   }),

@@ -1,7 +1,7 @@
 import { addActionsColumn, addColumn, BaseTableRows, TableActions } from '@components/Table';
 import { useCommand } from '@hooks/useCommand';
-import { SignatureType } from '@modules/data/signature';
 import { createErrorNotification } from '@modules/error_notification';
+import { Function } from '@modules/types';
 import { ColumnsType } from 'antd/lib/table';
 import React, { useCallback } from 'react';
 
@@ -14,32 +14,32 @@ export const FunctionSignatures = () => {
   }
 
   const getData = useCallback((response) => {
-    return response.status === 'fail' ? [] : response.data.filter((item: SignatureType) => item.type === 'function');
+    return response.status === 'fail' ? [] : response.data.filter((item: Function) => item.type === 'function');
   }, []);
   return <BaseTableRows data={getData(signatures)} columns={signatureSchema} loading={loading} />;
 };
 
-const signatureSchema: ColumnsType<SignatureType> = [
-  addColumn<SignatureType>({
+const signatureSchema: ColumnsType<Function> = [
+  addColumn<Function>({
     title: 'Source',
     dataIndex: 'abi_source',
     configuration: {
       width: 200,
     },
   }),
-  addColumn<SignatureType>({
+  addColumn<Function>({
     title: 'Encoding',
     dataIndex: 'encoding',
   }),
-  addColumn<SignatureType>({
+  addColumn<Function>({
     title: 'Name',
     dataIndex: 'name',
   }),
-  addColumn<SignatureType>({
+  addColumn<Function>({
     title: 'Signature',
     dataIndex: 'signature',
   }),
-  addActionsColumn<SignatureType>(
+  addActionsColumn<Function>(
     {
       title: '',
       dataIndex: '',
@@ -51,6 +51,6 @@ const signatureSchema: ColumnsType<SignatureType> = [
   ),
 ];
 
-function getTableActions(item: SignatureType) {
+function getTableActions(item: Function) {
   return <TableActions item={item} onClick={(action, tableItem) => console.log('Clicked action', action, tableItem)} />;
 }

@@ -8,8 +8,8 @@ import {
   TableActions,
 } from '@components/Table';
 import { useCommand } from '@hooks/useCommand';
-import { MonitorType } from '@modules/data/monitor';
 import { createErrorNotification } from '@modules/error_notification';
+import { Monitor } from '@modules/types';
 import { ColumnsType } from 'antd/lib/table';
 import React, { useCallback } from 'react';
 import { Link } from 'react-router-dom';
@@ -35,8 +35,8 @@ export const Monitors = () => {
   );
 };
 
-const monitorSchema: ColumnsType<MonitorType> = [
-  addColumn<MonitorType>({
+const monitorSchema: ColumnsType<Monitor> = [
+  addColumn<Monitor>({
     title: 'Address',
     dataIndex: 'address',
     configuration: { render: (address: any) => <Link to={DashboardAccountsAddressLocation(address)}>{address}</Link> },
@@ -57,21 +57,21 @@ const monitorSchema: ColumnsType<MonitorType> = [
   ),
   addNumColumn({
     title: 'nAppearances',
-    dataIndex: 'nAppearances',
+    dataIndex: 'nApps',
   }),
   addNumColumn({
     title: 'firstAppearance',
-    dataIndex: 'firstAppearance',
+    dataIndex: 'firstApp',
   }),
   addNumColumn({
     title: 'latestAppearance',
-    dataIndex: 'latestAppearance',
+    dataIndex: 'latestApp',
   }),
   addNumColumn({
     title: 'sizeInBytes',
     dataIndex: 'sizeInBytes',
   }),
-  addActionsColumn<MonitorType>(
+  addActionsColumn<Monitor>(
     {
       title: `<Button>Add</Button>`,
       dataIndex: '',
@@ -86,8 +86,8 @@ const monitorSchema: ColumnsType<MonitorType> = [
   ),
 ];
 
-function getTableActions(item: MonitorType) {
-  const onClick = (action: string, item: MonitorType) => {
+function getTableActions(item: Monitor) {
+  const onClick = (action: string, item: Monitor) => {
     switch (action) {
       case 'remove':
         console.log('Deleting the monitor', item);

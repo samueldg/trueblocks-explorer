@@ -1,12 +1,13 @@
 import { addColumn, addNumColumn, BaseTableRows, TableActions } from '@components/Table';
-import { BlockType } from '@modules/data/block';
 import { createErrorNotification } from '@modules/error_notification';
+import { Block } from '@modules/types';
 import { ColumnsType } from 'antd/lib/table';
+import moment from 'moment';
 import React, { useCallback } from 'react';
 import { useCommand } from '../../../hooks/useCommand';
 
 export const Blocks = () => {
-  const [blocks, loading] = useCommand('blocks', { list: 0, cache: true });
+  const [blocks, loading] = useCommand('blocks', { list: 0, list_count: 20, cache: true });
   if (blocks.status === 'fail') {
     createErrorNotification({
       description: 'Could not fetch blocks',
@@ -17,41 +18,54 @@ export const Blocks = () => {
   return <BaseTableRows data={getData(blocks)} columns={blockListSchema} loading={loading} />;
 };
 
-const blockListSchema: ColumnsType<BlockType> = [
-  addColumn<BlockType>({
+const blockListSchema: ColumnsType<Block> = [
+  addColumn<Block>({
+    title: 'Date',
+    dataIndex: 'timestamp',
+    configuration: {
+      render: (value) => {
+        return (
+          <div>
+            <div>{moment.unix(value).format('YYYY-MM-DD HH:mm:ss')}</div>
+            <div style={{ fontStyle: 'italic' }}>{moment.unix(value).fromNow()}</div>
+          </div>
+        );
+      },
+    },
+  }),
+  addColumn<Block>({
     title: 'Hash',
     dataIndex: 'hash',
+    configuration: {
+      render: (value, record) => {
+        return (
+          <div>
+            <div>{value}</div>
+            <div style={{ fontStyle: 'italic' }}>{Intl.NumberFormat().format(record.blockNumber)}</div>
+          </div>
+        );
+      },
+      width: 650,
+    },
   }),
-  addNumColumn<BlockType>({
-    title: 'Block Number',
-    dataIndex: 'blockNumber',
-  }),
-  addColumn<BlockType>({
-    title: 'Timestamp',
-    dataIndex: 'timestamp',
-  }),
-  addColumn<BlockType>({
-    title: 'Date',
-    dataIndex: 'date',
-  }),
-  addNumColumn<BlockType>({
+  addNumColumn<Block>({
     title: 'nTransactions',
     dataIndex: 'transactionsCnt',
   }),
-  addNumColumn<BlockType>({
+  addNumColumn<Block>({
     title: 'Uncles',
     dataIndex: 'unclesCnt',
   }),
-  addNumColumn<BlockType>({
+  addNumColumn<Block>({
     title: 'Gas Limit',
     dataIndex: 'gasLimit',
   }),
-  addNumColumn<BlockType>({
+  addNumColumn<Block>({
     title: 'Gas Used',
     dataIndex: 'gasUsed',
   }),
 ];
 
-function getTableActions(item: BlockType) {
+function getTableActions(item: Block) {
   return <TableActions item={item} onClick={(action, tableItem) => console.log('Clicked action', action, tableItem)} />;
 }
