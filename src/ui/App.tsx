@@ -8,6 +8,7 @@ import { pipe } from 'fp-ts/lib/function';
 import React, { useEffect, useState } from 'react';
 import { createUseStyles } from 'react-jss';
 import './app.css';
+import { Console } from './components/Console';
 import { MainMenu } from './components/MainMenu';
 import { HelpPanel } from './components/SidePanels/HelpPanel';
 import { PanelDirection, SidePanel } from './components/SidePanels/SidePanel';
@@ -15,7 +16,6 @@ import { StatusPanel } from './components/SidePanels/StatusPanel';
 import { Routes } from './Routes';
 import useGlobalState from './state';
 import { cookieVars } from './utils';
-import { Console } from './components/Console';
 
 const { Header, Footer, Content } = Layout;
 
@@ -55,7 +55,7 @@ export const App = () => {
         <SidePanel
           header='Main menu'
           dir={PanelDirection.Left}
-          name={cookieVars.menu_expanded}
+          cookieName={cookieVars.menu_expanded}
           collapsibleContent={false}>
           <MainMenu />
         </SidePanel>
@@ -69,12 +69,12 @@ export const App = () => {
               }}>
               <Routes />
             </Content>
-            <SidePanel header='Status' name={cookieVars.status_expanded} dir={PanelDirection.Right}>
+            <SidePanel header='Status' cookieName={cookieVars.status_expanded} dir={PanelDirection.Right}>
               <StatusPanel status={status} loading={loadingStatus} />
             </SidePanel>
             <SidePanel
               header='Help'
-              name={cookieVars.help_expanded}
+              cookieName={cookieVars.help_expanded}
               dir={PanelDirection.Right}
               customCollapseIcon={<QuestionCircleFilled className={styles.help_icon} />}
               customExpandIcon={<QuestionCircleFilled className={styles.help_icon} />}>

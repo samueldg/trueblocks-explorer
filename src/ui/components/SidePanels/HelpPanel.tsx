@@ -5,7 +5,7 @@ import { helpRoutes } from './HelpPanelHelp';
 
 export const HelpPanel = () => {
   const location = useLocation();
-  const matchedRoute = helpRoutes.find((item) => item.route === location.pathname);
+  const matchedRoute = helpRoutes.find((item) => location.pathname.endsWith(item.route));
   const url = matchedRoute && new URL('docs/explorer' + matchedRoute.route, 'https://docs.trueblocks.io/');
 
   return (
@@ -27,7 +27,6 @@ export const HelpPanel = () => {
           </div>
         )}
       </div>
-      {/* <span>{JSON.stringify(help, null, 2)}</span> */}
     </Loading>
   );
 };

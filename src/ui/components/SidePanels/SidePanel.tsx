@@ -14,20 +14,28 @@ export type SidePanelProps = {
   customExpandIcon?: ReactNode;
   dir: PanelDirection;
   header: ReactNode;
-  name: string;
+  cookieName: string;
 };
 
 export const SidePanel = (props: SidePanelProps) => {
-  const { children, collapsibleContent, customCollapseIcon, customExpandIcon, dir, header, name } = props;
-  const [expanded, setExpanded] = useState(Cookies.get(name) === 'true');
+  const { children, collapsibleContent, customCollapseIcon, customExpandIcon, dir, header, cookieName } = props;
+  const [expanded, setExpanded] = useState(Cookies.get(cookieName) === 'true');
 
   const onToggle = (expanded: boolean) => {
-    Cookies.set(name, expanded ? 'true' : 'false');
+    Cookies.set(cookieName, expanded ? 'true' : 'false');
     setExpanded(expanded ? true : false);
   };
 
   return (
-    <Sider style={{ overflowY: 'scroll' }} theme='light' collapsed={!expanded}>
+    <Sider
+      collapsedWidth={40}
+      style={{
+        margin: '1px',
+        overflowX: 'hidden',
+        overflowY: expanded ? 'scroll' : 'hidden',
+      }}
+      theme='light'
+      collapsed={!expanded}>
       <Panel
         header={header}
         dir={dir}
