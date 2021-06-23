@@ -131,7 +131,7 @@ export const BaseTableRows = ({
             setExpandedRowKeys(expandedRowKeys);
           },
           expandedRowKeys: expandedRowKeys,
-          expandedRowRender: (rowset) => <div>{JSON.stringify(rowset, null, 2)}</div>,
+          expandedRowRender: (rowset) => <pre>{JSON.stringify(rowset, null, 2)}</pre>,
         }}
       />
       {debug ? <pre>records: {JSON.stringify(data?.length)}</pre> : <></>}

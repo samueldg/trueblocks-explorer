@@ -1,3 +1,4 @@
+import React from 'react';
 import {
   AccountEventsLocation,
   AccountFunctionsLocation,
@@ -77,7 +78,18 @@ export const helpRoutes = [
   },
   {
     route: DashboardIndexesLocation,
-    helpText: 'View the contents of the TrueBlocks index cache.',
+    helpText: (
+      <div>
+        <p>View the contents of the TrueBlocks index cache.</p>
+        <p>
+          For more information on the process of extracting the index,
+          <a target='_blank' href='https://github.com/TrueBlocks/trueblocks-docs/issues/12'>
+            see here
+          </a>
+          .
+        </p>
+      </div>
+    ),
   },
   {
     route: IndexChartsLocation,

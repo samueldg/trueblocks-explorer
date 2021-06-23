@@ -2,6 +2,7 @@ import { address, blknum, date, double, gas, hash, timestamp, TransactionArray, 
 
 export declare type Block = {
   blockNumber: blknum;
+  unclesCnt: uint64;
   difficulty: uint64;
   finalized: boolean;
   gasLimit: gas;
@@ -16,5 +17,6 @@ export declare type Block = {
   timestamp: timestamp;
   transactions: TransactionArray;
   tx_hashes: string[];
+  extraData: string;
 };
 export declare type BlockArray = Block[];

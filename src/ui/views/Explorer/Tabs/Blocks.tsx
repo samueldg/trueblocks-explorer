@@ -45,38 +45,44 @@ const blockListSchema: ColumnsType<Block> = [
           </div>
         );
       },
-      width: 650,
+      width: 620,
     },
   }),
   addColumn<Block>({
     title: 'Miner',
     dataIndex: 'miner',
     configuration: {
+      render: (value, record) => {
+        return (
+          <div>
+            <div>{value}</div>
+            <div style={{ fontStyle: 'italic' }}>
+              {record.unclesCnt === null || record.unclesCnt === 0 ? '' : record.unclesCnt + ' uncle'}
+            </div>
+          </div>
+        );
+      },
       width: 400,
     },
   }),
   addNumColumn<Block>({
     title: 'Difficulty',
     dataIndex: 'difficulty',
-  }),
-  addNumColumn<Block>({
-    title: 'nTransactions',
-    dataIndex: 'transactionsCnt',
-  }),
-  addNumColumn<Block>({
-    title: 'Uncles',
-    dataIndex: 'unclesCnt',
     configuration: {
-      render: (value) => (value === null || value === 0 ? '' : value),
+      width: 180,
     },
+  }),
+  addNumColumn<Block>({
+    title: 'Gas Used',
+    dataIndex: 'gasUsed',
   }),
   addNumColumn<Block>({
     title: 'Gas Limit',
     dataIndex: 'gasLimit',
   }),
   addNumColumn<Block>({
-    title: 'Gas Used',
-    dataIndex: 'gasUsed',
+    title: 'nTransactions',
+    dataIndex: 'transactionsCnt',
   }),
 ];
 
