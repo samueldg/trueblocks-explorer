@@ -8,10 +8,10 @@ import {
 } from '@components/Table';
 import { useCommand } from '@hooks/useCommand';
 import { createErrorNotification } from '@modules/error_notification';
+import { renderNamedAddress } from '@modules/renderers';
 import { Monitor } from '@modules/types';
 import { ColumnsType } from 'antd/lib/table';
 import React, { useCallback } from 'react';
-import { Link } from 'react-router-dom';
 import { DashboardAccountsAddressLocation } from '../../../locations';
 
 export const Monitors = () => {
@@ -37,11 +37,10 @@ const monitorSchema: ColumnsType<Monitor> = [
   addColumn<Monitor>({
     title: 'Address',
     dataIndex: 'address',
-    configuration: { render: (address: any) => <Link to={DashboardAccountsAddressLocation(address)}>{address}</Link> },
-  }),
-  addColumn({
-    title: 'Name',
-    dataIndex: 'name',
+    configuration: {
+      render: (unused, record) => renderNamedAddress(record, DashboardAccountsAddressLocation(record.address)),
+      width: 500,
+    },
   }),
   addTagsColumn(
     {

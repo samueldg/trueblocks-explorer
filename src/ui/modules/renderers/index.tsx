@@ -1,0 +1,1 @@
+export { renderNamedAddress } from './renderNamedAddress';

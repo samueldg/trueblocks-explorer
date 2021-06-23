@@ -9,10 +9,12 @@ import {
 } from '@components/Table';
 import { useCommand } from '@hooks/useCommand';
 import { createErrorNotification } from '@modules/error_notification';
+import { renderNamedAddress } from '@modules/renderers';
 import { Name } from '@modules/types';
 import { Button, Input, Space } from 'antd';
 import { ColumnsType } from 'antd/lib/table';
 import React, { useCallback, useRef, useState } from 'react';
+import { DashboardAccountsAddressLocation } from '../../../locations';
 import './Addresses.css';
 
 export const Addresses = () => {
@@ -26,7 +28,17 @@ export const Addresses = () => {
     });
   }
 
-  const getData = useCallback((response) => (response.status === 'fail' ? [] : response.data), []);
+  const getData = useCallback((response) => {
+    if (response.status === 'fail') return [];
+
+    return response.data?.map((item: any, i: number) => {
+      return {
+        id: (i + 1).toString(),
+        nameaddr: item.name + ' ' + item.address,
+        ...item,
+      };
+    });
+  }, []);
 
   const getColumnSearchProps = (dataIndex: any) => ({
     filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }: any) => (
@@ -102,12 +114,12 @@ export const Addresses = () => {
 
 const addressSchema: ColumnsType<Name> = [
   addColumn<Name>({
-    title: 'Address',
-    dataIndex: 'address',
-  }),
-  addColumn({
-    title: 'Name',
-    dataIndex: 'name',
+    title: 'Name / Address',
+    dataIndex: 'nameaddr',
+    configuration: {
+      render: (unused, record) => renderNamedAddress(record, DashboardAccountsAddressLocation(record.address)),
+      width: 500,
+    },
   }),
   addColumn({
     title: 'Symbol',
