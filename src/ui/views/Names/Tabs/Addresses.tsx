@@ -19,9 +19,9 @@ import './Addresses.css';
 
 export const Addresses = () => {
   const [searchText, setSearchText] = useState('');
-  const [searchedColumn, setSearchedColumn] = useState('');
+  const [_, setSearchedColumn] = useState('');
   const searchInputRef = useRef(null);
-  const [addresses, loading] = useCommand('names', { expand: true });
+  const [addresses, loading] = useCommand('names', { expand: true, all: true });
   if (addresses.status === 'fail') {
     createErrorNotification({
       description: 'Could not fetch addresses',
@@ -30,7 +30,6 @@ export const Addresses = () => {
 
   const getData = useCallback((response) => {
     if (response.status === 'fail') return [];
-
     return response.data?.map((item: any, i: number) => {
       return {
         id: (i + 1).toString(),
@@ -162,6 +161,10 @@ const addressSchema: ColumnsType<Name> = [
   addFlagColumn({
     title: 'Contract',
     dataIndex: 'is_contract',
+  }),
+  addFlagColumn({
+    title: 'Custom',
+    dataIndex: 'is_custom',
   }),
   addFlagColumn({
     title: 'Monitor',

@@ -9,24 +9,24 @@ import { pipe } from 'fp-ts/lib/function';
 import React, { useCallback, useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import {
-  AccountReconciliationsLocation,
   AccountEventsLocation,
   AccountFunctionsLocation,
+  AccountReconciliationsLocation,
   AccountTransactionsLocation,
   DashboardAccountsLocation,
 } from '../../../../locations';
 import { cookieVars } from '../../../../utils';
 import { AccountEvents } from './Tabs/Events';
 import { AccountFunctions } from './Tabs/Functions';
-import { AccountTransactions } from './Tabs/Transactions';
 import { AccountReconciliations } from './Tabs/Reconciliations';
+import { AccountTransactions } from './Tabs/Transactions';
 
 export const AccountsView = () => {
-  const [articulate, setArticulate] = useState(false);
-  const [accounting, setAccounting] = useState(false);
+  const [articulate, setArticulate] = useState(true);
+  const [accounting, setAccounting] = useState(true);
   const [reversed, setReversed] = useState(false);
-  const [max_records, setMaxRecords] = useState(200);
-  const [tokens, setTokens] = useState(true);
+  const [max_records, setMaxRecords] = useState(3000);
+  const [tokens, setTokens] = useState(false);
   const [denom, setDenom] = useState('ether');
   const [currentAddress, setCurrentAddress] = useState('');
   const emptyData = { data: [{}], meta: {} };

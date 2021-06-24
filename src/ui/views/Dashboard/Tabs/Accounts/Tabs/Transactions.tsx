@@ -1,3 +1,4 @@
+import { CheckCircleFilled, CloseCircleFilled } from '@ant-design/icons';
 import { addColumn, addFlagColumn, BaseTableRows } from '@components/Table';
 import { Transaction } from '@modules/types';
 import { ColumnsType } from 'antd/lib/table';
@@ -144,9 +145,26 @@ export const transactionSchema: ColumnsType<Transaction> = [
     title: 'Reconciled',
     dataIndex: 'statements',
     configuration: {
-      render: (statements: any) => {
-        if (statements?.length) return statements?.length + '-' + (statements[0].reconciled ? 'true' : 'false');
-        return 'false';
+      render: (statements: any, record: any) => {
+        if (statements?.length)
+          return statements[0].reconciled ? (
+            <CheckCircleFilled style={{ color: 'green' }} />
+          ) : (
+            <CloseCircleFilled style={{ color: 'red' }} />
+            // <div>
+            //   <CloseCircleFilled style={{ color: 'red' }} />
+            //   {record.id === '1' ? (
+            //     <div>
+            //       counter
+            //       <br />
+            //       factual?
+            //     </div>
+            //   ) : (
+            //     <></>
+            //   )}
+            // </div>
+          );
+        return <></>;
       },
     },
   }),
