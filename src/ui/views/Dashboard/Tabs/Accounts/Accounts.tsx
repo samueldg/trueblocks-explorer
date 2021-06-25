@@ -26,7 +26,6 @@ export const AccountsView = () => {
   const [accounting, setAccounting] = useState(true);
   const [reversed, setReversed] = useState(false);
   const [max_records, setMaxRecords] = useState(10);
-  const [tokens, setTokens] = useState(true);
   const [denom, setDenom] = useState('ether');
   const [currentAddress, setCurrentAddress] = useState('');
   const emptyData = { data: [{}], meta: {} };
@@ -63,7 +62,6 @@ export const AccountsView = () => {
           reversed: reversed,
           max_records: max_records,
           first_record: 100,
-          tokens: tokens,
         });
         const result: Result = pipe(
           eitherResponse,
@@ -73,7 +71,7 @@ export const AccountsView = () => {
         setLoading(false);
       }
     })();
-  }, [currentAddress, denom, articulate, accounting, reversed, max_records, tokens]);
+  }, [currentAddress, denom, articulate, accounting, reversed, max_records]);
 
   if (transactions.status === 'fail') {
     createErrorNotification({
@@ -110,7 +108,6 @@ export const AccountsView = () => {
   const onAccounting = () => setAccounting(!accounting);
   const onReversed = () => setReversed(!reversed);
   const onMaxRecords = () => setMaxRecords(max_records > 200 ? 200 : 5000);
-  const onTokens = () => setTokens(!tokens);
   const onEther = () => {
     setAccounting(true);
     denom === 'ether' ? setDenom('') : setDenom('ether');
@@ -124,9 +121,6 @@ export const AccountsView = () => {
     <div>
       <Checkbox checked={max_records > 200} onChange={(event) => onMaxRecords()}>
         max_records
-      </Checkbox>
-      <Checkbox checked={tokens} onChange={(event) => onTokens()}>
-        tokens
       </Checkbox>
       <Checkbox checked={reversed} onChange={(event) => onReversed()}>
         reversed
