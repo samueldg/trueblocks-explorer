@@ -1,6 +1,11 @@
-import { address, uint64 } from '@modules/types';
+import { address, blknum, uint64 } from '@modules/types';
 
 export declare type Monitor = {
+  nApps: blknum;
+  firstApp: blknum;
+  latestApp: blknum;
+  path: string;
+  sizeInBytes: uint64;
   address: address;
   decimals: uint64;
   deleted: boolean;

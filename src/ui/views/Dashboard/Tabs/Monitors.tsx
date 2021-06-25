@@ -52,9 +52,15 @@ const monitorSchema: ColumnsType<Monitor> = [
     },
     (tag: string) => console.log('tag click', tag)
   ),
-  addNumColumn({
+  addNumColumn<Monitor>({
     title: 'nAppearances',
     dataIndex: 'nApps',
+    configuration: {
+      sorter: {
+        compare: (a, b) => a.nApps - b.nApps,
+        multiple: 1,
+      },
+    },
   }),
   addNumColumn({
     title: 'firstAppearance',

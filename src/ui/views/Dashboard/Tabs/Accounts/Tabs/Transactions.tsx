@@ -108,7 +108,7 @@ export const transactionSchema: ColumnsType<Transaction> = [
     },
   }),
   addColumn({
-    title: 'Reconciliations (asset, beg, out, gasOut, in, end, check)',
+    title: 'Reconciliations (asset, beg, in, out, gasOut, end, check)',
     dataIndex: 'compressedTx',
     configuration: {
       render: (item, record) => {
@@ -117,8 +117,7 @@ export const transactionSchema: ColumnsType<Transaction> = [
             <div style={{ fontSize: '12pt', fontWeight: 600, backgroundColor: 'indianred', color: 'yellow' }}>
               {item}
             </div>
-            <div>{renderStatements(record.statements, 'ETH')}</div>
-            <div>{renderStatements(record.statements, '')}</div>
+            <div>{renderStatements(record.statements)}</div>
           </div>
         );
       },
@@ -143,7 +142,7 @@ export const transactionSchema: ColumnsType<Transaction> = [
   // }),
 ];
 
-export const renderStatements = (statements: ReconciliationArray, asset: string) => {
+export const renderStatements = (statements: ReconciliationArray) => {
   const styles = useStyles();
   if (statements === null) return <></>;
   return (
@@ -151,9 +150,6 @@ export const renderStatements = (statements: ReconciliationArray, asset: string)
       <tbody>
         {statements?.map((statement) => {
           let show = true;
-          if (statement.asset === 'ETH') show = asset === 'ETH' ? true : false;
-          else show = asset === 'ETH' ? false : true;
-          if (!show) return <></>;
           return (
             <Statement
               key={statement.blockNumber * 100000 + statement.transactionIndex + statement.asset}
@@ -184,14 +180,14 @@ const Statement = ({ statement }: { statement: Reconciliation }) => {
       <td key={2} className={styles.col} style={{ width: '17%' }}>
         {clip(statement.begBal)}
       </td>
+      <td key={5} className={styles.col} style={{ width: '17%' }}>
+        {clip(statement.amountIn)}
+      </td>
       <td key={3} className={styles.col} style={{ width: '17%' }}>
         {clip(statement.amountOut)}
       </td>
       <td key={4} className={styles.col} style={{ width: '17%' }}>
-        {clip(statement.gasCostOut)}
-      </td>
-      <td key={5} className={styles.col} style={{ width: '17%' }}>
-        {clip(statement.amountIn)}
+        {clip(statement.gasCostOut, true)}
       </td>
       <td key={6} className={styles.col} style={{ width: '17%' }}>
         {clip(statement.endBal)}
@@ -203,11 +199,31 @@ const Statement = ({ statement }: { statement: Reconciliation }) => {
   );
 };
 
-const clip = (num: string) => {
+const clip = (num: string, is_gas?: boolean) => {
   const parts = num.split('.');
-  if (parts.length === 0 || parts[0] === '') return <div style={{ color: 'lightgrey' }}>{'0.0000000'}</div>;
-  if (parts.length === 1) return parts[0] + '.0000000';
-  return parts[0] + '.' + parts[1].substr(0, 7);
+  if (parts.length === 0 || parts[0] === '')
+    return (
+      <div style={{ color: 'lightgrey' }}>
+        {'0.0000000'}
+        {is_gas ? 'g' : ''}
+      </div>
+    );
+  if (parts.length === 1)
+    return (
+      parts[0] +
+      (
+        <div>
+          {'.0000000'}
+          {is_gas ? 'g' : ''}
+        </div>
+      )
+    );
+  return (
+    <div>
+      {parts[0] + '.' + parts[1].substr(0, 7)}
+      {is_gas ? 'g' : ''}
+    </div>
+  );
 };
 
 const useStyles = createUseStyles({
