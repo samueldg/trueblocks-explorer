@@ -25,8 +25,8 @@ export const AccountsView = () => {
   const [articulate, setArticulate] = useState(true);
   const [accounting, setAccounting] = useState(true);
   const [reversed, setReversed] = useState(false);
-  const [max_records, setMaxRecords] = useState(3000);
-  const [tokens, setTokens] = useState(false);
+  const [max_records, setMaxRecords] = useState(10);
+  const [tokens, setTokens] = useState(true);
   const [denom, setDenom] = useState('ether');
   const [currentAddress, setCurrentAddress] = useState('');
   const emptyData = { data: [{}], meta: {} };
@@ -61,8 +61,8 @@ export const AccountsView = () => {
           articulate: articulate,
           accounting: accounting,
           reversed: reversed,
-          // first_record: 0,
           max_records: max_records,
+          first_record: 100,
           tokens: tokens,
         });
         const result: Result = pipe(

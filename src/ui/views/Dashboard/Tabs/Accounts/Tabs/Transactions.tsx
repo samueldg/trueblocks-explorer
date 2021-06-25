@@ -1,8 +1,10 @@
 import { CheckCircleFilled, CloseCircleFilled } from '@ant-design/icons';
 import { addColumn, addFlagColumn, BaseTableRows } from '@components/Table';
-import { Transaction } from '@modules/types';
+import { Reconciliation, ReconciliationArray, Transaction } from '@modules/types';
 import { ColumnsType } from 'antd/lib/table';
 import React from 'react';
+import { createUseStyles } from 'react-jss';
+import style from 'react-syntax-highlighter/dist/esm/styles/hljs/a11y-dark';
 
 export const AccountTransactions = ({
   data,
@@ -91,22 +93,6 @@ export const transactionSchema: ColumnsType<Transaction> = [
       },
     },
   }),
-  // addColumn({
-  //   title: 'Value',
-  //   dataIndex: 'value',
-  // }),
-  // addColumn({
-  //   title: 'Gas',
-  //   dataIndex: 'gas',
-  // }),
-  // addColumn({
-  //   title: 'Gas Price',
-  //   dataIndex: 'gasPrice',
-  // }),
-  // addColumn({
-  //   title: 'Input',
-  //   dataIndex: 'input',
-  // }),
   addFlagColumn({
     title: 'Err',
     dataIndex: 'isError',
@@ -121,131 +107,114 @@ export const transactionSchema: ColumnsType<Transaction> = [
       width: 50,
     },
   }),
-  // addColumn({
-  //   title: 'Receipt',
-  //   dataIndex: 'receipt',
-  // }),
-  // addColumn({
-  //   title: 'Traces',
-  //   dataIndex: 'traces',
-  // }),
-  // addColumn({
-  //   title: 'Articulated Tx',
-  //   dataIndex: 'articulatedTx',
-  //   configuration: {
-  //     width: 400,
-  //     render: (obj: any) => <pre>{JSON.stringify(obj, null, 2)}</pre>
-  //   }
-  // }),
   addColumn({
-    title: 'Function Call',
-    dataIndex: 'function',
+    title: 'Reconciliations (asset, beg, out, gasOut, in, end, check)',
+    dataIndex: 'compressedTx',
+    configuration: {
+      render: (item, record) => {
+        return (
+          <div style={{ border: '1px solid brown' }}>
+            <div style={{ fontSize: '12pt', fontWeight: 600, backgroundColor: 'indianred', color: 'yellow' }}>
+              {item}
+            </div>
+            <div>{renderStatements(record.statements, 'ETH')}</div>
+            <div>{renderStatements(record.statements, '')}</div>
+          </div>
+        );
+      },
+      width: 900,
+    },
   }),
   addColumn({
-    title: 'Reconciled',
+    title: '',
     dataIndex: 'statements',
     configuration: {
-      render: (statements: any, record: any) => {
-        if (statements?.length)
-          return statements[0].reconciled ? (
-            <CheckCircleFilled style={{ color: 'green' }} />
-          ) : (
-            <CloseCircleFilled style={{ color: 'red' }} />
-            // <div>
-            //   <CloseCircleFilled style={{ color: 'red' }} />
-            //   {record.id === '1' ? (
-            //     <div>
-            //       counter
-            //       <br />
-            //       factual?
-            //     </div>
-            //   ) : (
-            //     <></>
-            //   )}
-            // </div>
-          );
-        return <></>;
-      },
+      render: (item) => '',
+      width: 300,
     },
   }),
   // addColumn({
-  //   title: 'Statements',
+  //   title: 'Token Reconciliations (asset, beg, out, gasOut, in, end, check)',
   //   dataIndex: 'statements',
-  // }),
-  // addColumn({
-  //   title: 'Gas Cost',
-  //   dataIndex: 'gasCost',
-  // }),
-  addColumn({
-    title: 'Ether',
-    dataIndex: 'ether',
-    configuration: {
-      render: (value) => {
-        return value;
-      },
-    },
-  }),
-  /*
-    blknum_t blockNumber;
-    blknum_t transactionIndex;
-    timestamp_t timestamp;
-    string_q asset;
-    uint64_t decimals;
-    bigint_t begBal;
-    bigint_t begBalDiff;
-    bigint_t amountIn;
-    bigint_t amountOut;
-    bigint_t internalIn;
-    bigint_t internalOut;
-    bigint_t selfDestructIn;
-    bigint_t selfDestructOut;
-    bigint_t minerBaseRewardIn;
-    bigint_t minerNephewRewardIn;
-    bigint_t minerTxFeeIn;
-    bigint_t minerUncleRewardIn;
-    bigint_t prefundIn;
-    bigint_t gasCostOut;
-    bigint_t endBal;
-    bigint_t endBalCalc;
-    bigint_t endBalDiff;
-    bigint_t amountNet;
-    string_q reconciliationType;
-    bool reconciled;
-  */
-  addColumn({
-    title: 'Gas Cost',
-    dataIndex: 'statements',
-    configuration: {
-      render: (statements: any) => {
-        if (statements?.length) {
-          return statements[0].gasCostOut;
-        }
-        return '0.0';
-      },
-    },
-  }),
-  addColumn({
-    title: 'Statement',
-    dataIndex: 'statements',
-    configuration: {
-      render: (statements: any) => {
-        if (statements?.length) {
-          return statements[0].endBal;
-        }
-        return '0.0';
-      },
-    },
-  }),
-  // addColumn({
-  //   title: 'Function',
-  //   dataIndex: 'function',
-  // }),
-  // addColumn({
-  //   title: 'Gas Used',
-  //   dataIndex: 'gasUsed',
-  // }),
-  // addColumn({
-  //   title: 'Encoding',
-  //   dataIndex: 'encoding',
+  //   configuration: {
+  //     render: (statements) => renderStatements(statements, ''),
+  //     width: 750,
+  //   },
   // }),
 ];
+
+export const renderStatements = (statements: ReconciliationArray, asset: string) => {
+  const styles = useStyles();
+  if (statements === null) return <></>;
+  return (
+    <table className={style.table}>
+      <tbody>
+        {statements?.map((statement) => {
+          let show = true;
+          if (statement.asset === 'ETH') show = asset === 'ETH' ? true : false;
+          else show = asset === 'ETH' ? false : true;
+          if (!show) return <></>;
+          return (
+            <Statement
+              key={statement.blockNumber * 100000 + statement.transactionIndex + statement.asset}
+              statement={statement}
+            />
+          );
+        })}
+      </tbody>
+    </table>
+  );
+};
+
+const ReconIcon = ({ reconciled }: { reconciled: boolean }) => {
+  return (
+    <div>
+      {reconciled ? <CheckCircleFilled style={{ color: 'green' }} /> : <CloseCircleFilled style={{ color: 'red' }} />}
+    </div>
+  );
+};
+
+const Statement = ({ statement }: { statement: Reconciliation }) => {
+  const styles = useStyles();
+  return (
+    <tr className={styles.row} key={statement.asset}>
+      <td key={1} className={styles.col} style={{ width: '12%' }}>
+        {statement.asset.slice(0, 5)}
+      </td>
+      <td key={2} className={styles.col} style={{ width: '17%' }}>
+        {clip(statement.begBal)}
+      </td>
+      <td key={3} className={styles.col} style={{ width: '17%' }}>
+        {clip(statement.amountOut)}
+      </td>
+      <td key={4} className={styles.col} style={{ width: '17%' }}>
+        {clip(statement.gasCostOut)}
+      </td>
+      <td key={5} className={styles.col} style={{ width: '17%' }}>
+        {clip(statement.amountIn)}
+      </td>
+      <td key={6} className={styles.col} style={{ width: '17%' }}>
+        {clip(statement.endBal)}
+      </td>
+      <td key={7} className={styles.col} style={{ width: '4%' }}>
+        <ReconIcon reconciled={statement.reconciled} />
+      </td>
+    </tr>
+  );
+};
+
+const clip = (num: string) => {
+  const parts = num.split('.');
+  if (parts.length === 0 || parts[0] === '') return <div style={{ color: 'lightgrey' }}>{'0.0000000'}</div>;
+  if (parts.length === 1) return parts[0] + '.0000000';
+  return parts[0] + '.' + parts[1].substr(0, 7);
+};
+
+const useStyles = createUseStyles({
+  table: {},
+  row: {},
+  col: {
+    textAlign: 'right',
+    backgroundColor: '#fff7e6',
+  },
+});
