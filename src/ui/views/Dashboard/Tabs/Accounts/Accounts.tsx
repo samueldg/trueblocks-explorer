@@ -24,6 +24,7 @@ import { AccountTransactions } from './Tabs/Transactions';
 export const AccountsView = () => {
   const [articulate, setArticulate] = useState(true);
   const [accounting, setAccounting] = useState(true);
+  const [staging, setStaging] = useState(false);
   const [reversed, setReversed] = useState(false);
   const [max_records, setMaxRecords] = useState(10);
   const [denom, setDenom] = useState('ether');
@@ -53,7 +54,7 @@ export const AccountsView = () => {
           fmt: 'json',
           cache_txs: true,
           cache_traces: true,
-          // staging: true,
+          staging: staging,
           // unripe: true,
           ether: denom === 'ether',
           dollars: denom === 'dollars',
@@ -61,7 +62,7 @@ export const AccountsView = () => {
           accounting: accounting,
           reversed: reversed,
           max_records: max_records,
-          first_record: 100,
+          first_record: 0,
         });
         const result: Result = pipe(
           eitherResponse,
@@ -71,7 +72,7 @@ export const AccountsView = () => {
         setLoading(false);
       }
     })();
-  }, [currentAddress, denom, articulate, accounting, reversed, max_records]);
+  }, [currentAddress, denom, articulate, accounting, staging, reversed, max_records]);
 
   if (transactions.status === 'fail') {
     createErrorNotification({
@@ -106,6 +107,7 @@ export const AccountsView = () => {
 
   const onArticulate = () => setArticulate(!articulate);
   const onAccounting = () => setAccounting(!accounting);
+  const onStaging = () => setStaging(!staging);
   const onReversed = () => setReversed(!reversed);
   const onMaxRecords = () => setMaxRecords(max_records > 200 ? 200 : 5000);
   const onEther = () => {
@@ -130,6 +132,9 @@ export const AccountsView = () => {
       </Checkbox>
       <Checkbox checked={accounting} onChange={(event) => onAccounting()}>
         accounting
+      </Checkbox>
+      <Checkbox checked={staging} onChange={(event) => onStaging()}>
+        staging
       </Checkbox>
       <Checkbox checked={denom === 'ether'} onChange={(event) => onEther()}>
         ether

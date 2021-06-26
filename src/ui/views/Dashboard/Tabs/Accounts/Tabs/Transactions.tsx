@@ -2,6 +2,7 @@ import { CheckCircleFilled, CloseCircleFilled } from '@ant-design/icons';
 import { addColumn, addFlagColumn, BaseTableRows } from '@components/Table';
 import { Reconciliation, ReconciliationArray, Transaction } from '@modules/types';
 import { ColumnsType } from 'antd/lib/table';
+import moment from 'moment';
 import React from 'react';
 import { createUseStyles } from 'react-jss';
 import style from 'react-syntax-highlighter/dist/esm/styles/hljs/a11y-dark';
@@ -66,6 +67,7 @@ export const transactionSchema: ColumnsType<Transaction> = [
         return (
           <pre>
             <div>{record.date}</div>
+            <div>{moment.unix(record.timestamp).fromNow()}</div>
             <div style={{ fontSize: 'small', fontStyle: 'italic' }}>
               {record.blockNumber?.toString() + '.' + record.transactionIndex?.toString()}
             </div>
@@ -170,8 +172,27 @@ const ReconIcon = ({ reconciled }: { reconciled: boolean }) => {
   );
 };
 
+function totalIn1(st: Reconciliation) {
+  return (
+    Number(st['amountIn']) +
+    Number(st['internalIn']) +
+    Number(st['selfDestructIn']) +
+    Number(st['minerBaseRewardIn']) +
+    Number(st['minerNephewRewardIn']) +
+    Number(st['minerTxFeeIn']) +
+    Number(st['minerUncleRewardIn']) +
+    Number(st['prefundIn'])
+  );
+}
+
+//----------------------------------------------------------------------------
+function totalOut1(st: Reconciliation) {
+  return Number(st['amountOut']) + Number(st['internalOut']) + Number(st['selfDestructOut']) + Number(st['gasCostOut']);
+}
+
 const Statement = ({ statement }: { statement: Reconciliation }) => {
   const styles = useStyles();
+
   return (
     <tr className={styles.row} key={statement.asset}>
       <td key={1} className={styles.col} style={{ width: '12%' }}>
@@ -181,10 +202,10 @@ const Statement = ({ statement }: { statement: Reconciliation }) => {
         {clip(statement.begBal)}
       </td>
       <td key={5} className={styles.col} style={{ width: '17%' }}>
-        {clip(statement.amountIn)}
+        {totalIn1(statement)}
       </td>
       <td key={3} className={styles.col} style={{ width: '17%' }}>
-        {clip(statement.amountOut)}
+        {totalOut1(statement)}
       </td>
       <td key={4} className={styles.col} style={{ width: '17%' }}>
         {clip(statement.gasCostOut, true)}
