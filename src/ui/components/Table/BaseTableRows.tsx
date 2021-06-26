@@ -15,11 +15,13 @@ export const BaseTableRows = ({
   columns,
   loading,
   extraData,
+  expandRender,
 }: {
   data: JsonResponse;
   columns: ColumnsType<any>;
   loading: boolean;
   extraData?: string;
+  expandRender?: (record: any) => JSX.Element;
 }) => {
   const { debug } = useGlobalState();
   const [expandedRowKeys, setExpandedRowKeys] = useState<readonly React.ReactText[]>([]);
@@ -101,6 +103,8 @@ export const BaseTableRows = ({
     }
   }, [currentPage]);
 
+  const expandRenderer = expandRender ? expandRender : (rowset: any) => <pre>{JSON.stringify(rowset, null, 2)}</pre>;
+
   return (
     <div onFocus={handleOnFocus} onBlur={handleOnBlur}>
       <Table<any>
@@ -111,6 +115,7 @@ export const BaseTableRows = ({
         loading={loading}
         pagination={{
           current: currentPage,
+          pageSizeOptions: ['5', '10', '20', '50', '100'],
           pageSize: pageSize,
           onChange: (page, newPageSize) => {
             setCurrentPage(page);
@@ -131,7 +136,7 @@ export const BaseTableRows = ({
             setExpandedRowKeys(expandedRowKeys);
           },
           expandedRowKeys: expandedRowKeys,
-          expandedRowRender: (rowset) => <pre>{JSON.stringify(rowset, null, 2)}</pre>,
+          expandedRowRender: expandRenderer,
         }}
       />
       {debug ? <pre>records: {JSON.stringify(data?.length)}</pre> : <></>}

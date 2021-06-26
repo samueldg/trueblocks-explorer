@@ -11,9 +11,9 @@ export const AccountTransactionsLocationAddress = (address: string) => `/dashboa
 export const AccountFunctionsLocation = '/dashboard/accounts/functions';
 export const AccountFunctionsLocationAddressTemplate = '/dashboard/accounts/functions/:address';
 export const AccountFunctionsLocationAddress = (address: string) => `/dashboard/accounts/functions/${address}`;
-export const AccountEventsLocation = '/dashboard/accounts/events';
-export const AccountEventsLocationAddressTemplate = '/dashboard/accounts/events/address';
-export const AccountEventsLocationAddress = (address: string) => `/dashboard/accounts/events/${address}`;
+export const AccountNeighborsLocation = '/dashboard/accounts/neighbors';
+export const AccountNeighborsLocationAddressTemplate = '/dashboard/accounts/neighbors/address';
+export const AccountNeighborsLocationAddress = (address: string) => `/dashboard/accounts/neighbors/${address}`;
 export const AccountReconciliationsLocation = '/dashboard/accounts/reconciliations';
 export const AccountReconciliationsLocationAddressTemplate = '/dashboard/accounts/reconciliations/address';
 export const AccountReconciliationsLocationAddress = (address: string) =>

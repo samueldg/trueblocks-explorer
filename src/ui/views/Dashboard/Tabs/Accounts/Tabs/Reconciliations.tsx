@@ -4,10 +4,10 @@ import { ColumnsType } from 'antd/lib/table';
 import React from 'react';
 
 export const AccountReconciliations = ({ data, columns, loading }: { data: any; columns?: any; loading: boolean }) => {
-  return <BaseTableRows data={data} columns={columns ? columns : eventSchema} loading={loading} />;
+  return <BaseTableRows data={data} columns={columns ? columns : neighborSchema} loading={loading} />;
 };
 
-export const eventSchema: ColumnsType<Transaction> = [
+export const neighborSchema: ColumnsType<Transaction> = [
   addNumColumn({
     title: 'Block Number',
     dataIndex: 'blockNumber',

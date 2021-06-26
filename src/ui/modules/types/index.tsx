@@ -12,6 +12,7 @@ export declare type int64 = number;
 export declare type double = number;
 export { Block, BlockArray } from '@modules/types/Block';
 export { Function, FunctionArray } from '@modules/types/Function';
+export { Log, LogArray } from '@modules/types/Log';
 export { Monitor, MonitorArray } from '@modules/types/Monitor';
 export { Name, NameArray } from '@modules/types/Name';
 export { Receipt, ReceiptArray } from '@modules/types/Receipt';

@@ -1,10 +1,11 @@
-import { blknum, int256, timestamp, uint64 } from '@modules/types';
+import { address, blknum, int256, timestamp, uint64 } from '@modules/types';
 
 export declare type Reconciliation = {
   blockNumber: blknum;
   transactionIndex: blknum;
   timestamp: timestamp;
-  asset: string;
+  assetAddr: address;
+  assetSymbol: string;
   decimals: uint64;
   begBal: int256;
   begBalDiff: int256;
