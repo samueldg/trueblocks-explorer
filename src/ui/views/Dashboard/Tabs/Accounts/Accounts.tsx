@@ -135,8 +135,8 @@ export const AccountsView = () => {
           <b>
             Summary for
             <br />
-            {'...' +
-              currentAddress.slice(0, 6) +
+            <div style={{ width: '40px' }}> </div>
+            {currentAddress.slice(0, 6) +
               '...' +
               currentAddress.slice(currentAddress.length - 5, currentAddress.length - 1)}
           </b>

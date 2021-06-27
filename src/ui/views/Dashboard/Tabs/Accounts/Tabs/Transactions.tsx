@@ -21,7 +21,7 @@ export const AccountTransactions = ({ record }: any) => {
     },
     { name: 'Functions / Events', location: AccountFunctionsLocation, component: <AccountFunctions record={record} /> },
     {
-      name: 'Gas',
+      name: 'Gas Accounting',
       location: AccountGasLocation,
       component: <AccountGas record={record} />,
     },

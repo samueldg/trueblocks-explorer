@@ -17,7 +17,6 @@ const useStyles = createUseStyles({
   },
   skinItem: {
     width: '400px',
-    // height: '20px',
     padding: '8px',
   },
   skinTitle: (theme: any) => ({
@@ -27,7 +26,6 @@ const useStyles = createUseStyles({
 
 export const Skins = () => {
   const { theme, setTheme } = useGlobalState();
-
   const styles = useStyles(theme);
 
   return (
