@@ -241,7 +241,11 @@ export const transactionSchema: ColumnsType<Transaction> = [
     title: '',
     dataIndex: 'statements',
     configuration: {
-      render: (item) => '',
+      render: (item, record) => (
+        <a target='_blank' href={'http://etherscan.io/tx/' + record.hash}>
+          ES
+        </a>
+      ),
       width: 300,
     },
   }),

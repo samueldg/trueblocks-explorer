@@ -1,13 +1,44 @@
 import { LogArray, Transaction } from '@modules/types';
+import { Card } from 'antd';
 import React from 'react';
+import { useAcctStyles } from '../AccountStyles';
 
 export const AccountFunctions = ({ record }: { record: Transaction }) => {
+  const styles = useAcctStyles();
   return (
-    <div style={{ display: 'grid', gridTemplateColumns: '1fr 8fr 10fr 10fr 3fr' }}>
+    <div className={styles.container}>
       <div></div>
-      <div style={{ margin: '2px', border: '1px solid black' }}>{showInput(record.input)}</div>
-      <div style={{ margin: '2px', border: '1px solid black' }}>{JSON.stringify(record.articulatedTx, null, 2)}</div>
-      <div style={{ margin: '2px', border: '1px solid black' }}>{showLogs(record.receipt.logs)}</div>
+      <div className={styles.cardHolder}>
+        <Card
+          className={styles.card}
+          headStyle={{
+            backgroundColor: 'indianred',
+          }}
+          hoverable={true}
+          title={'Input'}>
+          <b>Input bytes:</b>
+          {showInput(record.input)}
+          <br />
+          <b>Json Object:</b>
+          <div>{JSON.stringify(record.articulatedTx)}</div>
+          <br />
+          <b>Compressed Tx:</b>
+          <div>{JSON.stringify(record.compressedTx).replace(/\"/g, '|').replace(/"/g, '')}</div>
+        </Card>
+        <Card
+          className={styles.card}
+          headStyle={{
+            backgroundColor: 'indianred',
+          }}
+          hoverable={true}
+          title={'Events'}>
+          {'events'}
+        </Card>
+
+        {/* <div style={{ margin: '2px', border: '1px solid black' }}>{showInput(record.input)}</div>
+        <div style={{ margin: '2px', border: '1px solid black' }}>{JSON.stringify(record.articulatedTx, null, 2)}</div>
+        <div style={{ margin: '2px', border: '1px solid black' }}>{showLogs(record.receipt.logs)}</div> */}
+      </div>
       <div></div>
     </div>
   );
@@ -36,45 +67,3 @@ const showInput = (str: string) => {
     </pre>
   );
 };
-
-// export const functionSchema: ColumnsType<Transaction> = [
-//   addNumColumn({
-//     title: 'Block Number',
-//     dataIndex: 'blockNumber',
-//     configuration: {
-//       width: 100,
-//     },
-//   }),
-//   addNumColumn({
-//     title: 'Transaction ID',
-//     dataIndex: 'transactionIndex',
-//     configuration: {
-//       width: 100,
-//     },
-//   }),
-//   addColumn({
-//     title: 'From',
-//     dataIndex: 'from',
-//     configuration: {
-//       width: 150,
-//     },
-//   }),
-//   addColumn({
-//     title: 'To',
-//     dataIndex: 'to',
-//     configuration: {
-//       width: 150,
-//     },
-//   }),
-//   addNumColumn({
-//     title: 'Ether',
-//     dataIndex: 'ether',
-//     configuration: {
-//       width: 100,
-//     },
-//   }),
-//   addColumn({
-//     title: 'Function',
-//     dataIndex: 'compressedTx',
-//   }),
-// ];
