@@ -113,7 +113,7 @@ const statementBody = (statement: Reconciliation) => {
           '',
           statement.amountNet === '' ? '' : statement.amountNet > '0' ? '+' + statement.amountNet : statement.amountNet
         )}
-        {oneRow('endBal', '', '', statement.endBal, statement.endBalDiff)}
+        {oneRow('endBal', '', '', statement.endBal === '' ? '0.0000000' : statement.endBal, statement.endBalDiff)}
         {/* {oneRow('endBalCalc', '', '', statement.endBalCalc)} */}
         {/* {oneRow('reconciliationType', statement.reconciliationType, '')}
         {oneRow('reconciled', statement.reconciled ? 'true' : 'false', '')} */}
