@@ -3,6 +3,7 @@ import { Card } from 'antd';
 import React from 'react';
 import { useAcctStyles } from '../AccountStyles';
 
+//-----------------------------------------------------------------
 export const AccountFunctions = ({ record }: { record: Transaction }) => {
   const styles = useAcctStyles();
   return (
@@ -16,14 +17,7 @@ export const AccountFunctions = ({ record }: { record: Transaction }) => {
           }}
           hoverable={true}
           title={'Input'}>
-          <b>Input bytes:</b>
-          {showInput(record.input)}
-          <br />
-          <b>Json Object:</b>
-          <div>{JSON.stringify(record.articulatedTx)}</div>
-          <br />
-          <b>Compressed Tx:</b>
-          <div>{JSON.stringify(record.compressedTx).replace(/\"/g, '|').replace(/"/g, '')}</div>
+          {showInput(record)}
         </Card>
         <Card
           className={styles.card}
@@ -32,18 +26,15 @@ export const AccountFunctions = ({ record }: { record: Transaction }) => {
           }}
           hoverable={true}
           title={'Events'}>
-          {'events'}
+          {showLogs(record.receipt.logs)}
         </Card>
-
-        {/* <div style={{ margin: '2px', border: '1px solid black' }}>{showInput(record.input)}</div>
-        <div style={{ margin: '2px', border: '1px solid black' }}>{JSON.stringify(record.articulatedTx, null, 2)}</div>
-        <div style={{ margin: '2px', border: '1px solid black' }}>{showLogs(record.receipt.logs)}</div> */}
       </div>
       <div></div>
     </div>
   );
 };
 
+//-----------------------------------------------------------------
 const showLogs = (logs: LogArray) => {
   return logs.map((log, index) => {
     return (
@@ -54,16 +45,39 @@ const showLogs = (logs: LogArray) => {
   });
 };
 
-const showInput = (str: string) => {
+//-----------------------------------------------------------------
+const showInput = (record: Transaction) => {
+  let str = record.input;
   if (str.length < 10) <pre>{str}</pre>;
   const head = str.slice(0, 10);
   str = str.replace(head, '');
-  return (
+
+  const bytes = (
     <pre>
       <div>{head}</div>
       {str?.match(/.{1,64}/g)?.map((s) => (
         <div>{s}</div>
       ))}
     </pre>
+  );
+  const json = <pre>{JSON.stringify(record.articulatedTx, null, 2)}</pre>;
+  const comp = <div>{JSON.stringify(record.compressedTx).replace(/"/g, '')}</div>;
+  return (
+    <div>
+      {oneItem('Input bytes', bytes)}
+      {oneItem('Compressed Tx', comp)}
+      {oneItem('Json Object', json)}
+    </div>
+  );
+};
+
+//-----------------------------------------------------------------
+const oneItem = (title: string, component: React.ReactElement) => {
+  return (
+    <div>
+      <b>{title}:</b>
+      {component}
+      <br />
+    </div>
   );
 };
