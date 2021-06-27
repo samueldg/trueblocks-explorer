@@ -1,12 +1,5 @@
 import { SearchOutlined } from '@ant-design/icons';
-import {
-  addActionsColumn,
-  addColumn,
-  addFlagColumn,
-  addTagsColumn,
-  BaseTableRows,
-  TableActions,
-} from '@components/Table';
+import { addActionsColumn, addColumn, addFlagColumn, addTagsColumn, BaseTable, TableActions } from '@components/Table';
 import { useCommand } from '@hooks/useCommand';
 import { createErrorNotification } from '@modules/error_notification';
 import { renderNamedAddress } from '@modules/renderers';
@@ -99,7 +92,7 @@ export const Addresses = () => {
 
   return (
     <>
-      <BaseTableRows
+      <BaseTable
         data={getData(addresses)}
         columns={addressSchema.map((item) => {
           //@ts-ignore

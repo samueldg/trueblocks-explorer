@@ -1,11 +1,11 @@
 import { CheckCircleFilled, CloseCircleFilled } from '@ant-design/icons';
 import { Console } from '@components/Console';
-import { addColumn, addFlagColumn, BaseTableRows } from '@components/Table';
+import { addColumn, addFlagColumn, BaseTable } from '@components/Table';
 import { Result, toFailedResult, toSuccessfulData } from '@hooks/useCommand';
 import { runCommand } from '@modules/core';
 import { createErrorNotification } from '@modules/error_notification';
 import { Reconciliation, ReconciliationArray, Transaction } from '@modules/types';
-import { Checkbox, Divider, Input } from 'antd';
+import { Checkbox, Divider, Input, Tabs } from 'antd';
 import { ColumnsType } from 'antd/lib/table';
 import { either as Either } from 'fp-ts';
 import { pipe } from 'fp-ts/lib/function';
@@ -15,6 +15,8 @@ import { createUseStyles } from 'react-jss';
 import { useLocation } from 'react-router-dom';
 import style from 'react-syntax-highlighter/dist/esm/styles/hljs/a11y-dark';
 import { AccountTransactions } from './Tabs/Transactions';
+
+const { TabPane } = Tabs;
 
 export const AccountsView = () => {
   const [articulate, setArticulate] = useState(true);
@@ -146,8 +148,14 @@ export const AccountsView = () => {
           lastBlock: {theData[theData.length - 1].blockNumber}
           <br />
           balance: {'XXX'}
+          <Divider />
+          <Tabs tabPosition='left'>
+            <TabPane tab='Assets'></TabPane>
+            <TabPane tab='Neighbors'></TabPane>
+            <TabPane tab='Charts'></TabPane>
+          </Tabs>
         </div>
-        <BaseTableRows
+        <BaseTable
           data={getData(transactions)}
           columns={transactionSchema}
           loading={loading}
@@ -277,12 +285,15 @@ function totalIn1(st: Reconciliation) {
     Number(st['minerTxFeeIn']) +
     Number(st['minerUncleRewardIn']) +
     Number(st['prefundIn'])
-  );
+  ).toString();
 }
 
 //----------------------------------------------------------------------------
 function totalOut1(st: Reconciliation) {
-  return Number(st['amountOut']) + Number(st['internalOut']) + Number(st['selfDestructOut']) + Number(st['gasCostOut']);
+  return (
+    // Number(st['gasCostOut']) +
+    (Number(st['amountOut']) + Number(st['internalOut']) + Number(st['selfDestructOut'])).toString()
+  );
 }
 
 const Statement = ({ statement }: { statement: Reconciliation }) => {

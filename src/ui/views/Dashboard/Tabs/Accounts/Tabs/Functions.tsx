@@ -5,9 +5,9 @@ export const AccountFunctions = ({ record }: { record: Transaction }) => {
   return (
     <div style={{ display: 'grid', gridTemplateColumns: '1fr 8fr 10fr 10fr 3fr' }}>
       <div></div>
-      <div style={{ border: '1px solid black' }}>{showInput(record.input)}</div>
-      <div style={{ border: '1px solid black' }}>{JSON.stringify(record.articulatedTx, null, 2)}</div>
-      <div style={{ border: '1px solid black' }}>{showLogs(record.receipt.logs)}</div>
+      <div style={{ margin: '2px', border: '1px solid black' }}>{showInput(record.input)}</div>
+      <div style={{ margin: '2px', border: '1px solid black' }}>{JSON.stringify(record.articulatedTx, null, 2)}</div>
+      <div style={{ margin: '2px', border: '1px solid black' }}>{showLogs(record.receipt.logs)}</div>
       <div></div>
     </div>
   );

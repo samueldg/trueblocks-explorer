@@ -1,10 +1,16 @@
-import { addColumn, addNumColumn, BaseTableRows } from '@components/Table';
+import { addColumn, addNumColumn } from '@components/Table';
 import { Transaction } from '@modules/types';
 import { ColumnsType } from 'antd/lib/table';
 import React from 'react';
 
-export const AccountReconciliations = ({ data, columns, loading }: { data: any; columns?: any; loading: boolean }) => {
-  return <BaseTableRows data={data} columns={columns ? columns : neighborSchema} loading={loading} />;
+export const AccountReconciliations = ({ record }: { record: Transaction }) => {
+  return (
+    <div style={{ display: 'grid', gridTemplateColumns: '1fr 28fr 3fr' }}>
+      <div></div>
+      <div style={{ border: '1px solid black' }}>{JSON.stringify(record, null, 2)}</div>
+      <div></div>
+    </div>
+  );
 };
 
 export const neighborSchema: ColumnsType<Transaction> = [

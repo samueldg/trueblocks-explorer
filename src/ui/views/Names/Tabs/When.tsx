@@ -1,4 +1,4 @@
-import { addActionsColumn, addColumn, addNumColumn, BaseTableRows, TableActions } from '@components/Table';
+import { addActionsColumn, addColumn, addNumColumn, BaseTable, TableActions } from '@components/Table';
 import { useCommand } from '@hooks/useCommand';
 import { createErrorNotification } from '@modules/error_notification';
 import { Block } from '@modules/types';
@@ -14,7 +14,7 @@ export const When = () => {
   }
 
   const getData = useCallback((response) => (response.status === 'fail' ? [] : response.data), []);
-  return <BaseTableRows data={getData(when)} columns={whenSchema} loading={loading} />;
+  return <BaseTable data={getData(when)} columns={whenSchema} loading={loading} />;
 };
 
 const whenSchema: ColumnsType<Block> = [

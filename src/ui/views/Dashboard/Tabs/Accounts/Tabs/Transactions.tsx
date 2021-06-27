@@ -2,11 +2,14 @@ import { BaseView } from '@components/BaseView';
 import React from 'react';
 import {
   AccountFunctionsLocation,
-  AccountNeighborsLocation,
+  AccountGasLocation,
   AccountReconciliationsLocation,
+  AccountTracesLocation,
   DashboardAccountsLocation,
 } from '../../../../../locations';
 import { AccountFunctions } from './Functions';
+import { AccountGas } from './Gas';
+import { AccountReconciliations } from './Reconciliations';
 
 export const AccountTransactions = ({ record }: any) => {
   const title = '';
@@ -14,12 +17,15 @@ export const AccountTransactions = ({ record }: any) => {
     {
       name: 'Reconciliations',
       location: AccountReconciliationsLocation,
-      component: <div>{JSON.stringify(record)}</div>,
+      component: <AccountReconciliations record={record} />,
     },
     { name: 'Functions / Events', location: AccountFunctionsLocation, component: <AccountFunctions record={record} /> },
-    { name: 'Gas', location: AccountNeighborsLocation, component: <div>{JSON.stringify(record)}</div> },
-    { name: 'Neighbors', location: AccountNeighborsLocation, component: <div>{JSON.stringify(record)}</div> },
-    { name: 'Traces', location: AccountNeighborsLocation, component: <div>{JSON.stringify(record)}</div> },
+    {
+      name: 'Gas',
+      location: AccountGasLocation,
+      component: <AccountGas record={record} />,
+    },
+    { name: 'Traces', location: AccountTracesLocation, component: <div>{JSON.stringify(record)}</div> },
   ];
   return (
     <BaseView

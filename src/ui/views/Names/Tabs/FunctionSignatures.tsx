@@ -1,4 +1,4 @@
-import { addActionsColumn, addColumn, BaseTableRows, TableActions } from '@components/Table';
+import { addActionsColumn, addColumn, BaseTable, TableActions } from '@components/Table';
 import { useCommand } from '@hooks/useCommand';
 import { createErrorNotification } from '@modules/error_notification';
 import { Function } from '@modules/types';
@@ -16,7 +16,7 @@ export const FunctionSignatures = () => {
   const getData = useCallback((response) => {
     return response.status === 'fail' ? [] : response.data.filter((item: Function) => item.type === 'function');
   }, []);
-  return <BaseTableRows data={getData(signatures)} columns={signatureSchema} loading={loading} />;
+  return <BaseTable data={getData(signatures)} columns={signatureSchema} loading={loading} />;
 };
 
 const signatureSchema: ColumnsType<Function> = [

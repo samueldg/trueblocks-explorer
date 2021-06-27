@@ -3,10 +3,12 @@ import { Route, Switch } from 'react-router-dom';
 import {
   AccountFunctionsLocation,
   AccountFunctionsLocationAddressTemplate,
-  AccountNeighborsLocation,
-  AccountNeighborsLocationAddressTemplate,
+  AccountGasLocation,
+  AccountGasLocationAddressTemplate,
   AccountReconciliationsLocation,
   AccountReconciliationsLocationAddressTemplate,
+  AccountTracesLocation,
+  AccountTracesLocationAddressTemplate,
   AccountTransactionsLocation,
   AccountTransactionsLocationAddressTemplate,
   DashboardAccountsAddressLocationTemplate,
@@ -70,7 +72,8 @@ const routes = [
   { path: DashboardAccountsAddressLocationTemplate, component: DashboardView },
   { path: AccountTransactionsLocationAddressTemplate, component: DashboardView },
   { path: AccountFunctionsLocationAddressTemplate, component: DashboardView },
-  { path: AccountNeighborsLocationAddressTemplate, component: DashboardView },
+  { path: AccountGasLocationAddressTemplate, component: DashboardView },
+  { path: AccountTracesLocationAddressTemplate, component: DashboardView },
   { path: AccountReconciliationsLocationAddressTemplate, component: DashboardView },
   {
     path: AccountTransactionsLocation,
@@ -83,7 +86,12 @@ const routes = [
     component: DashboardView,
   },
   {
-    path: AccountNeighborsLocation,
+    path: AccountGasLocation,
+    exact: true,
+    component: DashboardView,
+  },
+  {
+    path: AccountTracesLocation,
     exact: true,
     component: DashboardView,
   },

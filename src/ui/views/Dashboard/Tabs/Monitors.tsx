@@ -1,11 +1,4 @@
-import {
-  addActionsColumn,
-  addColumn,
-  addNumColumn,
-  addTagsColumn,
-  BaseTableRows,
-  TableActions,
-} from '@components/Table';
+import { addActionsColumn, addColumn, addNumColumn, addTagsColumn, BaseTable, TableActions } from '@components/Table';
 import { useCommand } from '@hooks/useCommand';
 import { createErrorNotification } from '@modules/error_notification';
 import { renderNamedAddress } from '@modules/renderers';
@@ -28,7 +21,7 @@ export const Monitors = () => {
 
   return (
     <>
-      <BaseTableRows data={getData(monitors)} columns={monitorSchema} loading={loading} />
+      <BaseTable data={getData(monitors)} columns={monitorSchema} loading={loading} />
     </>
   );
 };

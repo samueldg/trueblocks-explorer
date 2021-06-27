@@ -1,4 +1,4 @@
-import { addColumn, addNumColumn, BaseTableRows } from '@components/Table';
+import { addColumn, addNumColumn, BaseTable } from '@components/Table';
 import { useCommand } from '@hooks/useCommand';
 import { createErrorNotification } from '@modules/error_notification';
 import { Monitor } from '@modules/types';
@@ -17,7 +17,7 @@ export const IndexTable = () => {
     return response.status === 'fail' || !response.data[0].caches ? [] : response.data[0].caches[0].items;
   }, []);
 
-  return <BaseTableRows data={getData(indexes)} columns={indexSchema} loading={loading} />;
+  return <BaseTable data={getData(indexes)} columns={indexSchema} loading={loading} />;
 };
 
 const indexSchema: ColumnsType<Monitor> = [

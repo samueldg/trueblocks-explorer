@@ -10,7 +10,7 @@ export const CustomRow = (props: any) => {
   else return <tr {...props} tabIndex={0} />;
 };
 
-export const BaseTableRows = ({
+export const BaseTable = ({
   data,
   columns,
   loading,
