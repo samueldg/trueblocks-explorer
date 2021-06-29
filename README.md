@@ -7,7 +7,7 @@
 [![React](https://img.shields.io/badge/React-node.js-purple.svg)](https://reactjs.org/)
 [![Twitter](https://img.shields.io/twitter/follow/espadrine.svg?style=social&label=Twitter)](https://twitter.com/quickblocks?lang=es)
 
-TrueBlocks lets you explore the ethereum blockchain in a fully-local and therefore fully-private way. This repo provides a frontend (this repo) application for the backend, [https://github.com/TrueBlocks/trueblocks-core](TrueBlocks core).
+TrueBlocks lets you explore the Ethereum blockchain in a fully-local and therefore fully-private way. This repo provides a frontend (this repo) application for the backend, [https://github.com/TrueBlocks/trueblocks-core](TrueBlocks core).
 
 ## Prerequisites
 
@@ -39,7 +39,7 @@ yarn
 yarn develop
 ```
 
-Now, the application should be running at `localhost:1234`
+Now, the application should be running at `localhost:1234`:
 
 
 <img src="./public/screen_shot.png" />
@@ -52,7 +52,7 @@ Now, the application should be running at `localhost:1234`
 
 ## Requirements
 
-- **Note:** In order for the TrueBlocks to work, you must have access to an Ethereum node with **--tracing** enabled. An excellent choice is Turbo-Geth (now called XXX). TrueBlocks defaults to using Parity at the RPC endpoint http://localhost:8545, but you may use any node supporting tracing and any endpoint (Infura, Quiknodes, for example). Performance will be _greatly reduced_ if you use a remote server. A good solution to this problem is to run a node on the [dAppNode](https://dappnode.io/) or [Ava.do](https://ava.do/) platforms and use [http://gtihub.com/Great-Hill-Corporation/trueblocks-docker](the TrueBlocks docker image).
+- **Note:** In order for the TrueBlocks to work, you must have access to an Ethereum node with **--tracing** enabled. An excellent choice is Turbo-Geth (now called XXX). TrueBlocks defaults to using Parity at the RPC endpoint http://localhost:8545, but you may use any node supporting tracing and any endpoint (Infura, Quiknodes, for example). Performance will be _greatly reduced_ if you use a remote server. A good solution to this problem is to run a node on the [dAppNode](https://dappnode.io/) or [Ava.do](https://ava.do/) platforms and use [http://github.com/TrueBlocks/trueblocks-docker](the TrueBlocks docker image).
 
 ## Getting Data on the Command Line
 
