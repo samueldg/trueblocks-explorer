@@ -1,5 +1,4 @@
 import { CheckCircleFilled, CloseCircleFilled } from '@ant-design/icons';
-import { Console } from '@components/Console';
 import { addColumn, addFlagColumn, BaseTable } from '@components/Table';
 import { Result, toFailedResult, toSuccessfulData } from '@hooks/useCommand';
 import { runCommand } from '@modules/core';
@@ -19,11 +18,8 @@ import { AccountTransactions } from './Tabs/Transactions';
 const { TabPane } = Tabs;
 
 export const AccountsView = ({ initAddress }: { initAddress: string }) => {
-  const [articulate, setArticulate] = useState(true);
   const [accounting, setAccounting] = useState(true);
   const [staging, setStaging] = useState(false);
-  const [reversed, setReversed] = useState(false);
-  const [max_records, setMaxRecords] = useState(10);
   const [denom, setDenom] = useState('ether');
   const [currentAddress, setCurrentAddress] = useState(initAddress);
   const emptyData = { data: [{}], meta: {} };
@@ -34,11 +30,8 @@ export const AccountsView = ({ initAddress }: { initAddress: string }) => {
   const [totalRecords, setTotalRecords] = useState<null | number>(null);
   const address = parts[parts.length - 1];
 
-  const onArticulate = () => setArticulate(!articulate);
   const onAccounting = () => setAccounting(!accounting);
   const onStaging = () => setStaging(!staging);
-  const onReversed = () => setReversed(!reversed);
-  const onMaxRecords = () => setMaxRecords(max_records > 200 ? 200 : 5000);
   const onEther = () => {
     setAccounting(true);
     denom === 'ether' ? setDenom('') : setDenom('ether');
@@ -66,7 +59,7 @@ export const AccountsView = ({ initAddress }: { initAddress: string }) => {
         setLoading(false);
       }
     })();
-  }, [currentAddress, denom, articulate, accounting, staging, reversed, max_records]);
+  }, [currentAddress, denom, accounting, staging]);
 
   useEffect(() => {
     (async () => {
@@ -80,11 +73,11 @@ export const AccountsView = ({ initAddress }: { initAddress: string }) => {
           // unripe: true,
           ether: denom === 'ether',
           dollars: denom === 'dollars',
-          articulate: articulate,
+          articulate: true,
           accounting: accounting,
-          reversed: reversed,
+          reversed: true,
           first_record: transactions?.data?.length,
-          max_records: 20,
+          max_records: 31 /* an arbitrary number not too big, not too small, that appears not to repeat */,
         });
         const result: Result = pipe(
           eitherResponse,
@@ -110,15 +103,6 @@ export const AccountsView = ({ initAddress }: { initAddress: string }) => {
   const expandRender = (record: any) => <AccountTransactions record={record} />;
   return (
     <div>
-      <Checkbox checked={max_records > 200} onChange={(event) => onMaxRecords()}>
-        max_records
-      </Checkbox>
-      <Checkbox checked={reversed} onChange={(event) => onReversed()}>
-        reversed
-      </Checkbox>
-      <Checkbox checked={articulate} onChange={(event) => onArticulate()}>
-        articulate
-      </Checkbox>
       <Checkbox checked={accounting} onChange={(event) => onAccounting()}>
         accounting
       </Checkbox>
