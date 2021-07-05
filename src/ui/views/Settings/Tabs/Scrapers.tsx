@@ -11,7 +11,7 @@ const useStyles = createUseStyles({
     margin: '2px',
     border: '1px brown dashed',
     width: 300,
-    height: 400
+    height: 400,
   },
 });
 
@@ -70,18 +70,30 @@ export const Scrapers = () => {
     <>
       <Row>
         <Col>
-          <Card style={{height: '500px'}} hoverable title={indexer.Name} className={styles.card}>
+          <Card style={{ height: '500px' }} hoverable title={indexer.Name} className={styles.card}>
             both scrapers:{' '}
-            <Switch checked={indexer.Running && monitors.Running} checkedChildren='on' unCheckedChildren='off' onClick={toggleBoth} /><br />
+            <Switch
+              checked={indexer.Running && monitors.Running}
+              checkedChildren='on'
+              unCheckedChildren='off'
+              onClick={toggleBoth}
+            />
+            <br />
             index scraper:
             <Switch checked={indexer.Running} checkedChildren='on' unCheckedChildren='off' onClick={toggleIndexer} />
             <pre>{JSON.stringify(indexer, null, 2)}</pre>
           </Card>
         </Col>
         <Col>
-          <Card style={{height: '500px'}}  hoverable title={monitors.Name} className={styles.card}>
+          <Card style={{ height: '500px' }} hoverable title={monitors.Name} className={styles.card}>
             both scrapers:{' '}
-            <Switch checked={indexer.Running && monitors.Running} checkedChildren='on' unCheckedChildren='off' onClick={toggleBoth} /><br />
+            <Switch
+              checked={indexer.Running && monitors.Running}
+              checkedChildren='on'
+              unCheckedChildren='off'
+              onClick={toggleBoth}
+            />
+            <br />
             monitor scraper:{' '}
             <Switch checked={monitors.Running} checkedChildren='on' unCheckedChildren='off' onClick={toggleMonitors} />
             <pre>{JSON.stringify(monitors, null, 2)}</pre>

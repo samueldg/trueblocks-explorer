@@ -1,18 +1,20 @@
 import { QuestionCircleFilled } from '@ant-design/icons';
 import { Result, toFailedResult, toSuccessfulData } from '@hooks/useCommand';
 import { runCommand } from '@modules/core';
-import { Layout } from 'antd';
+import { Button, Layout } from 'antd';
 import 'antd/dist/antd.css';
 import { either as Either } from 'fp-ts';
 import { pipe } from 'fp-ts/lib/function';
 import React, { useEffect, useState } from 'react';
 import { createUseStyles } from 'react-jss';
 import './app.css';
+import { Console } from './components/Console';
 import { MainMenu } from './components/MainMenu';
 import { HelpPanel } from './components/SidePanels/HelpPanel';
 import { PanelDirection, SidePanel } from './components/SidePanels/SidePanel';
 import { StatusPanel } from './components/SidePanels/StatusPanel';
 import { Routes } from './Routes';
+import useGlobalState from './state';
 import { cookieVars } from './utils';
 
 const { Header, Footer, Content } = Layout;
@@ -22,6 +24,7 @@ const useStyles = createUseStyles({
 });
 
 export const App = () => {
+  const { debug, setDebug } = useGlobalState();
   const [status, setStatus] = useState<Result>(toSuccessfulData({ data: [{}], meta: {} }) as Result);
   const [loadingStatus, setLoadingStatus] = useState(false);
   const styles = useStyles();
@@ -52,7 +55,7 @@ export const App = () => {
         <SidePanel
           header='Main menu'
           dir={PanelDirection.Left}
-          name={cookieVars.menu_expanded}
+          cookieName={cookieVars.menu_expanded}
           collapsibleContent={false}>
           <MainMenu />
         </SidePanel>
@@ -66,19 +69,25 @@ export const App = () => {
               }}>
               <Routes />
             </Content>
-            <SidePanel header='Status' name={cookieVars.status_expanded} dir={PanelDirection.Right}>
+            <SidePanel header='Status' cookieName={cookieVars.status_expanded} dir={PanelDirection.Right}>
               <StatusPanel status={status} loading={loadingStatus} />
             </SidePanel>
             <SidePanel
               header='Help'
-              name={cookieVars.help_expanded}
+              cookieName={cookieVars.help_expanded}
               dir={PanelDirection.Right}
               customCollapseIcon={<QuestionCircleFilled className={styles.help_icon} />}
               customExpandIcon={<QuestionCircleFilled className={styles.help_icon} />}>
               <HelpPanel />
             </SidePanel>
           </Layout>
-          <Footer>Footer</Footer>
+          <Footer style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+            <Button type={debug ? 'primary' : 'ghost'} onClick={() => setDebug(!debug)}>
+              {debug ? 'debug on' : 'debug off'}
+            </Button>
+            <Console asText={true} />
+            <div />
+          </Footer>
         </Layout>
       </Layout>
     </Layout>

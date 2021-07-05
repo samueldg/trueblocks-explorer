@@ -1,9 +1,8 @@
-import { PageHeader, Tabs } from 'antd';
-import Cookies from 'js-cookie';
-import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { BaseView } from '@components/BaseView';
+import React from 'react';
 import {
   SettingsCachesLocation,
+  SettingsLocation,
   SettingsSchemasLocation,
   SettingsScrapersLocation,
   SettingsSkinsLocation,
@@ -14,38 +13,21 @@ import { Schemas } from './Tabs/Schemas';
 import { Scrapers } from './Tabs/Scrapers';
 import { Skins } from './Tabs/Skins';
 
-const { TabPane } = Tabs;
-
 export const SettingsView = () => {
-  const history = useHistory();
-  const [currentTab, setCurrentTab] = useState(
-    Cookies.get(cookieVars.settings_current_tab) || SettingsScrapersLocation
-  );
-
-  const onTabChange = (key: string) => {
-    Cookies.set(cookieVars.settings_current_tab, key);
-    history.push(key);
-    setCurrentTab(key);
-  };
-
   const title = 'Settings';
+  const tabs = [
+    { name: 'Scrapers', location: SettingsScrapersLocation, component: <Scrapers /> },
+    { name: 'Caches', location: SettingsCachesLocation, component: <Caches /> },
+    { name: 'Skins', location: SettingsSkinsLocation, component: <Skins /> },
+    { name: 'Schemas', location: SettingsSchemasLocation, component: <Schemas /> },
+  ];
   return (
-    <>
-      <PageHeader title={title} />
-      <Tabs defaultActiveKey={currentTab} onChange={(key) => onTabChange(key)}>
-        <TabPane tab='Scrapers' key={SettingsScrapersLocation}>
-          <Scrapers />
-        </TabPane>
-        <TabPane tab='Caches' key={SettingsCachesLocation}>
-          <Caches />
-        </TabPane>
-        <TabPane tab='Skins' key={SettingsSkinsLocation}>
-          <Skins />
-        </TabPane>
-        <TabPane tab='Schemas' key={SettingsSchemasLocation}>
-          <Schemas />
-        </TabPane>
-      </Tabs>
-    </>
+    <BaseView
+      title={title}
+      defaultActive={SettingsScrapersLocation}
+      baseActive={SettingsLocation}
+      cookieName={cookieVars.settings_current_tab}
+      tabs={tabs}
+    />
   );
 };

@@ -23,6 +23,24 @@ export function addColumn<RecordType>({
   };
 }
 
+export function addNumColumn<RecordType>({
+  title,
+  dataIndex,
+  key,
+  configuration,
+}: ColumnConfiguration<RecordType>): ColumnType<RecordType> {
+  if (!configuration) configuration = {};
+  if (!configuration.render) configuration.render = (num: number) => Intl.NumberFormat().format(num);
+  configuration.align = 'right';
+  return {
+    title,
+    dataIndex,
+    key,
+    ellipsis: true,
+    ...configuration,
+  };
+}
+
 export function addFlagColumn<RecordType>(configuration: ColumnConfiguration<RecordType>) {
   return {
     ...addColumn(configuration),

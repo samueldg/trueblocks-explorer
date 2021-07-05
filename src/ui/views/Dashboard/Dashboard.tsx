@@ -1,46 +1,42 @@
-import { PageHeader, Tabs } from 'antd';
-import Cookies from 'js-cookie';
+import { BaseView } from '@components/BaseView';
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
 import {
+  DashboardAccountsLocation,
   DashboardCollectionsLocation,
+  DashboardIndexesLocation,
+  DashboardLocation,
+  DashboardMonitorsLocation,
   DashboardOverviewLocation,
-  DashboardSystemStatusLocation,
-} from '../..//locations';
+} from '../../locations';
 import { cookieVars } from '../../utils';
+import { AccountsView } from './Tabs/Accounts/Accounts';
 import { Collections } from './Tabs/Collections';
+import { IndexesView } from './Tabs/Indexes/Indexes';
+import { Monitors } from './Tabs/Monitors';
 import { Overview } from './Tabs/Overview';
-import { Status } from './Tabs/Status';
 
-const { TabPane } = Tabs;
-
-export const DashboardView = () => {
-  const history = useHistory();
-  const [currentTab, setCurrentTab] = useState(
-    Cookies.get(cookieVars.dashboard_current_tab) || DashboardOverviewLocation
-  );
-
-  const onTabChange = (key: string) => {
-    Cookies.set(cookieVars.dashboard_current_tab, key);
-    history.push(key);
-    setCurrentTab(key);
-  };
-
+export const DashboardView = ({ match }: { match?: any }) => {
   const title = 'Dashboard';
+  var tabs = [
+    { name: 'Overview', location: DashboardOverviewLocation, component: <Overview />, disabled: false },
+    {
+      name: 'Accounts',
+      location: DashboardAccountsLocation,
+      component: <AccountsView />,
+      disabled: false,
+    },
+    { name: 'Monitors', location: DashboardMonitorsLocation, component: <Monitors />, disabled: false },
+    { name: 'Collections', location: DashboardCollectionsLocation, component: <Collections />, disabled: false },
+    { name: 'Indexes', location: DashboardIndexesLocation, component: <IndexesView />, disabled: false },
+  ];
+
   return (
-    <>
-      <PageHeader title={title} />
-      <Tabs defaultActiveKey={currentTab} onChange={(key) => onTabChange(key)}>
-        <TabPane tab='Overview' key={DashboardOverviewLocation}>
-          <Overview />
-        </TabPane>
-        <TabPane tab='Collections' key={DashboardCollectionsLocation}>
-          <Collections />
-        </TabPane>
-        <TabPane tab='System Status' key={DashboardSystemStatusLocation}>
-          <Status />
-        </TabPane>
-      </Tabs>
-    </>
+    <BaseView
+      title={title}
+      defaultActive={DashboardOverviewLocation}
+      baseActive={DashboardLocation}
+      cookieName={cookieVars.dashboard_current_tab}
+      tabs={tabs}
+    />
   );
 };

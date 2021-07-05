@@ -1,54 +1,36 @@
-import { PageHeader, Tabs } from 'antd';
-import Cookies from 'js-cookie';
-import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { BaseView } from '@components/BaseView';
+import React from 'react';
 import {
   NamesAddressesLocation,
   NamesBlocksLocation,
-  NamesMonitorsLocation,
-  NamesSignaturesLocation,
+  NamesEventSigsLocation,
+  NamesFuncSigsLocation,
+  NamesLocation,
   NamesTagsLocation,
 } from '../../locations';
 import { cookieVars } from '../../utils';
-import { Monitors } from './Tabs/Monitors';
-import { NamedAddrs } from './Tabs/NamedAddrs';
-import { Signatures } from './Tabs/Signature';
+import { Addresses } from './Tabs/Addresses';
+import { EventSignatures } from './Tabs/EventSignatures';
+import { FunctionSignatures } from './Tabs/FunctionSignatures';
 import { Tags } from './Tabs/Tag';
 import { When } from './Tabs/When';
 
-const { TabPane } = Tabs;
-
 export const NamesView = () => {
-  const history = useHistory();
   const title = 'Names';
-  const [currentTab, setCurrentTab] = useState(Cookies.get(cookieVars.names_current_tab) || NamesMonitorsLocation);
-
-  const onTabChange = (key: string) => {
-    Cookies.set(cookieVars.names_current_tab, key);
-    history.push(key);
-    setCurrentTab(key);
-  };
-
+  const tabs = [
+    { name: 'Named Addresses', location: NamesAddressesLocation, component: <Addresses /> },
+    { name: 'Address Tags', location: NamesTagsLocation, component: <Tags /> },
+    { name: 'Function Signatures', location: NamesFuncSigsLocation, component: <FunctionSignatures /> },
+    { name: 'Event Signatures', location: NamesEventSigsLocation, component: <EventSignatures /> },
+    { name: 'Named Blocks', location: NamesBlocksLocation, component: <When /> },
+  ];
   return (
-    <>
-      <PageHeader title={title} />
-      <Tabs defaultActiveKey={currentTab} onChange={(key) => onTabChange(key)}>
-        <TabPane tab='Monitors' key={NamesMonitorsLocation}>
-          <Monitors />
-        </TabPane>
-        <TabPane tab='Addresses' key={NamesAddressesLocation}>
-          <NamedAddrs />
-        </TabPane>
-        <TabPane tab='Tags' key={NamesTagsLocation}>
-          <Tags />
-        </TabPane>
-        <TabPane tab='Signatures' key={NamesSignaturesLocation}>
-          <Signatures />
-        </TabPane>
-        <TabPane tab='Blocks' key={NamesBlocksLocation}>
-          <When />
-        </TabPane>
-      </Tabs>
-    </>
+    <BaseView
+      title={title}
+      defaultActive={NamesAddressesLocation}
+      baseActive={NamesLocation}
+      cookieName={cookieVars.names_current_tab}
+      tabs={tabs}
+    />
   );
 };

@@ -1,8 +1,10 @@
+import { useCallback, useEffect, useState } from 'react';
 import { useHotkeys } from 'react-hotkeys-hook';
-import { useCallback, useState } from 'react';
 
 export const cookieVars = {
   dashboard_current_tab: 'DASHBOARD_CURRENT_TAB',
+  dashboard_account_sub_tab: 'DASHBOARD_ACCOUNT_SUB_TAB',
+  dashboard_indexes_sub_tab: 'DASHBOARD_INDEXES_SUB_TAB',
   explorer_current_tab: 'EXPLORER_CURRENT_TAB',
   names_current_tab: 'NAMES_CURRENT_TAB',
   settings_current_tab: 'SETTINGS_CURRENT_TAB',
@@ -12,11 +14,11 @@ export const cookieVars = {
   help_expanded: 'HELP_EXPANDED',
 };
 
-const getSiblings = (e: any) => {
+export const getSiblings = (e: any) => {
   // for collecting siblings
   let siblings: any[] = [];
   // if no parent, return no sibling
-  if (!e.parentNode) {
+  if (!e || !e.parentNode) {
     return siblings;
   }
   // first child of the parent node
@@ -32,8 +34,24 @@ const getSiblings = (e: any) => {
   return siblings;
 };
 
-export const useKeyBindings = (expandedRowKeys: readonly React.ReactText[], setExpandedRowKeys: any) => {
+export const useKeyBindings = (
+  expandedRowKeys: readonly React.ReactText[],
+  setExpandedRowKeys: any,
+  currentPage: number,
+  pageSize: number,
+  dataLength: number,
+  nextPage: () => void,
+  previousPage: () => void,
+  firstPage: () => void,
+  lastPage: (event: any) => void,
+  focusedRow: number,
+  setFocusedRow: (row: number) => void
+) => {
   const [isFocused, setIsFocused] = useState(false);
+
+  useEffect(() => {
+    setIsFocused(true);
+  }, []);
 
   const handleOnFocus = useCallback((event) => {
     // Check if the element with querySelector string is
@@ -75,11 +93,19 @@ export const useKeyBindings = (expandedRowKeys: readonly React.ReactText[], setE
           if (document.activeElement?.isSameNode(currentRow)) {
             // look for previous sibling
             let previousSibling = currentRow.previousElementSibling;
-            while (!previousSibling?.getAttribute('data-row-key')) {
-              previousSibling = previousSibling.previousElementSibling;
-              if (!previousSibling) break;
+            if (!previousSibling.getAttribute('data-row-key') && currentPage !== 1) {
+              previousPage();
+            } else {
+              while (!previousSibling?.getAttribute('data-row-key')) {
+                previousSibling = previousSibling.previousElementSibling;
+                if (!previousSibling) break;
+              }
+              const index = getSiblings(currentRow)
+                .map((e) => e.getAttribute('data-row-key'))
+                .indexOf(previousSibling ? previousSibling.getAttribute('data-row-key') : 0);
+              setFocusedRow(index - 1);
+              previousSibling?.focus();
             }
-            previousSibling?.focus();
           } else {
             // highlight itself
             currentRow.focus();
@@ -87,7 +113,7 @@ export const useKeyBindings = (expandedRowKeys: readonly React.ReactText[], setE
         }
       }
     },
-    [isFocused]
+    [isFocused, currentPage, dataLength, focusedRow, setFocusedRow]
   );
 
   // Go to next row
@@ -103,15 +129,22 @@ export const useKeyBindings = (expandedRowKeys: readonly React.ReactText[], setE
               event.target.querySelector(`tr[data-row-key]`);
 
         if (currentRow) {
-          console.log('yo');
           if (document.activeElement?.isSameNode(currentRow)) {
             // look for next sibling
             let nextSibling = currentRow.nextElementSibling;
-            while (!nextSibling?.getAttribute('data-row-key')) {
-              nextSibling = nextSibling.nextElementSibling;
-              if (!nextSibling) break;
+            if (!nextSibling) {
+              nextPage();
+            } else {
+              while (!nextSibling?.getAttribute('data-row-key')) {
+                nextSibling = nextSibling.nextElementSibling;
+                if (!nextSibling) break;
+              }
+              const index = getSiblings(currentRow)
+                .map((e) => e.getAttribute('data-row-key'))
+                .indexOf(nextSibling.getAttribute('data-row-key'));
+              setFocusedRow(index);
+              nextSibling?.focus();
             }
-            nextSibling?.focus();
           } else {
             // highlight itself
             currentRow.focus();
@@ -119,7 +152,7 @@ export const useKeyBindings = (expandedRowKeys: readonly React.ReactText[], setE
         }
       }
     },
-    [isFocused]
+    [isFocused, currentPage, dataLength, focusedRow, setFocusedRow]
   );
 
   const handleEnterKey = useCallback(
@@ -145,39 +178,42 @@ export const useKeyBindings = (expandedRowKeys: readonly React.ReactText[], setE
         }
       }
     },
-    [isFocused, setExpandedRowKeys, expandedRowKeys]
+    [isFocused, setExpandedRowKeys, expandedRowKeys, dataLength]
   );
 
   const handleHomeKey = useCallback(
     (event) => {
-      // If activeElement is a TR element or has any of it's parent as TR element, then we must look for next TR element
-      if (event.target) {
-        // let's check if this itself is a TR element, if not, lets find one
-        const currentRow =
-          event.target.tagName === 'TR'
-            ? event.target
-            : event.target.parents?.find((element: HTMLElement) => element.tagName === 'TR') ??
-              event.target.querySelector(`tr[data-row-key]`);
+      if (currentPage !== 1) {
+        setFocusedRow(0);
+        firstPage();
+      } else {
+        if (event.target) {
+          const currentRow =
+            event.target.tagName === 'TR'
+              ? event.target
+              : event.target.parents?.find((element: HTMLElement) => element.tagName === 'TR') ??
+                event.target.querySelector(`tr[data-row-key]`);
 
-        if (currentRow) {
-          if (document.activeElement?.isSameNode(currentRow)) {
-            // look for previous sibling
-            const siblings = getSiblings(currentRow);
-            if (siblings && siblings.length > 0) {
-              siblings[1].focus();
+          if (currentRow) {
+            if (document.activeElement?.isSameNode(currentRow)) {
+              const siblings = getSiblings(currentRow);
+              if (siblings && siblings.length > 0 && currentRow.getAttribute('data-row-key').toString() !== '1') {
+                setFocusedRow(0);
+                siblings[1].focus();
+              }
+            } else {
+              currentRow.focus();
             }
-          } else {
-            // highlight itself
-            currentRow.focus();
           }
         }
       }
     },
-    [isFocused]
+    [isFocused, currentPage, dataLength, focusedRow, setFocusedRow]
   );
 
   const handleEndKey = useCallback(
     (event) => {
+      lastPage(event);
       // If activeElement is a TR element or has any of it's parent as TR element, then we must look for next TR element
       if (event.target) {
         // let's check if this itself is a TR element, if not, lets find one
@@ -191,7 +227,13 @@ export const useKeyBindings = (expandedRowKeys: readonly React.ReactText[], setE
           if (document.activeElement?.isSameNode(currentRow)) {
             // look for previous sibling
             const siblings = getSiblings(currentRow);
-            if (siblings && siblings.length > 0) {
+            const currentRowString = currentRow.getAttribute('data-row-key').toString();
+            if (
+              siblings &&
+              siblings.length > 0 &&
+              currentRowString.charAt(currentRowString.length - 1) !== siblings.length.toString()
+            ) {
+              setFocusedRow(siblings.length - 1);
               siblings[siblings.length - 1].focus();
             }
           } else {
@@ -201,7 +243,7 @@ export const useKeyBindings = (expandedRowKeys: readonly React.ReactText[], setE
         }
       }
     },
-    [isFocused]
+    [isFocused, currentPage, pageSize, dataLength, focusedRow, setFocusedRow]
   );
 
   useHotkeys('up', handleUpKey, [handleUpKey]);

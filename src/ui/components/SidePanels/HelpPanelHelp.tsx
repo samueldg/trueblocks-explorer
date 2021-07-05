@@ -1,20 +1,43 @@
+import React from 'react';
 import {
-  DashboardCollectionsLocation, DashboardLocation,
+  AccountFunctionsLocation,
+  AccountGasLocation,
+  AccountReconciliationsLocation,
+  AccountTracesLocation,
+  AccountTransactionsLocation,
+  DashboardAccountsLocation,
+  DashboardCollectionsLocation,
+  DashboardIndexesLocation,
+  DashboardLocation,
+  DashboardMonitorsLocation,
   DashboardOverviewLocation,
-  DashboardSystemStatusLocation,
-  ExplorerBlocksLocation, ExplorerIndexesLocation, ExplorerLocation,
-  ExplorerLogsLocation, ExplorerReceiptsLocation,
-  ExplorerTracesLocation, ExplorerTransactionsLocation, NamesAddressesLocation,
-  NamesBlocksLocation, NamesLocation,
-  NamesMonitorsLocation,
-  NamesSignaturesLocation, NamesTagsLocation, RootLocation,
-  SettingsCachesLocation, SettingsLocation,
-  SettingsSchemasLocation, SettingsScrapersLocation,
+  ExplorerBlocksLocation,
+  ExplorerLocation,
+  ExplorerLogsLocation,
+  ExplorerReceiptsLocation,
+  ExplorerTracesLocation,
+  ExplorerTransactionsLocation,
+  IndexChartsLocation,
+  IndexGridLocation,
+  IndexTableLocation,
+  NamesAddressesLocation,
+  NamesBlocksLocation,
+  NamesEventSigsLocation,
+  NamesFuncSigsLocation,
+  NamesLocation,
+  NamesTagsLocation,
+  RootLocation,
+  SettingsCachesLocation,
+  SettingsLocation,
+  SettingsSchemasLocation,
+  SettingsScrapersLocation,
   SettingsSkinsLocation,
-  SupportAboutUsLocation, SupportContactUsLocation,
+  SupportAboutUsLocation,
+  SupportContactUsLocation,
   SupportDocumentationLocation,
   SupportHotKeysLocation,
-  SupportLicensingLocation, SupportLocation
+  SupportLicensingLocation,
+  SupportLocation,
 } from '../../locations';
 
 export const helpRoutes = [
@@ -27,24 +50,72 @@ export const helpRoutes = [
     helpText: 'The dashboard overview page gives you an overview of your holdings among other things.',
   },
   {
+    route: DashboardAccountsLocation,
+    helpText: 'View the transactional history of an account.',
+  },
+  {
+    route: AccountTracesLocation,
+    helpText: 'View the history of traces for the transaction.',
+  },
+  {
+    route: AccountGasLocation,
+    helpText: 'View the event history of an account.',
+  },
+  {
+    route: AccountReconciliationsLocation,
+    helpText: 'View the reconciliation history of an account.',
+  },
+  {
+    route: AccountFunctionsLocation,
+    helpText: 'View the functional history of an account.',
+  },
+  {
+    route: AccountTransactionsLocation,
+    helpText: 'View transactional history of an account.',
+  },
+  {
     route: DashboardOverviewLocation,
     helpText: 'The dashboard overview page gives you an overview of your holdings among other things.',
+  },
+  {
+    route: DashboardMonitorsLocation,
+    helpText:
+      'Monitors are named addresses that you have indicated are "of interest" and should be monitored by the scrapers.',
   },
   {
     route: DashboardCollectionsLocation,
     helpText: 'Collections allow you to group together multiple monitored addresses.',
   },
   {
-    route: DashboardSystemStatusLocation,
-    helpText: 'This screen shows you the system\'s status',
+    route: DashboardIndexesLocation,
+    helpText: (
+      <div>
+        <p>View the contents of the TrueBlocks index cache.</p>
+        <p>
+          For more information on the process of extracting the index,
+          <a target='_blank' href='https://github.com/TrueBlocks/trueblocks-docs/issues/12'>
+            see here
+          </a>
+          .
+        </p>
+      </div>
+    ),
+  },
+  {
+    route: IndexChartsLocation,
+    helpText: 'Charts related to the index cache.',
+  },
+  {
+    route: IndexGridLocation,
+    helpText: 'Grid view of the index cache.',
+  },
+  {
+    route: IndexTableLocation,
+    helpText: 'Table view of the index cache.',
   },
   {
     route: NamesLocation,
-    helpText: 'Monitors are named addresses that you\'ve indicated are \'of interest\' and should be monitored by the scrapers.',
-  },
-  {
-    route: NamesMonitorsLocation,
-    helpText: 'Monitors are named addresses that you\'ve indicated are \'of interest\' and should be monitored by the scrapers.',
+    helpText: 'Names are common or known addresses that have been given a name.',
   },
   {
     route: NamesAddressesLocation,
@@ -55,19 +126,20 @@ export const helpRoutes = [
     helpText: 'Tags are groupings used to collect together named addresses.',
   },
   {
-    route: NamesSignaturesLocation,
-    helpText: 'The signatures tab allows you to add/edit/delete four byte and event signatures.',
+    route: NamesFuncSigsLocation,
+    helpText: 'The function signatures tab allows you to add/edit/delete four byte signatures.',
+  },
+  {
+    route: NamesEventSigsLocation,
+    helpText: 'The event signatures tab allows you to add/edit/delete event signatures.',
   },
   {
     route: NamesBlocksLocation,
-    helpText: 'The blocks tab allows you to name particular blocks such as notable smart contract deployments, hard forks, or other blocks.',
+    helpText:
+      'The blocks tab allows you to name particular blocks such as notable smart contract deployments, hard forks, or other blocks.',
   },
   {
     route: ExplorerLocation,
-    helpText: 'View the contents of the TrueBlocks index cache.',
-  },
-  {
-    route: ExplorerIndexesLocation,
     helpText: 'View the contents of the TrueBlocks index cache.',
   },
   {
@@ -104,7 +176,7 @@ export const helpRoutes = [
   },
   {
     route: SettingsSkinsLocation,
-    helpText: 'Change the skin of the application you\'re using',
+    helpText: 'Change the skin or them of the application.',
   },
   {
     route: SettingsSchemasLocation,
@@ -133,6 +205,5 @@ export const helpRoutes = [
   {
     route: SupportAboutUsLocation,
     helpText: 'A short history of TrueBlocks, LLC.',
-  }
+  },
 ];
-

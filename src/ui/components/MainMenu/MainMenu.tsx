@@ -6,23 +6,23 @@ import { ExplorerLocation, NamesLocation, RootLocation, SettingsLocation, Suppor
 
 export const MainMenu = () => (
   <Menu mode='inline'>
-    <Menu.Item icon={<UnorderedListOutlined />}>
+    <Menu.Item key={RootLocation} icon={<UnorderedListOutlined />}>
       <NavLink to={RootLocation}>Dashboard</NavLink>
     </Menu.Item>
 
-    <Menu.Item icon={<BookOutlined />}>
+    <Menu.Item key={NamesLocation} icon={<BookOutlined />}>
       <NavLink to={NamesLocation}>Names</NavLink>
     </Menu.Item>
 
-    <Menu.Item icon={<CameraOutlined />}>
+    <Menu.Item key={ExplorerLocation} icon={<CameraOutlined />}>
       <NavLink to={ExplorerLocation}>Explorer</NavLink>
     </Menu.Item>
 
-    <Menu.Item icon={<SettingOutlined />}>
+    <Menu.Item key={SettingsLocation} icon={<SettingOutlined />}>
       <NavLink to={SettingsLocation}>Settings</NavLink>
     </Menu.Item>
 
-    <Menu.Item icon={<PhoneOutlined />}>
+    <Menu.Item key={SupportLocation} icon={<PhoneOutlined />}>
       <NavLink to={SupportLocation}>Support</NavLink>
     </Menu.Item>
   </Menu>
