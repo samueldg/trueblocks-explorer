@@ -18,19 +18,20 @@ import { AccountTransactions } from './Tabs/Transactions';
 
 const { TabPane } = Tabs;
 
-export const AccountsView = () => {
+export const AccountsView = ({ initAddress }: { initAddress: string }) => {
   const [articulate, setArticulate] = useState(true);
   const [accounting, setAccounting] = useState(true);
   const [staging, setStaging] = useState(false);
   const [reversed, setReversed] = useState(false);
   const [max_records, setMaxRecords] = useState(10);
   const [denom, setDenom] = useState('ether');
-  const [currentAddress, setCurrentAddress] = useState('0xf503017d7baf7fbc0fff7492b751025c6a78179b');
+  const [currentAddress, setCurrentAddress] = useState(initAddress);
   const emptyData = { data: [{}], meta: {} };
   const [transactions, setTransactions] = useState<Result>(toSuccessfulData(emptyData));
   const [loading, setLoading] = useState(false);
   const location = useLocation();
   const parts = location.pathname.split('/');
+  const [totalRecords, setTotalRecords] = useState<null | number>(null);
   const address = parts[parts.length - 1];
 
   const onArticulate = () => setArticulate(!articulate);
@@ -48,18 +49,28 @@ export const AccountsView = () => {
   }, []);
 
   useEffect(() => {
-    if (address !== currentAddress && address?.slice(0, 2) === '0x') {
-      setCurrentAddress(address);
-    }
-  }, [address]);
-
-  // To get count:
-  // nRecords = http://localhost:8080/list?count&appearances&addrs=0xf503017d7baf7fbc0fff7492b751025c6a78179b
-
-  useEffect(() => {
     (async () => {
       if (currentAddress.slice(0, 2) === '0x') {
         setLoading(true);
+        const eitherResponse = await runCommand('list', {
+          count: true,
+          appearances: true,
+          addrs: currentAddress,
+        });
+        const result: Result = pipe(
+          eitherResponse,
+          Either.fold(toFailedResult, (serverResponse) => toSuccessfulData(serverResponse) as Result)
+        );
+        //@ts-ignore
+        setTotalRecords(result.data[0]?.nRecords);
+        setLoading(false);
+      }
+    })();
+  }, [currentAddress, denom, articulate, accounting, staging, reversed, max_records]);
+
+  useEffect(() => {
+    (async () => {
+      if (totalRecords && transactions.data.length < totalRecords) {
         const eitherResponse = await runCommand('export', {
           addrs: currentAddress,
           fmt: 'json',
@@ -72,18 +83,20 @@ export const AccountsView = () => {
           articulate: articulate,
           accounting: accounting,
           reversed: reversed,
-          max_records: max_records,
-          first_record: 0,
+          first_record: transactions?.data?.length,
+          max_records: 20,
         });
         const result: Result = pipe(
           eitherResponse,
           Either.fold(toFailedResult, (serverResponse) => toSuccessfulData(serverResponse) as Result)
         );
-        setTransactions(result);
-        setLoading(false);
+        let newTransactions = { ...transactions };
+        //@ts-ignore
+        newTransactions.data = [...newTransactions.data, ...result.data];
+        setTransactions(newTransactions);
       }
     })();
-  }, [currentAddress, denom, articulate, accounting, staging, reversed, max_records]);
+  }, [totalRecords, transactions]);
 
   if (transactions.status === 'fail') {
     createErrorNotification({
@@ -126,7 +139,11 @@ export const AccountsView = () => {
           value={currentAddress}
           onChange={(e) => setCurrentAddress(e.target.value)}
         />
-        <Console style={{ position: 'absolute', right: '8px' }} />
+        <progress
+          style={{ position: 'absolute', right: '8px' }}
+          max={'100'}
+          value={((transactions.data.length / (totalRecords || 1)) * 100).toFixed(0)}
+        />
       </div>
 
       <Divider />
@@ -143,9 +160,9 @@ export const AccountsView = () => {
           <br />
           nTransactions: {theData.length}
           <br />
-          firstBlock: {theData[0].blockNumber}
+          firstBlock: {theData[0]?.blockNumber}
           <br />
-          lastBlock: {theData[theData.length - 1].blockNumber}
+          lastBlock: {theData[theData.length - 1]?.blockNumber}
           <br />
           balance: {'XXX'}
           <Divider />
@@ -162,7 +179,6 @@ export const AccountsView = () => {
           extraData={currentAddress}
           expandRender={expandRender}
         />
-        );
       </div>
     </div>
   );
@@ -257,11 +273,14 @@ export const renderStatements = (statements: ReconciliationArray) => {
   return (
     <table className={style.table}>
       <tbody>
-        {statements?.map((statement) => {
+        {statements?.map((statement, i) => {
           let show = true;
           return (
             <Statement
-              key={statement.blockNumber * 100000 + statement.transactionIndex + statement.assetSymbol}
+              key={
+                statement.blockNumber * 100000 + statement.transactionIndex + statement.assetSymbol ||
+                `${i}-${Math.random()}`
+              }
               statement={statement}
             />
           );
@@ -304,26 +323,26 @@ const Statement = ({ statement }: { statement: Reconciliation }) => {
   const styles = useStyles();
 
   return (
-    <tr className={styles.row} key={statement.assetSymbol}>
-      <td key={1} className={styles.col} style={{ width: '12%' }}>
+    <tr className={styles.row} key={statement.assetSymbol || Math.random()}>
+      <td key={`${1}-${Math.random()}`} className={styles.col} style={{ width: '12%' }}>
         {statement.assetSymbol?.slice(0, 5)}
       </td>
-      <td key={2} className={styles.col} style={{ width: '17%' }}>
+      <td key={`${2}-${Math.random()}`} className={styles.col} style={{ width: '17%' }}>
         {clip(statement.begBal)}
       </td>
-      <td key={5} className={styles.col} style={{ width: '17%' }}>
+      <td key={`${3}-${Math.random()}`} className={styles.col} style={{ width: '17%' }}>
         {totalIn1(statement)}
       </td>
-      <td key={3} className={styles.col} style={{ width: '17%' }}>
+      <td key={`${4}-${Math.random()}`} className={styles.col} style={{ width: '17%' }}>
         {totalOut1(statement)}
       </td>
-      <td key={4} className={styles.col} style={{ width: '17%' }}>
+      <td key={`${5}-${Math.random()}`} className={styles.col} style={{ width: '17%' }}>
         {clip(statement.gasCostOut, true)}
       </td>
-      <td key={6} className={styles.col} style={{ width: '17%' }}>
+      <td key={`${6}-${Math.random()}`} className={styles.col} style={{ width: '17%' }}>
         {clip(statement.endBal)}
       </td>
-      <td key={7} className={styles.col} style={{ width: '4%' }}>
+      <td key={`${7}-${Math.random()}`} className={styles.col} style={{ width: '4%' }}>
         <ReconIcon reconciled={statement.reconciled} />
       </td>
     </tr>

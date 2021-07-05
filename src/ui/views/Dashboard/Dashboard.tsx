@@ -1,5 +1,5 @@
 import { BaseView } from '@components/BaseView';
-import React, { useState } from 'react';
+import React from 'react';
 import {
   DashboardAccountsLocation,
   DashboardCollectionsLocation,
@@ -8,6 +8,7 @@ import {
   DashboardMonitorsLocation,
   DashboardOverviewLocation,
 } from '../../locations';
+import useGlobalState from '../../state';
 import { cookieVars } from '../../utils';
 import { AccountsView } from './Tabs/Accounts/Accounts';
 import { Collections } from './Tabs/Collections';
@@ -16,13 +17,14 @@ import { Monitors } from './Tabs/Monitors';
 import { Overview } from './Tabs/Overview';
 
 export const DashboardView = ({ match }: { match?: any }) => {
+  const { accountAddresses } = useGlobalState();
   const title = 'Dashboard';
   var tabs = [
     { name: 'Overview', location: DashboardOverviewLocation, component: <Overview />, disabled: false },
     {
       name: 'Accounts',
       location: DashboardAccountsLocation,
-      component: <AccountsView />,
+      component: <AccountsView initAddress={accountAddresses[0]} />,
       disabled: false,
     },
     { name: 'Monitors', location: DashboardMonitorsLocation, component: <Monitors />, disabled: false },
