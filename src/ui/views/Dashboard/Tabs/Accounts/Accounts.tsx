@@ -19,17 +19,18 @@ import { AccountTransactions } from './SubTabs/Transactions';
 
 const { TabPane } = Tabs;
 
-export const AccountsView = ({ initAddress }: { initAddress: string }) => {
+export const AccountsView = () => {
   const [accounting, setAccounting] = useState(true);
   const [staging, setStaging] = useState(false);
   const [denom, setDenom] = useState('ether');
-  const [currentAddress, setCurrentAddress] = useState(initAddress);
   const emptyData = { data: [{}], meta: {} };
   const [transactions, setTransactions] = useState<Result>(toSuccessfulData(emptyData));
   const [loading, setLoading] = useState(false);
   const location = useLocation();
   const parts = location.pathname.split('/');
   const [totalRecords, setTotalRecords] = useState<null | number>(null);
+  const { accountAddress, setAccountAddress } = useGlobalState();
+  // const [currentAddress, setCurrentAddress] = useState(accountAddress);
 
   const onAccounting = () => setAccounting(!accounting);
   const onStaging = () => setStaging(!staging);
@@ -44,12 +45,12 @@ export const AccountsView = ({ initAddress }: { initAddress: string }) => {
 
   useEffect(() => {
     (async () => {
-      if (currentAddress.slice(0, 2) === '0x') {
+      if (accountAddress.slice(0, 2) === '0x') {
         setLoading(true);
         const eitherResponse = await runCommand('list', {
           count: true,
           appearances: true,
-          addrs: currentAddress,
+          addrs: accountAddress,
         });
         const result: Result = pipe(
           eitherResponse,
@@ -60,13 +61,13 @@ export const AccountsView = ({ initAddress }: { initAddress: string }) => {
         setLoading(false);
       }
     })();
-  }, [currentAddress, denom, accounting, staging]);
+  }, [accountAddress, denom, accounting, staging]);
 
   useEffect(() => {
     (async () => {
       if (totalRecords && transactions.data.length < totalRecords) {
         const eitherResponse = await runCommand('export', {
-          addrs: currentAddress,
+          addrs: accountAddress,
           fmt: 'json',
           cache_txs: true,
           cache_traces: true,
@@ -113,12 +114,35 @@ export const AccountsView = ({ initAddress }: { initAddress: string }) => {
     { name: 'Events', location: 'events', component: <div>Events</div> },
   ];
 
+  const addressInput = (
+    <Input
+      disabled={loading}
+      placeholder={'Input an address'}
+      value={accountAddress}
+      onChange={(e) => {
+        setTransactions(toSuccessfulData(emptyData));
+        setAccountAddress(e.target.value);
+      }}
+    />
+  );
+  const progressBar = (): JSX.Element => {
+    if (transactions?.data?.length === totalRecords || totalRecords === 0) return <></>;
+    return (
+      <progress
+        style={{ position: 'absolute', right: '8px' }}
+        max={'100'}
+        value={((transactions?.data?.length / (totalRecords || 1)) * 100).toFixed(0)}
+      />
+    );
+  };
+
   const getData = useCallback((response) => (response.status === 'fail' ? [] : response.data), []);
-  const theData = getData(transactions).filter((record: Transaction) => record.blockNumber !== undefined);
+  const theData = getData(transactions); // .filter((record: Transaction) => record.blockNumber !== undefined);
   const getMeta = useCallback((response) => (response.status === 'fail' ? [] : response.meta), []);
   const expandRender = (record: any) => <AccountTransactions record={record} />;
   return (
     <div>
+      <AddressBar input={addressInput} progress={progressBar()} />
       <Checkbox checked={accounting} onChange={(event) => onAccounting()}>
         accounting
       </Checkbox>
@@ -131,21 +155,6 @@ export const AccountsView = ({ initAddress }: { initAddress: string }) => {
       <Checkbox checked={denom === 'dollars'} onChange={(event) => onDollars()}>
         dollars
       </Checkbox>
-      <div style={{ marginTop: '8px', display: 'flex', alignItems: 'center', position: 'relative' }}>
-        <h3 style={{ marginRight: '12px', flexShrink: 0 }}>Viewing account:</h3>
-        <Input
-          disabled={loading}
-          placeholder={'Input an address'}
-          value={currentAddress}
-          onChange={(e) => setCurrentAddress(e.target.value)}
-        />
-        <progress
-          style={{ position: 'absolute', right: '8px' }}
-          max={'100'}
-          value={((transactions.data.length / (totalRecords || 1)) * 100).toFixed(0)}
-        />
-      </div>
-
       <Divider />
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 14fr' }}>
         <div>
@@ -155,9 +164,9 @@ export const AccountsView = ({ initAddress }: { initAddress: string }) => {
             Summary for
             <br />
             <div style={{ width: '40px' }}> </div>
-            {currentAddress.slice(0, 6) +
+            {accountAddress.slice(0, 6) +
               '...' +
-              currentAddress.slice(currentAddress.length - 5, currentAddress.length - 1)}
+              accountAddress.slice(accountAddress.length - 5, accountAddress.length - 1)}
           </b>
           <br />
           nTransactions: {theData.length}
@@ -172,10 +181,20 @@ export const AccountsView = ({ initAddress }: { initAddress: string }) => {
           data={theData}
           columns={transactionSchema}
           loading={loading}
-          extraData={currentAddress}
+          extraData={accountAddress}
           expandRender={expandRender}
         />
       </div>
+    </div>
+  );
+};
+
+const AddressBar = ({ input, progress }: { input: JSX.Element; progress: JSX.Element }) => {
+  return (
+    <div style={{ marginTop: '8px', display: 'flex', alignItems: 'center', position: 'relative' }}>
+      <h3 style={{ marginRight: '12px', flexShrink: 0 }}>Accounting for </h3>
+      {input}
+      {progress}
     </div>
   );
 };
@@ -193,7 +212,7 @@ const TinyTabs = ({ tabs }: { tabs: ViewTab[] }) => {
 export const renderAsNamedAddress = (address: string, acctFor: string) => {
   const { names } = useGlobalState();
 
-  const name = names[address] && names[address].name;
+  const name = names && names[address] && names[address].name;
   let style = { color: name && name !== '' ? 'blue' : 'grey', fontWeight: 500 };
   if (address === acctFor) {
     style = { color: 'green', fontWeight: 800 };
@@ -265,6 +284,8 @@ export const transactionSchema: ColumnsType<Transaction> = [
     dataIndex: 'compressedTx',
     configuration: {
       render: (item, record) => {
+        if (item === '' && record.from === '0xBlockReward') item = '0xBlockReward';
+        if (item === '' && record.from === '0xUncleReward') item = '0xUncleReward';
         return (
           <div style={{ border: '1px solid brown' }}>
             <div style={{ fontSize: '12pt', fontWeight: 600, backgroundColor: 'indianred', color: 'yellow' }}>
@@ -322,27 +343,6 @@ const ReconIcon = ({ reconciled }: { reconciled: boolean }) => {
   );
 };
 
-function totalIn1(st: Reconciliation) {
-  return (
-    Number(st['amountIn']) +
-    Number(st['internalIn']) +
-    Number(st['selfDestructIn']) +
-    Number(st['minerBaseRewardIn']) +
-    Number(st['minerNephewRewardIn']) +
-    Number(st['minerTxFeeIn']) +
-    Number(st['minerUncleRewardIn']) +
-    Number(st['prefundIn'])
-  ).toString();
-}
-
-//----------------------------------------------------------------------------
-function totalOut1(st: Reconciliation) {
-  return (
-    // Number(st['gasCostOut']) +
-    (Number(st['amountOut']) + Number(st['internalOut']) + Number(st['selfDestructOut'])).toString()
-  );
-}
-
 const Statement = ({ statement }: { statement: Reconciliation }) => {
   const styles = useStyles();
 
@@ -355,10 +355,10 @@ const Statement = ({ statement }: { statement: Reconciliation }) => {
         {clip(statement.begBal)}
       </td>
       <td key={`${3}-${Math.random()}`} className={styles.col} style={{ width: '17%' }}>
-        {totalIn1(statement)}
+        {clip(statement.totalIn)}
       </td>
       <td key={`${4}-${Math.random()}`} className={styles.col} style={{ width: '17%' }}>
-        {totalOut1(statement)}
+        {clip(statement.totalOut)}
       </td>
       <td key={`${5}-${Math.random()}`} className={styles.col} style={{ width: '17%' }}>
         {clip(statement.gasCostOut, true)}

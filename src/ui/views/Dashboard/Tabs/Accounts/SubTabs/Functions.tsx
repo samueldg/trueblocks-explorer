@@ -64,9 +64,9 @@ const showInput = (record: Transaction) => {
   const comp = <div>{JSON.stringify(record.compressedTx).replace(/"/g, '')}</div>;
   return (
     <div>
-      {oneItem('Input bytes', bytes)}
-      {oneItem('Compressed Tx', comp)}
       {oneItem('Json Object', json)}
+      {oneItem('Compressed Tx', comp)}
+      {oneItem('Input bytes', bytes)}
     </div>
   );
 };
@@ -75,7 +75,9 @@ const showInput = (record: Transaction) => {
 const oneItem = (title: string, component: React.ReactElement) => {
   return (
     <div>
-      <b>{title}:</b>
+      <b>
+        <u>{title}:</u>
+      </b>
       {component}
       <br />
     </div>

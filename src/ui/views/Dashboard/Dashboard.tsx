@@ -1,5 +1,5 @@
 import { BaseView } from '@components/BaseView';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   DashboardAccountsLocation,
   DashboardCollectionsLocation,
@@ -13,14 +13,21 @@ import { Collections } from './Tabs/Collections';
 import { Monitors } from './Tabs/Monitors';
 
 export const DashboardView = ({ match }: { match?: any }) => {
-  const { accountAddress } = useGlobalState();
-  const title = 'Dashboard';
+  const { accountAddress, names } = useGlobalState();
+  const [named, setNamed] = useState('');
+
+  useEffect(() => {
+    const name = names && names[accountAddress];
+    if (name) setNamed(name.name);
+  }, [accountAddress, names]);
+
+  const title = `Dashboard [${accountAddress} ${named}]`;
   var tabs = [
     { name: 'Monitors', location: DashboardMonitorsLocation, component: <Monitors />, disabled: false },
     {
       name: 'Account Details',
       location: DashboardAccountsLocation,
-      component: <AccountsView initAddress={accountAddress} />,
+      component: <AccountsView />,
       disabled: false,
     },
     { name: 'Collections', location: DashboardCollectionsLocation, component: <Collections />, disabled: false },
