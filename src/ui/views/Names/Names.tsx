@@ -7,7 +7,7 @@ import {
   NamesFuncSigsLocation,
   NamesLocation,
   NamesTagsLocation,
-} from '../../locations';
+} from '../../Routes';
 import { cookieVars } from '../../utils';
 import { Addresses } from './Tabs/Addresses';
 import { EventSignatures } from './Tabs/EventSignatures';

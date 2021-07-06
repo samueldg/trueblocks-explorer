@@ -7,7 +7,7 @@ import { Name } from '@modules/types';
 import { Button, Input, Space } from 'antd';
 import { ColumnsType } from 'antd/lib/table';
 import React, { useCallback, useRef, useState } from 'react';
-import { DashboardAccountsAddressLocation } from '../../../locations';
+import { DashboardAccountsAddressLocation } from '../../../Routes';
 import './Addresses.css';
 
 export const Addresses = () => {

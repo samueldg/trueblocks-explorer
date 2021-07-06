@@ -5,7 +5,7 @@ import {
   DashboardCollectionsLocation,
   DashboardLocation,
   DashboardMonitorsLocation,
-} from '../../locations';
+} from '../../Routes';
 import useGlobalState from '../../state';
 import { cookieVars } from '../../utils';
 import { AccountsView } from './Tabs/Accounts/Accounts';

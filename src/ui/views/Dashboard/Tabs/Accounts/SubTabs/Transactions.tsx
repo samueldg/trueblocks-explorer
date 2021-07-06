@@ -6,7 +6,7 @@ import {
   AccountReconsLocation,
   AccountTracesLocation,
   DashboardAccountsLocation,
-} from '../../../../../locations';
+} from '../../../../../Routes';
 import { AccountFunctions } from './Functions';
 import { AccountGas } from './Gas';
 import { AccountRecons } from './Recons';

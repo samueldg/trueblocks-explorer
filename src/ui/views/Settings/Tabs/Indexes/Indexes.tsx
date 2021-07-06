@@ -5,7 +5,7 @@ import {
   SettingsIndexesLocation,
   SettingsIndexGridLocation,
   SettingsIndexTableLocation,
-} from '../../../../locations';
+} from '../../../../Routes';
 import { cookieVars } from '../../../../utils';
 import { IndexCharts } from './Tabs/IndexCharts';
 import { IndexGrid } from './Tabs/IndexGrid';

@@ -36,7 +36,7 @@ import {
   SupportHotKeysLocation,
   SupportLicensingLocation,
   SupportLocation,
-} from '../../locations';
+} from '../../Routes';
 
 export const helpRoutes = [
   {

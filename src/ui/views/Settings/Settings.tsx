@@ -7,10 +7,10 @@ import {
   SettingsSchemasLocation,
   SettingsScrapersLocation,
   SettingsSkinsLocation,
-} from '../../locations';
+} from '../../Routes';
 import { cookieVars } from '../../utils';
-import { IndexesView } from './Tabs/Indexes/Indexes';
 import { Caches } from './Tabs/Caches';
+import { IndexesView } from './Tabs/Indexes/Indexes';
 import { Schemas } from './Tabs/Schemas';
 import { Scrapers } from './Tabs/Scrapers';
 import { Skins } from './Tabs/Skins';

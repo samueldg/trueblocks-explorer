@@ -7,7 +7,7 @@ import {
   ExplorerReceiptsLocation,
   ExplorerTracesLocation,
   ExplorerTransactionsLocation,
-} from '../../locations';
+} from '../../Routes';
 import { cookieVars } from '../../utils';
 import { Blocks } from './Tabs/Blocks';
 import { Logs } from './Tabs/Logs';

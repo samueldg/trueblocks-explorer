@@ -7,7 +7,7 @@ import {
   SupportHotKeysLocation,
   SupportLicensingLocation,
   SupportLocation,
-} from '../..//locations';
+} from '../../Routes';
 import { cookieVars } from '../../utils';
 import { About } from './Tabs/About';
 import { Contact } from './Tabs/Contact';

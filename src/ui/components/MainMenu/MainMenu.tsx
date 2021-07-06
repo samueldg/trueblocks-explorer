@@ -2,7 +2,7 @@ import { BookOutlined, CameraOutlined, PhoneOutlined, SettingOutlined, Unordered
 import { Menu } from 'antd';
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { ExplorerLocation, NamesLocation, RootLocation, SettingsLocation, SupportLocation } from '../../locations';
+import { ExplorerLocation, NamesLocation, RootLocation, SettingsLocation, SupportLocation } from '../../Routes';
 
 export const MainMenu = () => (
   <Menu mode='inline'>

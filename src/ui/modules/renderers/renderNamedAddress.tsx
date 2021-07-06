@@ -1,7 +1,7 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
+import { DashboardAccountsAddressLocation } from '../../Routes';
 import useGlobalState from '../../state';
-import { DashboardAccountsAddressLocation } from '../../locations';
 
 export const renderNamedAddress = (record: any, location: string) => {
   const history = useHistory();

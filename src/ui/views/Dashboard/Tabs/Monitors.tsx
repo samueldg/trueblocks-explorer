@@ -5,7 +5,7 @@ import { renderNamedAddress } from '@modules/renderers';
 import { Monitor } from '@modules/types';
 import { ColumnsType } from 'antd/lib/table';
 import React, { useCallback } from 'react';
-import { DashboardAccountsAddressLocation } from '../../../locations';
+import { DashboardAccountsAddressLocation } from '../../../Routes';
 
 export const Monitors = () => {
   const [monitors, loading] = useCommand('status', { mode: 'monitors', details: true });
