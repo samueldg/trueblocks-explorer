@@ -26,6 +26,7 @@ import {
   SettingsIndexesLocation,
   SettingsIndexGridLocation,
   SettingsIndexTableLocation,
+  SettingsIndexManifestLocation,
   SettingsLocation,
   SettingsSchemasLocation,
   SettingsScrapersLocation,
@@ -93,6 +94,10 @@ export const helpRoutes = [
   },
   {
     route: SettingsIndexChartsLocation,
+    helpText: 'Charts related to the index cache.',
+  },
+  {
+    route: SettingsIndexManifestLocation,
     helpText: 'Charts related to the index cache.',
   },
   {

@@ -1,6 +1,6 @@
+import { notification } from 'antd';
 import { either as Either, taskEither as TaskEither } from 'fp-ts';
 import { pipe } from 'fp-ts/function';
-import { notification } from 'antd';
 
 export type CoreCommand =
   | 'export'
@@ -23,8 +23,7 @@ export type CoreCommand =
   | 'tokens'
   | 'quotes'
   | 'slurp'
-  | 'where'
-  | 'dive';
+  | 'pins';
 
 export type CommandParams = Record<string, string | boolean | number>;
 

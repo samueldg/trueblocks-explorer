@@ -39,6 +39,7 @@ export const SettingsIndexesLocation = '/settings/indexes';
 export const SettingsIndexGridLocation = '/settings/indexes/grid';
 export const SettingsIndexTableLocation = '/settings/indexes/table';
 export const SettingsIndexChartsLocation = '/settings/indexes/charts';
+export const SettingsIndexManifestLocation = '/settings/indexes/manifest';
 export const SettingsCachesLocation = '/settings/caches';
 export const SettingsSkinsLocation = '/settings/skins';
 export const SettingsSchemasLocation = '/settings/schemas';
@@ -187,6 +188,11 @@ const routes = [
   },
   {
     path: SettingsIndexChartsLocation,
+    exact: true,
+    component: SettingsView,
+  },
+  {
+    path: SettingsIndexManifestLocation,
     exact: true,
     component: SettingsView,
   },
