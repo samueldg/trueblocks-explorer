@@ -20,6 +20,9 @@ export const AccountGasLocationAddress = (address: string) => `/dashboard/accoun
 export const AccountTracesLocation = '/dashboard/accounts/traces';
 export const AccountTracesLocationAddressTemplate = '/dashboard/accounts/traces/:address';
 export const AccountTracesLocationAddress = (address: string) => `/dashboard/accounts/traces/${address}`;
+export const AccountRawLocation = '/dashboard/accounts/raw';
+export const AccountRawLocationAddressTemplate = '/dashboard/accounts/raw/:address';
+export const AccountRawLocationAddress = (address: string) => `/dashboard/accounts/raw/${address}`;
 export const DashboardCollectionsLocation = '/dashboard/collections';
 export const NamesLocation = '/names';
 export const NamesAddressesLocation = '/names/addresses';
@@ -98,6 +101,11 @@ const routes = [
   },
   {
     path: AccountGasLocation,
+    exact: true,
+    component: DashboardView,
+  },
+  {
+    path: AccountRawLocation,
     exact: true,
     component: DashboardView,
   },
@@ -289,6 +297,10 @@ export const helpRoutes = [
   {
     route: DashboardAccountsLocation,
     helpText: 'View the transactional history of an account.',
+  },
+  {
+    route: AccountRawLocation,
+    helpText: 'View the raw transaction.',
   },
   {
     route: AccountTracesLocation,

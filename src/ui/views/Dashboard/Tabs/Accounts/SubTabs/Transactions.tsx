@@ -3,6 +3,7 @@ import React from 'react';
 import {
   AccountFunctionsLocation,
   AccountGasLocation,
+  AccountRawLocation,
   AccountReconsLocation,
   AccountTracesLocation,
   DashboardAccountsLocation,
@@ -25,7 +26,8 @@ export const AccountTransactions = ({ record }: any) => {
       location: AccountGasLocation,
       component: <AccountGas record={record} />,
     },
-    { name: 'Traces', location: AccountTracesLocation, component: <div>{JSON.stringify(record)}</div> },
+    { name: 'Raw', location: AccountRawLocation, component: <pre>{JSON.stringify(record, null, 2)}</pre> },
+    { name: 'Traces', location: AccountTracesLocation, component: <pre>{JSON.stringify(record.traces, null, 2)}</pre> },
   ];
   return (
     <BaseView
