@@ -194,7 +194,7 @@ export const renderAsNamedAddress = (address: string, acctFor: string) => {
   const { names } = useGlobalState();
 
   const name = names[address] && names[address].name;
-  const style = { color: address === acctFor ? 'red' : name && name !== '' ? 'blue' : 'grey' };
+  const style = { color: address === acctFor ? 'green' : name && name !== '' ? 'blue' : 'grey' };
   if (name && name !== '') {
     return (
       <div style={style}>
@@ -271,7 +271,7 @@ export const transactionSchema: ColumnsType<Transaction> = [
           </div>
         );
       },
-      width: 900,
+      width: 600,
     },
   }),
   addColumn({
