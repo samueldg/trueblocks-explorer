@@ -25,6 +25,8 @@ export declare type Reconciliation = {
   endBalCalc: int256;
   endBalDiff: int256;
   amountNet: int256;
+  totalIn: int256;
+  totalOut: int256;
   reconciliationType: string;
   reconciled: boolean;
 };
