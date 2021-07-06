@@ -50,7 +50,7 @@ export const App = () => {
 
   useEffect(() => {
     (async () => {
-      const eitherResponse = await runCommand('names');
+      const eitherResponse = await runCommand('names', { expand: true, all: true });
       const result: Result = pipe(
         eitherResponse,
         Either.fold(toFailedResult, (serverResponse) => toSuccessfulData(serverResponse) as Result)

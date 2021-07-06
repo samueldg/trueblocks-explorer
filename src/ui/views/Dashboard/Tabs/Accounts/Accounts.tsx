@@ -14,7 +14,8 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { createUseStyles } from 'react-jss';
 import { useLocation } from 'react-router-dom';
 import style from 'react-syntax-highlighter/dist/esm/styles/hljs/a11y-dark';
-import { AccountTransactions } from './Tabs/Transactions';
+import useGlobalState from '../../../../state';
+import { AccountTransactions } from './SubTabs/Transactions';
 
 const { TabPane } = Tabs;
 
@@ -29,7 +30,6 @@ export const AccountsView = ({ initAddress }: { initAddress: string }) => {
   const location = useLocation();
   const parts = location.pathname.split('/');
   const [totalRecords, setTotalRecords] = useState<null | number>(null);
-  const address = parts[parts.length - 1];
 
   const onAccounting = () => setAccounting(!accounting);
   const onStaging = () => setStaging(!staging);
@@ -87,7 +87,7 @@ export const AccountsView = ({ initAddress }: { initAddress: string }) => {
           eitherResponse,
           Either.fold(toFailedResult, (serverResponse) => toSuccessfulData(serverResponse) as Result)
         );
-        let newTransactions = { ...transactions };
+        let newTransactions: Result = { ...transactions };
         //@ts-ignore
         newTransactions.data = [...newTransactions.data, ...result.data];
         setTransactions(newTransactions);
@@ -114,7 +114,7 @@ export const AccountsView = ({ initAddress }: { initAddress: string }) => {
   ];
 
   const getData = useCallback((response) => (response.status === 'fail' ? [] : response.data), []);
-  const theData = getData(transactions);
+  const theData = getData(transactions).filter((record: Transaction) => record.blockNumber !== undefined);
   const getMeta = useCallback((response) => (response.status === 'fail' ? [] : response.meta), []);
   const expandRender = (record: any) => <AccountTransactions record={record} />;
   return (
@@ -149,6 +149,8 @@ export const AccountsView = ({ initAddress }: { initAddress: string }) => {
       <Divider />
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 14fr' }}>
         <div>
+          <TinyTabs tabs={tinyTabs} />
+          <Divider />
           <b>
             Summary for
             <br />
@@ -165,11 +167,9 @@ export const AccountsView = ({ initAddress }: { initAddress: string }) => {
           lastBlock: {theData && theData.length > 0 && theData[theData.length - 1].blockNumber}
           <br />
           balance: {'XXX'}
-          <Divider />
-          <TinyTabs tabs={tinyTabs} />
         </div>
         <BaseTable
-          data={getData(transactions)}
+          data={theData}
           columns={transactionSchema}
           loading={loading}
           extraData={currentAddress}
@@ -190,6 +190,22 @@ const TinyTabs = ({ tabs }: { tabs: ViewTab[] }) => {
   );
 };
 
+export const renderAsNamedAddress = (address: string, acctFor: string) => {
+  const { names } = useGlobalState();
+
+  const name = names[address] && names[address].name;
+  const style = { color: address === acctFor ? 'red' : name && name !== '' ? 'blue' : 'grey' };
+  if (name && name !== '') {
+    return (
+      <div style={style}>
+        {'[' + address.substr(0, 6) + '...' + address.substr(address.length - 4, address.length) + '] '}
+        <i>{name}</i>
+      </div>
+    );
+  }
+  return <div style={style}>{address}</div>;
+};
+
 export const transactionSchema: ColumnsType<Transaction> = [
   addColumn({
     title: 'Date',
@@ -207,22 +223,21 @@ export const transactionSchema: ColumnsType<Transaction> = [
           </pre>
         );
       },
-      width: 250,
+      width: 200,
     },
   }),
   addColumn({
     title: 'From / To',
     dataIndex: 'from',
     configuration: {
-      width: 400,
-      render: (value: any, record: Transaction) => {
+      width: 425,
+      render: (unused: any, record: Transaction) => {
         if (!record) return <div></div>;
-        const from = value === record.extraData ? <div style={{ color: 'red' }}>{value}</div> : value;
-        const to = record.to === record.extraData ? <div style={{ color: 'red' }}>{record.to}</div> : record.to;
+        const to = record.to === record.extraData ? <div style={style}>{record.to}</div> : record.to;
         return (
           <pre>
-            <div>{from}</div>
-            <div>{to}</div>
+            {renderAsNamedAddress(record.from, record.extraData)}
+            {renderAsNamedAddress(record.to, record.extraData)}
           </pre>
         );
       },
