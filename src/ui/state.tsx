@@ -6,11 +6,12 @@ const GlobalStateContext = createContext<any[]>([]);
 
 const THEME = Cookies.get('theme');
 const DEBUG = Cookies.get('debug') === 'true' ? true : false;
+const ADDRESS = Cookies.get('address');
 
 const initialState = {
   theme: THEME || null,
   debug: DEBUG || false,
-  accountAddress: '0xf503017d7baf7fbc0fff7492b751025c6a78179b',
+  accountAddress: ADDRESS || null,
   names: null,
 };
 
@@ -29,6 +30,7 @@ const GlobalStateReducer = (state: any, action: any) => {
         debug: action.debug,
       };
     case 'SET_ACCOUNT_ADDRESS':
+      Cookies.set('address', action.address);
       return {
         ...state,
         accountAddress: action.address,
