@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { DashboardAccountsAddressLocation } from '../../Routes';
 import useGlobalState from '../../state';
 
-export const renderNamedAddress = (record: any, location: string) => {
+export const renderNamedAddress = (record: any) => {
   const history = useHistory();
   const { setAccountAddress } = useGlobalState();
   return (

@@ -6,9 +6,7 @@ import { renderNamedAddress } from '@modules/renderers';
 import { Monitor } from '@modules/types';
 import { Button, Input, Space } from 'antd';
 import { ColumnsType } from 'antd/lib/table';
-import { any } from 'prop-types';
-import React, { useCallback, useState, useRef } from 'react';
-import { DashboardAccountsAddressLocation } from '../../../Routes';
+import React, { useCallback, useRef, useState } from 'react';
 
 export const Monitors = () => {
   const [monitors, loading] = useCommand('status', { mode: 'monitors', details: true });
@@ -111,7 +109,7 @@ const monitorSchema: ColumnsType<Monitor> = [
     title: 'Name / Address',
     dataIndex: 'nameaddr',
     configuration: {
-      render: (unused, record) => renderNamedAddress(record, DashboardAccountsAddressLocation(record.address)),
+      render: (unused, record) => renderNamedAddress(record),
       width: 500,
     },
   }),

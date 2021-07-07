@@ -1,20 +1,18 @@
 import { SearchOutlined } from '@ant-design/icons';
 import { addActionsColumn, addColumn, addFlagColumn, addTagsColumn, BaseTable, TableActions } from '@components/Table';
-import { useCommand } from '@hooks/useCommand';
+import { Result, toFailedResult, toSuccessfulData } from '@hooks/useCommand';
+import { runCommand } from '@modules/core';
 import { createErrorNotification } from '@modules/error_notification';
 import { renderNamedAddress } from '@modules/renderers';
 import { Name } from '@modules/types';
 import { Button, Input, Space, Spin } from 'antd';
 import Modal from 'antd/lib/modal/Modal';
 import { ColumnsType } from 'antd/lib/table';
-import React, { useCallback, useRef, useState, useEffect } from 'react';
-import useGlobalState from '../../../state';
-import { DashboardAccountsAddressLocation } from '../../../Routes';
-import './Addresses.css';
-import { runCommand } from '@modules/core';
-import { pipe } from 'fp-ts/lib/function';
 import { either as Either } from 'fp-ts';
-import { Result, toFailedResult, toSuccessfulData } from '@hooks/useCommand';
+import { pipe } from 'fp-ts/lib/function';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
+import useGlobalState from '../../../state';
+import './Addresses.css';
 
 export const Addresses = () => {
   const [searchText, setSearchText] = useState('');
@@ -232,7 +230,7 @@ const addressSchema: ColumnsType<Name> = [
     title: 'Name / Address',
     dataIndex: 'nameaddr',
     configuration: {
-      render: (unused, record) => renderNamedAddress(record, DashboardAccountsAddressLocation(record.address)),
+      render: (unused, record) => renderNamedAddress(record),
       width: 500,
     },
   }),

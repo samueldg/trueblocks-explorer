@@ -1,12 +1,12 @@
 import { BaseView } from '@components/BaseView';
 import React from 'react';
 import {
-  AccountFunctionsLocation,
-  AccountGasLocation,
-  AccountRawLocation,
-  AccountReconsLocation,
-  AccountTracesLocation,
+  DashboardAccountFunctionsLocation,
+  DashboardAccountGasLocation,
+  DashboardAccountRawLocation,
+  DashboardAccountReconsLocation,
   DashboardAccountsLocation,
+  DashboardAccountTracesLocation,
 } from '../../../../../Routes';
 import { AccountFunctions } from './Functions';
 import { AccountGas } from './Gas';
@@ -17,22 +17,30 @@ export const AccountTransactions = ({ record }: any) => {
   const tabs = [
     {
       name: 'Reconciliations',
-      location: AccountReconsLocation,
+      location: DashboardAccountReconsLocation,
       component: <AccountRecons record={record} />,
     },
-    { name: 'Functions / Events', location: AccountFunctionsLocation, component: <AccountFunctions record={record} /> },
+    {
+      name: 'Functions / Events',
+      location: DashboardAccountFunctionsLocation,
+      component: <AccountFunctions record={record} />,
+    },
     {
       name: 'Gas Accounting',
-      location: AccountGasLocation,
+      location: DashboardAccountGasLocation,
       component: <AccountGas record={record} />,
     },
-    { name: 'Raw', location: AccountRawLocation, component: <pre>{JSON.stringify(record, null, 2)}</pre> },
-    { name: 'Traces', location: AccountTracesLocation, component: <pre>{JSON.stringify(record.traces, null, 2)}</pre> },
+    { name: 'Raw', location: DashboardAccountRawLocation, component: <pre>{JSON.stringify(record, null, 2)}</pre> },
+    {
+      name: 'Traces',
+      location: DashboardAccountTracesLocation,
+      component: <pre>{JSON.stringify(record.traces, null, 2)}</pre>,
+    },
   ];
   return (
     <BaseView
       title={title}
-      defaultActive={AccountFunctionsLocation}
+      defaultActive={DashboardAccountFunctionsLocation}
       baseActive={DashboardAccountsLocation}
       cookieName={'shit'} //cookieVars.explorer_current_tab}
       tabs={tabs}
