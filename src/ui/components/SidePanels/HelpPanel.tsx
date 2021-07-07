@@ -1,12 +1,12 @@
 import { Loading } from '@components/Loading';
 import React from 'react';
 import { useLocation } from 'react-router-dom';
-import { helpRoutes } from '../../Routes';
+import { routes } from '../../Routes';
 
 export const HelpPanel = () => {
   const location = useLocation();
-  const matchedRoute = helpRoutes.find((item) => location.pathname.endsWith(item.route));
-  const url = matchedRoute && new URL('docs/explorer' + matchedRoute.route, 'https://docs.trueblocks.io/');
+  const matchedRoute = routes.find((item: any) => location.pathname.endsWith(item.path));
+  const url = matchedRoute && new URL('docs/explorer' + matchedRoute.path, 'https://docs.trueblocks.io/');
 
   return (
     <Loading loading={false}>

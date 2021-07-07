@@ -1,6 +1,6 @@
 import { CheckCircleFilled, CloseCircleFilled } from '@ant-design/icons';
 import { ViewTab } from '@components/BaseView';
-import { addColumn, addFlagColumn, BaseTable } from '@components/Table';
+import { addColumn, BaseTable } from '@components/Table';
 import { Result, toFailedResult, toSuccessfulData } from '@hooks/useCommand';
 import { runCommand } from '@modules/core';
 import { createErrorNotification } from '@modules/error_notification';
@@ -22,7 +22,7 @@ export const AccountsView = () => {
   const [staging, setStaging] = useState(false);
   const [denom, setDenom] = useState('ether');
   const emptyData = { data: [{}], meta: {} };
-  const [transactions, setTransactions] = useState<Result>(toSuccessfulData(emptyData));
+  const [transactions, setTransactions] = useState<Result | null>(null);
   const [loading, setLoading] = useState(false);
   const [totalRecords, setTotalRecords] = useState<null | number>(null);
   const { accountAddress, setAccountAddress } = useGlobalState();
@@ -39,7 +39,7 @@ export const AccountsView = () => {
 
   useEffect(() => {
     (async () => {
-      if (accountAddress.slice(0, 2) === '0x') {
+      if (accountAddress?.slice(0, 2) === '0x') {
         setLoading(true);
         const eitherResponse = await runCommand('list', {
           count: true,
@@ -59,7 +59,7 @@ export const AccountsView = () => {
 
   useEffect(() => {
     (async () => {
-      if (totalRecords && transactions.data.length < totalRecords) {
+      if (totalRecords && (transactions?.data.length || 0) < totalRecords) {
         const eitherResponse = await runCommand('export', {
           addrs: accountAddress,
           fmt: 'json',
@@ -72,9 +72,9 @@ export const AccountsView = () => {
           articulate: true,
           accounting: true,
           reversed: false,
-          first_record: transactions?.data?.length,
+          first_record: transactions?.data?.length || 0,
           max_records:
-            transactions?.data?.length < 100
+            (transactions?.data?.length || 0) < 100
               ? 10
               : 31 /* an arbitrary number not too big, not too small, that appears not to repeat */,
         });
@@ -82,15 +82,16 @@ export const AccountsView = () => {
           eitherResponse,
           Either.fold(toFailedResult, (serverResponse) => toSuccessfulData(serverResponse) as Result)
         );
-        let newTransactions: Result = { ...transactions };
+        let newTransactions: Result = transactions?.data ? { ...transactions } : toSuccessfulData(emptyData);
         //@ts-ignore
-        newTransactions.data = [...newTransactions.data, ...result.data];
+        newTransactions.data =
+          newTransactions.data.length === 1 ? [...result.data] : [...newTransactions.data, ...result.data];
         setTransactions(newTransactions);
       }
     })();
   }, [totalRecords, transactions, denom, staging]);
 
-  if (transactions.status === 'fail') {
+  if (transactions?.status === 'fail') {
     createErrorNotification({
       description: 'Could not fetch transactions',
     });
@@ -119,20 +120,21 @@ export const AccountsView = () => {
       }}
     />
   );
+
   const progressBar = (): JSX.Element => {
     if (transactions?.data?.length === totalRecords || totalRecords === 0) return <></>;
     return (
       <progress
         style={{ position: 'absolute', right: '8px' }}
         max={'100'}
-        value={((transactions?.data?.length / (totalRecords || 1)) * 100).toFixed(0)}
+        value={((transactions?.data?.length || 1 / (totalRecords || 1)) * 100).toFixed(0)}
       />
     );
   };
 
-  const getData = useCallback((response) => (response.status === 'fail' ? [] : response.data), []);
+  const getData = useCallback((response) => (response?.status === 'fail' ? [] : response?.data), []);
   const theData = getData(transactions); // .filter((record: Transaction) => record.blockNumber !== undefined);
-  const getMeta = useCallback((response) => (response.status === 'fail' ? [] : response.meta), []);
+  const getMeta = useCallback((response) => (response?.status === 'fail' ? [] : response?.meta), []);
   const expandRender = (record: any) => <AccountTransactions record={record} />;
   return (
     <div>
@@ -147,7 +149,7 @@ export const AccountsView = () => {
         dollars
       </Checkbox>
       <Divider />
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 14fr' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 7fr' }}>
         <div>
           <TinyTabs tabs={tinyTabs} />
           <Divider />
@@ -155,12 +157,12 @@ export const AccountsView = () => {
             Summary for
             <br />
             <div style={{ width: '40px' }}> </div>
-            {accountAddress.slice(0, 6) +
+            {accountAddress?.slice(0, 6) +
               '...' +
-              accountAddress.slice(accountAddress.length - 5, accountAddress.length - 1)}
+              accountAddress?.slice(accountAddress.length - 5, accountAddress.length - 1)}
           </b>
           <br />
-          nTransactions: {theData.length}
+          nTransactions: {theData?.length}
           <br />
           firstBlock: {theData && theData.length > 0 && theData[0].blockNumber}
           <br />
@@ -174,10 +176,15 @@ export const AccountsView = () => {
           loading={loading}
           extraData={accountAddress}
           expandRender={expandRender}
+          siderRender={null}
         />
       </div>
     </div>
   );
+};
+
+const siderRender = (record: Transaction) => {
+  return record.blockNumber + '.' + record.transactionIndex;
 };
 
 const AddressBar = ({ input, progress }: { input: JSX.Element; progress: JSX.Element }) => {
@@ -224,6 +231,7 @@ export const transactionSchema: ColumnsType<Transaction> = [
     title: 'Date',
     dataIndex: 'date',
     configuration: {
+      width: '15%',
       render: (field: any, record: Transaction) => {
         if (!record) return <div></div>;
         return (
@@ -236,14 +244,13 @@ export const transactionSchema: ColumnsType<Transaction> = [
           </pre>
         );
       },
-      width: 200,
     },
   }),
   addColumn({
     title: 'From / To',
     dataIndex: 'from',
     configuration: {
-      width: 350,
+      width: '35%',
       render: (unused: any, record: Transaction) => {
         if (!record) return <div></div>;
         const to = record.to === record.extraData ? <div style={style}>{record.to}</div> : record.to;
@@ -256,24 +263,11 @@ export const transactionSchema: ColumnsType<Transaction> = [
       },
     },
   }),
-  addFlagColumn({
-    title: 'Err',
-    dataIndex: 'isError',
-    configuration: {
-      width: 50,
-    },
-  }),
-  addFlagColumn({
-    title: 'Tok',
-    dataIndex: 'hasToken',
-    configuration: {
-      width: 50,
-    },
-  }),
   addColumn({
     title: 'Reconciliations (asset, beg, in, out, gasOut, end, check)',
     dataIndex: 'compressedTx',
     configuration: {
+      width: '45%',
       render: (item, record) => {
         if (item === '' && record.from === '0xBlockReward') item = '0xBlockReward';
         if (item === '' && record.from === '0xUncleReward') item = '0xUncleReward';
@@ -286,19 +280,18 @@ export const transactionSchema: ColumnsType<Transaction> = [
           </div>
         );
       },
-      width: 600,
     },
   }),
   addColumn({
     title: '',
     dataIndex: 'statements',
     configuration: {
+      width: '5%',
       render: (item, record) => (
         <a target='_blank' href={'http://etherscan.io/tx/' + record.hash}>
           ES
         </a>
       ),
-      width: 300,
     },
   }),
 ];
@@ -310,7 +303,6 @@ export const renderStatements = (statements: ReconciliationArray) => {
     <table className={style.table}>
       <tbody>
         {statements?.map((statement, i) => {
-          let show = true;
           return (
             <Statement
               key={

@@ -11,6 +11,7 @@ import React, { useCallback, useState, useRef } from 'react';
 import useGlobalState from '../../../state';
 import { DashboardAccountsAddressLocation } from '../../../Routes';
 import Modal from 'antd/lib/modal/Modal';
+import React, { useCallback, useRef, useState } from 'react';
 
 export const Monitors = () => {
   const [monitors, loading] = useCommand('status', { mode: 'monitors', details: true });
@@ -223,7 +224,7 @@ const monitorSchema: ColumnsType<Monitor> = [
     title: 'Name / Address',
     dataIndex: 'nameaddr',
     configuration: {
-      render: (unused, record) => renderNamedAddress(record, DashboardAccountsAddressLocation(record.address)),
+      render: (unused, record) => renderNamedAddress(record),
       width: 500,
     },
   }),
