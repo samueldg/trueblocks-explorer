@@ -176,7 +176,7 @@ export const AccountsView = () => {
           loading={loading}
           extraData={accountAddress}
           expandRender={expandRender}
-          siderRender={siderRender}
+          siderRender={null}
         />
       </div>
     </div>
