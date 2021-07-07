@@ -16,12 +16,14 @@ export const BaseTable = ({
   loading,
   extraData,
   expandRender,
+  siderRender = null,
 }: {
   data: JsonResponse;
   columns: ColumnsType<any>;
   loading: boolean;
   extraData?: string;
   expandRender?: (record: any) => JSX.Element;
+  siderRender?: any;
 }) => {
   const { debug } = useGlobalState();
   const [expandedRowKeys, setExpandedRowKeys] = useState<readonly React.ReactText[]>([]);
@@ -71,6 +73,7 @@ export const BaseTable = ({
     },
     [currentPage, dataSource, focusedRow, setFocusedRow]
   );
+
   useHotkeys(
     'right,pagedown',
     () => {
@@ -103,44 +106,52 @@ export const BaseTable = ({
     }
   }, [currentPage]);
 
-  const expandRenderer = expandRender ? expandRender : (rowset: any) => <pre>{JSON.stringify(rowset, null, 2)}</pre>;
+  const expandedRowRender = expandRender ? expandRender : (row: any) => <pre>{JSON.stringify(row, null, 2)}</pre>;
+  let dataRow = pageSize * (currentPage - 1) + focusedRow;
+  const record = dataSource[Math.max(0, dataRow)];
+  let sider = siderRender ? siderRender(record) : <></>;
+  let style = { display: 'grid', gridTemplateColumns: '10fr 4fr' };
+  if (!siderRender) style = { display: 'grid', gridTemplateColumns: '20fr 1fr' };
 
   return (
-    <div onFocus={handleOnFocus} onBlur={handleOnBlur}>
-      <Table<any>
-        rowKey={'id'}
-        components={components}
-        columns={columns}
-        dataSource={dataSource}
-        loading={loading}
-        pagination={{
-          current: currentPage,
-          pageSizeOptions: ['5', '10', '20', '50', '100'],
-          pageSize: pageSize,
-          onChange: (page, newPageSize) => {
-            setCurrentPage(page);
-            if (newPageSize !== pageSize) {
-              setPageSize(pageSize);
-              setCurrentPage(1);
-              const tr = document.querySelector('tr[data-row-key]');
-              //@ts-ignore
-              tr.focus();
-            }
-          },
-        }}
-        rowClassName={(record, index) => 'row-' + index}
-        size='small'
-        scroll={{ x: 1300 }}
-        expandable={{
-          onExpandedRowsChange: (expandedRowKeys) => {
-            setExpandedRowKeys(expandedRowKeys);
-          },
-          expandedRowKeys: expandedRowKeys,
-          expandedRowRender: expandRenderer,
-        }}
-      />
+    <>
+      <div onFocus={handleOnFocus} onBlur={handleOnBlur} style={style}>
+        <Table<any>
+          rowKey={'id'}
+          components={components}
+          columns={columns}
+          dataSource={dataSource}
+          loading={loading}
+          pagination={{
+            current: currentPage,
+            pageSizeOptions: ['5', '10', '20', '50', '100'],
+            pageSize: pageSize,
+            onChange: (page, newPageSize) => {
+              setCurrentPage(page);
+              if (newPageSize !== pageSize) {
+                setPageSize(pageSize);
+                setCurrentPage(1);
+                const tr = document.querySelector('tr[data-row-key]');
+                //@ts-ignore
+                tr.focus();
+              }
+            },
+          }}
+          rowClassName={(record, index) => 'row-' + index}
+          size='small'
+          scroll={{ x: 1300 }}
+          expandable={{
+            onExpandedRowsChange: (expandedRowKeys) => {
+              setExpandedRowKeys(expandedRowKeys);
+            },
+            expandedRowKeys: expandedRowKeys,
+            expandedRowRender: expandedRowRender,
+          }}
+        />
+        {sider}
+      </div>
       {debug ? <pre>records: {JSON.stringify(data?.length)}</pre> : <></>}
       {debug ? <pre>{JSON.stringify(data, null, 2)}</pre> : <></>}
-    </div>
+    </>
   );
 };
