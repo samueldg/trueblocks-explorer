@@ -161,7 +161,6 @@ export const Addresses = () => {
           source: selectedNameSource,
           tags: selectedNameTags,
         };
-        console.log(newAddresses);
         setAddresses(newAddresses);
         setLoadingEdit(false);
         setNamesEditModal(false);

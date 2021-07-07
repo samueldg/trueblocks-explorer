@@ -22,7 +22,7 @@ export const AccountsView = () => {
   const [staging, setStaging] = useState(false);
   const [denom, setDenom] = useState('ether');
   const emptyData = { data: [{}], meta: {} };
-  const [transactions, setTransactions] = useState<Result>(toSuccessfulData(emptyData));
+  const [transactions, setTransactions] = useState<Result | null>(null);
   const [loading, setLoading] = useState(false);
   const [totalRecords, setTotalRecords] = useState<null | number>(null);
   const { accountAddress, setAccountAddress } = useGlobalState();
@@ -39,7 +39,7 @@ export const AccountsView = () => {
 
   useEffect(() => {
     (async () => {
-      if (accountAddress.slice(0, 2) === '0x') {
+      if (accountAddress?.slice(0, 2) === '0x') {
         setLoading(true);
         const eitherResponse = await runCommand('list', {
           count: true,
@@ -59,7 +59,7 @@ export const AccountsView = () => {
 
   useEffect(() => {
     (async () => {
-      if (totalRecords && transactions.data.length < totalRecords) {
+      if (totalRecords && (transactions?.data.length || 0) < totalRecords) {
         const eitherResponse = await runCommand('export', {
           addrs: accountAddress,
           fmt: 'json',
@@ -72,9 +72,9 @@ export const AccountsView = () => {
           articulate: true,
           accounting: true,
           reversed: false,
-          first_record: transactions?.data?.length,
+          first_record: transactions?.data?.length || 0,
           max_records:
-            transactions?.data?.length < 100
+            (transactions?.data?.length || 0) < 100
               ? 10
               : 31 /* an arbitrary number not too big, not too small, that appears not to repeat */,
         });
@@ -82,15 +82,16 @@ export const AccountsView = () => {
           eitherResponse,
           Either.fold(toFailedResult, (serverResponse) => toSuccessfulData(serverResponse) as Result)
         );
-        let newTransactions: Result = { ...transactions };
+        let newTransactions: Result = transactions?.data ? { ...transactions } : toSuccessfulData(emptyData);
         //@ts-ignore
-        newTransactions.data = [...newTransactions.data, ...result.data];
+        newTransactions.data =
+          newTransactions.data.length === 1 ? [...result.data] : [...newTransactions.data, ...result.data];
         setTransactions(newTransactions);
       }
     })();
   }, [totalRecords, transactions, denom, staging]);
 
-  if (transactions.status === 'fail') {
+  if (transactions?.status === 'fail') {
     createErrorNotification({
       description: 'Could not fetch transactions',
     });
@@ -126,14 +127,14 @@ export const AccountsView = () => {
       <progress
         style={{ position: 'absolute', right: '8px' }}
         max={'100'}
-        value={((transactions?.data?.length / (totalRecords || 1)) * 100).toFixed(0)}
+        value={((transactions?.data?.length || 1 / (totalRecords || 1)) * 100).toFixed(0)}
       />
     );
   };
 
-  const getData = useCallback((response) => (response.status === 'fail' ? [] : response.data), []);
+  const getData = useCallback((response) => (response?.status === 'fail' ? [] : response?.data), []);
   const theData = getData(transactions); // .filter((record: Transaction) => record.blockNumber !== undefined);
-  const getMeta = useCallback((response) => (response.status === 'fail' ? [] : response.meta), []);
+  const getMeta = useCallback((response) => (response?.status === 'fail' ? [] : response?.meta), []);
   const expandRender = (record: any) => <AccountTransactions record={record} />;
   return (
     <div>
@@ -156,12 +157,12 @@ export const AccountsView = () => {
             Summary for
             <br />
             <div style={{ width: '40px' }}> </div>
-            {accountAddress.slice(0, 6) +
+            {accountAddress?.slice(0, 6) +
               '...' +
-              accountAddress.slice(accountAddress.length - 5, accountAddress.length - 1)}
+              accountAddress?.slice(accountAddress.length - 5, accountAddress.length - 1)}
           </b>
           <br />
-          nTransactions: {theData.length}
+          nTransactions: {theData?.length}
           <br />
           firstBlock: {theData && theData.length > 0 && theData[0].blockNumber}
           <br />
