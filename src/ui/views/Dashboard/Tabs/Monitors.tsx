@@ -1,11 +1,16 @@
-import { SearchOutlined } from '@ant-design/icons';
+import { PlusCircleFilled, SearchOutlined } from '@ant-design/icons';
 import { addActionsColumn, addColumn, addNumColumn, addTagsColumn, BaseTable, TableActions } from '@components/Table';
 import { useCommand } from '@hooks/useCommand';
 import { createErrorNotification } from '@modules/error_notification';
 import { renderNamedAddress } from '@modules/renderers';
 import { Monitor } from '@modules/types';
-import { Button, Input, Space } from 'antd';
+import { Button, Input, Space, Spin } from 'antd';
 import { ColumnsType } from 'antd/lib/table';
+import { any } from 'prop-types';
+import React, { useCallback, useState, useRef } from 'react';
+import useGlobalState from '../../../state';
+import { DashboardAccountsAddressLocation } from '../../../Routes';
+import Modal from 'antd/lib/modal/Modal';
 import React, { useCallback, useRef, useState } from 'react';
 
 export const Monitors = () => {
@@ -13,6 +18,13 @@ export const Monitors = () => {
   const [searchText, setSearchText] = useState('');
   const [_, setSearchedColumn] = useState('');
   const searchInputRef = useRef(null);
+  const { namesEditModal, setNamesEditModal } = useGlobalState();
+  const [selectedNameAddress, setSelectedNameAddress] = useState('');
+  const [selectedNameName, setSelectedNameName] = useState('');
+  const [selectedNameDescription, setSelectedNameDescription] = useState('');
+  const [selectedNameSource, setSelectedNameSource] = useState('');
+  const [selectedNameTags, setSelectedNameTags] = useState('');
+  const [loadingEdit, setLoadingEdit] = useState(false);
 
   if (monitors.status === 'fail') {
     createErrorNotification({
@@ -90,8 +102,111 @@ export const Monitors = () => {
     setSearchText('');
   };
 
+  const onEditItem = () => {
+    setLoadingEdit(true);
+    fetch(`${process.env.CORE_URL}/names`, {
+      method: 'POST',
+      mode: 'cors',
+      cache: 'no-cache',
+      credentials: 'omit',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      redirect: 'follow',
+      referrerPolicy: 'no-referrer',
+      body: JSON.stringify({
+        address: selectedNameAddress,
+        description: selectedNameDescription,
+        name: selectedNameName,
+        source: selectedNameSource,
+        tags: selectedNameTags,
+      }),
+    })
+      .then((result) => result.json())
+      .then((response) => {
+        /*let newAddresses = { ...addresses };
+        //@ts-ignore
+        let foundAddress = newAddresses.data.map((item) => item.address).indexOf(namesEditModal.address);
+        //@ts-ignore
+        newAddresses.data[foundAddress] = {
+          //@ts-ignore
+          ...newAddresses.data[foundAddress],
+          description: selectedNameDescription,
+          name: selectedNameName,
+          source: selectedNameSource,
+          tags: selectedNameTags,
+        };
+        setAddresses(newAddresses);*/
+        setLoadingEdit(false);
+        setNamesEditModal(false);
+      });
+  };
+
   return (
     <>
+      <Modal visible={namesEditModal} onCancel={() => setNamesEditModal(false)} onOk={() => onEditItem()}>
+        {loadingEdit ? (
+          <div style={{ padding: '48px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+            <Spin />
+          </div>
+        ) : (
+          <div style={{ marginTop: '24px' }}>
+            <div style={{ marginTop: '16px' }}>
+              <div style={{ marginBottom: '6px' }}>Address</div>
+              <Input
+                placeholder={'Address'}
+                value={selectedNameAddress}
+                onChange={(e) => setSelectedNameAddress(e.target.value)}
+              />
+            </div>
+            <div style={{ marginTop: '16px' }}>
+              <div style={{ marginBottom: '6px' }}>Name</div>
+              <Input
+                placeholder={'Name'}
+                value={selectedNameName}
+                onChange={(e) => setSelectedNameName(e.target.value)}
+              />
+            </div>
+            <div style={{ marginTop: '16px' }}>
+              <div style={{ marginBottom: '6px' }}>Description</div>
+              <Input
+                placeholder={'Description'}
+                value={selectedNameDescription}
+                onChange={(e) => setSelectedNameDescription(e.target.value)}
+              />
+            </div>
+            <div style={{ marginTop: '16px' }}>
+              <div style={{ marginBottom: '6px' }}>Source</div>
+              <Input
+                placeholder={'Source'}
+                value={selectedNameSource}
+                onChange={(e) => setSelectedNameSource(e.target.value)}
+              />
+            </div>
+            <div style={{ marginTop: '16px' }}>
+              <div style={{ marginBottom: '6px' }}>Tags</div>
+              <Input
+                placeholder={'Tags'}
+                value={selectedNameTags}
+                onChange={(e) => setSelectedNameTags(e.target.value)}
+              />
+            </div>
+          </div>
+        )}
+      </Modal>
+      <div
+        onClick={() => setNamesEditModal(true)}
+        style={{
+          marginTop: '16px',
+          marginBottom: '24px',
+          color: 'rgb(24, 144, 255)',
+          fontWeight: 'bold',
+          cursor: 'pointer',
+          fontSize: '20px',
+        }}>
+        <PlusCircleFilled style={{ marginRight: '8px' }} />
+        Add new monitor
+      </div>
       <BaseTable
         data={getData(monitors)}
         columns={monitorSchema.map((item) => {
@@ -147,7 +262,7 @@ const monitorSchema: ColumnsType<Monitor> = [
   }),
   addActionsColumn<Monitor>(
     {
-      title: `Add`,
+      title: 'Actions',
       dataIndex: '',
       configuration: {
         align: 'right',
