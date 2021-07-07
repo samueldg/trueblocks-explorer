@@ -107,11 +107,13 @@ export const BaseTable = ({
   }, [currentPage]);
 
   const expandedRowRender = expandRender ? expandRender : (row: any) => <pre>{JSON.stringify(row, null, 2)}</pre>;
-  let dataRow = pageSize * (currentPage - 1) + focusedRow;
-  const record = dataSource[Math.max(0, dataRow)];
-  let sider = siderRender ? siderRender(record) : <></>;
-  let style = { display: 'grid', gridTemplateColumns: '10fr 4fr' };
-  if (!siderRender) style = { display: 'grid', gridTemplateColumns: '20fr 1fr' };
+  // let dataRow = pageSize * (currentPage - 1) + focusedRow;
+  // const record = dataSource[Math.max(0, dataRow)];
+  let sider = <></>; // siderRender ? siderRender(record) : <></>;
+  let style =
+    // { display: 'grid', gridTemplateColumns: '10fr 4fr' };
+    //if (!siderRender) style =
+    { display: 'grid', gridTemplateColumns: '20fr 1fr' };
 
   return (
     <>
