@@ -45,7 +45,12 @@ export const BaseTable = ({
     currentPage,
     pageSize,
     dataSource?.length,
-    () => currentPage < Math.ceil(dataSource?.length / pageSize) && setCurrentPage(currentPage + 1),
+    () => {
+      if (currentPage < Math.ceil(dataSource?.length / pageSize)) {
+        setCurrentPage(currentPage + 1);
+        setFocusedRow(0);
+      }
+    },
     () => {
       currentPage > 1 && setCurrentPage(currentPage - 1);
       const tr = document.querySelector('tr[data-row-key]');
@@ -53,7 +58,11 @@ export const BaseTable = ({
       siblings[siblings.length - 1].focus();
     },
     () => setCurrentPage(1),
-    () => setCurrentPage(Math.ceil(dataSource?.length / pageSize)),
+    () => {
+      const lastPage = Math.ceil(dataSource?.length / pageSize);
+      setCurrentPage(lastPage);
+      setFocusedRow(dataSource?.length - (lastPage - 1) * pageSize - 1);
+    },
     focusedRow,
     (row) => setFocusedRow(row)
   );
@@ -108,8 +117,8 @@ export const BaseTable = ({
 
   const expandedRowRender = expandRender ? expandRender : (row: any) => <pre>{JSON.stringify(row, null, 2)}</pre>;
   let dataRow = pageSize * (currentPage - 1) + focusedRow;
-  const record = dataSource[Math.max(0, dataRow)];
-  let sider = siderRender ? siderRender(record) : <></>;
+  const record = dataSource[Math.min(Math.max(0, dataRow), dataSource?.length)];
+  let sider = siderRender ? siderRender(record, pageSize, currentPage, focusedRow, dataRow) : <></>;
   let style = { display: 'grid', gridTemplateColumns: '10fr 4fr' };
   if (!siderRender) style = { display: 'grid', gridTemplateColumns: '20fr 1fr' };
 
