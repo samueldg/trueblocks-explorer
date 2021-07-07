@@ -1,8 +1,9 @@
 import { ColumnType } from 'antd/lib/table';
+import { ReactNode } from 'react-markdown';
 import { renderActionsAsColumn, renderFlag, renderTagsWithClickHandler, TagClickHandler } from './mappers';
 
 export type ColumnConfiguration<RecordType> = {
-  title: string;
+  title: string | ReactNode;
   dataIndex: string;
   key?: string;
   configuration?: ColumnType<RecordType>;
