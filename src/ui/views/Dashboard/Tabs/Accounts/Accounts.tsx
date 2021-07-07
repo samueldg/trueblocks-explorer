@@ -1,6 +1,6 @@
 import { CheckCircleFilled, CloseCircleFilled } from '@ant-design/icons';
 import { ViewTab } from '@components/BaseView';
-import { addColumn, addFlagColumn, BaseTable } from '@components/Table';
+import { addColumn, BaseTable } from '@components/Table';
 import { Result, toFailedResult, toSuccessfulData } from '@hooks/useCommand';
 import { runCommand } from '@modules/core';
 import { createErrorNotification } from '@modules/error_notification';
@@ -119,6 +119,7 @@ export const AccountsView = () => {
       }}
     />
   );
+
   const progressBar = (): JSX.Element => {
     if (transactions?.data?.length === totalRecords || totalRecords === 0) return <></>;
     return (
@@ -147,7 +148,7 @@ export const AccountsView = () => {
         dollars
       </Checkbox>
       <Divider />
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 14fr' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 7fr' }}>
         <div>
           <TinyTabs tabs={tinyTabs} />
           <Divider />
@@ -174,10 +175,15 @@ export const AccountsView = () => {
           loading={loading}
           extraData={accountAddress}
           expandRender={expandRender}
+          siderRender={siderRender}
         />
       </div>
     </div>
   );
+};
+
+const siderRender = (record: Transaction) => {
+  return record.blockNumber + '.' + record.transactionIndex;
 };
 
 const AddressBar = ({ input, progress }: { input: JSX.Element; progress: JSX.Element }) => {
@@ -224,6 +230,7 @@ export const transactionSchema: ColumnsType<Transaction> = [
     title: 'Date',
     dataIndex: 'date',
     configuration: {
+      width: '15%',
       render: (field: any, record: Transaction) => {
         if (!record) return <div></div>;
         return (
@@ -236,14 +243,13 @@ export const transactionSchema: ColumnsType<Transaction> = [
           </pre>
         );
       },
-      width: 200,
     },
   }),
   addColumn({
     title: 'From / To',
     dataIndex: 'from',
     configuration: {
-      width: 350,
+      width: '35%',
       render: (unused: any, record: Transaction) => {
         if (!record) return <div></div>;
         const to = record.to === record.extraData ? <div style={style}>{record.to}</div> : record.to;
@@ -256,24 +262,11 @@ export const transactionSchema: ColumnsType<Transaction> = [
       },
     },
   }),
-  addFlagColumn({
-    title: 'Err',
-    dataIndex: 'isError',
-    configuration: {
-      width: 50,
-    },
-  }),
-  addFlagColumn({
-    title: 'Tok',
-    dataIndex: 'hasToken',
-    configuration: {
-      width: 50,
-    },
-  }),
   addColumn({
     title: 'Reconciliations (asset, beg, in, out, gasOut, end, check)',
     dataIndex: 'compressedTx',
     configuration: {
+      width: '45%',
       render: (item, record) => {
         if (item === '' && record.from === '0xBlockReward') item = '0xBlockReward';
         if (item === '' && record.from === '0xUncleReward') item = '0xUncleReward';
@@ -286,19 +279,18 @@ export const transactionSchema: ColumnsType<Transaction> = [
           </div>
         );
       },
-      width: 600,
     },
   }),
   addColumn({
     title: '',
     dataIndex: 'statements',
     configuration: {
+      width: '5%',
       render: (item, record) => (
         <a target='_blank' href={'http://etherscan.io/tx/' + record.hash}>
           ES
         </a>
       ),
-      width: 300,
     },
   }),
 ];
@@ -310,7 +302,6 @@ export const renderStatements = (statements: ReconciliationArray) => {
     <table className={style.table}>
       <tbody>
         {statements?.map((statement, i) => {
-          let show = true;
           return (
             <Statement
               key={
