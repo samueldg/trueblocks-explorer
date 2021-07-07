@@ -149,7 +149,7 @@ export const AccountsView = () => {
         dollars
       </Checkbox>
       <Divider />
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 7fr' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 20fr' }}>
         <div>
           <TinyTabs tabs={tinyTabs} />
           <Divider />
@@ -183,8 +183,30 @@ export const AccountsView = () => {
   );
 };
 
-const siderRender = (record: Transaction) => {
-  return record.blockNumber + '.' + record.transactionIndex;
+const siderRender = (
+  record: Transaction,
+  pageSize: number,
+  currentPage: number,
+  focusedRow: number,
+  dataRow: number
+) => {
+  return (
+    <div>
+      focusedRow: {focusedRow}
+      <br />
+      currentPage: {currentPage}
+      <br />
+      pageSize: {pageSize}
+      <br />
+      dataRow: {dataRow}
+      <br />
+      <br />
+      <b>{record?.blockNumber + '.' + record?.transactionIndex}</b>
+      <br />
+      <br />
+      <b>{record?.compressedTx?.substr(0, 40)}</b>
+    </div>
+  );
 };
 
 const AddressBar = ({ input, progress }: { input: JSX.Element; progress: JSX.Element }) => {
