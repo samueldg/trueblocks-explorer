@@ -138,7 +138,6 @@ export const AccountsView = () => {
   const expandRender = (record: any) => <AccountTransactions record={record} />;
   return (
     <div>
-      <AddressBar input={addressInput} progress={progressBar()} />
       <Checkbox checked={staging} onChange={(event) => onStaging()}>
         staging
       </Checkbox>
@@ -148,6 +147,7 @@ export const AccountsView = () => {
       <Checkbox checked={denom === 'dollars'} onChange={(event) => onDollars()}>
         dollars
       </Checkbox>
+      <AddressBar input={addressInput} progress={progressBar()} />
       <Divider />
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 20fr' }}>
         <div>
@@ -192,13 +192,13 @@ const siderRender = (
 ) => {
   return (
     <div>
+      dataRow: {dataRow}
+      <br />
       focusedRow: {focusedRow}
       <br />
       currentPage: {currentPage}
       <br />
       pageSize: {pageSize}
-      <br />
-      dataRow: {dataRow}
       <br />
       <br />
       <b>{record?.blockNumber + '.' + record?.transactionIndex}</b>
