@@ -321,7 +321,7 @@ export const helpRoutes = [
   {
     route: DashboardMonitorsLocation,
     helpText:
-      'Monitors are named addresses that you have indicated are "of interest" and should be monitored by the scrapers.',
+      'Monitors are named addresses that you have indicated are of interest and should be monitored by the scrapers.',
   },
   {
     route: DashboardCollectionsLocation,

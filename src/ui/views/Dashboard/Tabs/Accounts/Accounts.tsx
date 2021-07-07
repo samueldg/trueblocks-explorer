@@ -12,7 +12,6 @@ import { pipe } from 'fp-ts/lib/function';
 import moment from 'moment';
 import React, { useCallback, useEffect, useState } from 'react';
 import { createUseStyles } from 'react-jss';
-import { useLocation } from 'react-router-dom';
 import style from 'react-syntax-highlighter/dist/esm/styles/hljs/a11y-dark';
 import useGlobalState from '../../../../state';
 import { AccountTransactions } from './SubTabs/Transactions';
@@ -20,27 +19,22 @@ import { AccountTransactions } from './SubTabs/Transactions';
 const { TabPane } = Tabs;
 
 export const AccountsView = () => {
-  const [accounting, setAccounting] = useState(true);
   const [staging, setStaging] = useState(false);
   const [denom, setDenom] = useState('ether');
   const emptyData = { data: [{}], meta: {} };
   const [transactions, setTransactions] = useState<Result>(toSuccessfulData(emptyData));
   const [loading, setLoading] = useState(false);
-  const location = useLocation();
-  const parts = location.pathname.split('/');
   const [totalRecords, setTotalRecords] = useState<null | number>(null);
   const { accountAddress, setAccountAddress } = useGlobalState();
-  // const [currentAddress, setCurrentAddress] = useState(accountAddress);
 
-  const onAccounting = () => setAccounting(!accounting);
   const onStaging = () => setStaging(!staging);
   const onEther = () => {
-    setAccounting(true);
     denom === 'ether' ? setDenom('') : setDenom('ether');
+    setTransactions(toSuccessfulData(emptyData));
   };
   const onDollars = useCallback(() => {
-    setAccounting(true);
     denom === 'dollars' ? setDenom('') : setDenom('dollars');
+    setTransactions(toSuccessfulData(emptyData));
   }, []);
 
   useEffect(() => {
@@ -61,7 +55,7 @@ export const AccountsView = () => {
         setLoading(false);
       }
     })();
-  }, [accountAddress, denom, accounting, staging]);
+  }, [accountAddress, denom, staging]);
 
   useEffect(() => {
     (async () => {
@@ -76,7 +70,7 @@ export const AccountsView = () => {
           ether: denom === 'ether',
           dollars: denom === 'dollars',
           articulate: true,
-          accounting: accounting,
+          accounting: true,
           reversed: false,
           first_record: transactions?.data?.length,
           max_records:
@@ -94,7 +88,7 @@ export const AccountsView = () => {
         setTransactions(newTransactions);
       }
     })();
-  }, [totalRecords, transactions]);
+  }, [totalRecords, transactions, denom, staging]);
 
   if (transactions.status === 'fail') {
     createErrorNotification({
@@ -143,9 +137,6 @@ export const AccountsView = () => {
   return (
     <div>
       <AddressBar input={addressInput} progress={progressBar()} />
-      <Checkbox checked={accounting} onChange={(event) => onAccounting()}>
-        accounting
-      </Checkbox>
       <Checkbox checked={staging} onChange={(event) => onStaging()}>
         staging
       </Checkbox>

@@ -14,7 +14,8 @@
     "develop": "concurrently 'yarn develop:ui' 'yarn develop:electron'",
     "test": "jest --setupFiles dotenv/config --verbose",
     "test:e2e": "cypress open",
-    "prettify": "node_modules/.bin/prettier '{src,test,mocks}/**/*.{js,jsx,ts,tsx}' --write"
+    "prettify": "node_modules/.bin/prettier '{src,test,mocks}/**/*.{js,jsx,ts,tsx}' --write",
+    "routes": "makeClass --js >src/ui/Routes.tsx"
   },
   "browserslist": [
     "last 2 chrome version",
