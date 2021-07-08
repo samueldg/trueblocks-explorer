@@ -24,7 +24,7 @@ const oneStatement = (statement: Reconciliation) => {
     <Card
       className={styles.card}
       headStyle={{
-        backgroundColor: 'indianred',
+        backgroundColor: 'lightgrey',
       }}
       hoverable={true}
       title={statementHeader(statement)}>

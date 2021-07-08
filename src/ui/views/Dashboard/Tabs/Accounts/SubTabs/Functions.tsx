@@ -13,7 +13,7 @@ export const AccountFunctions = ({ record }: { record: Transaction }) => {
         <Card
           className={styles.card}
           headStyle={{
-            backgroundColor: 'indianred',
+            backgroundColor: 'lightgrey',
           }}
           hoverable={true}
           title={'Input'}>
@@ -22,7 +22,7 @@ export const AccountFunctions = ({ record }: { record: Transaction }) => {
         <Card
           className={styles.card}
           headStyle={{
-            backgroundColor: 'indianred',
+            backgroundColor: 'lightgrey',
           }}
           hoverable={true}
           title={'Events'}>

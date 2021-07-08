@@ -122,14 +122,11 @@ export const AccountsView = () => {
   );
 
   const progressBar = (): JSX.Element => {
-    if (transactions?.data?.length === totalRecords || totalRecords === 0) return <></>;
-    return (
-      <progress
-        style={{ position: 'absolute', right: '8px' }}
-        max={'100'}
-        value={((transactions?.data?.length || 1 / (totalRecords || 1)) * 100).toFixed(0)}
-      />
-    );
+    if (!transactions || !transactions.data) return <></>;
+    if (!totalRecords) return <></>;
+    if (transactions.data.length === totalRecords) return <></>;
+    const pct = ((transactions.data.length / (totalRecords || 1)) * 100) / 2;
+    return <progress style={{ position: 'absolute', right: '8px' }} max={50} value={pct} />;
   };
 
   const getData = useCallback((response) => (response?.status === 'fail' ? [] : response?.data), []);
@@ -291,11 +288,19 @@ export const transactionSchema: ColumnsType<Transaction> = [
     configuration: {
       width: '45%',
       render: (item, record) => {
+        item = record.compressedTx;
         if (item === '' && record.from === '0xBlockReward') item = '0xBlockReward';
         if (item === '' && record.from === '0xUncleReward') item = '0xUncleReward';
         return (
-          <div style={{ border: '1px solid brown' }}>
-            <div style={{ fontSize: '12pt', fontWeight: 600, backgroundColor: 'indianred', color: 'yellow' }}>
+          <div style={{ border: '1px solid darkgrey' }}>
+            <div
+              style={{
+                padding: '2px',
+                paddingLeft: '5px',
+                backgroundColor: 'lightgrey',
+                color: '#222222',
+                overflowX: 'hidden',
+              }}>
               {item}
             </div>
             <div>{renderStatements(record.statements)}</div>
@@ -309,10 +314,13 @@ export const transactionSchema: ColumnsType<Transaction> = [
     dataIndex: 'statements',
     configuration: {
       width: '5%',
-      render: (item, record) => (
-        <a target='_blank' href={'http://etherscan.io/tx/' + record.hash}>
-          ES
-        </a>
+      render: (item, record, index) => (
+        <>
+          <a target='_blank' href={'http://etherscan.io/tx/' + record.hash}>
+            ES
+          </a>{' '}
+          - {index}
+        </>
       ),
     },
   }),
@@ -410,6 +418,6 @@ const useStyles = createUseStyles({
   row: {},
   col: {
     textAlign: 'right',
-    backgroundColor: '#fff7e6',
+    backgroundColor: 'white',
   },
 });

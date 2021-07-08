@@ -28,7 +28,7 @@ export const BaseTable = ({
   const { debug } = useGlobalState();
   const [expandedRowKeys, setExpandedRowKeys] = useState<readonly React.ReactText[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [pageSize, setPageSize] = useState(10);
+  const [pageSize, setPageSize] = useState(7);
   const [focusedRow, setFocusedRow] = useState(0);
 
   const dataSource = data?.map((item: any, i: number) => {
