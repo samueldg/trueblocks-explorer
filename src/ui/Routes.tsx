@@ -16,12 +16,12 @@ Mousetrap.bind('s a', function () {
 });
 export const DashboardAccountReconsLocation = '/dashboard/accounts/recons';
 export const DashboardAccountFunctionsLocation = '/dashboard/accounts/functions';
-export const DashboardAccountGasLocation = '/dashboard/accounts/gas';
 export const DashboardAccountTracesLocation = '/dashboard/accounts/traces';
 export const DashboardCollectionsLocation = '/dashboard/collections';
 
 export const DashboardAccountsAssetsLocation = '/dashboard/accounts/assets';
 export const DashboardAccountsNeighborsLocation = '/dashboard/accounts/neighbors';
+export const DashboardAccountsGasLocation = '/dashboard/accounts/gas';
 export const DashboardAccountsChartsLocation = '/dashboard/accounts/charts';
 export const DashboardAccountsFunctionsLocation = '/dashboard/accounts/functions';
 export const DashboardAccountsEventsLocation = '/dashboard/accounts/events';
@@ -151,12 +151,6 @@ export const routes = [
     helpText: 'View the functional history of an account.',
   },
   {
-    path: DashboardAccountGasLocation,
-    exact: true,
-    component: DashboardView,
-    helpText: 'View the event history of an account.',
-  },
-  {
     path: DashboardAccountTracesLocation,
     exact: true,
     component: DashboardView,
@@ -186,6 +180,12 @@ export const routes = [
     exact: true,
     component: DashboardView,
     helpText: 'See all assets for a given address',
+  },
+  {
+    path: DashboardAccountsGasLocation,
+    exact: true,
+    component: DashboardView,
+    helpText: 'Analyze gas usage',
   },
   {
     path: DashboardAccountsChartsLocation,

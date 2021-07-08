@@ -1,25 +1,40 @@
-import { DeleteOutlined, EditOutlined, InfoCircleOutlined, PlusCircleOutlined } from '@ant-design/icons';
+import { DeleteOutlined, EditOutlined, InfoCircleOutlined, PlusCircleOutlined, UndoOutlined } from '@ant-design/icons';
 import { Button } from 'antd';
 import PropTypes, { InferType } from 'prop-types';
-import React, { useCallback } from 'react';
+import React from 'react';
 
-type Action = 'details' | 'remove' | 'edit' | 'monitor';
+type Action = 'info' | 'delete' | 'undelete' | 'remove' | 'edit' | 'view';
 
 export function TableActions({ item, onClick }: InferType<typeof TableActions.propTypes>) {
   const createOnClick = (action: Action) => () => onClick(action, item);
+  if (item.deleted) {
+    return (
+      <>
+        <Button shape='circle' type='text' onClick={createOnClick('info')}>
+          <InfoCircleOutlined />
+        </Button>
+        <Button danger shape='circle' type='text' onClick={createOnClick('undelete')}>
+          <UndoOutlined />
+        </Button>
+        <Button shape='circle' type='text' onClick={createOnClick('remove')}>
+          <DeleteOutlined />
+        </Button>
+      </>
+    );
+  }
 
   return (
     <>
-      <Button shape='circle' type='text' onClick={createOnClick('details')}>
+      <Button shape='circle' type='text' onClick={createOnClick('info')}>
         <InfoCircleOutlined />
       </Button>
-      <Button danger shape='circle' type='text' onClick={createOnClick('remove')}>
+      <Button danger shape='circle' type='text' onClick={createOnClick('delete')}>
         <DeleteOutlined />
       </Button>
       <Button shape='circle' type='text' onClick={createOnClick('edit')}>
         <EditOutlined />
       </Button>
-      <Button shape='circle' type='text' onClick={createOnClick('monitor')}>
+      <Button shape='circle' type='text' onClick={createOnClick('view')}>
         <PlusCircleOutlined />
       </Button>
     </>

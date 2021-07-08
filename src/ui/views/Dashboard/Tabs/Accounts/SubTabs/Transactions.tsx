@@ -3,13 +3,11 @@ import { SelectedRow } from '@components/Table/BaseTable';
 import React from 'react';
 import {
   DashboardAccountFunctionsLocation,
-  DashboardAccountGasLocation,
   DashboardAccountReconsLocation,
   DashboardAccountsLocation,
   DashboardAccountTracesLocation,
 } from '../../../../../Routes';
 import { AccountFunctions } from './Functions';
-import { AccountGas } from './Gas';
 import { AccountRecons } from './Recons';
 
 export const AccountTransactions = ({ record, selectedRow }: { record: any; selectedRow: SelectedRow }) => {
@@ -24,11 +22,6 @@ export const AccountTransactions = ({ record, selectedRow }: { record: any; sele
       name: 'Functions / Events',
       location: DashboardAccountFunctionsLocation,
       component: <AccountFunctions record={record} />,
-    },
-    {
-      name: 'Gas Accounting',
-      location: DashboardAccountGasLocation,
-      component: <AccountGas record={record} />,
     },
     {
       name: 'Traces',

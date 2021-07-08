@@ -18,6 +18,7 @@ import {
   DashboardAccountsChartsLocation,
   DashboardAccountsEventsLocation,
   DashboardAccountsFunctionsLocation,
+  DashboardAccountsGasLocation,
   DashboardAccountsLocation,
   DashboardAccountsNeighborsLocation,
 } from '../../../../Routes';
@@ -154,6 +155,7 @@ export const AccountsView = () => {
       component: <div>Assets</div>,
     },
     { name: 'Neighbors', location: DashboardAccountsNeighborsLocation, component: <div>Neighbors</div> },
+    { name: 'Gas', location: DashboardAccountsGasLocation, component: <div>Gas</div> },
     { name: 'Charts', location: DashboardAccountsChartsLocation, component: <div>Charts</div> },
     { name: 'Functions', location: DashboardAccountsFunctionsLocation, component: <div>Functions</div> },
     { name: 'Events', location: DashboardAccountsEventsLocation, component: <div>Events</div> },
@@ -200,7 +202,6 @@ export const AccountsView = () => {
     </div>
   );
 };
-
 
 const AddressBar = ({ input, progress }: { input: JSX.Element; progress: JSX.Element }) => {
   return (
