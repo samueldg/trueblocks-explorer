@@ -58,7 +58,8 @@ export const BaseView = ({
     setCurrentTab(key);
   };
 
-  const titleComponent = title.length === 0 ? <></> : <PageHeader title={title} />;
+  const titleComponent = title.length === 0 ? <></> : <PageHeader style={{ padding: '0px' }} title={title} />;
+
   return (
     <>
       {titleComponent}
