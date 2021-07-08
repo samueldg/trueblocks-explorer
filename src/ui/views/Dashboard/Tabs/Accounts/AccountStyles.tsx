@@ -8,7 +8,7 @@ export const useAcctStyles = createUseStyles({
   },
   cardHolder: {
     display: 'flex',
-    flexWrap: 'nowrap',
+    flexWrap: 'wrap',
     rowGap: '5px',
     border: '1px solid lightgrey',
     padding: '4px',

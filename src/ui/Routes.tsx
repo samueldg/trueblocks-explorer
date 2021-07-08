@@ -18,7 +18,6 @@ export const DashboardAccountReconsLocation = '/dashboard/accounts/recons';
 export const DashboardAccountFunctionsLocation = '/dashboard/accounts/functions';
 export const DashboardAccountGasLocation = '/dashboard/accounts/gas';
 export const DashboardAccountTracesLocation = '/dashboard/accounts/traces';
-export const DashboardAccountRawLocation = '/dashboard/accounts/raw';
 export const DashboardCollectionsLocation = '/dashboard/collections';
 
 export const DashboardAccountsAssetsLocation = '/dashboard/accounts/assets';
@@ -94,14 +93,12 @@ export const DashboardAccountReconsLocationAddressTemplate = '/dashboard/account
 export const DashboardAccountFunctionsLocationAddressTemplate = '/dashboard/accounts/functions/:address';
 export const DashboardAccountGasLocationAddressTemplate = '/dashboard/accounts/gas/:address';
 export const DashboardAccountTracesLocationAddressTemplate = '/dashboard/accounts/traces/:address';
-export const DashboardAccountRawLocationAddressTemplate = '/dashboard/accounts/raw/:address';
 
 export const DashboardAccountsAddressLocation = (address: string) => `/dashboard/accounts/${address}`;
 export const DashboardAccountReconsLocationAddress = (address: string) => `/dashboard/accounts/recons/${address}`;
 export const DashboardAccountFunctionsLocationAddress = (address: string) => `/dashboard/accounts/functions/${address}`;
 export const DashboardAccountGasLocationAddress = (address: string) => `/dashboard/accounts/gas/${address}`;
 export const DashboardAccountTracesLocationAddress = (address: string) => `/dashboard/accounts/traces/${address}`;
-export const DashboardAccountRawLocationAddress = (address: string) => `/dashboard/accounts/raw/${address}`;
 
 export const routes = [
   {
@@ -158,12 +155,6 @@ export const routes = [
     exact: true,
     component: DashboardView,
     helpText: 'View the event history of an account.',
-  },
-  {
-    path: DashboardAccountRawLocation,
-    exact: true,
-    component: DashboardView,
-    helpText: 'View the raw transaction.',
   },
   {
     path: DashboardAccountTracesLocation,

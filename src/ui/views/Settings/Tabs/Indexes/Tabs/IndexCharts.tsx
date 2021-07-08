@@ -70,9 +70,6 @@ const indexSchema: ColumnsType<Monitor> = [
 function getTableActions(item: Monitor) {
   const onClick = (action: string, item: Monitor) => {
     switch (action) {
-      case 'remove':
-        console.log('Deleting the monitor', item);
-        break;
       default:
         console.log('Clicked action', action, item);
     }
