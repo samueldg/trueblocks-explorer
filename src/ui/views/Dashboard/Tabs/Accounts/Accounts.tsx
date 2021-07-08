@@ -13,6 +13,14 @@ import moment from 'moment';
 import React, { useCallback, useEffect, useState } from 'react';
 import { createUseStyles } from 'react-jss';
 import style from 'react-syntax-highlighter/dist/esm/styles/hljs/a11y-dark';
+import {
+  DashboardAccountsAssetsLocation,
+  DashboardAccountsChartsLocation,
+  DashboardAccountsEventsLocation,
+  DashboardAccountsFunctionsLocation,
+  DashboardAccountsLocation,
+  DashboardAccountsNeighborsLocation,
+} from '../../../../Routes';
 import useGlobalState from '../../../../state';
 import { AccountTransactions } from './SubTabs/Transactions';
 
@@ -97,18 +105,6 @@ export const AccountsView = () => {
     });
   }
 
-  const tinyTabs: ViewTab[] = [
-    {
-      name: 'Assets',
-      location: 'assets',
-      component: <div>Assets</div>,
-    },
-    { name: 'Neighbors', location: 'neighbors', component: <div>Neighbors</div> },
-    { name: 'Charts', location: 'charts', component: <div>Charts</div> },
-    { name: 'Functions', location: 'functions', component: <div>Functions</div> },
-    { name: 'Events', location: 'events', component: <div>Events</div> },
-  ];
-
   const addressInput = (
     <Input
       disabled={loading}
@@ -132,7 +128,57 @@ export const AccountsView = () => {
   const getData = useCallback((response) => (response?.status === 'fail' ? [] : response?.data), []);
   const theData = getData(transactions); // .filter((record: Transaction) => record.blockNumber !== undefined);
   const getMeta = useCallback((response) => (response?.status === 'fail' ? [] : response?.meta), []);
-  const expandRender = (record: any) => <AccountTransactions record={record} />;
+  const expandRender = (record: any) => <AccountTransactions key='account-transactions' record={record} />;
+
+  const accountHistory = (
+    <BaseTable
+      data={theData}
+      columns={transactionSchema}
+      loading={loading}
+      extraData={accountAddress}
+      expandRender={expandRender}
+      siderRender={siderRender}
+    />
+  );
+
+  const tinyTabs: ViewTab[] = [
+    {
+      name: 'History',
+      location: DashboardAccountsLocation,
+      component: accountHistory,
+    },
+    {
+      name: 'Assets',
+      location: DashboardAccountsAssetsLocation,
+      component: <div>Assets</div>,
+    },
+    { name: 'Neighbors', location: DashboardAccountsNeighborsLocation, component: <div>Neighbors</div> },
+    { name: 'Charts', location: DashboardAccountsChartsLocation, component: <div>Charts</div> },
+    { name: 'Functions', location: DashboardAccountsFunctionsLocation, component: <div>Functions</div> },
+    { name: 'Events', location: DashboardAccountsEventsLocation, component: <div>Events</div> },
+  ];
+
+  const summary = (
+    <>
+      <b>
+        Summary for
+        <br />
+        <div style={{ width: '40px' }}> </div>
+        {accountAddress?.slice(0, 6) +
+          '...' +
+          accountAddress?.slice(accountAddress.length - 5, accountAddress.length - 1)}
+      </b>
+      <br />
+      nTransactions: {theData?.length}
+      <br />
+      firstBlock: {theData && theData.length > 0 && theData[0].blockNumber}
+      <br />
+      lastBlock: {theData && theData.length > 0 && theData[theData.length - 1].blockNumber}
+      <br />
+      balance: {'XXX'}
+    </>
+  );
+
   return (
     <div>
       <Checkbox checked={staging} onChange={(event) => onStaging()}>
@@ -145,36 +191,10 @@ export const AccountsView = () => {
         dollars
       </Checkbox>
       <AddressBar input={addressInput} progress={progressBar()} />
-      <Divider />
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 20fr' }}>
-        <div>
-          <TinyTabs tabs={tinyTabs} />
-          <Divider />
-          <b>
-            Summary for
-            <br />
-            <div style={{ width: '40px' }}> </div>
-            {accountAddress?.slice(0, 6) +
-              '...' +
-              accountAddress?.slice(accountAddress.length - 5, accountAddress.length - 1)}
-          </b>
-          <br />
-          nTransactions: {theData?.length}
-          <br />
-          firstBlock: {theData && theData.length > 0 && theData[0].blockNumber}
-          <br />
-          lastBlock: {theData && theData.length > 0 && theData[theData.length - 1].blockNumber}
-          <br />
-          balance: {'XXX'}
-        </div>
-        <BaseTable
-          data={theData}
-          columns={transactionSchema}
-          loading={loading}
-          extraData={accountAddress}
-          expandRender={expandRender}
-          siderRender={siderRender}
-        />
+      <Divider style={{ height: '1px' }} />
+      <div style={{ display: 'grid', gridTemplateColumns: '20fr 1fr' }}>
+        <TinyTabs tabs={tinyTabs} summary={summary} />
+        <div></div>
       </div>
     </div>
   );
@@ -216,11 +236,16 @@ const AddressBar = ({ input, progress }: { input: JSX.Element; progress: JSX.Ele
   );
 };
 
-const TinyTabs = ({ tabs }: { tabs: ViewTab[] }) => {
+const TinyTabs = ({ tabs, summary }: { tabs: ViewTab[]; summary: JSX.Element }) => {
   return (
     <Tabs tabPosition='left'>
       {tabs.map((tab: any) => {
-        return <TabPane key={tab.location} tab={tab.name} />;
+        // TODO(tjayrush): Can we use summary here somehow?
+        return (
+          <TabPane key={tab.location} tab={tab.name} style={{ border: '1px dashed purple', width: '100%' }}>
+            {tab.component}
+          </TabPane>
+        );
       })}
     </Tabs>
   );
@@ -229,20 +254,30 @@ const TinyTabs = ({ tabs }: { tabs: ViewTab[] }) => {
 export const renderAsNamedAddress = (address: string, acctFor: string) => {
   const { names } = useGlobalState();
 
-  const name = names && names[address] && names[address].name;
-  let style = { color: name && name !== '' ? 'blue' : 'grey', fontWeight: 500 };
-  if (address === acctFor) {
-    style = { color: 'green', fontWeight: 800 };
+  const isCurrent = address === acctFor;
+  const isSpecial = address === '0xPrefund' || address === '0xBlockReward' || address === '0xUncleReward';
+
+  let name = names && names[address] && names[address].name;
+  if (!isSpecial && !isCurrent && !name) {
+    return <div style={{ color: 'grey' }}>{address}</div>;
   }
-  if (name && name !== '') {
-    return (
-      <div style={style}>
-        {'[' + address.substr(0, 6) + '...' + address.substr(address.length - 4, address.length) + '] '}
-        <i>{name}</i>
-      </div>
-    );
+
+  let style = isCurrent ? { color: 'green' } : { color: 'blue' };
+  if (isSpecial) {
+    name = '';
+    style = { color: 'blue' };
   }
-  return <div style={style}>{address}</div>;
+
+  const addr =
+    name === '' || name === undefined
+      ? address
+      : '[' + address.substr(0, 6) + '...' + address.substr(address.length - 4, address.length) + '] ';
+  return (
+    <div style={style}>
+      {addr}
+      {name}
+    </div>
+  );
 };
 
 export const transactionSchema: ColumnsType<Transaction> = [

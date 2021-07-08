@@ -21,6 +21,12 @@ export const DashboardAccountTracesLocation = '/dashboard/accounts/traces';
 export const DashboardAccountRawLocation = '/dashboard/accounts/raw';
 export const DashboardCollectionsLocation = '/dashboard/collections';
 
+export const DashboardAccountsAssetsLocation = '/dashboard/accounts/assets';
+export const DashboardAccountsNeighborsLocation = '/dashboard/accounts/neighbors';
+export const DashboardAccountsChartsLocation = '/dashboard/accounts/charts';
+export const DashboardAccountsFunctionsLocation = '/dashboard/accounts/functions';
+export const DashboardAccountsEventsLocation = '/dashboard/accounts/events';
+
 export const NamesLocation = '/names';
 Mousetrap.bind('s n', function () {
   window.location.href = NamesLocation;
@@ -177,6 +183,36 @@ export const routes = [
     component: DashboardView,
     helpText:
       'Monitors are named addresses that you have indicated are of interest and should be monitored by the scrapers.',
+  },
+  {
+    path: DashboardAccountsAssetsLocation,
+    exact: true,
+    component: DashboardView,
+    helpText: 'See all assets for a given address',
+  },
+  {
+    path: DashboardAccountsNeighborsLocation,
+    exact: true,
+    component: DashboardView,
+    helpText: 'See all assets for a given address',
+  },
+  {
+    path: DashboardAccountsChartsLocation,
+    exact: true,
+    component: DashboardView,
+    helpText: 'See all assets for a given address',
+  },
+  {
+    path: DashboardAccountsFunctionsLocation,
+    exact: true,
+    component: DashboardView,
+    helpText: 'See all assets for a given address',
+  },
+  {
+    path: DashboardAccountsEventsLocation,
+    exact: true,
+    component: DashboardView,
+    helpText: 'See all assets for a given address',
   },
   {
     path: DashboardCollectionsLocation,
