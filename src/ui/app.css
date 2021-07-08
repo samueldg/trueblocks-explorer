@@ -33,3 +33,8 @@ body,
 .ant-table-tbody > tr:hover:not(.ant-table-expanded-row) > td {
   background: unset;
 }
+
+.ant-table-tbody > tr > td {
+  vertical-align: top !important;
+  /* background-color: khaki !important; */
+}

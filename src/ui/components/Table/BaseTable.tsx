@@ -46,19 +46,26 @@ export const BaseTable = ({
     pageSize,
     dataSource?.length,
     () => {
+      /* nextPage */
       if (currentPage < Math.ceil(dataSource?.length / pageSize)) {
         setCurrentPage(currentPage + 1);
         setFocusedRow(0);
       }
     },
     () => {
+      /* prevPage */
       currentPage > 1 && setCurrentPage(currentPage - 1);
       const tr = document.querySelector('tr[data-row-key]');
       const siblings = getSiblings(tr);
-      siblings[siblings.length - 1].focus();
+      setFocusedRow(siblings.length - 1);
+      if (siblings.length > 0) siblings[siblings.length - 1].focus();
     },
-    () => setCurrentPage(1),
     () => {
+      /* firstPage */
+      setCurrentPage(1);
+    },
+    () => {
+      /* lastPage */
       const lastPage = Math.ceil(dataSource?.length / pageSize);
       setCurrentPage(lastPage);
       setFocusedRow(dataSource?.length - (lastPage - 1) * pageSize - 1);
@@ -77,7 +84,8 @@ export const BaseTable = ({
         //@ts-ignore
         tr.focus();
       } else {
-        siblings[focusedRow].focus();
+        setFocusedRow(0);
+        if (siblings?.length) siblings[0].focus();
       }
     },
     [currentPage, dataSource, focusedRow, setFocusedRow]
@@ -89,7 +97,8 @@ export const BaseTable = ({
       currentPage < Math.ceil(dataSource?.length / pageSize) && setCurrentPage(currentPage + 1);
       const tr = document.querySelector('tr[data-row-key]');
       const siblings = getSiblings(tr);
-      if (siblings[focusedRow]) siblings[focusedRow].focus();
+      setFocusedRow(0);
+      if (siblings?.length) siblings[0].focus();
     },
     [currentPage, dataSource, focusedRow, setFocusedRow]
   );

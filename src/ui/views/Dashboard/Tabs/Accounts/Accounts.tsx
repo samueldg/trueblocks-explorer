@@ -173,7 +173,7 @@ export const AccountsView = () => {
           loading={loading}
           extraData={accountAddress}
           expandRender={expandRender}
-          siderRender={null}
+          siderRender={siderRender}
         />
       </div>
     </div>
@@ -418,6 +418,6 @@ const useStyles = createUseStyles({
   row: {},
   col: {
     textAlign: 'right',
-    backgroundColor: 'white',
+    backgroundColor: '#fff7e6',
   },
 });

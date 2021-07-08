@@ -103,7 +103,7 @@ export const useKeyBindings = (
               const index = getSiblings(currentRow)
                 .map((e) => e.getAttribute('data-row-key'))
                 .indexOf(previousSibling ? previousSibling.getAttribute('data-row-key') : 0);
-              setFocusedRow(index - 1);
+              setFocusedRow(Math.max(index - 1, 0));
               previousSibling?.focus();
             }
           } else {
