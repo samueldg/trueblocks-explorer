@@ -6,11 +6,12 @@ import { useAcctStyles } from '../AccountStyles';
 //-----------------------------------------------------------------
 export const AccountFunctions = ({ record }: { record: Transaction }) => {
   const styles = useAcctStyles();
+  if (!record) return <></>;
   return (
-    <div className={styles.container}>
-      <div></div>
-      <div className={styles.cardHolder}>
+    <div key={record.blockNumber + '.' + record.transactionIndex + '-y'} className={styles.container}>
+      <div key={record.blockNumber + '.' + record.transactionIndex + '-x'} className={styles.cardHolder}>
         <Card
+          key={record.blockNumber + '.' + record.transactionIndex + '-input'}
           className={styles.card}
           headStyle={{
             backgroundColor: 'lightgrey',
@@ -20,6 +21,7 @@ export const AccountFunctions = ({ record }: { record: Transaction }) => {
           {showInput(record)}
         </Card>
         <Card
+          key={record.blockNumber + '.' + record.transactionIndex + '-events'}
           className={styles.card}
           headStyle={{
             backgroundColor: 'lightgrey',
@@ -29,7 +31,6 @@ export const AccountFunctions = ({ record }: { record: Transaction }) => {
           {showLogs(record.receipt.logs)}
         </Card>
       </div>
-      <div></div>
     </div>
   );
 };
@@ -55,8 +56,8 @@ const showInput = (record: Transaction) => {
   const bytes = (
     <pre>
       <div>{head}</div>
-      {str?.match(/.{1,64}/g)?.map((s) => (
-        <div>{s}</div>
+      {str?.match(/.{1,64}/g)?.map((s, index) => (
+        <div key={index}>{s}</div>
       ))}
     </pre>
   );
