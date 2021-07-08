@@ -1,16 +1,19 @@
 import { Reconciliation, Transaction } from '@modules/types';
 import { Card } from 'antd';
-import React from 'react';
+import React, { useState } from 'react';
 import { useAcctStyles } from '../AccountStyles';
 
 //-----------------------------------------------------------------
 export const AccountRecons = ({ record }: { record: Transaction }) => {
+  const [expand, setExpand] = useState(false);
   const styles = useAcctStyles();
   return (
     <div className={styles.container}>
       <div></div>
       <div className={styles.cardHolder}>
-        {record.statements?.map((statement: Reconciliation) => oneStatement(statement))}
+        {record?.statements?.map((statement: Reconciliation, index: number) =>
+          oneStatement(statement, index, expand, setExpand, styles)
+        )}
       </div>
       <div></div>
     </div>
@@ -18,36 +21,114 @@ export const AccountRecons = ({ record }: { record: Transaction }) => {
 };
 
 //-----------------------------------------------------------------
-const oneStatement = (statement: Reconciliation) => {
-  const styles = useAcctStyles();
+const oneStatement = (
+  statement: Reconciliation,
+  index: number,
+  expand: boolean,
+  setExpand: React.Dispatch<React.SetStateAction<boolean>>,
+  styles: any
+) => {
   return (
     <Card
+      key={statement.blockNumber + '.' + statement.transactionIndex + '.' + index}
       className={styles.card}
       headStyle={{
         backgroundColor: 'lightgrey',
       }}
       hoverable={true}
-      title={statementHeader(statement)}>
-      {statementBody(statement)}
+      title={statementHeader(statement, expand, setExpand)}>
+      {statementBody(statement, expand, styles)}
     </Card>
   );
 };
 
 //-----------------------------------------------------------------
-const statementHeader = (statement: Reconciliation) => {
-  return statement.assetSymbol + ' reconciliation';
+const statementHeader = (
+  statement: Reconciliation,
+  expand: boolean,
+  setExpand: React.Dispatch<React.SetStateAction<boolean>>
+) => {
+  return (
+    <div style={{ display: 'grid', gridTemplateColumns: '20fr 1fr', textAlign: 'start' }}>
+      <div>{statement.assetSymbol + ' reconciliation'}</div>
+      <div onClick={() => setExpand(!expand)}>{expand ? '-' : '+'}</div>
+    </div>
+  );
 };
 
 //-----------------------------------------------------------------
-const clip = (num: string) => {
+const clip = (num: string, diff?: boolean) => {
   const parts = num.split('.');
   if (parts.length === 0 || parts[0] === '') return <div style={{ color: 'lightgrey' }}>{'-'}</div>;
-  if (parts.length === 1) return parts[0] + <div>{'.0000000'}</div>;
-  return <div>{parts[0] + '.' + parts[1].substr(0, 7)}</div>;
+  if (parts.length === 1)
+    return (
+      <div style={diff ? { color: 'red' } : {}}>
+        {parts[0]}
+        {'.0000000'}
+      </div>
+    );
+  return <div style={diff ? { color: 'red' } : {}}>{parts[0] + '.' + parts[1].substr(0, 7)}</div>;
+};
+
+//-----------------------------------------------------------------
+const statementBody = (statement: Reconciliation, expand: boolean, styles: any) => {
+  return (
+    <table>
+      <tbody>
+        {/* {oneRow(styles, expand, 'blockNumber', statement.blockNumber.toString())}
+        {oneRow(styles, expand, 'transactionIndex', statement.transactionIndex.toString())}
+        {oneRow(styles, expand, 'timestamp', statement.timestamp.toString())}
+        {oneRow(styles, expand, 'assetAddr', statement.assetAddr)}
+        {oneRow(styles, expand, 'assetSymbol', statement.assetSymbol)}
+        {oneRow(styles, expand, 'decimals', statement.decimals.toString())} */}
+        {oneRow(styles, expand, '', 'income', 'outflow', 'balance', 'diff', true)}
+        {oneRow(
+          styles,
+          expand,
+          'begBal',
+          '',
+          '',
+          statement.begBal === '' ? '0.0000000' : statement.begBal,
+          statement.begBalDiff
+        )}
+        {oneRow(styles, expand, 'amount', statement.amountIn, statement.amountOut)}
+        {oneRow(styles, expand, 'internal', statement.internalIn, statement.internalOut)}
+        {oneRow(styles, expand, 'selfDestruct', statement.selfDestructIn, statement.selfDestructOut)}
+        {oneRow(styles, expand, 'minerBaseReward', statement.minerBaseRewardIn)}
+        {oneRow(styles, expand, 'minerNephewReward', statement.minerNephewRewardIn)}
+        {oneRow(styles, expand, 'minerTxFee', statement.minerTxFeeIn)}
+        {oneRow(styles, expand, 'minerUncleReward', statement.minerUncleRewardIn)}
+        {oneRow(styles, expand, 'prefund', statement.prefundIn)}
+        {oneRow(styles, expand, 'gasCost', '', statement.gasCostOut)}
+        {oneRow(
+          styles,
+          expand,
+          'amountNet',
+          '',
+          '',
+          statement.amountNet === '' ? '' : statement.amountNet > '0' ? '+' + statement.amountNet : statement.amountNet
+        )}
+        {oneRow(
+          styles,
+          expand,
+          'endBal',
+          '',
+          '',
+          statement.endBal === '' ? '0.0000000' : statement.endBal,
+          statement.endBalDiff
+        )}
+        {/* {oneRow(styles, expand, 'endBalCalc', '', '', statement.endBalCalc)} */}
+        {/* {oneRow(styles, expand, 'reconciliationType', statement.reconciliationType, '')}
+        {oneRow(styles, expand, 'reconciled', statement.reconciled ? 'true' : 'false', '')} */}
+      </tbody>
+    </table>
+  );
 };
 
 //-----------------------------------------------------------------
 const oneRow = (
+  styles: any,
+  expand: boolean,
   name: string,
   valueIn: string,
   valueOut: string = '',
@@ -55,12 +136,17 @@ const oneRow = (
   diffIn: string = '',
   header: boolean = false
 ) => {
-  const styles = useAcctStyles();
+  const v1: number = +valueIn;
+  const v2: number = +valueOut;
+  if (!expand && name !== 'begBal' && name !== 'endBal' && v1 + v2 === 0) return <></>;
+
   const valI = header ? valueIn : clip(valueIn);
   const valO = header ? valueOut : clip(valueOut);
   const bal = header ? balance : clip(balance);
-  const diff = header ? diffIn : clip(diffIn);
+  const diff = header ? diffIn : clip(diffIn, true);
   const style = header ? styles.tableHead : styles.tableRow;
+  const dStyle = diffIn !== '' ? {} : { color: 'red' };
+
   return (
     <tr>
       <td className={style} style={{ width: '100px' }}>
@@ -78,46 +164,9 @@ const oneRow = (
       <td className={style} style={{ width: '100px' }}>
         {bal}
       </td>
-      <td className={style} style={{ width: '100px' }}>
+      <td className={style} style={{ ...dStyle, width: '100px' }}>
         {diff}
       </td>
     </tr>
-  );
-};
-
-//-----------------------------------------------------------------
-const statementBody = (statement: Reconciliation) => {
-  return (
-    <table>
-      <tbody>
-        {/* {oneRow('blockNumber', statement.blockNumber.toString())}
-        {oneRow('transactionIndex', statement.transactionIndex.toString())}
-        {oneRow('timestamp', statement.timestamp.toString())}
-        {oneRow('assetAddr', statement.assetAddr)}
-        {oneRow('assetSymbol', statement.assetSymbol)}
-        {oneRow('decimals', statement.decimals.toString())} */}
-        {oneRow('', 'income', 'outflow', 'balance', 'diff', true)}
-        {oneRow('begBal', '', '', statement.begBal === '' ? '0.0000000' : statement.begBal, statement.begBalDiff)}
-        {oneRow('amount', statement.amountIn, statement.amountOut)}
-        {oneRow('internal', statement.internalIn, statement.internalOut)}
-        {oneRow('selfDestruct', statement.selfDestructIn, statement.selfDestructOut)}
-        {oneRow('minerBaseReward', statement.minerBaseRewardIn)}
-        {oneRow('minerNephewReward', statement.minerNephewRewardIn)}
-        {oneRow('minerTxFee', statement.minerTxFeeIn)}
-        {oneRow('minerUncleReward', statement.minerUncleRewardIn)}
-        {oneRow('prefund', statement.prefundIn)}
-        {oneRow('gasCost', '', statement.gasCostOut)}
-        {oneRow(
-          'amountNet',
-          '',
-          '',
-          statement.amountNet === '' ? '' : statement.amountNet > '0' ? '+' + statement.amountNet : statement.amountNet
-        )}
-        {oneRow('endBal', '', '', statement.endBal === '' ? '0.0000000' : statement.endBal, statement.endBalDiff)}
-        {/* {oneRow('endBalCalc', '', '', statement.endBalCalc)} */}
-        {/* {oneRow('reconciliationType', statement.reconciliationType, '')}
-        {oneRow('reconciled', statement.reconciled ? 'true' : 'false', '')} */}
-      </tbody>
-    </table>
   );
 };
