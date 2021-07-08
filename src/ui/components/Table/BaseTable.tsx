@@ -98,7 +98,9 @@ export const BaseTable = ({
       const tr = document.querySelector('tr[data-row-key]');
       const siblings = getSiblings(tr);
       setFocusedRow(0);
-      if (siblings?.length) siblings[0].focus();
+      if (siblings?.length) {
+        siblings[0].focus();
+      }
     },
     [currentPage, dataSource, focusedRow, setFocusedRow]
   );
