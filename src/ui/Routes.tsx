@@ -1,12 +1,19 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { DashboardView, ExplorerView, NamesView, SettingsView, SupportView } from './views';
+const Mousetrap = require('mousetrap');
 
 export const RootLocation = '/';
 
 export const DashboardLocation = '/dashboard';
 export const DashboardMonitorsLocation = '/dashboard/monitors';
+Mousetrap.bind('s m', function () {
+  window.location.href = DashboardMonitorsLocation;
+});
 export const DashboardAccountsLocation = '/dashboard/accounts';
+Mousetrap.bind('s a', function () {
+  window.location.href = DashboardAccountsLocation;
+});
 export const DashboardAccountReconsLocation = '/dashboard/accounts/recons';
 export const DashboardAccountFunctionsLocation = '/dashboard/accounts/functions';
 export const DashboardAccountGasLocation = '/dashboard/accounts/gas';
@@ -15,6 +22,9 @@ export const DashboardAccountRawLocation = '/dashboard/accounts/raw';
 export const DashboardCollectionsLocation = '/dashboard/collections';
 
 export const NamesLocation = '/names';
+Mousetrap.bind('s n', function () {
+  window.location.href = NamesLocation;
+});
 export const NamesAddressesLocation = '/names/addresses';
 export const NamesTagsLocation = '/names/tags';
 export const NamesFuncSigsLocation = '/names/funcsigs';
@@ -22,13 +32,34 @@ export const NamesEventSigsLocation = '/names/eventsigs';
 export const NamesBlocksLocation = '/names/blocks';
 
 export const ExplorerLocation = '/explorer';
+Mousetrap.bind('s e', function () {
+  window.location.href = ExplorerLocation;
+});
 export const ExplorerBlocksLocation = '/explorer/blocks';
+Mousetrap.bind('e b', function () {
+  window.location.href = ExplorerBlocksLocation;
+});
 export const ExplorerTransactionsLocation = '/explorer/transactions';
+Mousetrap.bind('e t', function () {
+  window.location.href = ExplorerTransactionsLocation;
+});
 export const ExplorerReceiptsLocation = '/explorer/receipts';
+Mousetrap.bind('e r', function () {
+  window.location.href = ExplorerReceiptsLocation;
+});
 export const ExplorerLogsLocation = '/explorer/logs';
+Mousetrap.bind('e l', function () {
+  window.location.href = ExplorerLogsLocation;
+});
 export const ExplorerTracesLocation = '/explorer/traces';
+Mousetrap.bind('e c', function () {
+  window.location.href = ExplorerTracesLocation;
+});
 
 export const SettingsLocation = '/settings';
+Mousetrap.bind('s s', function () {
+  window.location.href = SettingsLocation;
+});
 export const SettingsScrapersLocation = '/settings/scrapers';
 export const SettingsIndexesLocation = '/settings/indexes';
 export const SettingsIndexGridLocation = '/settings/indexes/grid';
@@ -41,8 +72,14 @@ export const SettingsSchemasLocation = '/settings/schemas';
 
 export const SupportLocation = '/support';
 export const SupportContactUsLocation = '/support/contact-us';
+Mousetrap.bind('s u', function () {
+  window.location.href = SupportContactUsLocation;
+});
 export const SupportDocumentationLocation = '/support/documentation';
 export const SupportHotKeysLocation = '/support/hot-keys';
+Mousetrap.bind('s k', function () {
+  window.location.href = SupportHotKeysLocation;
+});
 export const SupportLicensingLocation = '/support/licensing';
 export const SupportAboutUsLocation = '/support/about-us';
 

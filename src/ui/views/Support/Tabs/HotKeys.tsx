@@ -3,14 +3,13 @@ import ReactMarkdown from 'react-markdown';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 
 const l1: string = '#### Accessing Screens...';
-const t1: string = `ts c     Open Dashboard screen
-ts m     Open Dashboard screen
-ts a     Open Accounts screen
-ts n     Open Names screen
-ts e     Open Explorer screen
-ts s     Open Settings screen
-ts u     Open Support screen
-ts k     Show hotkeys (this screen)`;
+const t1: string = `s m     Open Dashboard screen
+s a     Open Accounts screen
+s n     Open Names screen
+s e     Open Explorer screen
+s s     Open Settings screen
+s u     Open Support screen
+s k     Show hotkeys (this screen)`;
 
 const l2: string = '#### Showing / Hiding Panels...';
 const t2: string = `q l      Hide panels but contents
