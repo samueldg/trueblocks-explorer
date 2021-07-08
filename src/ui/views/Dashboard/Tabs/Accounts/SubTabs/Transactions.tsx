@@ -1,9 +1,9 @@
 import { BaseView } from '@components/BaseView';
+import { SelectedRow } from '@components/Table/BaseTable';
 import React from 'react';
 import {
   DashboardAccountFunctionsLocation,
   DashboardAccountGasLocation,
-  DashboardAccountRawLocation,
   DashboardAccountReconsLocation,
   DashboardAccountsLocation,
   DashboardAccountTracesLocation,
@@ -12,7 +12,7 @@ import { AccountFunctions } from './Functions';
 import { AccountGas } from './Gas';
 import { AccountRecons } from './Recons';
 
-export const AccountTransactions = ({ record }: any) => {
+export const AccountTransactions = ({ record, selectedRow }: { record: any; selectedRow: SelectedRow }) => {
   const title = '';
   const tabs = [
     {
@@ -30,20 +30,28 @@ export const AccountTransactions = ({ record }: any) => {
       location: DashboardAccountGasLocation,
       component: <AccountGas record={record} />,
     },
-    { name: 'Raw', location: DashboardAccountRawLocation, component: <pre>{JSON.stringify(record, null, 2)}</pre> },
     {
       name: 'Traces',
       location: DashboardAccountTracesLocation,
-      component: <pre>{JSON.stringify(record.traces, null, 2)}</pre>,
+      component: <pre>{JSON.stringify(record?.traces, null, 2)}</pre>,
     },
   ];
+  const debug = (
+    <div>
+      <pre>{JSON.stringify(selectedRow, null, 2)}</pre>
+      <br />
+    </div>
+  );
   return (
-    <BaseView
-      title={title}
-      defaultActive={DashboardAccountFunctionsLocation}
-      baseActive={DashboardAccountsLocation}
-      cookieName={'shit'} //cookieVars.explorer_current_tab}
-      tabs={tabs}
-    />
+    <div>
+      {debug}
+      <BaseView
+        title={title}
+        defaultActive={DashboardAccountFunctionsLocation}
+        baseActive={DashboardAccountsLocation}
+        cookieName={'shit'} //cookieVars.explorer_current_tab}
+        tabs={tabs}
+      />
+    </div>
   );
 };

@@ -1,6 +1,6 @@
 import { CheckCircleFilled, CloseCircleFilled } from '@ant-design/icons';
 import { ViewTab } from '@components/BaseView';
-import { addColumn, BaseTable } from '@components/Table';
+import { addColumn, BaseTable, SelectedRow } from '@components/Table';
 import { Result, toFailedResult, toSuccessfulData } from '@hooks/useCommand';
 import { runCommand } from '@modules/core';
 import { createErrorNotification } from '@modules/error_notification';
@@ -128,7 +128,9 @@ export const AccountsView = () => {
   const getData = useCallback((response) => (response?.status === 'fail' ? [] : response?.data), []);
   const theData = getData(transactions); // .filter((record: Transaction) => record.blockNumber !== undefined);
   const getMeta = useCallback((response) => (response?.status === 'fail' ? [] : response?.meta), []);
-  const expandRender = (record: any) => <AccountTransactions key='account-transactions' record={record} />;
+  const expandRender = (record: any, selectedRow: SelectedRow) => (
+    <AccountTransactions key='account-transactions' record={record} selectedRow={selectedRow} />
+  );
 
   const accountHistory = (
     <BaseTable
@@ -136,8 +138,7 @@ export const AccountsView = () => {
       columns={transactionSchema}
       loading={loading}
       extraData={accountAddress}
-      expandRender={expandRender}
-      siderRender={siderRender}
+      siderRender={expandRender}
     />
   );
 
@@ -200,31 +201,6 @@ export const AccountsView = () => {
   );
 };
 
-const siderRender = (
-  record: Transaction,
-  pageSize: number,
-  currentPage: number,
-  focusedRow: number,
-  dataRow: number
-) => {
-  return (
-    <div>
-      dataRow: {dataRow}
-      <br />
-      focusedRow: {focusedRow}
-      <br />
-      currentPage: {currentPage}
-      <br />
-      pageSize: {pageSize}
-      <br />
-      <br />
-      <b>{record?.blockNumber + '.' + record?.transactionIndex}</b>
-      <br />
-      <br />
-      <b>{record?.compressedTx?.substr(0, 40)}</b>
-    </div>
-  );
-};
 
 const AddressBar = ({ input, progress }: { input: JSX.Element; progress: JSX.Element }) => {
   return (

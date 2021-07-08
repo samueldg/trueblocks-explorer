@@ -10,20 +10,27 @@ export const CustomRow = (props: any) => {
   else return <tr {...props} tabIndex={0} />;
 };
 
+export type SelectedRow = {
+  pageSize: number;
+  currentPage: number;
+  focusedRow: number;
+  dataRow: number;
+};
+
 export const BaseTable = ({
   data,
   columns,
   loading,
   extraData,
-  expandRender,
-  siderRender = null,
+  expandRender = undefined,
+  siderRender = undefined,
 }: {
   data: JsonResponse;
   columns: ColumnsType<any>;
   loading: boolean;
   extraData?: string;
-  expandRender?: (record: any) => JSX.Element;
-  siderRender?: any;
+  expandRender?: (row: any) => JSX.Element;
+  siderRender?: (record: any, selectedRow: SelectedRow) => JSX.Element;
 }) => {
   const { debug } = useGlobalState();
   const [expandedRowKeys, setExpandedRowKeys] = useState<readonly React.ReactText[]>([]);
@@ -126,13 +133,14 @@ export const BaseTable = ({
     }
   }, [currentPage]);
 
-  const expandedRowRender = expandRender ? expandRender : (row: any) => <pre>{JSON.stringify(row, null, 2)}</pre>;
+  const expandedRowRender =
+    expandRender !== undefined ? expandRender : (row: any) => <pre>{JSON.stringify(row, null, 2)}</pre>;
   let sider = <></>;
   let style = { display: 'grid', gridTemplateColumns: '20fr 1fr' };
   if (dataSource && siderRender) {
     let dataRow = pageSize * (currentPage - 1) + focusedRow;
     const record = dataSource[Math.max(0, dataRow)];
-    sider = siderRender(record, pageSize, currentPage, focusedRow, dataRow);
+    sider = siderRender(record, { pageSize, currentPage, focusedRow, dataRow });
     style = { display: 'grid', gridTemplateColumns: '10fr 4fr' };
   }
   return (
