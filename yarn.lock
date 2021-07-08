@@ -1218,6 +1218,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/mousetrap@npm:^1.6.8":
+  version: 1.6.8
+  resolution: "@types/mousetrap@npm:1.6.8"
+  checksum: ddbcc5314146e8d7bc491b4d15e74e0e41c1fc1f2f8c3b5e56173184d45d9a75b7219cddad1c6037b3b6fc6350fa9f0bdb82913e9afdd2a17c259b54a1cb79e6
+  languageName: node
+  linkType: hard
+
 "@types/node@npm:*":
   version: 15.6.1
   resolution: "@types/node@npm:15.6.1"
@@ -8676,6 +8683,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"mousetrap@npm:^1.6.5":
+  version: 1.6.5
+  resolution: "mousetrap@npm:1.6.5"
+  checksum: 563074169163708e2de0c2e9a2bd76f32ba909efbe2baf395db08015d09b19445b859982fad36cd50dcd8a2475f07af89babe2b3da029e7b5cd48e26ff973cd5
+  languageName: node
+  linkType: hard
+
 "ms@npm:2.0.0":
   version: 2.0.0
   resolution: "ms@npm:2.0.0"
@@ -12402,6 +12416,7 @@ resolve@^2.0.0-next.3:
     "@types/filesize": ^5.0.0
     "@types/jest": ^26.0.20
     "@types/js-cookie": ^2.2.6
+    "@types/mousetrap": ^1.6.8
     "@types/react": ^17.0.3
     "@types/react-dom": ^17.0.2
     "@types/react-highlight-words": ^0.16.2
@@ -12438,6 +12453,7 @@ resolve@^2.0.0-next.3:
     jest-fetch-mock: ^3.0.3
     js-cookie: ^2.2.1
     moment: ^2.29.1
+    mousetrap: ^1.6.5
     path-browserify: ^1.0.1
     prettier: ^2.0.2
     prop-types: ^15.7.2
