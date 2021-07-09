@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { useAcctStyles } from '../AccountStyles';
 
 //-----------------------------------------------------------------
-export const AccountRecons = ({ record }: { record: Transaction }) => {
+export const AccountHistoryRecons = ({ record }: { record: Transaction }) => {
   const [expand, setExpand] = useState(false);
   const styles = useAcctStyles();
   return (

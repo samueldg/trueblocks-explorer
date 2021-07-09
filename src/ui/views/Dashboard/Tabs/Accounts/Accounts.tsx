@@ -1,6 +1,6 @@
 import { CheckCircleFilled, CloseCircleFilled } from '@ant-design/icons';
 import { ViewTab } from '@components/BaseView';
-import { addColumn, BaseTable, SelectedRow } from '@components/Table';
+import { addColumn } from '@components/Table';
 import { Result, toFailedResult, toSuccessfulData } from '@hooks/useCommand';
 import { runCommand } from '@modules/core';
 import { createErrorNotification } from '@modules/error_notification';
@@ -24,7 +24,7 @@ import {
 } from '../../../../Routes';
 import useGlobalState from '../../../../state';
 import { AccountAssets } from './SubTabs/Assets';
-import { AccountHistory } from './SubTabs/Transactions';
+import { AccountHistory } from './SubTabs/History';
 
 const { TabPane } = Tabs;
 
@@ -130,30 +130,17 @@ export const AccountsView = () => {
   const getData = useCallback((response) => (response?.status === 'fail' ? [] : response?.data), []);
   const theData = getData(transactions); // .filter((record: Transaction) => record.blockNumber !== undefined);
   const getMeta = useCallback((response) => (response?.status === 'fail' ? [] : response?.meta), []);
-  const siderRender = (record: any, selectedRow: SelectedRow) => (
-    <AccountHistory key='account-transactions' record={record} selectedRow={selectedRow} />
-  );
-
-  const accountHistory = (
-    <BaseTable
-      dataSource={theData}
-      columns={transactionSchema}
-      loading={loading}
-      extraData={accountAddress}
-      siderRender={siderRender}
-    />
-  );
 
   const tinyTabs: ViewTab[] = [
     {
       name: 'History',
       location: DashboardAccountsHistoryLocation,
-      component: accountHistory,
+      component: <AccountHistory theData={theData} loading={loading} accountAddress={accountAddress} />,
     },
     {
       name: 'Assets',
       location: DashboardAccountsAssetsLocation,
-      component: <AccountAssets />,
+      component: <AccountAssets theData={theData} loading={loading} accountAddress={accountAddress} />,
     },
     { name: 'Neighbors', location: DashboardAccountsNeighborsLocation, component: <div>Neighbors</div> },
     { name: 'Gas', location: DashboardAccountsGasLocation, component: <div>Gas</div> },

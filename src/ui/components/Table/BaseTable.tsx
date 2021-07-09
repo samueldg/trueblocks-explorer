@@ -84,7 +84,7 @@ export const BaseTable = ({
         onRow={(record, rowIndex) => {
           return {
             onClick: (event) => {
-              setCurRow(record.key);
+              setRowNumber(record.key);
             },
             style: record.key === curRow ? { color: 'darkblue', backgroundColor: 'rgb(236, 235, 235)' } : {},
           };

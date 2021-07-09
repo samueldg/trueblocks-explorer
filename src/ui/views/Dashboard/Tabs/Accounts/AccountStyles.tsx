@@ -9,8 +9,7 @@ export const useAcctStyles = createUseStyles({
   cardHolder: {
     display: 'flex',
     flexWrap: 'wrap',
-    rowGap: '5px',
-    border: '1px solid lightgrey',
+    rowGap: '2px',
     padding: '4px',
   },
   card: {
