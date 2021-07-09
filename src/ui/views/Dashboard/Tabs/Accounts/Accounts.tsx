@@ -23,6 +23,7 @@ import {
   DashboardAccountsNeighborsLocation,
 } from '../../../../Routes';
 import useGlobalState from '../../../../state';
+import { AccountAssets } from './SubTabs/Assets';
 import { AccountHistory } from './SubTabs/Transactions';
 
 const { TabPane } = Tabs;
@@ -129,7 +130,7 @@ export const AccountsView = () => {
   const getData = useCallback((response) => (response?.status === 'fail' ? [] : response?.data), []);
   const theData = getData(transactions); // .filter((record: Transaction) => record.blockNumber !== undefined);
   const getMeta = useCallback((response) => (response?.status === 'fail' ? [] : response?.meta), []);
-  const expandRender = (record: any, selectedRow: SelectedRow) => (
+  const siderRender = (record: any, selectedRow: SelectedRow) => (
     <AccountHistory key='account-transactions' record={record} selectedRow={selectedRow} />
   );
 
@@ -139,7 +140,7 @@ export const AccountsView = () => {
       columns={transactionSchema}
       loading={loading}
       extraData={accountAddress}
-      siderRender={expandRender}
+      siderRender={siderRender}
     />
   );
 
@@ -152,7 +153,7 @@ export const AccountsView = () => {
     {
       name: 'Assets',
       location: DashboardAccountsAssetsLocation,
-      component: <div>Assets</div>,
+      component: <AccountAssets />,
     },
     { name: 'Neighbors', location: DashboardAccountsNeighborsLocation, component: <div>Neighbors</div> },
     { name: 'Gas', location: DashboardAccountsGasLocation, component: <div>Gas</div> },
@@ -219,7 +220,7 @@ const TinyTabs = ({ tabs, summary }: { tabs: ViewTab[]; summary: JSX.Element }) 
       {tabs.map((tab: any) => {
         // TODO(tjayrush): Can we use summary here somehow?
         return (
-          <TabPane key={tab.location} tab={tab.name} style={{ border: '1px dashed purple', width: '100%' }}>
+          <TabPane key={tab.location} tab={tab.name} style={{ width: '100%' }}>
             {tab.component}
           </TabPane>
         );
@@ -248,7 +249,7 @@ export const renderAsNamedAddress = (address: string, acctFor: string) => {
   const addr =
     name === '' || name === undefined
       ? address
-      : '[' + address.substr(0, 6) + '...' + address.substr(address.length - 4, address.length) + '] ';
+      : '[' + address?.substr(0, 6) + '...' + address?.substr(address.length - 4, address.length) + '] ';
   return (
     <div style={style}>
       {addr}
@@ -301,6 +302,7 @@ export const transactionSchema: ColumnsType<Transaction> = [
       width: '45%',
       render: (item, record) => {
         item = record.compressedTx;
+        if (item === '' && record.from === '0xPrefund') item = '0xPrefund';
         if (item === '' && record.from === '0xBlockReward') item = '0xBlockReward';
         if (item === '' && record.from === '0xUncleReward') item = '0xUncleReward';
         return (

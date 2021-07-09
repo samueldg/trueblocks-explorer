@@ -22,7 +22,7 @@ body,
 .ant-table-tbody > tr.ant-table-row-hover:not(.ant-table-expanded-row) > td,
 .ant-table-thead > tr:focus:not(.ant-table-expanded-row) > td,
 .ant-table-tbody > tr:focus:not(.ant-table-expanded-row) > td {
-  background-color: rgb(238, 235, 235) !important;
+  background-color: rgb(248, 247, 247) !important;
   border: none;
   outline: none;
 }

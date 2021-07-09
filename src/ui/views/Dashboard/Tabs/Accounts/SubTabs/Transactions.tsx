@@ -1,5 +1,5 @@
 import { BaseView } from '@components/BaseView';
-import { SelectedRow } from '@components/Table/BaseTable';
+import { SelectedRow } from '@components/Table';
 import React from 'react';
 import {
   DashboardAccountFunctionsLocation,

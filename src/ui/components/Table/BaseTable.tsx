@@ -1,21 +1,15 @@
-import { JsonResponse } from '@modules/core';
+import 'antd/dist/antd.css';
 import Table, { ColumnsType } from 'antd/lib/table';
+import Mousetrap from 'mousetrap';
 import React, { useEffect, useState } from 'react';
-import { useHotkeys } from 'react-hotkeys-hook';
-import useGlobalState from '../../state';
-import { getSiblings, useKeyBindings } from '../../utils';
-
-export const CustomRow = (props: any) => {
-  if (props.className.indexOf('ant-table-expanded-row') >= 0) return <tr {...props} />;
-  else return <tr {...props} tabIndex={0} />;
-};
 
 export type SelectedRow = {
+  curRow: number;
+  curPage: number;
   pageSize: number;
-  currentPage: number;
-  focusedRow: number;
-  dataRow: number;
 };
+
+type JsonResponse = Record<string, any>;
 
 export const BaseTable = ({
   dataSource,
@@ -32,156 +26,90 @@ export const BaseTable = ({
   expandRender?: (row: any) => JSX.Element;
   siderRender?: (record: any, selectedRow: SelectedRow) => JSX.Element;
 }) => {
-  const { debug } = useGlobalState();
-  const [expandedRowKeys, setExpandedRowKeys] = useState<readonly React.ReactText[]>([]);
-  const [currentPage, setCurrentPage] = useState(1);
+  const [displayedRow, setDisplayedRow] = useState(dataSource ? dataSource[0] : {});
+  const [curRow, setCurRow] = useState(0);
+  const [curPage, setCurPage] = useState(1);
   const [pageSize, setPageSize] = useState(7);
-  const [focusedRow, setFocusedRow] = useState(0);
+  const [isExpanded, setIsExpanded] = useState(false);
+  const [keyedData, setKeyedData] = useState([{ key: 0 }]);
 
-  const dataSrc = dataSource?.map((item: any, i: number) => {
-    return {
-      id: (i + 1).toString(),
-      extraData: extraData,
-      ...item,
-    };
-  });
-
-  const { handleOnFocus, handleOnBlur } = useKeyBindings(
-    expandedRowKeys,
-    setExpandedRowKeys,
-    currentPage,
-    pageSize,
-    dataSrc?.length,
-    () => {
-      /* nextPage */
-      if (currentPage < Math.ceil(dataSrc?.length / pageSize)) {
-        setCurrentPage(currentPage + 1);
-        setFocusedRow(0);
-      }
-    },
-    () => {
-      /* prevPage */
-      currentPage > 1 && setCurrentPage(currentPage - 1);
-      const tr = document.querySelector('tr[data-row-key]');
-      const siblings = getSiblings(tr);
-      setFocusedRow(siblings.length - 1);
-      if (siblings.length > 0) siblings[siblings.length - 1].focus();
-    },
-    () => {
-      /* firstPage */
-      setCurrentPage(1);
-    },
-    () => {
-      /* lastPage */
-      const lastPage = Math.ceil(dataSrc?.length / pageSize);
-      setCurrentPage(lastPage);
-      setFocusedRow(dataSrc?.length - (lastPage - 1) * pageSize - 1);
-    },
-    focusedRow,
-    (row) => setFocusedRow(row)
-  );
-
-  useHotkeys(
-    'left,pageup',
-    () => {
-      currentPage > 1 && setCurrentPage(currentPage - 1);
-      const tr = document.querySelector('tr[data-row-key]');
-      const siblings = getSiblings(tr);
-      if (currentPage === 1) {
-        //@ts-ignore
-        tr.focus();
-      } else {
-        setFocusedRow(0);
-        if (siblings?.length) siblings[0].focus();
-      }
-    },
-    [currentPage, dataSrc, focusedRow, setFocusedRow]
-  );
-
-  useHotkeys(
-    'right,pagedown',
-    () => {
-      currentPage < Math.ceil(dataSrc?.length / pageSize) && setCurrentPage(currentPage + 1);
-      const tr = document.querySelector('tr[data-row-key]');
-      const siblings = getSiblings(tr);
-      setFocusedRow(0);
-      if (siblings?.length) {
-        siblings[0].focus();
-      }
-    },
-    [currentPage, dataSrc, focusedRow, setFocusedRow]
-  );
-
-  const components = {
-    body: { row: CustomRow },
+  const setRowNumber = (n: number) => {
+    const num = Math.max(0, Math.min(dataSource.length - 1, n));
+    setCurRow(num);
+    setCurPage(Math.floor(num / pageSize) + 1);
   };
 
-  useEffect(() => {
-    const tr = document.querySelector('tr[data-row-key]');
-    if (tr) {
-      //@ts-ignore
-      tr.focus();
-    }
-    const siblings = getSiblings(tr);
-    if (
-      siblings &&
-      siblings.length > 0 &&
-      currentPage === Math.ceil(dataSrc?.length / pageSize) &&
-      tr?.getAttribute('data-row-key')?.toString() !== siblings.length.toString()
-    ) {
-      siblings[siblings.length - 1].focus();
-    }
-  }, [currentPage]);
+  Mousetrap.bind('up', () => setRowNumber(curRow - 1));
+  Mousetrap.bind('down', () => setRowNumber(curRow + 1));
+  Mousetrap.bind(['left', 'pageup'], () => setRowNumber(curRow - pageSize));
+  Mousetrap.bind(['right', 'pagedown'], () => setRowNumber(curRow + pageSize));
+  Mousetrap.bind('home', () => setRowNumber(0));
+  Mousetrap.bind('end', () => setRowNumber(dataSource.length - 1));
+  Mousetrap.bind('enter', () => {
+    setIsExpanded(!isExpanded);
+  });
 
+  useEffect(() => {
+    setKeyedData(
+      dataSource
+        ? dataSource.map((record: any, index: number) => {
+            return {
+              key: index,
+              extraData: extraData,
+              ...record,
+            };
+          })
+        : []
+    );
+  }, [dataSource, extraData]);
+
+  useEffect(() => {
+    setDisplayedRow(keyedData[curRow]);
+  }, [curRow, keyedData]);
+
+  // clean up mouse control when we unmount
+  useEffect(() => {
+    return () => {
+      Mousetrap.unbind(['up', 'down', 'pageup', 'pagedown', 'home', 'end', 'enter']);
+    };
+  }, []);
+
+  const gridStyle = siderRender ? { display: 'grid', gridTemplateColumns: '20fr 1fr 8fr' } : {};
   const expandedRowRender =
     expandRender !== undefined ? expandRender : (row: any) => <pre>{JSON.stringify(row, null, 2)}</pre>;
-  let sider = <></>;
-  let style = { display: 'grid', gridTemplateColumns: '20fr 1fr' };
-  if (dataSrc && siderRender) {
-    let dataRow = pageSize * (currentPage - 1) + focusedRow;
-    const record = dataSrc[Math.max(0, dataRow)];
-    sider = siderRender(record, { pageSize, currentPage, focusedRow, dataRow });
-    style = { display: 'grid', gridTemplateColumns: '10fr 4fr' };
-  }
+
   return (
-    <>
-      <div onFocus={handleOnFocus} onBlur={handleOnBlur} style={style}>
-        <Table<any>
-          rowKey={'id'}
-          components={components}
-          columns={columns}
-          dataSource={dataSrc}
-          loading={loading}
-          pagination={{
-            current: currentPage,
-            pageSizeOptions: ['5', '10', '20', '50', '100'],
-            pageSize: pageSize,
-            onChange: (page, newPageSize) => {
-              setCurrentPage(page);
-              if (newPageSize !== pageSize) {
-                setPageSize(pageSize);
-                setCurrentPage(1);
-                const tr = document.querySelector('tr[data-row-key]');
-                //@ts-ignore
-                tr.focus();
-              }
+    <div style={gridStyle}>
+      <Table
+        onRow={(record, rowIndex) => {
+          return {
+            onClick: (event) => {
+              setCurRow(record.key);
             },
-          }}
-          rowClassName={(record, index) => 'row-' + index}
-          size='small'
-          scroll={{ x: 1300 }}
-          expandable={{
-            onExpandedRowsChange: (expandedRowKeys) => {
-              setExpandedRowKeys(expandedRowKeys);
-            },
-            expandedRowKeys: expandedRowKeys,
-            expandedRowRender: expandedRowRender,
-          }}
-        />
-        {sider}
-      </div>
-      {debug ? <pre>records: {JSON.stringify(dataSource?.length)}</pre> : <></>}
-      {debug ? <pre>{JSON.stringify(dataSource, null, 2)}</pre> : <></>}
-    </>
+            style: record.key === curRow ? { color: 'darkblue', backgroundColor: 'rgb(236, 235, 235)' } : {},
+          };
+        }}
+        size='small'
+        loading={loading}
+        columns={columns}
+        dataSource={keyedData}
+        expandable={{
+          expandedRowRender: expandedRowRender,
+        }}
+        pagination={{
+          onChange: (page, newPageSize) => {
+            if (newPageSize && newPageSize !== pageSize) {
+              setPageSize(newPageSize);
+              setRowNumber(0);
+            }
+          },
+          pageSize: pageSize,
+          current: curPage,
+          pageSizeOptions: ['5', '10', '20', '50', '100'],
+        }}
+      />
+      <div></div>
+      {siderRender ? siderRender(displayedRow, { curRow, curPage, pageSize }) : <></>}
+    </div>
   );
 };

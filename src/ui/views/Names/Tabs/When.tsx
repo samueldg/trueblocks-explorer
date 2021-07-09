@@ -22,7 +22,7 @@ const whenSchema: ColumnsType<Block> = [
     title: 'Block Number',
     dataIndex: 'blockNumber',
     configuration: {
-      width: 100,
+      width: 200,
     },
   }),
   addColumn({
