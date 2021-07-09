@@ -14,6 +14,6 @@ export const IndexManifest = () => {
     return response.status === 'fail' || !response.data[0].caches ? [] : response.data[0].caches[0].items;
   }, []);
 
-  // return <BaseTable data={getData(indexes)} columns={indexSchema} loading={loading} />;
+  // return <BaseTable dataSource={getData(indexes)} columns={indexSchema} loading={loading} />;
   return <pre>{JSON.stringify(manifest, null, 2)}</pre>;
 };

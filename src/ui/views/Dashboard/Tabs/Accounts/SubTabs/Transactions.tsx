@@ -4,13 +4,13 @@ import React from 'react';
 import {
   DashboardAccountFunctionsLocation,
   DashboardAccountReconsLocation,
-  DashboardAccountsLocation,
+  DashboardAccountsHistoryLocation,
   DashboardAccountTracesLocation,
 } from '../../../../../Routes';
 import { AccountFunctions } from './Functions';
 import { AccountRecons } from './Recons';
 
-export const AccountTransactions = ({ record, selectedRow }: { record: any; selectedRow: SelectedRow }) => {
+export const AccountHistory = ({ record, selectedRow }: { record: any; selectedRow: SelectedRow }) => {
   const title = '';
   const tabs = [
     {
@@ -41,7 +41,7 @@ export const AccountTransactions = ({ record, selectedRow }: { record: any; sele
       <BaseView
         title={title}
         defaultActive={DashboardAccountFunctionsLocation}
-        baseActive={DashboardAccountsLocation}
+        baseActive={DashboardAccountsHistoryLocation}
         cookieName={'shit'} //cookieVars.explorer_current_tab}
         tabs={tabs}
       />

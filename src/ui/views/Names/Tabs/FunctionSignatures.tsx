@@ -16,7 +16,7 @@ export const FunctionSignatures = () => {
   const getData = useCallback((response) => {
     return response.status === 'fail' ? [] : response.data.filter((item: Function) => item.type === 'function');
   }, []);
-  return <BaseTable data={getData(signatures)} columns={signatureSchema} loading={loading} />;
+  return <BaseTable dataSource={getData(signatures)} columns={signatureSchema} loading={loading} />;
 };
 
 const signatureSchema: ColumnsType<Function> = [

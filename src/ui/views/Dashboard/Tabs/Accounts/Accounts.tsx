@@ -19,11 +19,11 @@ import {
   DashboardAccountsEventsLocation,
   DashboardAccountsFunctionsLocation,
   DashboardAccountsGasLocation,
-  DashboardAccountsLocation,
+  DashboardAccountsHistoryLocation,
   DashboardAccountsNeighborsLocation,
 } from '../../../../Routes';
 import useGlobalState from '../../../../state';
-import { AccountTransactions } from './SubTabs/Transactions';
+import { AccountHistory } from './SubTabs/Transactions';
 
 const { TabPane } = Tabs;
 
@@ -130,12 +130,12 @@ export const AccountsView = () => {
   const theData = getData(transactions); // .filter((record: Transaction) => record.blockNumber !== undefined);
   const getMeta = useCallback((response) => (response?.status === 'fail' ? [] : response?.meta), []);
   const expandRender = (record: any, selectedRow: SelectedRow) => (
-    <AccountTransactions key='account-transactions' record={record} selectedRow={selectedRow} />
+    <AccountHistory key='account-transactions' record={record} selectedRow={selectedRow} />
   );
 
   const accountHistory = (
     <BaseTable
-      data={theData}
+      dataSource={theData}
       columns={transactionSchema}
       loading={loading}
       extraData={accountAddress}
@@ -146,7 +146,7 @@ export const AccountsView = () => {
   const tinyTabs: ViewTab[] = [
     {
       name: 'History',
-      location: DashboardAccountsLocation,
+      location: DashboardAccountsHistoryLocation,
       component: accountHistory,
     },
     {

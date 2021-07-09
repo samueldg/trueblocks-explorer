@@ -205,7 +205,7 @@ export const Monitors = () => {
         Add new monitor
       </div>
       <BaseTable
-        data={getData(monitors)}
+        dataSource={getData(monitors)}
         columns={monitorSchema.map((item) => {
           //@ts-ignore
           return { ...item, ...getColumnSearchProps(item.dataIndex) };

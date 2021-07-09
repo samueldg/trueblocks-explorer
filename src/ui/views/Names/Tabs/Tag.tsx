@@ -14,7 +14,7 @@ export const Tags = () => {
   }
 
   const getData = useCallback((response) => (response.status === 'fail' ? [] : response.data), []);
-  return <BaseTable data={getData(tags)} columns={tagSchema} loading={loading} />;
+  return <BaseTable dataSource={getData(tags)} columns={tagSchema} loading={loading} />;
 };
 
 const tagSchema: ColumnsType<Tag> = [

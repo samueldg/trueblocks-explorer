@@ -1,7 +1,7 @@
 import { BaseView } from '@components/BaseView';
 import React, { useEffect, useState } from 'react';
 import {
-  DashboardAccountsLocation,
+  DashboardAccountsHistoryLocation,
   DashboardCollectionsLocation,
   DashboardLocation,
   DashboardMonitorsLocation,
@@ -26,7 +26,7 @@ export const DashboardView = ({ match }: { match?: any }) => {
     { name: 'Monitors', location: DashboardMonitorsLocation, component: <Monitors />, disabled: false },
     {
       name: 'Account Details',
-      location: DashboardAccountsLocation,
+      location: DashboardAccountsHistoryLocation,
       component: <AccountsView />,
       disabled: false,
     },

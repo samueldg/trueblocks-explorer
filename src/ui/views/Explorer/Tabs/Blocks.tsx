@@ -15,7 +15,7 @@ export const Blocks = () => {
   }
 
   const getData = useCallback((response) => (response.status === 'fail' ? [] : response.data), []);
-  return <BaseTable data={getData(blocks)} columns={blockListSchema} loading={loading} />;
+  return <BaseTable dataSource={getData(blocks)} columns={blockListSchema} loading={loading} />;
 };
 
 const blockListSchema: ColumnsType<Block> = [

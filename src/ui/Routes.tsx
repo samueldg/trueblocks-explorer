@@ -10,9 +10,9 @@ export const DashboardMonitorsLocation = '/dashboard/monitors';
 Mousetrap.bind('s m', function () {
   window.location.href = DashboardMonitorsLocation;
 });
-export const DashboardAccountsLocation = '/dashboard/accounts';
+export const DashboardAccountsHistoryLocation = '/dashboard/accounts';
 Mousetrap.bind('s a', function () {
-  window.location.href = DashboardAccountsLocation;
+  window.location.href = DashboardAccountsHistoryLocation;
 });
 export const DashboardAccountReconsLocation = '/dashboard/accounts/recons';
 export const DashboardAccountFunctionsLocation = '/dashboard/accounts/functions';
@@ -114,7 +114,7 @@ export const routes = [
     helpText: 'The dashboard overview page gives you an overview of your holdings among other things.',
   },
   {
-    path: DashboardAccountsLocation,
+    path: DashboardAccountsHistoryLocation,
     exact: true,
     component: DashboardView,
     helpText: 'View the transactional history of an account.',

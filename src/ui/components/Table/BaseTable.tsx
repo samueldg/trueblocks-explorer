@@ -18,14 +18,14 @@ export type SelectedRow = {
 };
 
 export const BaseTable = ({
-  data,
+  dataSource,
   columns,
   loading,
   extraData,
   expandRender = undefined,
   siderRender = undefined,
 }: {
-  data: JsonResponse;
+  dataSource: JsonResponse;
   columns: ColumnsType<any>;
   loading: boolean;
   extraData?: string;
@@ -38,7 +38,7 @@ export const BaseTable = ({
   const [pageSize, setPageSize] = useState(7);
   const [focusedRow, setFocusedRow] = useState(0);
 
-  const dataSource = data?.map((item: any, i: number) => {
+  const dataSrc = dataSource?.map((item: any, i: number) => {
     return {
       id: (i + 1).toString(),
       extraData: extraData,
@@ -51,10 +51,10 @@ export const BaseTable = ({
     setExpandedRowKeys,
     currentPage,
     pageSize,
-    dataSource?.length,
+    dataSrc?.length,
     () => {
       /* nextPage */
-      if (currentPage < Math.ceil(dataSource?.length / pageSize)) {
+      if (currentPage < Math.ceil(dataSrc?.length / pageSize)) {
         setCurrentPage(currentPage + 1);
         setFocusedRow(0);
       }
@@ -73,9 +73,9 @@ export const BaseTable = ({
     },
     () => {
       /* lastPage */
-      const lastPage = Math.ceil(dataSource?.length / pageSize);
+      const lastPage = Math.ceil(dataSrc?.length / pageSize);
       setCurrentPage(lastPage);
-      setFocusedRow(dataSource?.length - (lastPage - 1) * pageSize - 1);
+      setFocusedRow(dataSrc?.length - (lastPage - 1) * pageSize - 1);
     },
     focusedRow,
     (row) => setFocusedRow(row)
@@ -95,13 +95,13 @@ export const BaseTable = ({
         if (siblings?.length) siblings[0].focus();
       }
     },
-    [currentPage, dataSource, focusedRow, setFocusedRow]
+    [currentPage, dataSrc, focusedRow, setFocusedRow]
   );
 
   useHotkeys(
     'right,pagedown',
     () => {
-      currentPage < Math.ceil(dataSource?.length / pageSize) && setCurrentPage(currentPage + 1);
+      currentPage < Math.ceil(dataSrc?.length / pageSize) && setCurrentPage(currentPage + 1);
       const tr = document.querySelector('tr[data-row-key]');
       const siblings = getSiblings(tr);
       setFocusedRow(0);
@@ -109,7 +109,7 @@ export const BaseTable = ({
         siblings[0].focus();
       }
     },
-    [currentPage, dataSource, focusedRow, setFocusedRow]
+    [currentPage, dataSrc, focusedRow, setFocusedRow]
   );
 
   const components = {
@@ -126,7 +126,7 @@ export const BaseTable = ({
     if (
       siblings &&
       siblings.length > 0 &&
-      currentPage === Math.ceil(dataSource?.length / pageSize) &&
+      currentPage === Math.ceil(dataSrc?.length / pageSize) &&
       tr?.getAttribute('data-row-key')?.toString() !== siblings.length.toString()
     ) {
       siblings[siblings.length - 1].focus();
@@ -137,9 +137,9 @@ export const BaseTable = ({
     expandRender !== undefined ? expandRender : (row: any) => <pre>{JSON.stringify(row, null, 2)}</pre>;
   let sider = <></>;
   let style = { display: 'grid', gridTemplateColumns: '20fr 1fr' };
-  if (dataSource && siderRender) {
+  if (dataSrc && siderRender) {
     let dataRow = pageSize * (currentPage - 1) + focusedRow;
-    const record = dataSource[Math.max(0, dataRow)];
+    const record = dataSrc[Math.max(0, dataRow)];
     sider = siderRender(record, { pageSize, currentPage, focusedRow, dataRow });
     style = { display: 'grid', gridTemplateColumns: '10fr 4fr' };
   }
@@ -150,7 +150,7 @@ export const BaseTable = ({
           rowKey={'id'}
           components={components}
           columns={columns}
-          dataSource={dataSource}
+          dataSource={dataSrc}
           loading={loading}
           pagination={{
             current: currentPage,
@@ -180,8 +180,8 @@ export const BaseTable = ({
         />
         {sider}
       </div>
-      {debug ? <pre>records: {JSON.stringify(data?.length)}</pre> : <></>}
-      {debug ? <pre>{JSON.stringify(data, null, 2)}</pre> : <></>}
+      {debug ? <pre>records: {JSON.stringify(dataSource?.length)}</pre> : <></>}
+      {debug ? <pre>{JSON.stringify(dataSource, null, 2)}</pre> : <></>}
     </>
   );
 };

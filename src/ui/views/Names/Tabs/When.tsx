@@ -14,7 +14,7 @@ export const When = () => {
   }
 
   const getData = useCallback((response) => (response.status === 'fail' ? [] : response.data), []);
-  return <BaseTable data={getData(when)} columns={whenSchema} loading={loading} />;
+  return <BaseTable dataSource={getData(when)} columns={whenSchema} loading={loading} />;
 };
 
 const whenSchema: ColumnsType<Block> = [

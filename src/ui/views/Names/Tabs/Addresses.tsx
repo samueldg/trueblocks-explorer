@@ -213,7 +213,7 @@ export const Addresses = () => {
         )}
       </Modal>
       <BaseTable
-        data={getData(addresses)}
+        dataSource={getData(addresses)}
         columns={addressSchema.map((item) => {
           //@ts-ignore
           return { ...item, ...getColumnSearchProps(item.dataIndex) };
