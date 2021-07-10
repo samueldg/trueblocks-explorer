@@ -28,7 +28,7 @@ export const AccountHistoryFunctions = ({ record }: { record: Transaction }) => 
           }}
           hoverable={true}
           title={'Events'}>
-          {showLogs(record.receipt.logs)}
+          {showLogs(record?.receipt?.logs)}
         </Card>
       </div>
     </div>
@@ -49,7 +49,8 @@ const showLogs = (logs: LogArray) => {
 //-----------------------------------------------------------------
 const showInput = (record: Transaction) => {
   let str = record.input;
-  if (str.length < 10) <pre>{str}</pre>;
+  if (!str) return <></>;
+  if (str?.length < 10) <pre>{str}</pre>;
   const head = str.slice(0, 10);
   str = str.replace(head, '');
 
