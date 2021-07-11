@@ -1,4 +1,5 @@
 import { CheckCircleFilled, CloseCircleFilled } from '@ant-design/icons';
+import AccountCharts from '@components/AccountCharts';
 import { ViewTab } from '@components/BaseView';
 import { addColumn } from '@components/Table';
 import { Result, toFailedResult, toSuccessfulData } from '@hooks/useCommand';
@@ -144,7 +145,7 @@ export const AccountsView = () => {
     },
     { name: 'Neighbors', location: DashboardAccountsNeighborsLocation, component: <div>Neighbors</div> },
     { name: 'Gas', location: DashboardAccountsGasLocation, component: <div>Gas</div> },
-    { name: 'Charts', location: DashboardAccountsChartsLocation, component: <div>Charts</div> },
+    { name: 'Charts', location: DashboardAccountsChartsLocation, component: <AccountCharts data={transactions} /> },
     { name: 'Functions', location: DashboardAccountsFunctionsLocation, component: <div>Functions</div> },
     { name: 'Events', location: DashboardAccountsEventsLocation, component: <div>Events</div> },
   ];
