@@ -17,6 +17,7 @@ Mousetrap.bind('s a', function () {
 export const DashboardAccountReconsLocation = '/dashboard/accounts/recons';
 export const DashboardAccountFunctionsLocation = '/dashboard/accounts/functions';
 export const DashboardAccountTracesLocation = '/dashboard/accounts/traces';
+export const DashboardAccountLogosLocation = '/dashboard/accounts/logos';
 export const DashboardCollectionsLocation = '/dashboard/collections';
 
 export const DashboardAccountsAssetsLocation = '/dashboard/accounts/assets';
@@ -155,6 +156,12 @@ export const routes = [
     exact: true,
     component: DashboardView,
     helpText: 'View the history of traces for the transaction.',
+  },
+  {
+    path: DashboardAccountLogosLocation,
+    exact: true,
+    component: DashboardView,
+    helpText: 'View the logo of the to address for the transaction.',
   },
   {
     path: DashboardAccountReconsLocation,

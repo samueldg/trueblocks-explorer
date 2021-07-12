@@ -4,6 +4,7 @@ import { TransactionArray } from '@modules/types';
 import React from 'react';
 import {
   DashboardAccountFunctionsLocation,
+  DashboardAccountLogosLocation,
   DashboardAccountReconsLocation,
   DashboardAccountsHistoryLocation,
   DashboardAccountTracesLocation,
@@ -53,6 +54,11 @@ export const AccountHistorySider = ({ record, selectedRow }: { record: any; sele
       name: 'Traces',
       location: DashboardAccountTracesLocation,
       component: <pre>{JSON.stringify(record?.traces, null, 2)}</pre>,
+    },
+    {
+      name: 'Logos',
+      location: DashboardAccountLogosLocation,
+      component: <pre>{JSON.stringify(record?.to, null, 2)}</pre>,
     },
   ];
   const debug = null;
