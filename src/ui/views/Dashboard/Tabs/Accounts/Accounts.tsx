@@ -52,7 +52,6 @@ export const AccountsView = () => {
     setTransactions(toSuccessfulData(emptyData));
   }, []);
 
-  const debugging = false;
   useEffect(() => {
     (async () => {
       if (accountAddress?.slice(0, 2) === '0x') {
@@ -67,7 +66,7 @@ export const AccountsView = () => {
           Either.fold(toFailedResult, (serverResponse) => toSuccessfulData(serverResponse) as Result)
         );
         //@ts-ignore
-        setTotalRecords(debugging ? 4 : result.data[0]?.nRecords);
+        setTotalRecords(result.data[0]?.nRecords);
         setLoading(false);
       }
     })();
@@ -103,7 +102,6 @@ export const AccountsView = () => {
         newTransactions.data =
           newTransactions.data.length === 1 ? [...result.data] : [...newTransactions.data, ...result.data];
         //@ts-ignore
-        if (debugging) newTransactions.data = newTransactions.data.filter((item, index) => index < 4);
         setTransactions(newTransactions);
       }
     })();
