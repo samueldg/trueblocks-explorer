@@ -60,9 +60,11 @@ export default function AccountCharts({ data }: { data: any }) {
   return (
     <div>
       {uniqueAssets.map((asset: any, i: number) => (
-        <>
-          <div style={{ marginBottom: '24px', fontSize: '28px', fontWeight: 'bold' }}>{asset.asset}</div>
-          <div style={{ width: '100%', height: '300px' }}>
+        <div key={i}>
+          <div key={i + 'd1'} style={{ marginBottom: '24px', fontSize: '28px', fontWeight: 'bold' }}>
+            {asset.asset}
+          </div>
+          <div key={i + 'd2'} style={{ width: '100%', height: '300px' }}>
             <ResponsiveContainer width='100%' height='100%'>
               <AreaChart
                 width={500}
@@ -93,7 +95,7 @@ export default function AccountCharts({ data }: { data: any }) {
               </AreaChart>
             </ResponsiveContainer>
           </div>
-        </>
+        </div>
       ))}
     </div>
   );

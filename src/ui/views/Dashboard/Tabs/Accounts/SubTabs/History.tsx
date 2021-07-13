@@ -3,15 +3,19 @@ import { BaseTable, SelectedRow } from '@components/Table';
 import { TransactionArray } from '@modules/types';
 import React from 'react';
 import {
-  DashboardAccountFunctionsLocation,
-  DashboardAccountLogosLocation,
-  DashboardAccountReconsLocation,
+  DashboardAccountsLocation,
+  DashboardAccountsHistoryFunctionsLocation,
+  DashboardAccountsHistoryEventsLocation,
+  DashboardAccountsHistoryCustomLocation,
+  DashboardAccountsHistoryReconsLocation,
   DashboardAccountsHistoryLocation,
-  DashboardAccountTracesLocation,
+  DashboardAccountsHistoryTracesLocation,
 } from '../../../../../Routes';
 import { transactionSchema } from '../Accounts';
+import { AccountHistoryEvents } from './HistoryEvents';
 import { AccountHistoryFunctions } from './HistoryFunctions';
 import { AccountHistoryRecons } from './HistoryRecons';
+import { cookieVars } from '../../../../../utils';
 
 export const AccountHistory = ({
   theData,
@@ -38,46 +42,42 @@ export const AccountHistory = ({
 };
 
 export const AccountHistorySider = ({ record, selectedRow }: { record: any; selectedRow: SelectedRow }) => {
-  const title = '';
   const tabs = [
     {
-      name: 'Reconciliations',
-      location: DashboardAccountReconsLocation,
+      name: 'Recons',
+      location: DashboardAccountsHistoryReconsLocation,
       component: <AccountHistoryRecons record={record} />,
     },
     {
-      name: 'Functions / Events',
-      location: DashboardAccountFunctionsLocation,
+      name: 'Function',
+      location: DashboardAccountsHistoryFunctionsLocation,
       component: <AccountHistoryFunctions record={record} />,
     },
     {
+      name: 'Events',
+      location: DashboardAccountsHistoryEventsLocation,
+      component: <AccountHistoryEvents record={record} />,
+    },
+    {
       name: 'Traces',
-      location: DashboardAccountTracesLocation,
+      location: DashboardAccountsHistoryTracesLocation,
       component: <pre>{JSON.stringify(record?.traces, null, 2)}</pre>,
     },
     {
-      name: 'Logos',
-      location: DashboardAccountLogosLocation,
+      name: 'Custom',
+      location: DashboardAccountsHistoryCustomLocation,
       component: <pre>{JSON.stringify(record?.to, null, 2)}</pre>,
     },
   ];
-  const debug = null;
-  // (
-  //   <div>
-  //     <pre>{JSON.stringify(selectedRow, null, 2)}</pre>
-  //     <br />
-  //   </div>
-  // );
+
   return (
-    <div>
-      {debug}
-      <BaseView
-        title={title}
-        defaultActive={DashboardAccountFunctionsLocation}
-        baseActive={DashboardAccountsHistoryLocation}
-        cookieName={'shit'} //cookieVars.explorer_current_tab}
-        tabs={tabs}
-      />
-    </div>
+    <BaseView
+      title={''}
+      defaultActive={DashboardAccountsHistoryLocation}
+      baseActive={DashboardAccountsLocation}
+      cookieName={cookieVars.dashboard_account_history_sub_tab}
+      tabs={tabs}
+      subBase={true}
+    />
   );
 };

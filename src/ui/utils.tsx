@@ -1,5 +1,6 @@
 export const cookieVars = {
   dashboard_current_tab: 'DASHBOARD_CURRENT_TAB',
+  dashboard_account_history_sub_tab: 'DASHBOARD_ACCOUNT_SUB_TAB',
   dashboard_account_sub_tab: 'DASHBOARD_ACCOUNT_SUB_TAB',
   dashboard_indexes_sub_tab: 'DASHBOARD_INDEXES_SUB_TAB',
   explorer_current_tab: 'EXPLORER_CURRENT_TAB',

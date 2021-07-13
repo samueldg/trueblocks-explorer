@@ -5,14 +5,15 @@ import { useAcctStyles } from '../AccountStyles';
 
 //-----------------------------------------------------------------
 export const AccountHistoryRecons = ({ record }: { record: Transaction }) => {
+  if (!record) return <></>;
   const [expand, setExpand] = useState(false);
+  const key = record.blockNumber + '.' + record.transactionIndex;
   const styles = useAcctStyles();
   return (
-    <div className={styles.container}>
-      <div></div>
-      <div className={styles.cardHolder}>
+    <div key={key} className={styles.container}>
+      <div key={key} className={styles.cardHolder}>
         {record?.statements?.map((statement: Reconciliation, index: number) =>
-          oneStatement(statement, index, expand, setExpand, styles)
+          oneStatement(statement, index, expand, setExpand, styles, key)
         )}
       </div>
       <div></div>
@@ -26,11 +27,12 @@ const oneStatement = (
   index: number,
   expand: boolean,
   setExpand: React.Dispatch<React.SetStateAction<boolean>>,
-  styles: any
+  styles: any,
+  key: string
 ) => {
   return (
     <Card
-      key={statement.blockNumber + '.' + statement.transactionIndex + '.' + index}
+      key={key + '.' + index}
       className={styles.card}
       headStyle={{
         backgroundColor: 'lightgrey',

@@ -1,6 +1,6 @@
 import { CheckCircleFilled, CloseCircleFilled } from '@ant-design/icons';
 import AccountCharts from '@components/AccountCharts';
-import { ViewTab } from '@components/BaseView';
+import { BaseView, ViewTab } from '@components/BaseView';
 import { addColumn } from '@components/Table';
 import { Result, toFailedResult, toSuccessfulData } from '@hooks/useCommand';
 import { runCommand } from '@modules/core';
@@ -16,6 +16,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { createUseStyles } from 'react-jss';
 import style from 'react-syntax-highlighter/dist/esm/styles/hljs/a11y-dark';
 import {
+  DashboardAccountsLocation,
   DashboardAccountsAssetsLocation,
   DashboardAccountsChartsLocation,
   DashboardAccountsEventsLocation,
@@ -27,6 +28,7 @@ import {
 import useGlobalState from '../../../../state';
 import { AccountAssets } from './SubTabs/Assets';
 import { AccountHistory } from './SubTabs/History';
+import { cookieVars } from '../../../../utils';
 
 const { TabPane } = Tabs;
 
@@ -132,7 +134,7 @@ export const AccountsView = () => {
   };
 
   const getData = useCallback((response) => (response?.status === 'fail' ? [] : response?.data), []);
-  const theData = getData(transactions); // .filter((record: Transaction) => record.blockNumber !== undefined);
+  const theData = getData(transactions);
   const getMeta = useCallback((response) => (response?.status === 'fail' ? [] : response?.meta), []);
 
   const tinyTabs: ViewTab[] = [
@@ -153,27 +155,6 @@ export const AccountsView = () => {
     { name: 'Events', location: DashboardAccountsEventsLocation, component: <div>Events</div> },
   ];
 
-  const summary = (
-    <>
-      <b>
-        Summary for
-        <br />
-        <div style={{ width: '40px' }}> </div>
-        {accountAddress?.slice(0, 6) +
-          '...' +
-          accountAddress?.slice(accountAddress.length - 5, accountAddress.length - 1)}
-      </b>
-      <br />
-      nTransactions: {theData?.length}
-      <br />
-      firstBlock: {theData && theData.length > 0 && theData[0].blockNumber}
-      <br />
-      lastBlock: {theData && theData.length > 0 && theData[theData.length - 1].blockNumber}
-      <br />
-      balance: {'XXX'}
-    </>
-  );
-
   return (
     <div>
       <Checkbox checked={staging} onChange={(event) => onStaging()}>
@@ -188,10 +169,33 @@ export const AccountsView = () => {
       <AddressBar input={addressInput} progress={progressBar()} />
       <Divider style={{ height: '1px' }} />
       <div style={{ display: 'grid', gridTemplateColumns: '20fr 1fr' }}>
-        <TinyTabs tabs={tinyTabs} summary={summary} />
+        <TinyTabs tabs={tinyTabs} />
         <div></div>
       </div>
+      {/* <BaseView
+        title={''}
+        cookieName={cookieVars.dashboard_account_sub_tab}
+        defaultActive={DashboardAccountsHistoryLocation}
+        baseActive={DashboardAccountsLocation}
+        tabs={tinyTabs}
+        position='left'
+        subBase={true}
+      /> */}
     </div>
+  );
+};
+
+const TinyTabs = ({ tabs }: { tabs: ViewTab[] }) => {
+  return (
+    <Tabs tabPosition='left'>
+      {tabs.map((tab: any) => {
+        return (
+          <TabPane key={tab.location} tab={tab.name} style={{ width: '100%' }}>
+            {tab.component}
+          </TabPane>
+        );
+      })}
+    </Tabs>
   );
 };
 
@@ -202,21 +206,6 @@ const AddressBar = ({ input, progress }: { input: JSX.Element; progress: JSX.Ele
       {input}
       {progress}
     </div>
-  );
-};
-
-const TinyTabs = ({ tabs, summary }: { tabs: ViewTab[]; summary: JSX.Element }) => {
-  return (
-    <Tabs tabPosition='left'>
-      {tabs.map((tab: any) => {
-        // TODO(tjayrush): Can we use summary here somehow?
-        return (
-          <TabPane key={tab.location} tab={tab.name} style={{ width: '100%' }}>
-            {tab.component}
-          </TabPane>
-        );
-      })}
-    </Tabs>
   );
 };
 
@@ -273,7 +262,7 @@ export const transactionSchema: ColumnsType<Transaction> = [
     title: 'From / To',
     dataIndex: 'from',
     configuration: {
-      width: '35%',
+      width: '30%',
       render: (unused: any, record: Transaction) => {
         if (!record) return <div></div>;
         const to = record.to === record.extraData ? <div style={style}>{record.to}</div> : record.to;
@@ -290,7 +279,7 @@ export const transactionSchema: ColumnsType<Transaction> = [
     title: 'Reconciliations (asset, beg, in, out, gasOut, end, check)',
     dataIndex: 'compressedTx',
     configuration: {
-      width: '45%',
+      width: '50%',
       render: (item, record) => {
         item = record.compressedTx;
         if (item === '' && record.from === '0xPrefund') item = '0xPrefund';
@@ -396,7 +385,7 @@ const clip = (num: string, is_gas?: boolean) => {
   if (parts.length === 0 || parts[0] === '')
     return (
       <div style={{ color: 'lightgrey' }}>
-        {'0.0000000'}
+        {'0.000000'}
         {is_gas ? 'g' : ''}
       </div>
     );
@@ -405,14 +394,14 @@ const clip = (num: string, is_gas?: boolean) => {
       parts[0] +
       (
         <div>
-          {'.0000000'}
+          {'.000000'}
           {is_gas ? 'g' : ''}
         </div>
       )
     );
   return (
     <div>
-      {parts[0] + '.' + parts[1].substr(0, 7)}
+      {parts[0] + '.' + parts[1].substr(0, 6)}
       {is_gas ? 'g' : ''}
     </div>
   );

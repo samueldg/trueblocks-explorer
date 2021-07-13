@@ -8,14 +8,14 @@ import {
   SettingsIndexTableLocation,
 } from '../../../../Routes';
 import { cookieVars } from '../../../../utils';
-import { IndexCharts } from './Tabs/IndexCharts';
-import { IndexGrid } from './Tabs/IndexGrid';
-import { IndexManifest } from './Tabs/IndexManifest';
-import { IndexTable } from './Tabs/IndexTable';
+import { IndexCharts } from './SubTabs/IndexCharts';
+import { IndexGrid } from './SubTabs/IndexGrid';
+import { IndexManifest } from './SubTabs/IndexManifest';
+import { IndexTable } from './SubTabs/IndexTable';
 
 export const IndexesView = () => {
   const title = '';
-  var tabs = [
+  const tabs = [
     { name: 'Grid', location: SettingsIndexGridLocation, component: <IndexGrid /> },
     { name: 'Table', location: SettingsIndexTableLocation, component: <IndexTable /> },
     { name: 'Charts', location: SettingsIndexChartsLocation, component: <IndexCharts /> },
@@ -27,9 +27,9 @@ export const IndexesView = () => {
       defaultActive={SettingsIndexGridLocation}
       baseActive={SettingsIndexesLocation}
       cookieName={cookieVars.dashboard_indexes_sub_tab}
-      subBase={true}
       tabs={tabs}
       position='left'
+      subBase={true}
     />
   );
 };

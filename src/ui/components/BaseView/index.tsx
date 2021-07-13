@@ -13,7 +13,7 @@ export type ViewTab = {
 };
 
 declare type TabsPosition = 'top' | 'right' | 'bottom' | 'left';
-interface ViewParams {
+export interface ViewParams {
   title: string;
   defaultActive: string;
   baseActive: string;
@@ -32,6 +32,8 @@ export const BaseView = ({
   position = 'top',
   subBase,
 }: ViewParams) => {
+  console.log('defaultActive: ', defaultActive);
+  console.log('baseActive: ', baseActive);
   const history = useHistory();
   const location = useLocation();
   const parts = location.pathname.split('/');

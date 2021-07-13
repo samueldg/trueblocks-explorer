@@ -1,7 +1,7 @@
 import { BaseView } from '@components/BaseView';
 import React, { useEffect, useState } from 'react';
 import {
-  DashboardAccountsHistoryLocation,
+  DashboardAccountsLocation,
   DashboardCollectionsLocation,
   DashboardLocation,
   DashboardMonitorsLocation,
@@ -21,12 +21,12 @@ export const DashboardView = ({ match }: { match?: any }) => {
     if (name) setNamed(name.name);
   }, [accountAddress, names]);
 
-  const title = `Dashboard [${accountAddress} ${named}]`;
-  var tabs = [
+  const title = `Dashboard [${accountAddress ? accountAddress : ''} ${accountAddress ? named : ''}]`;
+  const tabs = [
     { name: 'Monitors', location: DashboardMonitorsLocation, component: <Monitors />, disabled: false },
     {
       name: 'Account Details',
-      location: DashboardAccountsHistoryLocation,
+      location: DashboardAccountsLocation,
       component: <AccountsView />,
       disabled: false,
     },

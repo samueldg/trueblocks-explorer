@@ -10,15 +10,16 @@ export const DashboardMonitorsLocation = '/dashboard/monitors';
 Mousetrap.bind('s m', function () {
   window.location.href = DashboardMonitorsLocation;
 });
-export const DashboardAccountsHistoryLocation = '/dashboard/accounts';
+export const DashboardAccountsLocation = '/dashboard/accounts';
 Mousetrap.bind('s a', function () {
-  window.location.href = DashboardAccountsHistoryLocation;
+  window.location.href = DashboardAccountsLocation;
 });
-export const DashboardAccountReconsLocation = '/dashboard/accounts/recons';
-export const DashboardAccountFunctionsLocation = '/dashboard/accounts/functions';
-export const DashboardAccountTracesLocation = '/dashboard/accounts/traces';
-export const DashboardAccountLogosLocation = '/dashboard/accounts/logos';
-export const DashboardCollectionsLocation = '/dashboard/collections';
+export const DashboardAccountsHistoryLocation = '/dashboard/accounts/history';
+export const DashboardAccountsHistoryReconsLocation = '/dashboard/accounts/history/recons';
+export const DashboardAccountsHistoryFunctionsLocation = '/dashboard/accounts/history/functions';
+export const DashboardAccountsHistoryEventsLocation = '/dashboard/accounts/history/events';
+export const DashboardAccountsHistoryTracesLocation = '/dashboard/accounts/history/traces';
+export const DashboardAccountsHistoryCustomLocation = '/dashboard/accounts/history/custom';
 
 export const DashboardAccountsAssetsLocation = '/dashboard/accounts/assets';
 export const DashboardAccountsNeighborsLocation = '/dashboard/accounts/neighbors';
@@ -26,6 +27,7 @@ export const DashboardAccountsGasLocation = '/dashboard/accounts/gas';
 export const DashboardAccountsChartsLocation = '/dashboard/accounts/charts';
 export const DashboardAccountsFunctionsLocation = '/dashboard/accounts/functions';
 export const DashboardAccountsEventsLocation = '/dashboard/accounts/events';
+export const DashboardCollectionsLocation = '/dashboard/collections';
 
 export const NamesLocation = '/names';
 Mousetrap.bind('s n', function () {
@@ -115,6 +117,12 @@ export const routes = [
     helpText: 'The dashboard overview page gives you an overview of your holdings among other things.',
   },
   {
+    path: DashboardAccountsLocation,
+    exact: true,
+    component: DashboardView,
+    helpText: 'View the transactional history of an account.',
+  },
+  {
     path: DashboardAccountsHistoryLocation,
     exact: true,
     component: DashboardView,
@@ -146,25 +154,31 @@ export const routes = [
     component: DashboardView,
   },
   {
-    path: DashboardAccountFunctionsLocation,
+    path: DashboardAccountsHistoryFunctionsLocation,
     exact: true,
     component: DashboardView,
-    helpText: 'View the functional history of an account.',
+    helpText: 'View the functions for a transaction.',
   },
   {
-    path: DashboardAccountTracesLocation,
+    path: DashboardAccountsHistoryEventsLocation,
+    exact: true,
+    component: DashboardView,
+    helpText: 'View the events in transaction.',
+  },
+  {
+    path: DashboardAccountsHistoryTracesLocation,
     exact: true,
     component: DashboardView,
     helpText: 'View the history of traces for the transaction.',
   },
   {
-    path: DashboardAccountLogosLocation,
+    path: DashboardAccountsHistoryCustomLocation,
     exact: true,
     component: DashboardView,
     helpText: 'View the logo of the to address for the transaction.',
   },
   {
-    path: DashboardAccountReconsLocation,
+    path: DashboardAccountsHistoryReconsLocation,
     exact: true,
     component: DashboardView,
     helpText: 'View the reconciliation history of an account.',

@@ -10,6 +10,7 @@ export const AccountAssets = ({
   loading: boolean;
   accountAddress: string;
 }) => {
+  if (!theData) return <></>;
   var count = function (ary: any[], classifier: any) {
     classifier = classifier || String;
     return ary.reduce(function (counter, item) {

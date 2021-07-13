@@ -74,7 +74,7 @@ export const BaseTable = ({
     };
   }, []);
 
-  const gridStyle = siderRender ? { display: 'grid', gridTemplateColumns: '20fr 1fr 8fr' } : {};
+  const gridStyle = siderRender ? { display: 'grid', gridTemplateColumns: '30fr 1fr 12fr 1fr' } : {};
   const expandedRowRender =
     expandRender !== undefined ? expandRender : (row: any) => <pre>{JSON.stringify(row, null, 2)}</pre>;
 
@@ -110,6 +110,7 @@ export const BaseTable = ({
       />
       <div></div>
       {siderRender ? siderRender(displayedRow, { curRow, curPage, pageSize }) : <></>}
+      <div></div>
     </div>
   );
 };
