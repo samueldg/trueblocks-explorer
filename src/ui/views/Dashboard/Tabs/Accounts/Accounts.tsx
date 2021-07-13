@@ -33,14 +33,29 @@ import { useHistory, useLocation } from 'react-router-dom';
 
 const { TabPane } = Tabs;
 
-export const AccountsView = () => {
+export const AccountsView = ({
+  emptyData,
+  loading,
+  setLoading,
+  accountAddress,
+  setAccountAddress,
+  totalRecords,
+  setTotalRecords,
+  transactions,
+  setTransactions,
+}: {
+  emptyData: any;
+  loading: boolean;
+  setLoading: any;
+  accountAddress: string;
+  setAccountAddress: any;
+  totalRecords: number | null;
+  setTotalRecords: any;
+  transactions: Result | null;
+  setTransactions: any;
+}) => {
   const [staging, setStaging] = useState(false);
   const [denom, setDenom] = useState('ether');
-  const emptyData = { data: [{}], meta: {} };
-  const [transactions, setTransactions] = useState<Result | null>(null);
-  const [loading, setLoading] = useState(false);
-  const [totalRecords, setTotalRecords] = useState<null | number>(null);
-  const { accountAddress, setAccountAddress } = useGlobalState();
 
   const onStaging = () => setStaging(!staging);
   const onEther = () => {
@@ -51,67 +66,6 @@ export const AccountsView = () => {
     denom === 'dollars' ? setDenom('') : setDenom('dollars');
     setTransactions(toSuccessfulData(emptyData));
   }, []);
-
-  useEffect(() => {
-    (async () => {
-      if (accountAddress?.slice(0, 2) === '0x') {
-        setLoading(true);
-        const eitherResponse = await runCommand('list', {
-          count: true,
-          appearances: true,
-          addrs: accountAddress,
-        });
-        const result: Result = pipe(
-          eitherResponse,
-          Either.fold(toFailedResult, (serverResponse) => toSuccessfulData(serverResponse) as Result)
-        );
-        //@ts-ignore
-        setTotalRecords(result.data[0]?.nRecords);
-        setLoading(false);
-      }
-    })();
-  }, [accountAddress, denom, staging]);
-
-  useEffect(() => {
-    (async () => {
-      if (totalRecords && (transactions?.data.length || 0) < totalRecords) {
-        const eitherResponse = await runCommand('export', {
-          addrs: accountAddress,
-          fmt: 'json',
-          cache_txs: true,
-          cache_traces: true,
-          staging: staging,
-          // unripe: true,
-          ether: denom === 'ether',
-          dollars: denom === 'dollars',
-          articulate: true,
-          accounting: true,
-          reversed: false,
-          first_record: transactions?.data?.length || 0,
-          max_records:
-            (transactions?.data?.length || 0) < 100
-              ? 10
-              : 31 /* an arbitrary number not too big, not too small, that appears not to repeat */,
-        });
-        const result: Result = pipe(
-          eitherResponse,
-          Either.fold(toFailedResult, (serverResponse) => toSuccessfulData(serverResponse) as Result)
-        );
-        let newTransactions: Result = transactions?.data ? { ...transactions } : toSuccessfulData(emptyData);
-        //@ts-ignore
-        newTransactions.data =
-          newTransactions.data.length === 1 ? [...result.data] : [...newTransactions.data, ...result.data];
-        //@ts-ignore
-        setTransactions(newTransactions);
-      }
-    })();
-  }, [totalRecords, transactions, denom, staging]);
-
-  if (transactions?.status === 'fail') {
-    createErrorNotification({
-      description: 'Could not fetch transactions',
-    });
-  }
 
   const addressInput = (
     <Input
