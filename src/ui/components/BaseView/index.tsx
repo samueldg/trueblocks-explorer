@@ -23,6 +23,7 @@ export interface ViewParams {
   subBase?: boolean;
 }
 
+// let count = 1;
 export const BaseView = ({
   title = '',
   defaultActive,
