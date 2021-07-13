@@ -53,9 +53,9 @@ export const IndexesView = () => {
     },
   ];
 
+  // console.log('IndexesView');
   return (
     <BaseView
-      title={''}
       defaultActive={SettingsIndexGridLocation}
       baseActive={SettingsIndexesLocation}
       cookieName={cookieVars.dashboard_indexes_sub_tab}

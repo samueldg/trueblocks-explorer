@@ -14,7 +14,7 @@ export type ViewTab = {
 
 declare type TabsPosition = 'top' | 'right' | 'bottom' | 'left';
 export interface ViewParams {
-  title: string;
+  title?: string;
   defaultActive: string;
   baseActive: string;
   cookieName: string;
@@ -24,15 +24,14 @@ export interface ViewParams {
 }
 
 export const BaseView = ({
-  title,
-  cookieName,
+  title = '',
   defaultActive,
   baseActive,
+  cookieName,
   tabs,
   position = 'top',
   subBase,
 }: ViewParams) => {
-  const history = useHistory();
   const location = useLocation();
   const parts = location.pathname.split('/');
   const subPath = location.pathname.replace(baseActive, '');
@@ -52,14 +51,26 @@ export const BaseView = ({
       defaultActive
   );
 
+  const history = useHistory();
   const onTabChange = (key: string) => {
+    // console.log(count, 'set: ', cookieName, key);
     Cookies.set(cookieName, key);
     history.push(key);
     setCurrentTab(key);
   };
 
-  const titleComponent = title.length === 0 ? <></> : <PageHeader style={{ padding: '0px' }} title={title} />;
+  // console.log(count, 'ba: ', baseActive);
+  // console.log(count, 'da: ', defaultActive);
+  // console.log(count, 'tabs: ', tabs);
+  // console.log(count, 'cook: ', Cookies.get(cookieName));
+  // console.log(count, 'eq: ', defaultActive == tabs[0].location);
+  // console.log(count, 'cn: ', cookieName);
+  // console.log(count, 'lo: ', location);
+  // console.log(count, 'pa: ', parts);
+  // console.log(count, 'su: ', subPath);
+  // console.log(count++, 'ct: ', currentTab);
 
+  const titleComponent = title.length === 0 ? <></> : <PageHeader style={{ padding: '0px' }} title={title} />;
   return (
     <>
       {titleComponent}

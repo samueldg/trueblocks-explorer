@@ -1,12 +1,13 @@
+import Cookies from 'js-cookie';
 import { CheckCircleFilled, CloseCircleFilled } from '@ant-design/icons';
 import AccountCharts from '@components/AccountCharts';
-import { BaseView, ViewTab } from '@components/BaseView';
+import { BaseView, ViewTab, ViewParams } from '@components/BaseView';
 import { addColumn } from '@components/Table';
 import { Result, toFailedResult, toSuccessfulData } from '@hooks/useCommand';
 import { runCommand } from '@modules/core';
 import { createErrorNotification } from '@modules/error_notification';
 import { Reconciliation, ReconciliationArray, Transaction } from '@modules/types';
-import { Checkbox, Divider, Input, Tabs } from 'antd';
+import { Checkbox, Divider, Input, Tabs, PageHeader } from 'antd';
 import { ColumnsType } from 'antd/lib/table';
 import { either as Either } from 'fp-ts';
 import { pipe } from 'fp-ts/lib/function';
@@ -29,6 +30,7 @@ import useGlobalState from '../../../../state';
 import { AccountAssets } from './SubTabs/Assets';
 import { AccountHistory } from './SubTabs/History';
 import { cookieVars } from '../../../../utils';
+import { useHistory, useLocation } from 'react-router-dom';
 
 const { TabPane } = Tabs;
 
@@ -53,6 +55,7 @@ export const AccountsView = () => {
     setTransactions(toSuccessfulData(emptyData));
   }, []);
 
+  const debugging = false;
   useEffect(() => {
     (async () => {
       if (accountAddress?.slice(0, 2) === '0x') {
@@ -67,7 +70,7 @@ export const AccountsView = () => {
           Either.fold(toFailedResult, (serverResponse) => toSuccessfulData(serverResponse) as Result)
         );
         //@ts-ignore
-        setTotalRecords(result.data[0]?.nRecords);
+        setTotalRecords(debugging ? 4 : result.data[0]?.nRecords);
         setLoading(false);
       }
     })();
@@ -102,6 +105,8 @@ export const AccountsView = () => {
         //@ts-ignore
         newTransactions.data =
           newTransactions.data.length === 1 ? [...result.data] : [...newTransactions.data, ...result.data];
+        //@ts-ignore
+        if (debugging) newTransactions.data = newTransactions.data.filter((item, index) => index < 4);
         setTransactions(newTransactions);
       }
     })();
@@ -137,7 +142,7 @@ export const AccountsView = () => {
   const theData = getData(transactions);
   const getMeta = useCallback((response) => (response?.status === 'fail' ? [] : response?.meta), []);
 
-  const tinyTabs: ViewTab[] = [
+  const leftSideTabs: ViewTab[] = [
     {
       name: 'History',
       location: DashboardAccountsHistoryLocation,
@@ -155,6 +160,7 @@ export const AccountsView = () => {
     { name: 'Events', location: DashboardAccountsEventsLocation, component: <div>Events</div> },
   ];
 
+  // console.log('AccountsView');
   return (
     <div>
       <Checkbox checked={staging} onChange={(event) => onStaging()}>
@@ -169,33 +175,72 @@ export const AccountsView = () => {
       <AddressBar input={addressInput} progress={progressBar()} />
       <Divider style={{ height: '1px' }} />
       <div style={{ display: 'grid', gridTemplateColumns: '20fr 1fr' }}>
-        <TinyTabs tabs={tinyTabs} />
+        <BaseView2
+          defaultActive={DashboardAccountsHistoryLocation}
+          baseActive={DashboardAccountsLocation}
+          cookieName={cookieVars.dashboard_account_sub_tab}
+          tabs={leftSideTabs}
+          position='left'
+          subBase={true}
+        />
         <div></div>
       </div>
-      {/* <BaseView
-        title={''}
-        cookieName={cookieVars.dashboard_account_sub_tab}
-        defaultActive={DashboardAccountsHistoryLocation}
-        baseActive={DashboardAccountsLocation}
-        tabs={tinyTabs}
-        position='left'
-        subBase={true}
-      /> */}
     </div>
   );
 };
 
-const TinyTabs = ({ tabs }: { tabs: ViewTab[] }) => {
+// let count = 100;
+const BaseView2 = ({ title = '', defaultActive, baseActive, cookieName, tabs, position, subBase }: ViewParams) => {
+  const location = useLocation();
+  const parts = location.pathname.split('/');
+  const subPath = location.pathname.replace(baseActive, '');
+  const [currentTab, setCurrentTab] = useState(
+    (subPath && subPath.length > 0
+      ? parts.length > 3
+        ? !subBase
+          ? parts.length === 4
+            ? location.pathname.replace(`/${parts[parts.length - 1]}`, '')
+            : parts.length === 5
+            ? location.pathname.replace(`/${parts[parts.length - 1]}`, '').replace(`/${parts[parts.length - 2]}`, '')
+            : location.pathname
+          : location.pathname
+        : location.pathname
+      : null) ||
+      Cookies.get(cookieName) ||
+      defaultActive
+  );
+
+  const history = useHistory();
+  const onTabChange = (key: string) => {
+    // console.log(count, 'set: ', cookieName, key);
+    Cookies.set(cookieName, key);
+    history.push(key);
+    setCurrentTab(key);
+  };
+
+  // console.log(count, 'ba: ', baseActive);
+  // console.log(count, 'da: ', defaultActive);
+  // console.log(count, 'tabs: ', tabs);
+  // console.log(count, 'cook: ', Cookies.get(cookieName));
+  // console.log(count, 'eq: ', defaultActive == tabs[0].location);
+  // console.log(count, 'cn: ', cookieName);
+  // console.log(count, 'lo: ', location);
+  // console.log(count, 'pa: ', parts);
+  // console.log(count, 'su: ', subPath);
+  // console.log(count++, 'ct: ', currentTab);
+
+  const titleComponent = title.length === 0 ? <></> : <PageHeader style={{ padding: '0px' }} title={title} />;
   return (
-    <Tabs tabPosition='left'>
-      {tabs.map((tab: any) => {
-        return (
-          <TabPane key={tab.location} tab={tab.name} style={{ width: '100%' }}>
+    <>
+      {titleComponent}
+      <Tabs tabPosition={position} defaultActiveKey={currentTab} onChange={(key) => onTabChange(key)}>
+        {tabs.map((tab) => (
+          <TabPane tab={tab.name} key={tab.location} disabled={tab.disabled}>
             {tab.component}
           </TabPane>
-        );
-      })}
-    </Tabs>
+        ))}
+      </Tabs>
+    </>
   );
 };
 

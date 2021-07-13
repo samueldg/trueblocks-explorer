@@ -24,6 +24,8 @@ export const SupportView = () => {
     { name: 'Licensing', location: SupportLicensingLocation, component: <Licensing /> },
     { name: 'About Us', location: SupportAboutUsLocation, component: <About /> },
   ];
+
+  // console.log('SupportView');
   return (
     <BaseView
       title={title}

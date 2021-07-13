@@ -24,6 +24,8 @@ export const NamesView = () => {
     { name: 'Event Signatures', location: NamesEventSigsLocation, component: <EventSignatures /> },
     { name: 'Named Blocks', location: NamesBlocksLocation, component: <When /> },
   ];
+
+  // console.log('NamesView');
   return (
     <BaseView
       title={title}

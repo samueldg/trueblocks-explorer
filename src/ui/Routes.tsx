@@ -27,6 +27,7 @@ export const DashboardAccountsGasLocation = '/dashboard/accounts/gas';
 export const DashboardAccountsChartsLocation = '/dashboard/accounts/charts';
 export const DashboardAccountsFunctionsLocation = '/dashboard/accounts/functions';
 export const DashboardAccountsEventsLocation = '/dashboard/accounts/events';
+
 export const DashboardCollectionsLocation = '/dashboard/collections';
 
 export const NamesLocation = '/names';

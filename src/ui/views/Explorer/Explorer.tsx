@@ -24,6 +24,8 @@ export const ExplorerView = () => {
     { name: 'Logs', location: ExplorerLogsLocation, component: <Logs /> },
     { name: 'Traces', location: ExplorerTracesLocation, component: <Traces /> },
   ];
+
+  // console.log('ExplorerView');
   return (
     <BaseView
       title={title}

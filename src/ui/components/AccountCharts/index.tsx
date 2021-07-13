@@ -64,7 +64,7 @@ export default function AccountCharts({ data }: { data: any }) {
           <div key={i + 'd1'} style={{ marginBottom: '24px', fontSize: '28px', fontWeight: 'bold' }}>
             {asset.asset}
           </div>
-          <div key={i + 'd2'} style={{ width: '100%', height: '300px' }}>
+          <div key={i + 'd2'} style={{ width: '100%', height: '300px', minWidth: '1' }}>
             <ResponsiveContainer width='100%' height='100%'>
               <AreaChart
                 width={500}

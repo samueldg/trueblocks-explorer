@@ -33,6 +33,7 @@ export const DashboardView = ({ match }: { match?: any }) => {
     { name: 'Collections', location: DashboardCollectionsLocation, component: <Collections />, disabled: false },
   ];
 
+  // console.log('DashboardView');
   return (
     <BaseView
       title={title}

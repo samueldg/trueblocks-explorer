@@ -70,11 +70,11 @@ export const AccountHistorySider = ({ record, selectedRow }: { record: any; sele
     },
   ];
 
+  // console.log('AccountHistorySider');
   return (
     <BaseView
-      title={''}
-      defaultActive={DashboardAccountsHistoryLocation}
-      baseActive={DashboardAccountsLocation}
+      defaultActive={DashboardAccountsHistoryReconsLocation}
+      baseActive={DashboardAccountsHistoryLocation}
       cookieName={cookieVars.dashboard_account_history_sub_tab}
       tabs={tabs}
       subBase={true}

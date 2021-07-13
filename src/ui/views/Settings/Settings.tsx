@@ -24,6 +24,8 @@ export const SettingsView = () => {
     { name: 'Skins', location: SettingsSkinsLocation, component: <Skins /> },
     { name: 'Schemas', location: SettingsSchemasLocation, component: <Schemas /> },
   ];
+
+  // console.log('SettingsView');
   return (
     <BaseView
       title={title}
