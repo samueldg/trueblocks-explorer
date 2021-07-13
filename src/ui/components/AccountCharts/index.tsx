@@ -1,6 +1,6 @@
 import React from 'react';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
-import moment from 'moment';
+import dayjs from 'dayjs';
 import { chartColors } from './colors';
 
 export default function AccountCharts({ data }: { data: any }) {
@@ -45,14 +45,14 @@ export default function AccountCharts({ data }: { data: any }) {
 
   const testDataETH = historyETH.map((item: any) => {
     return {
-      name: moment(item.date).format('MM/DD/YYYY'),
+      name: dayjs(item.date).format('MM/DD/YYYY'),
       ETH: parseFloat(item.endBal || 0),
     };
   });
 
   const testDataDAI = historyDAI.map((item: any) => {
     return {
-      name: moment(item.date).format('MM/DD/YYYY'),
+      name: dayjs(item.date).format('MM/DD/YYYY'),
       DAI: parseFloat(item.endBal || 0),
     };
   });
@@ -69,7 +69,7 @@ export default function AccountCharts({ data }: { data: any }) {
                 height={400}
                 data={asset.data.map((item: any) => {
                   return {
-                    name: moment(item.date).format('MM/DD/YYYY'),
+                    name: dayjs(item.date).format('MM/DD/YYYY'),
                     [asset.asset]: parseFloat(item.endBal || 0),
                   };
                 })}

@@ -1147,15 +1147,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/filesize@npm:^5.0.0":
-  version: 5.0.0
-  resolution: "@types/filesize@npm:5.0.0"
-  dependencies:
-    filesize: "*"
-  checksum: 40ed98b3fb319df30afb588a6ea111a16312fa7f235d81729880e386762b0094a7fccf9454984a76397ac1e8f7aee73dc52908d0143f363bdf6c99af7c69911a
-  languageName: node
-  linkType: hard
-
 "@types/graceful-fs@npm:^4.1.2":
   version: 4.1.5
   resolution: "@types/graceful-fs@npm:4.1.5"
@@ -1352,15 +1343,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-jss@npm:^10.0.0":
-  version: 10.0.0
-  resolution: "@types/react-jss@npm:10.0.0"
-  dependencies:
-    react-jss: "*"
-  checksum: 3379b07503623ce85fdde02d62dd6cb98a7eb78fda7891dc12d97e405ee725ece5371dfdb49a1dc3269303f3c5ee73f6b4dfc2884a3b26437a7f5edbec05acd8
-  languageName: node
-  linkType: hard
-
 "@types/react-router-dom@npm:^5.1.7":
   version: 5.1.8
   resolution: "@types/react-router-dom@npm:5.1.8"
@@ -1400,7 +1382,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:*, @types/react@npm:>=16.9.0, @types/react@npm:^17.0.3":
+"@types/react@npm:*, @types/react@npm:>=16.9.0":
   version: 17.0.14
   resolution: "@types/react@npm:17.0.14"
   dependencies:
@@ -3929,7 +3911,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dayjs@npm:1.x, dayjs@npm:^1.9.3":
+"dayjs@npm:1.x, dayjs@npm:^1.10.6, dayjs@npm:^1.9.3":
   version: 1.10.6
   resolution: "dayjs@npm:1.10.6"
   checksum: 474d21162c12d269d40e90cb3ce049bb2d987b8038c173224c8eb5805d6f38f07d11875779a81e282d8f889d3803c4bbb91d09b6ee08a1a44ae60ec26afd8f45
@@ -5353,13 +5335,6 @@ __metadata:
   peerDependencies:
     webpack: ^4.0.0 || ^5.0.0
   checksum: 0f103418c072ec66c081a9908cd7824ee19905e18be16889cb050f5f373998afaf7ca4c2fd2df4cabf703a2cd526aefe59105930e3f8d266a5b35e6d5f5b3cf4
-  languageName: node
-  linkType: hard
-
-"filesize@npm:*":
-  version: 7.0.0
-  resolution: "filesize@npm:7.0.0"
-  checksum: ada28792beca6fee3c26708e7e1bad9fa3b8553a0001de39278ba78d55e8ce963db2d3413a1d83efcf07ba446664b2865d8b4d4715eeb004b28d0dec8375cfb8
   languageName: node
   linkType: hard
 
@@ -10732,7 +10707,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-jss@npm:*, react-jss@npm:^10.6.0":
+"react-jss@npm:^10.6.0":
   version: 10.7.1
   resolution: "react-jss@npm:10.7.1"
   dependencies:
@@ -12652,14 +12627,11 @@ resolve@^2.0.0-next.3:
     "@testing-library/react-hooks": ^5.1.1
     "@tsconfig/recommended": ^1.0.1
     "@types/dotenv-safe": ^8.1.1
-    "@types/filesize": ^5.0.0
     "@types/jest": ^26.0.20
     "@types/js-cookie": ^2.2.6
     "@types/mousetrap": ^1.6.8
-    "@types/react": ^17.0.3
     "@types/react-dom": ^17.0.2
     "@types/react-highlight-words": ^0.16.2
-    "@types/react-jss": ^10.0.0
     "@types/react-router-dom": ^5.1.7
     "@types/react-syntax-highlighter": ^13.5.0
     "@typescript-eslint/eslint-plugin": ^4.17.0
@@ -12670,6 +12642,7 @@ resolve@^2.0.0-next.3:
     concurrently: ^6.0.0
     css-loader: ^5.1.2
     cypress: ^6.6.0
+    dayjs: ^1.10.6
     dotenv: ^8.2.0
     dotenv-safe: ^8.2.0
     dotenv-webpack: ^7.0.2
@@ -12691,7 +12664,6 @@ resolve@^2.0.0-next.3:
     jest: ^26.6.3
     jest-fetch-mock: ^3.0.3
     js-cookie: ^2.2.1
-    moment: ^2.29.1
     mousetrap: ^1.6.5
     path-browserify: ^1.0.1
     prettier: ^2.0.2

@@ -10,7 +10,8 @@ import { Checkbox, Divider, Input, Tabs } from 'antd';
 import { ColumnsType } from 'antd/lib/table';
 import { either as Either } from 'fp-ts';
 import { pipe } from 'fp-ts/lib/function';
-import moment from 'moment';
+import relativeTime from 'dayjs/plugin/relativeTime';
+import dayjs from 'dayjs';
 import React, { useCallback, useEffect, useState } from 'react';
 import { createUseStyles } from 'react-jss';
 import style from 'react-syntax-highlighter/dist/esm/styles/hljs/a11y-dark';
@@ -30,6 +31,8 @@ import { AccountHistory } from './SubTabs/History';
 const { TabPane } = Tabs;
 
 export const AccountsView = () => {
+  dayjs.extend(relativeTime);
+
   const [staging, setStaging] = useState(false);
   const [denom, setDenom] = useState('ether');
   const emptyData = { data: [{}], meta: {} };
@@ -256,8 +259,8 @@ export const transactionSchema: ColumnsType<Transaction> = [
         if (!record) return <div></div>;
         return (
           <pre>
-            <div>{record.date}</div>
-            <div>{moment.unix(record.timestamp).fromNow()}</div>
+            <div>{dayjs(record.date).format('YYYY-MM-DD HH:mm:ss')}</div>
+            <div>{dayjs.unix(record.timestamp).fromNow()}</div>
             <div style={{ fontSize: 'small', fontStyle: 'italic' }}>
               {record.blockNumber?.toString() + '.' + record.transactionIndex?.toString()}
             </div>

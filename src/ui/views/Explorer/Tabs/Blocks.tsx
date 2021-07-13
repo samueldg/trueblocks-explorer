@@ -2,11 +2,13 @@ import { addColumn, addNumColumn, BaseTable, TableActions } from '@components/Ta
 import { createErrorNotification } from '@modules/error_notification';
 import { Block } from '@modules/types';
 import { ColumnsType } from 'antd/lib/table';
-import moment from 'moment';
+import relativeTime from 'dayjs/plugin/relativeTime';
+import dayjs from 'dayjs';
 import React, { useCallback } from 'react';
 import { useCommand } from '../../../hooks/useCommand';
 
 export const Blocks = () => {
+  dayjs.extend(relativeTime);
   const [blocks, loading] = useCommand('blocks', { list: 0, list_count: 12, cache: true });
   if (blocks.status === 'fail') {
     createErrorNotification({
@@ -26,8 +28,8 @@ const blockListSchema: ColumnsType<Block> = [
       render: (value) => {
         return (
           <div>
-            <div>{moment.unix(value).format('YYYY-MM-DD HH:mm:ss')}</div>
-            <div style={{ fontStyle: 'italic' }}>{moment.unix(value).fromNow()}</div>
+            <div>{dayjs.unix(value).format('YYYY-MM-DD HH:mm:ss')}</div>
+            <div style={{ fontStyle: 'italic' }}>{dayjs.unix(value).fromNow()}</div>
           </div>
         );
       },
