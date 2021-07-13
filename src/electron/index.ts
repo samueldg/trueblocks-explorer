@@ -7,19 +7,19 @@ const { DEV_UI_URL, PRODUCTION_ASSET_DIRECTORY } = readEnvFile();
 
 const store = new Store();
 
-function onDevelopmentMode(win: BrowserWindow) {
-  win.webContents.on('devtools-closed', () => store.set('devtools', false));
-  win.webContents.on('devtools-opened', () => store.set('devtools', true));
+function onDevelopmentMode(mainWindow: BrowserWindow) {
+  mainWindow.webContents.on('devtools-closed', () => store.set('devtools', false));
+  mainWindow.webContents.on('devtools-opened', () => store.set('devtools', true));
 
   if (store.get('devtools') !== false) {
-    win.webContents.openDevTools();
+    mainWindow.webContents.openDevTools();
   }
 }
 
 function createWindow() {
   const windowConfig = store.get('window') as {};
 
-  const win = new BrowserWindow({
+  const mainWindow = new BrowserWindow({
     width: 800,
     height: 600,
     ...windowConfig,
@@ -34,11 +34,11 @@ function createWindow() {
     productionAssetDirectory: PRODUCTION_ASSET_DIRECTORY,
   });
 
-  win.loadURL(uiLocation);
-  win.on('close', () => store.set('window', win.getBounds()));
+  mainWindow.loadURL(uiLocation);
+  mainWindow.on('close', () => store.set('window', mainWindow.getBounds()));
 
   if (developmentMode) {
-    onDevelopmentMode(win);
+    onDevelopmentMode(mainWindow);
   }
 }
 
