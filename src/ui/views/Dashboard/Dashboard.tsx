@@ -13,7 +13,8 @@ import { Collections } from './Tabs/Collections';
 import { Monitors } from './Tabs/Monitors';
 
 export const DashboardView = ({ match }: { match?: any }) => {
-  const { accountAddress, names } = useGlobalState();
+  const { accountAddress } = useGlobalState();
+  const { names } = useGlobalState();
   const [named, setNamed] = useState('');
 
   useEffect(() => {
