@@ -12,7 +12,7 @@ export const GridTable = ({
   data,
   columns,
   title = 'Grid Table (gt-)',
-  meta = { max: 12500000, completed: 12300000 },
+  meta = { max: 12900000, completed: 12900000 },
   rowSpan = 1e6,
 }: {
   data: any;

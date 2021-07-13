@@ -2,8 +2,8 @@ import { useCommand } from '@hooks/useCommand';
 import { createErrorNotification } from '@modules/error_notification';
 import React, { useCallback } from 'react';
 
-export const IndexManifest = () => {
-  const [manifest, loading] = useCommand('pins', { list: true });
+export const IndexManifest = ({ theData, loading }: { theData: any[]; loading: boolean }) => {
+  const [manifest, loadMan] = useCommand('pins', { list: true });
   if (manifest.status === 'fail') {
     createErrorNotification({
       description: 'Could not fetch manifest',

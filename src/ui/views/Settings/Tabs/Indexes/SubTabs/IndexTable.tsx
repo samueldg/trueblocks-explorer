@@ -4,20 +4,10 @@ import { createErrorNotification } from '@modules/error_notification';
 import { Monitor } from '@modules/types';
 import { ColumnsType } from 'antd/lib/table';
 import React, { useCallback } from 'react';
+import { indexSchema } from '../Indexes';
 
-export const IndexTable = () => {
-  const [indexes, loading] = useCommand('status', { mode: 'index', details: true });
-  if (indexes.status === 'fail') {
-    createErrorNotification({
-      description: 'Could not fetch indexes',
-    });
-  }
-
-  const getData = useCallback((response) => {
-    return response.status === 'fail' || !response.data[0].caches ? [] : response.data[0].caches[0].items;
-  }, []);
-
-  return <BaseTable dataSource={getData(indexes)} columns={indexSchema} loading={loading} />;
+export const IndexTable = ({ theData, loading }: { theData: any[]; loading: boolean }) => {
+  return <BaseTable dataSource={theData} columns={indexSchema} loading={loading} />;
 };
 
 function padLeft(num: number, size: number, char: string = '0') {
@@ -39,52 +29,52 @@ const renderBlockRange = (record: Monitor) => {
   );
 };
 
-const indexSchema: ColumnsType<Monitor> = [
-  addColumn({
-    title: 'Block Range',
-    dataIndex: 'firstApp',
-    configuration: {
-      render: (item, record) => renderBlockRange(record),
-      width: '200px',
-    },
-  }),
-  addColumn({
-    title: 'File Date',
-    dataIndex: 'fileDate',
-  }),
-  addNumColumn({
-    title: 'nAddrs',
-    dataIndex: 'nAddrs',
-  }),
-  addNumColumn({
-    title: 'nApps',
-    dataIndex: 'nApps',
-    configuration: {
-      render: (item: number) => <div style={{ color: 'red', fontWeight: 800 }}>{item}</div>,
-    },
-  }),
-  addNumColumn({
-    title: 'firstTs',
-    dataIndex: 'firstTs',
-  }),
-  addNumColumn({
-    title: 'latestTs',
-    dataIndex: 'latestTs',
-  }),
-  addNumColumn({
-    title: 'indexSizeBytes',
-    dataIndex: 'indexSizeBytes',
-  }),
-  addNumColumn({
-    title: 'bloomSizeBytes',
-    dataIndex: 'bloomSizeBytes',
-  }),
-  addColumn({
-    title: 'indexHash',
-    dataIndex: 'indexHash',
-  }),
-  addColumn({
-    title: 'bloomHash',
-    dataIndex: 'bloomHash',
-  }),
-];
+// const indexSchema2: ColumnsType<Monitor> = [
+//   addColumn({
+//     title: 'Block Range',
+//     dataIndex: 'firstApp',
+//     configuration: {
+//       render: (item, record) => renderBlockRange(record),
+//       width: '200px',
+//     },
+//   }),
+//   addColumn({
+//     title: 'File Date',
+//     dataIndex: 'fileDate',
+//   }),
+//   addNumColumn({
+//     title: 'nAddrs',
+//     dataIndex: 'nAddrs',
+//   }),
+//   addNumColumn({
+//     title: 'nApps',
+//     dataIndex: 'nApps',
+//     configuration: {
+//       render: (item: number) => <div style={{ color: 'red', fontWeight: 800 }}>{item}</div>,
+//     },
+//   }),
+//   addNumColumn({
+//     title: 'firstTs',
+//     dataIndex: 'firstTs',
+//   }),
+//   addNumColumn({
+//     title: 'latestTs',
+//     dataIndex: 'latestTs',
+//   }),
+//   addNumColumn({
+//     title: 'indexSizeBytes',
+//     dataIndex: 'indexSizeBytes',
+//   }),
+//   addNumColumn({
+//     title: 'bloomSizeBytes',
+//     dataIndex: 'bloomSizeBytes',
+//   }),
+//   addColumn({
+//     title: 'indexHash',
+//     dataIndex: 'indexHash',
+//   }),
+//   addColumn({
+//     title: 'bloomHash',
+//     dataIndex: 'bloomHash',
+//   }),
+// ];
