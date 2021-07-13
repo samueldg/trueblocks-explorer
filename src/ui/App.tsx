@@ -16,6 +16,8 @@ import { StatusPanel } from './components/SidePanels/StatusPanel';
 import { Routes } from './Routes';
 import useGlobalState from './state';
 import { cookieVars } from './utils';
+import relativeTime from 'dayjs/plugin/relativeTime';
+import dayjs from 'dayjs';
 
 const { Header, Footer, Content } = Layout;
 
@@ -24,6 +26,8 @@ const useStyles = createUseStyles({
 });
 
 export const App = () => {
+  dayjs.extend(relativeTime);
+
   const { debug, setDebug, setNames, names } = useGlobalState();
   const [status, setStatus] = useState<Result>(toSuccessfulData({ data: [{}], meta: {} }) as Result);
   const [loadingStatus, setLoadingStatus] = useState(false);

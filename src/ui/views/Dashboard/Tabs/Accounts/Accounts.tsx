@@ -11,7 +11,6 @@ import { Checkbox, Divider, Input, Tabs, PageHeader } from 'antd';
 import { ColumnsType } from 'antd/lib/table';
 import { either as Either } from 'fp-ts';
 import { pipe } from 'fp-ts/lib/function';
-import relativeTime from 'dayjs/plugin/relativeTime';
 import dayjs from 'dayjs';
 import React, { useCallback, useEffect, useState } from 'react';
 import { createUseStyles } from 'react-jss';
@@ -35,8 +34,6 @@ import { useHistory, useLocation } from 'react-router-dom';
 const { TabPane } = Tabs;
 
 export const AccountsView = () => {
-  dayjs.extend(relativeTime);
-
   const [staging, setStaging] = useState(false);
   const [denom, setDenom] = useState('ether');
   const emptyData = { data: [{}], meta: {} };
@@ -175,7 +172,7 @@ export const AccountsView = () => {
       <AddressBar input={addressInput} progress={progressBar()} />
       <Divider style={{ height: '1px' }} />
       <div style={{ display: 'grid', gridTemplateColumns: '20fr 1fr' }}>
-        <BaseView2
+        <BaseView
           defaultActive={DashboardAccountsHistoryLocation}
           baseActive={DashboardAccountsLocation}
           cookieName={cookieVars.dashboard_account_sub_tab}
@@ -186,61 +183,6 @@ export const AccountsView = () => {
         <div></div>
       </div>
     </div>
-  );
-};
-
-// let count = 100;
-const BaseView2 = ({ title = '', defaultActive, baseActive, cookieName, tabs, position, subBase }: ViewParams) => {
-  const location = useLocation();
-  const parts = location.pathname.split('/');
-  const subPath = location.pathname.replace(baseActive, '');
-  const [currentTab, setCurrentTab] = useState(
-    (subPath && subPath.length > 0
-      ? parts.length > 3
-        ? !subBase
-          ? parts.length === 4
-            ? location.pathname.replace(`/${parts[parts.length - 1]}`, '')
-            : parts.length === 5
-            ? location.pathname.replace(`/${parts[parts.length - 1]}`, '').replace(`/${parts[parts.length - 2]}`, '')
-            : location.pathname
-          : location.pathname
-        : location.pathname
-      : null) ||
-      Cookies.get(cookieName) ||
-      defaultActive
-  );
-
-  const history = useHistory();
-  const onTabChange = (key: string) => {
-    // console.log(count, 'set: ', cookieName, key);
-    Cookies.set(cookieName, key);
-    history.push(key);
-    setCurrentTab(key);
-  };
-
-  // console.log(count, 'ba: ', baseActive);
-  // console.log(count, 'da: ', defaultActive);
-  // console.log(count, 'tabs: ', tabs);
-  // console.log(count, 'cook: ', Cookies.get(cookieName));
-  // console.log(count, 'eq: ', defaultActive == tabs[0].location);
-  // console.log(count, 'cn: ', cookieName);
-  // console.log(count, 'lo: ', location);
-  // console.log(count, 'pa: ', parts);
-  // console.log(count, 'su: ', subPath);
-  // console.log(count++, 'ct: ', currentTab);
-
-  const titleComponent = title.length === 0 ? <></> : <PageHeader style={{ padding: '0px' }} title={title} />;
-  return (
-    <>
-      {titleComponent}
-      <Tabs tabPosition={position} defaultActiveKey={currentTab} onChange={(key) => onTabChange(key)}>
-        {tabs.map((tab) => (
-          <TabPane tab={tab.name} key={tab.location} disabled={tab.disabled}>
-            {tab.component}
-          </TabPane>
-        ))}
-      </Tabs>
-    </>
   );
 };
 
