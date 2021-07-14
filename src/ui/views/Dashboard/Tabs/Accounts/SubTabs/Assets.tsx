@@ -1,7 +1,7 @@
 import { ReconciliationArray, TransactionArray } from '@modules/types';
 import React from 'react';
 
-export const AccountAssets = ({
+export const Assets = ({
   theData,
   loading,
   accountAddress,

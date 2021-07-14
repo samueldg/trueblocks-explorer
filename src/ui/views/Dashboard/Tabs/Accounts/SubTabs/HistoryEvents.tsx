@@ -4,7 +4,7 @@ import React from 'react';
 import { useAcctStyles } from '../AccountStyles';
 
 //-----------------------------------------------------------------
-export const AccountHistoryEvents = ({ record }: { record: Transaction }) => {
+export const HistoryEvents = ({ record }: { record: Transaction }) => {
   if (!record) return <></>;
   const key = record.blockNumber + '.' + record.transactionIndex;
   const styles = useAcctStyles();

@@ -12,10 +12,10 @@ import { cookieVars } from '../../utils';
 import { AccountsView } from './Tabs/Accounts/Accounts';
 import { Collections } from './Tabs/Collections';
 import { Monitors } from './Tabs/Monitors';
+import { createErrorNotification } from '@modules/error_notification';
 import { Result, toFailedResult, toSuccessfulData, emptyData } from '@hooks/useCommand';
 import { either as Either } from 'fp-ts';
 import { pipe } from 'fp-ts/lib/function';
-import { createErrorNotification } from '@modules/error_notification';
 
 export const DashboardView = ({ match }: { match?: any }) => {
   const { accountAddress, setAccountAddress } = useGlobalState();

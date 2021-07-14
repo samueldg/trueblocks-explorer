@@ -1,6 +1,5 @@
 import Cookies from 'js-cookie';
 import { CheckCircleFilled, CloseCircleFilled } from '@ant-design/icons';
-import AccountCharts from '@components/AccountCharts';
 import { BaseView, ViewTab, ViewParams } from '@components/BaseView';
 import { addColumn } from '@components/Table';
 import { Result, toFailedResult, toSuccessfulData, emptyData } from '@hooks/useCommand';
@@ -26,8 +25,13 @@ import {
   DashboardAccountsNeighborsLocation,
 } from '../../../../Routes';
 import useGlobalState from '../../../../state';
-import { AccountAssets } from './SubTabs/Assets';
-import { AccountHistory } from './SubTabs/History';
+import { History } from './SubTabs/History';
+import { Assets } from './SubTabs/Assets';
+import { Neighbors } from './SubTabs/Neighbors';
+import { Gas } from './SubTabs/Gas';
+import { Charts } from './SubTabs/Charts';
+import { Functions } from './SubTabs/Functions';
+import { Events } from './SubTabs/Events';
 import { cookieVars } from '../../../../utils';
 import { useHistory, useLocation } from 'react-router-dom';
 
@@ -93,18 +97,38 @@ export const AccountsView = ({
     {
       name: 'History',
       location: DashboardAccountsHistoryLocation,
-      component: <AccountHistory theData={theData} loading={loading} accountAddress={accountAddress} />,
+      component: <History theData={theData} loading={loading} accountAddress={accountAddress} />,
     },
     {
       name: 'Assets',
       location: DashboardAccountsAssetsLocation,
-      component: <AccountAssets theData={theData} loading={loading} accountAddress={accountAddress} />,
+      component: <Assets theData={theData} loading={loading} accountAddress={accountAddress} />,
     },
-    { name: 'Neighbors', location: DashboardAccountsNeighborsLocation, component: <div>Neighbors</div> },
-    { name: 'Gas', location: DashboardAccountsGasLocation, component: <div>Gas</div> },
-    { name: 'Charts', location: DashboardAccountsChartsLocation, component: <AccountCharts data={transactions} /> },
-    { name: 'Functions', location: DashboardAccountsFunctionsLocation, component: <div>Functions</div> },
-    { name: 'Events', location: DashboardAccountsEventsLocation, component: <div>Events</div> },
+    {
+      name: 'Neighbors',
+      location: DashboardAccountsNeighborsLocation,
+      component: <Neighbors theData={theData} loading={loading} accountAddress={accountAddress} />,
+    },
+    {
+      name: 'Gas',
+      location: DashboardAccountsGasLocation,
+      component: <Gas theData={theData} loading={loading} accountAddress={accountAddress} />,
+    },
+    {
+      name: 'Charts',
+      location: DashboardAccountsChartsLocation,
+      component: <Charts theData={theData} loading={loading} accountAddress={accountAddress} data={transactions} />,
+    },
+    {
+      name: 'Functions',
+      location: DashboardAccountsFunctionsLocation,
+      component: <Functions theData={theData} loading={loading} accountAddress={accountAddress} />,
+    },
+    {
+      name: 'Events',
+      location: DashboardAccountsEventsLocation,
+      component: <Events theData={theData} loading={loading} accountAddress={accountAddress} />,
+    },
   ];
 
   // console.log('AccountsView');

@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { useAcctStyles } from '../AccountStyles';
 
 //-----------------------------------------------------------------
-export const AccountHistoryRecons = ({ record }: { record: Transaction }) => {
+export const HistoryRecons = ({ record }: { record: Transaction }) => {
   if (!record) return <></>;
   const [expand, setExpand] = useState(false);
   const key = record.blockNumber + '.' + record.transactionIndex;

@@ -12,12 +12,12 @@ import {
   DashboardAccountsHistoryTracesLocation,
 } from '../../../../../Routes';
 import { transactionSchema } from '../Accounts';
-import { AccountHistoryEvents } from './HistoryEvents';
-import { AccountHistoryFunctions } from './HistoryFunctions';
-import { AccountHistoryRecons } from './HistoryRecons';
+import { HistoryEvents } from './HistoryEvents';
+import { HistoryFunctions } from './HistoryFunctions';
+import { HistoryRecons } from './HistoryRecons';
 import { cookieVars } from '../../../../../utils';
 
-export const AccountHistory = ({
+export const History = ({
   theData,
   loading,
   accountAddress,
@@ -46,17 +46,17 @@ export const AccountHistorySider = ({ record, selectedRow }: { record: any; sele
     {
       name: 'Recons',
       location: DashboardAccountsHistoryReconsLocation,
-      component: <AccountHistoryRecons record={record} />,
+      component: <HistoryRecons record={record} />,
     },
     {
       name: 'Function',
       location: DashboardAccountsHistoryFunctionsLocation,
-      component: <AccountHistoryFunctions record={record} />,
+      component: <HistoryFunctions record={record} />,
     },
     {
       name: 'Events',
       location: DashboardAccountsHistoryEventsLocation,
-      component: <AccountHistoryEvents record={record} />,
+      component: <HistoryEvents record={record} />,
     },
     {
       name: 'Traces',
