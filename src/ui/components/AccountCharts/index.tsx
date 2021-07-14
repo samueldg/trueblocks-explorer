@@ -89,8 +89,8 @@ export default function AccountCharts({ data }: { data: any }) {
                   type='monotone'
                   dataKey={asset.asset}
                   stackId='1'
-                  stroke={chartColors[i] || '#63b598'}
-                  fill={chartColors[i] || '#63b598'}
+                  stroke={chartColors[i % chartColors.length] || '#63b598'}
+                  fill={chartColors[i % chartColors.length] || '#63b598'}
                 />
               </AreaChart>
             </ResponsiveContainer>
