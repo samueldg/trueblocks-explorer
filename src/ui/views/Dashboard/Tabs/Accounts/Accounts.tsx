@@ -6,7 +6,7 @@ import { Result, toFailedResult, toSuccessfulData, emptyData } from '@hooks/useC
 import { runCommand } from '@modules/core';
 import { createErrorNotification } from '@modules/error_notification';
 import { Reconciliation, ReconciliationArray, Transaction } from '@modules/types';
-import { Checkbox, Divider, Input, Tabs, PageHeader } from 'antd';
+import { Checkbox, Divider, Input, Tabs, PageHeader, Progress } from 'antd';
 import { ColumnsType } from 'antd/lib/table';
 import { either as Either } from 'fp-ts';
 import { pipe } from 'fp-ts/lib/function';
@@ -85,8 +85,10 @@ export const AccountsView = ({
     if (!transactions || !transactions.data) return <></>;
     if (!totalRecords) return <></>;
     if (transactions.data.length === totalRecords) return <></>;
-    const pct = ((transactions.data.length / (totalRecords || 1)) * 100) / 2;
-    return <progress style={{ position: 'absolute', right: '8px' }} max={50} value={pct} />;
+    const pct = Math.floor((transactions.data.length / (totalRecords || 1)) * 100);
+    return (
+      <Progress style={{ width: '200px', position: 'absolute', right: '8px' }} percent={pct} strokeLinecap='square' />
+    );
   };
 
   const getData = useCallback((response) => (response?.status === 'fail' ? [] : response?.data), []);
