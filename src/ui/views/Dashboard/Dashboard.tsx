@@ -1,21 +1,22 @@
-import { runCommand } from '@modules/core';
-import { BaseView } from '@components/BaseView';
-import React, { useEffect, useState } from 'react';
 import {
   DashboardAccountsLocation,
   DashboardCollectionsLocation,
   DashboardLocation,
   DashboardMonitorsLocation,
 } from '../../Routes';
-import useGlobalState from '../../state';
-import { cookieVars } from '../../utils';
+import React, { useEffect, useState } from 'react';
+import { Result, emptyData, toFailedResult, toSuccessfulData } from '@hooks/useCommand';
+
 import { AccountsView } from './Tabs/Accounts/Accounts';
+import { BaseView } from '@components/BaseView';
 import { Collections } from './Tabs/Collections';
-import { Monitors } from './Tabs/Monitors';
-import { createErrorNotification } from '@modules/error_notification';
-import { Result, toFailedResult, toSuccessfulData, emptyData } from '@hooks/useCommand';
 import { either as Either } from 'fp-ts';
+import { Monitors } from './Tabs/Monitors';
+import { cookieVars } from '../../utils';
+import { createErrorNotification } from '@modules/error_notification';
 import { pipe } from 'fp-ts/lib/function';
+import { runCommand } from '@modules/core';
+import useGlobalState from '../../state';
 
 export const DashboardView = ({ match }: { match?: any }) => {
   const { accountAddress, setAccountAddress } = useGlobalState();
