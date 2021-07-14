@@ -12,7 +12,7 @@ import { cookieVars } from '../../utils';
 import { AccountsView } from './Tabs/Accounts/Accounts';
 import { Collections } from './Tabs/Collections';
 import { Monitors } from './Tabs/Monitors';
-import { Result, toFailedResult, toSuccessfulData } from '@hooks/useCommand';
+import { Result, toFailedResult, toSuccessfulData, emptyData } from '@hooks/useCommand';
 import { either as Either } from 'fp-ts';
 import { pipe } from 'fp-ts/lib/function';
 import { createErrorNotification } from '@modules/error_notification';
@@ -21,7 +21,6 @@ export const DashboardView = ({ match }: { match?: any }) => {
   const { accountAddress, setAccountAddress } = useGlobalState();
   const { names } = useGlobalState();
   const [named, setNamed] = useState('');
-  const emptyData = { data: [{}], meta: {} };
   const [loading, setLoading] = useState(false);
   const [totalRecords, setTotalRecords] = useState<null | number>(null);
   const [transactions, setTransactions] = useState<Result | null>(null);
@@ -101,7 +100,6 @@ export const DashboardView = ({ match }: { match?: any }) => {
       location: DashboardAccountsLocation,
       component: (
         <AccountsView
-          emptyData={emptyData}
           loading={loading}
           setLoading={setLoading}
           accountAddress={accountAddress}

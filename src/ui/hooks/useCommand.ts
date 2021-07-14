@@ -63,8 +63,9 @@ export function toSuccessfulScraperData(responseData: JsonResponse): ScrapeResul
   };
 }
 
+export const emptyData = { data: [{}], meta: {} };
+
 export function useCommand(command: CoreCommand, params?: CommandParams) {
-  const emptyData = { data: [{}], meta: {} };
   const [response, setData] = useState<Result>(toSuccessfulData(emptyData));
   const [loading, setLoading] = useState(true);
 

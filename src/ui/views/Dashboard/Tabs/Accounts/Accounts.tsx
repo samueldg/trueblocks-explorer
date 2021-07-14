@@ -3,7 +3,7 @@ import { CheckCircleFilled, CloseCircleFilled } from '@ant-design/icons';
 import AccountCharts from '@components/AccountCharts';
 import { BaseView, ViewTab, ViewParams } from '@components/BaseView';
 import { addColumn } from '@components/Table';
-import { Result, toFailedResult, toSuccessfulData } from '@hooks/useCommand';
+import { Result, toFailedResult, toSuccessfulData, emptyData } from '@hooks/useCommand';
 import { runCommand } from '@modules/core';
 import { createErrorNotification } from '@modules/error_notification';
 import { Reconciliation, ReconciliationArray, Transaction } from '@modules/types';
@@ -34,7 +34,6 @@ import { useHistory, useLocation } from 'react-router-dom';
 const { TabPane } = Tabs;
 
 export const AccountsView = ({
-  emptyData,
   loading,
   setLoading,
   accountAddress,
@@ -44,7 +43,6 @@ export const AccountsView = ({
   transactions,
   setTransactions,
 }: {
-  emptyData: any;
   loading: boolean;
   setLoading: any;
   accountAddress: string;
