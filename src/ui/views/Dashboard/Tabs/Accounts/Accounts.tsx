@@ -25,13 +25,13 @@ import {
   DashboardAccountsNeighborsLocation,
 } from '../../../../Routes';
 import useGlobalState from '../../../../state';
-import { History } from './SubTabs/History';
-import { Assets } from './SubTabs/Assets';
-import { Neighbors } from './SubTabs/Neighbors';
-import { Gas } from './SubTabs/Gas';
-import { Charts } from './SubTabs/Charts';
-import { Functions } from './SubTabs/Functions';
-import { Events } from './SubTabs/Events';
+import { History } from './LeftTabs/History';
+import { Assets } from './LeftTabs/Assets';
+import { Neighbors } from './LeftTabs/Neighbors';
+import { Gas } from './LeftTabs/Gas';
+import { Charts } from './LeftTabs/Charts';
+import { Functions } from './LeftTabs/Functions';
+import { Events } from './LeftTabs/Events';
 import { cookieVars } from '../../../../utils';
 import { useHistory, useLocation } from 'react-router-dom';
 
