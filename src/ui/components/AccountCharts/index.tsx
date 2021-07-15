@@ -1,25 +1,38 @@
 import { Area, AreaChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 
+import { address, blknum, int256, timestamp, uint64 } from '@modules/types';
+import { Transaction, TransactionArray, Reconciliation } from '@modules/types';
 import React from 'react';
 import { chartColors } from './colors';
 import dayjs from 'dayjs';
 
-export default function AccountCharts({ theData }: { theData: any }) {
+declare type BalanceRecord = {
+  endBal: int256;
+  date: Date;
+};
+export declare type BalanceRecordArray = BalanceRecord[];
+declare type AssetRecord = {
+  asset: string;
+  history: BalanceRecordArray;
+  color: string;
+};
+
+export default function AccountCharts({ theData }: { theData: TransactionArray }) {
   if (!theData) return <></>;
 
   const uniqueAssets: any = [];
-  theData.map((item: any) => {
-    item.statements?.map((asset: any) => {
-      if (uniqueAssets.find((a: any) => a.asset === asset.assetSymbol) === undefined) {
+  theData.map((tx: Transaction) => {
+    tx.statements?.map((recon: Reconciliation) => {
+      if (uniqueAssets.find((a: any) => a.asset === recon.assetSymbol) === undefined) {
         uniqueAssets.push({
-          asset: asset.assetSymbol,
+          asset: recon.assetSymbol,
           history: [],
           color: chartColors[Math.floor(Math.random() * (9 - 0 + 1) + 0)],
         });
       }
     });
     uniqueAssets.map((record: any, i: number) => {
-      const foundStatement = item.statements?.find((s: any) => s.assetSymbol === record.asset);
+      const foundStatement = tx.statements?.find((s: any) => s.assetSymbol === record.asset);
       if (foundStatement) {
         uniqueAssets[i].history = [
           ...uniqueAssets[i].history,
