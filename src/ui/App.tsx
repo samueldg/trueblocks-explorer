@@ -1,25 +1,28 @@
-import { QuestionCircleFilled } from '@ant-design/icons';
-import { Result, toFailedResult, toSuccessfulData } from '@hooks/useCommand';
-import { runCommand } from '@modules/core';
-import { Button, Layout } from 'antd';
 import 'antd/dist/antd.css';
-import { either as Either } from 'fp-ts';
-import { pipe } from 'fp-ts/lib/function';
-import React, { useEffect, useState } from 'react';
-import { createUseStyles } from 'react-jss';
 import './app.css';
-import { Console } from './components/Console';
-import { MainMenu } from './components/MainMenu';
-import { HelpPanel } from './components/SidePanels/HelpPanel';
+
+import { Button, Layout, Typography } from 'antd';
 import { PanelDirection, SidePanel } from './components/SidePanels/SidePanel';
-import { StatusPanel } from './components/SidePanels/StatusPanel';
+import React, { useEffect, useState } from 'react';
+import { Result, toFailedResult, toSuccessfulData } from '@hooks/useCommand';
+
+import { Console } from './components/Console';
+import { either as Either } from 'fp-ts';
+import { HelpPanel } from './components/SidePanels/HelpPanel';
+import { MainMenu } from './components/MainMenu';
+import { QuestionCircleFilled } from '@ant-design/icons';
 import { Routes } from './Routes';
-import useGlobalState from './state';
+import { StatusPanel } from './components/SidePanels/StatusPanel';
 import { cookieVars } from './utils';
-import relativeTime from 'dayjs/plugin/relativeTime';
+import { createUseStyles } from 'react-jss';
 import dayjs from 'dayjs';
+import { pipe } from 'fp-ts/lib/function';
+import relativeTime from 'dayjs/plugin/relativeTime';
+import { runCommand } from '@modules/core';
+import useGlobalState from './state';
 
 const { Header, Footer, Content } = Layout;
+const { Title } = Typography;
 
 const useStyles = createUseStyles({
   help_icon: { color: 'green' },
@@ -73,7 +76,11 @@ export const App = () => {
 
   return (
     <Layout>
-      <Header className='app-header'>TrueBlocks Account Explorer</Header>
+      <Header className='app-header'>
+        <Title style={{ color: 'white' }} level={2}>
+          TrueBlocks Account Explorer
+        </Title>
+      </Header>
       <Layout>
         <SidePanel
           header='Main menu'

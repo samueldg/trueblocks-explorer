@@ -29,14 +29,18 @@ export default function AccountCharts({ theData }: { theData: any }) {
     });
   });
 
+  uniqueAssets.sort(function (a: any, b: any) {
+    return b.history.length - a.history.length;
+  });
+
   return (
-    <div>
+    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr 1fr 1fr' }}>
       {uniqueAssets.map((asset: any, i: number) => (
         <div key={i}>
           <div key={i + 'd1'} style={{ marginBottom: '24px', fontSize: '28px', fontWeight: 'bold' }}>
             {asset.asset}
           </div>
-          <div key={i + 'd2'} style={{ width: '100%', height: '300px', minWidth: '1' }}>
+          <div key={i + 'd2'} style={{ width: '100%', height: '200px', minWidth: '1' }}>
             <ResponsiveContainer width='100%' height='100%'>
               <AreaChart
                 width={500}
