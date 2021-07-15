@@ -36,6 +36,27 @@ import { runCommand } from '@modules/core';
 import style from 'react-syntax-highlighter/dist/esm/styles/hljs/a11y-dark';
 import useGlobalState from '../../../../state';
 
+function useDebounce<T>(value: T, delay: number): T {
+  // State and setters for debounced value
+  const [debouncedValue, setDebouncedValue] = useState<T>(value);
+  useEffect(
+    () => {
+      // Update debounced value after delay
+      const handler = setTimeout(() => {
+        setDebouncedValue(value);
+      }, delay);
+      // Cancel the timeout if value changes (also on delay change or unmount)
+      // This is how we prevent debounced value from updating if value is changed ...
+      // .. within the delay period. Timeout gets cleared and restarted.
+      return () => {
+        clearTimeout(handler);
+      };
+    },
+    [value, delay] // Only re-call effect if value or delay changes
+  );
+  return debouncedValue;
+}
+
 const { TabPane } = Tabs;
 
 export const AccountsView = ({
@@ -59,6 +80,7 @@ export const AccountsView = ({
 }) => {
   const [staging, setStaging] = useState(false);
   const [denom, setDenom] = useState('ether');
+  const [tempAddress, setTempAddress] = useState(accountAddress);
 
   const onStaging = () => setStaging(!staging);
   const onEther = () => {
@@ -70,14 +92,25 @@ export const AccountsView = ({
     setTransactions(toSuccessfulData(emptyData));
   }, []);
 
+  const debouncedSearchTerm: string = useDebounce<string>(tempAddress, 800);
+
+  useEffect(
+    () => {
+      if (debouncedSearchTerm) {
+        setAccountAddress(debouncedSearchTerm);
+      }
+    },
+    [debouncedSearchTerm] // Only call effect if debounced search term changes
+  );
+
   const addressInput = (
     <Input
       disabled={loading}
       placeholder={'Input an address'}
-      value={accountAddress}
+      value={tempAddress}
       onChange={(e) => {
         setTransactions(toSuccessfulData(emptyData));
-        setAccountAddress(e.target.value);
+        setTempAddress(e.target.value);
       }}
     />
   );
