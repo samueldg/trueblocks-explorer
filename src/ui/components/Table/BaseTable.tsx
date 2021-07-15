@@ -1,7 +1,9 @@
 import 'antd/dist/antd.css';
-import Table, { ColumnsType } from 'antd/lib/table';
-import Mousetrap from 'mousetrap';
+
 import React, { useEffect, useState } from 'react';
+import Table, { ColumnsType } from 'antd/lib/table';
+
+import Mousetrap from 'mousetrap';
 
 export type SelectedRow = {
   curRow: number;
@@ -18,6 +20,7 @@ export const BaseTable = ({
   extraData,
   expandRender = undefined,
   siderRender = undefined,
+  defPageSize = 7,
 }: {
   dataSource: JsonResponse;
   columns: ColumnsType<any>;
@@ -25,11 +28,12 @@ export const BaseTable = ({
   extraData?: string;
   expandRender?: (row: any) => JSX.Element;
   siderRender?: (record: any, selectedRow: SelectedRow) => JSX.Element;
+  defPageSize?: number;
 }) => {
   const [displayedRow, setDisplayedRow] = useState(dataSource ? dataSource[0] : {});
   const [curRow, setCurRow] = useState(0);
   const [curPage, setCurPage] = useState(1);
-  const [pageSize, setPageSize] = useState(7);
+  const [pageSize, setPageSize] = useState(defPageSize);
   const [isExpanded, setIsExpanded] = useState(false);
   const [keyedData, setKeyedData] = useState([{ key: 0 }]);
 
