@@ -7,12 +7,10 @@ export const Charts = ({
   theData,
   loading,
   accountAddress,
-  data,
 }: {
   theData: TransactionArray;
   loading: boolean;
   accountAddress: string;
-  data: any;
 }) => {
-  return <AccountCharts data={data} />;
+  return <AccountCharts theData={theData} />;
 };

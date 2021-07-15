@@ -1,39 +1,40 @@
-import Cookies from 'js-cookie';
+import { BaseView, ViewParams, ViewTab } from '@components/BaseView';
 import { CheckCircleFilled, CloseCircleFilled } from '@ant-design/icons';
-import { BaseView, ViewTab, ViewParams } from '@components/BaseView';
-import { addColumn } from '@components/Table';
-import { Result, toFailedResult, toSuccessfulData, emptyData } from '@hooks/useCommand';
-import { runCommand } from '@modules/core';
-import { createErrorNotification } from '@modules/error_notification';
-import { Reconciliation, ReconciliationArray, Transaction } from '@modules/types';
-import { Checkbox, Divider, Input, Tabs, PageHeader, Progress } from 'antd';
-import { ColumnsType } from 'antd/lib/table';
-import { either as Either } from 'fp-ts';
-import { pipe } from 'fp-ts/lib/function';
-import dayjs from 'dayjs';
-import React, { useCallback, useEffect, useState } from 'react';
-import { createUseStyles } from 'react-jss';
-import style from 'react-syntax-highlighter/dist/esm/styles/hljs/a11y-dark';
+import { Checkbox, Divider, Input, PageHeader, Progress, Tabs } from 'antd';
 import {
-  DashboardAccountsLocation,
   DashboardAccountsAssetsLocation,
   DashboardAccountsChartsLocation,
   DashboardAccountsEventsLocation,
   DashboardAccountsFunctionsLocation,
   DashboardAccountsGasLocation,
   DashboardAccountsHistoryLocation,
+  DashboardAccountsLocation,
   DashboardAccountsNeighborsLocation,
 } from '../../../../Routes';
-import useGlobalState from '../../../../state';
-import { History } from './LeftTabs/History';
-import { Assets } from './LeftTabs/Assets';
-import { Neighbors } from './LeftTabs/Neighbors';
-import { Gas } from './LeftTabs/Gas';
-import { Charts } from './LeftTabs/Charts';
-import { Functions } from './LeftTabs/Functions';
-import { Events } from './LeftTabs/Events';
-import { cookieVars } from '../../../../utils';
+import React, { useCallback, useEffect, useState } from 'react';
+import { Reconciliation, ReconciliationArray, Transaction } from '@modules/types';
+import { Result, emptyData, toFailedResult, toSuccessfulData } from '@hooks/useCommand';
 import { useHistory, useLocation } from 'react-router-dom';
+
+import { Assets } from './LeftTabs/Assets';
+import { Charts } from './LeftTabs/Charts';
+import { ColumnsType } from 'antd/lib/table';
+import Cookies from 'js-cookie';
+import { either as Either } from 'fp-ts';
+import { Events } from './LeftTabs/Events';
+import { Functions } from './LeftTabs/Functions';
+import { Gas } from './LeftTabs/Gas';
+import { History } from './LeftTabs/History';
+import { Neighbors } from './LeftTabs/Neighbors';
+import { addColumn } from '@components/Table';
+import { cookieVars } from '../../../../utils';
+import { createErrorNotification } from '@modules/error_notification';
+import { createUseStyles } from 'react-jss';
+import dayjs from 'dayjs';
+import { pipe } from 'fp-ts/lib/function';
+import { runCommand } from '@modules/core';
+import style from 'react-syntax-highlighter/dist/esm/styles/hljs/a11y-dark';
+import useGlobalState from '../../../../state';
 
 const { TabPane } = Tabs;
 
@@ -119,7 +120,7 @@ export const AccountsView = ({
     {
       name: 'Charts',
       location: DashboardAccountsChartsLocation,
-      component: <Charts theData={theData} loading={loading} accountAddress={accountAddress} data={transactions} />,
+      component: <Charts theData={theData} loading={loading} accountAddress={accountAddress} />,
     },
     {
       name: 'Functions',

@@ -1,60 +1,32 @@
+import { Area, AreaChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
+
 import React from 'react';
-import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
-import dayjs from 'dayjs';
 import { chartColors } from './colors';
+import dayjs from 'dayjs';
 
-export default function AccountCharts({ data }: { data: any }) {
+export default function AccountCharts({ theData }: { theData: any }) {
+  if (!theData) return <></>;
+
   const uniqueAssets: any = [];
-
-  const historyETH: any = [];
-  const historyDAI: any = [];
-
-  data &&
-    data.data.map((item: any) => {
-      item.statements?.map((asset: any) => {
-        if (uniqueAssets.find((a: any) => a.asset === asset.assetSymbol) === undefined) {
-          uniqueAssets.push({
-            asset: asset.assetSymbol,
-            data: [],
-            color: chartColors[Math.floor(Math.random() * (9 - 0 + 1) + 0)],
-          });
-        }
-      });
-      uniqueAssets.map((record: any, i: number) => {
-        const foundStatement = item.statements?.find((s: any) => s.assetSymbol === record.asset);
-        if (foundStatement) {
-          uniqueAssets[i].data = [
-            ...uniqueAssets[i].data,
-            { endBal: foundStatement.endBal, date: new Date(foundStatement.timestamp * 1000) },
-          ];
-        }
-      });
-      /*const statementETH = item.statements?.find((s: any) => s.assetSymbol === 'ETH');
-      const statementDAI = item.statements?.find((s: any) => s.assetSymbol === 'DAI');
-      if (statementETH) {
-        historyETH.push({ endBal: statementETH.endBal, date: new Date(statementETH.timestamp * 1000) });
+  theData.map((item: any) => {
+    item.statements?.map((asset: any) => {
+      if (uniqueAssets.find((a: any) => a.asset === asset.assetSymbol) === undefined) {
+        uniqueAssets.push({
+          asset: asset.assetSymbol,
+          history: [],
+          color: chartColors[Math.floor(Math.random() * (9 - 0 + 1) + 0)],
+        });
       }
-      if (statementDAI) {
-        historyDAI.push({ endBal: statementDAI.endBal, date: new Date(statementETH.timestamp * 1000) });
-      }*/
     });
-
-  /*data && uniqueAssets.length > 0 && data.data.map((item: any) => {
-      item.statements?.map()
-    })*/
-
-  const testDataETH = historyETH.map((item: any) => {
-    return {
-      name: dayjs(item.date).format('MM/DD/YYYY'),
-      ETH: parseFloat(item.endBal || 0),
-    };
-  });
-
-  const testDataDAI = historyDAI.map((item: any) => {
-    return {
-      name: dayjs(item.date).format('MM/DD/YYYY'),
-      DAI: parseFloat(item.endBal || 0),
-    };
+    uniqueAssets.map((record: any, i: number) => {
+      const foundStatement = item.statements?.find((s: any) => s.assetSymbol === record.asset);
+      if (foundStatement) {
+        uniqueAssets[i].history = [
+          ...uniqueAssets[i].history,
+          { endBal: foundStatement.endBal, date: new Date(foundStatement.timestamp * 1000) },
+        ];
+      }
+    });
   });
 
   return (
@@ -69,7 +41,7 @@ export default function AccountCharts({ data }: { data: any }) {
               <AreaChart
                 width={500}
                 height={400}
-                data={asset.data.map((item: any) => {
+                data={asset.history.map((item: any) => {
                   return {
                     name: dayjs(item.date).format('MM/DD/YYYY'),
                     [asset.asset]: parseFloat(item.endBal || 0),
