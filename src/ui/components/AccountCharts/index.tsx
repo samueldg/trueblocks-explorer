@@ -1,7 +1,7 @@
 import { Area, AreaChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
-
+import { Reconciliation, Transaction, TransactionArray } from '@modules/types';
 import { address, blknum, int256, timestamp, uint64 } from '@modules/types';
-import { Transaction, TransactionArray, Reconciliation } from '@modules/types';
+
 import React from 'react';
 import { chartColors } from './colors';
 import dayjs from 'dayjs';
@@ -20,7 +20,7 @@ declare type AssetRecord = {
 export default function AccountCharts({ theData }: { theData: TransactionArray }) {
   if (!theData) return <></>;
 
-  const uniqueAssets: any = [];
+  let uniqueAssets: any = [];
   theData.map((tx: Transaction) => {
     tx.statements?.map((recon: Reconciliation) => {
       if (uniqueAssets.find((a: any) => a.asset === recon.assetSymbol) === undefined) {
@@ -31,6 +31,7 @@ export default function AccountCharts({ theData }: { theData: TransactionArray }
         });
       }
     });
+
     uniqueAssets.map((record: any, i: number) => {
       const foundStatement = tx.statements?.find((s: any) => s.assetSymbol === record.asset);
       if (foundStatement) {
@@ -42,6 +43,9 @@ export default function AccountCharts({ theData }: { theData: TransactionArray }
     });
   });
 
+  uniqueAssets = uniqueAssets.filter((record: any) => {
+    return record.history.length > 1;
+  });
   uniqueAssets.sort(function (a: any, b: any) {
     return b.history.length - a.history.length;
   });
@@ -51,7 +55,7 @@ export default function AccountCharts({ theData }: { theData: TransactionArray }
       {uniqueAssets.map((asset: any, i: number) => (
         <div key={i}>
           <div key={i + 'd1'} style={{ marginBottom: '24px', fontSize: '28px', fontWeight: 'bold' }}>
-            {asset.asset}
+            {asset.asset} ({asset.history.length} txs)
           </div>
           <div key={i + 'd2'} style={{ width: '100%', height: '200px', minWidth: '1' }}>
             <ResponsiveContainer width='100%' height='100%'>

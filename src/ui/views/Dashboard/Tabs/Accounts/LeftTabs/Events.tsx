@@ -19,7 +19,7 @@ export const Events = ({
 
   const counts = Object.create(null);
   theData.forEach((item: any, i: number) => {
-    item.receipt.logs.map((item: any) => {
+    item.receipt?.logs?.map((item: any) => {
       if (item.articulatedLog) {
         if (!counts[item.articulatedLog?.name]) counts[item.articulatedLog?.name] = 1;
         else counts[item.articulatedLog?.name] = Number(counts[item.articulatedLog?.name]) + 1;

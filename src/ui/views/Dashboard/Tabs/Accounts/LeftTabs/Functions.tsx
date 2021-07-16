@@ -19,9 +19,11 @@ export const Functions = ({
 
   const counts = Object.create(null);
   theData.forEach((item: any, i: number) => {
-    if (item.articulatedTx) {
-      if (!counts[item.articulatedTx?.name]) counts[item.articulatedTx?.name] = 1;
-      else counts[item.articulatedTx?.name] = Number(counts[item.articulatedTx?.name]) + 1;
+    const v = item.articulatedTx;
+    if (v) {
+      const k = v?.name + (item.isError ? ' (errored)' : '');
+      if (!counts[k]) counts[k] = 1;
+      else counts[k] = Number(counts[k]) + 1;
     }
   });
 

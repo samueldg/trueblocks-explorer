@@ -69,9 +69,11 @@ export const DashboardView = ({ match }: { match?: any }) => {
           reversed: false,
           first_record: transactions?.data?.length || 0,
           max_records:
-            (transactions?.data?.length || 0) < 100
+            (transactions?.data?.length || 0) < 50
               ? 10
-              : 31 /* an arbitrary number not too big, not too small, that appears not to repeat */,
+              : (transactions?.data?.length || 0) < 150
+              ? 71
+              : 139 /* an arbitrary number not too big, not too small, that appears not to repeat */,
         });
         const result: Result = pipe(
           eitherResponse,
