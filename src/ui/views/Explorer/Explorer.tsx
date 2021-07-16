@@ -26,7 +26,6 @@ export const ExplorerView = () => {
     { name: 'Traces', location: ExplorerTracesLocation, component: <Traces /> },
   ];
 
-  // console.log('ExplorerView');
   return (
     <div>
       <div style={{ backgroundColor: 'orange', color: 'black' }}>This module is not completed.</div>

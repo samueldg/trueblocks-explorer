@@ -1,5 +1,3 @@
-import { BaseView } from '@components/BaseView';
-import React from 'react';
 import {
   SettingsCachesLocation,
   SettingsIndexesLocation,
@@ -8,12 +6,15 @@ import {
   SettingsScrapersLocation,
   SettingsSkinsLocation,
 } from '../../Routes';
-import { cookieVars } from '../../utils';
+
+import { BaseView } from '@components/BaseView';
 import { Caches } from './Tabs/Caches';
 import { IndexesView } from './Tabs/Indexes/Indexes';
+import React from 'react';
 import { Schemas } from './Tabs/Schemas';
 import { Scrapers } from './Tabs/Scrapers';
 import { Skins } from './Tabs/Skins';
+import { cookieVars } from '../../utils';
 
 export const SettingsView = () => {
   const title = 'Settings';
@@ -25,7 +26,6 @@ export const SettingsView = () => {
     { name: 'Schemas', location: SettingsSchemasLocation, component: <Schemas /> },
   ];
 
-  // console.log('SettingsView');
   return (
     <BaseView
       title={title}

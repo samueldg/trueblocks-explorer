@@ -1,5 +1,3 @@
-import { BaseView } from '@components/BaseView';
-import React from 'react';
 import {
   NamesAddressesLocation,
   NamesBlocksLocation,
@@ -8,12 +6,15 @@ import {
   NamesLocation,
   NamesTagsLocation,
 } from '../../Routes';
-import { cookieVars } from '../../utils';
+
 import { Addresses } from './Tabs/Addresses';
+import { BaseView } from '@components/BaseView';
 import { EventSignatures } from './Tabs/EventSignatures';
 import { FunctionSignatures } from './Tabs/FunctionSignatures';
+import React from 'react';
 import { Tags } from './Tabs/Tag';
 import { When } from './Tabs/When';
+import { cookieVars } from '../../utils';
 
 export const NamesView = () => {
   const title = 'Names';
@@ -25,7 +26,6 @@ export const NamesView = () => {
     { name: 'Named Blocks', location: NamesBlocksLocation, component: <When /> },
   ];
 
-  // console.log('NamesView');
   return (
     <BaseView
       title={title}

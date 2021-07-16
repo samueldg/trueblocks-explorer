@@ -1,5 +1,3 @@
-import { BaseView } from '@components/BaseView';
-import React from 'react';
 import {
   SupportAboutUsLocation,
   SupportContactUsLocation,
@@ -8,12 +6,15 @@ import {
   SupportLicensingLocation,
   SupportLocation,
 } from '../../Routes';
-import { cookieVars } from '../../utils';
+
 import { About } from './Tabs/About';
+import { BaseView } from '@components/BaseView';
 import { Contact } from './Tabs/Contact';
 import { Documentation } from './Tabs/Documentation';
 import { HotKeys } from './Tabs/HotKeys';
 import { Licensing } from './Tabs/Licensing';
+import React from 'react';
+import { cookieVars } from '../../utils';
 
 export const SupportView = () => {
   const title = 'Support';
@@ -25,7 +26,6 @@ export const SupportView = () => {
     { name: 'About Us', location: SupportAboutUsLocation, component: <About /> },
   ];
 
-  // console.log('SupportView');
   return (
     <BaseView
       title={title}

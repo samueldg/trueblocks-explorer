@@ -1,21 +1,22 @@
-import { BaseView } from '@components/BaseView';
 import { BaseTable, SelectedRow } from '@components/Table';
-import { TransactionArray } from '@modules/types';
-import React from 'react';
 import {
-  DashboardAccountsLocation,
-  DashboardAccountsHistoryFunctionsLocation,
-  DashboardAccountsHistoryEventsLocation,
   DashboardAccountsHistoryCustomLocation,
-  DashboardAccountsHistoryReconsLocation,
+  DashboardAccountsHistoryEventsLocation,
+  DashboardAccountsHistoryFunctionsLocation,
   DashboardAccountsHistoryLocation,
+  DashboardAccountsHistoryReconsLocation,
   DashboardAccountsHistoryTracesLocation,
+  DashboardAccountsLocation,
 } from '../../../../../Routes';
-import { transactionSchema } from '../Accounts';
+
+import { BaseView } from '@components/BaseView';
 import { HistoryEvents } from './HistoryEvents';
 import { HistoryFunctions } from './HistoryFunctions';
 import { HistoryRecons } from './HistoryRecons';
+import React from 'react';
+import { TransactionArray } from '@modules/types';
 import { cookieVars } from '../../../../../utils';
+import { transactionSchema } from '../Accounts';
 
 export const History = ({
   theData,
@@ -70,7 +71,6 @@ export const AccountHistorySider = ({ record, selectedRow }: { record: any; sele
     },
   ];
 
-  // console.log('AccountHistorySider');
   return (
     <BaseView
       defaultActive={DashboardAccountsHistoryReconsLocation}

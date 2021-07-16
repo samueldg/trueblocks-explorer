@@ -1,7 +1,8 @@
 import { PageHeader, Tabs } from 'antd';
-import Cookies from 'js-cookie';
 import React, { ReactNode, useState } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
+
+import Cookies from 'js-cookie';
 
 const { TabPane } = Tabs;
 
@@ -54,22 +55,10 @@ export const BaseView = ({
 
   const history = useHistory();
   const onTabChange = (key: string) => {
-    // console.log(count, 'set: ', cookieName, key);
     Cookies.set(cookieName, key);
     history.push(key);
     setCurrentTab(key);
   };
-
-  // console.log(count, 'ba: ', baseActive);
-  // console.log(count, 'da: ', defaultActive);
-  // console.log(count, 'tabs: ', tabs);
-  // console.log(count, 'cook: ', Cookies.get(cookieName));
-  // console.log(count, 'eq: ', defaultActive == tabs[0].location);
-  // console.log(count, 'cn: ', cookieName);
-  // console.log(count, 'lo: ', location);
-  // console.log(count, 'pa: ', parts);
-  // console.log(count, 'su: ', subPath);
-  // console.log(count++, 'ct: ', currentTab);
 
   const titleComponent = title.length === 0 ? <></> : <PageHeader style={{ padding: '0px' }} title={title} />;
   return (

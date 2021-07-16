@@ -1,22 +1,23 @@
-import { addColumn, addNumColumn, TableActions } from '@components/Table';
-import { Monitor } from '@modules/types';
-import { BaseView } from '@components/BaseView';
-import { useCommand } from '@hooks/useCommand';
-import { createErrorNotification } from '@modules/error_notification';
 import React, { useCallback } from 'react';
 import {
   SettingsIndexChartsLocation,
-  SettingsIndexesLocation,
   SettingsIndexGridLocation,
   SettingsIndexManifestLocation,
   SettingsIndexTableLocation,
+  SettingsIndexesLocation,
 } from '../../../../Routes';
-import { cookieVars } from '../../../../utils';
+import { TableActions, addColumn, addNumColumn } from '@components/Table';
+
+import { BaseView } from '@components/BaseView';
+import { ColumnsType } from 'antd/lib/table';
 import { IndexCharts } from './SubTabs/IndexCharts';
 import { IndexGrid } from './SubTabs/IndexGrid';
 import { IndexManifest } from './SubTabs/IndexManifest';
 import { IndexTable } from './SubTabs/IndexTable';
-import { ColumnsType } from 'antd/lib/table';
+import { Monitor } from '@modules/types';
+import { cookieVars } from '../../../../utils';
+import { createErrorNotification } from '@modules/error_notification';
+import { useCommand } from '@hooks/useCommand';
 
 export const IndexesView = () => {
   const [indexes, loading] = useCommand('status', { mode: 'index', details: true });
@@ -53,7 +54,6 @@ export const IndexesView = () => {
     },
   ];
 
-  // console.log('IndexesView');
   return (
     <BaseView
       defaultActive={SettingsIndexGridLocation}

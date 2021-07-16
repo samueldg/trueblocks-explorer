@@ -107,7 +107,6 @@ export const DashboardView = ({ match }: { match?: any }) => {
           accountAddress={accountAddress}
           setAccountAddress={setAccountAddress}
           totalRecords={totalRecords}
-          setTotalRecords={setTotalRecords}
           transactions={transactions}
           setTransactions={setTransactions}
         />
@@ -117,7 +116,6 @@ export const DashboardView = ({ match }: { match?: any }) => {
     { name: 'Collections', location: DashboardCollectionsLocation, component: <Collections />, disabled: false },
   ];
 
-  // console.log('DashboardView');
   return (
     <BaseView
       title={title}

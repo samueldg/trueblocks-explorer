@@ -44,7 +44,6 @@ export const AccountsView = ({
   accountAddress,
   setAccountAddress,
   totalRecords,
-  setTotalRecords,
   transactions,
   setTransactions,
 }: {
@@ -53,7 +52,6 @@ export const AccountsView = ({
   accountAddress: string;
   setAccountAddress: any;
   totalRecords: number | null;
-  setTotalRecords: any;
   transactions: Result | null;
   setTransactions: any;
 }) => {
@@ -134,7 +132,6 @@ export const AccountsView = ({
     },
   ];
 
-  // console.log('AccountsView');
   return (
     <div>
       <Checkbox checked={staging} onChange={(event) => onStaging()}>
