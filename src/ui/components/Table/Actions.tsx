@@ -1,6 +1,7 @@
-import { DeleteOutlined, EditOutlined, InfoCircleOutlined, PlusCircleOutlined, UndoOutlined } from '@ant-design/icons';
-import { Button } from 'antd';
+import { DeleteOutlined, EditOutlined, EyeOutlined, InfoCircleOutlined, UndoOutlined } from '@ant-design/icons';
 import PropTypes, { InferType } from 'prop-types';
+
+import { Button } from 'antd';
 import React from 'react';
 
 type Action = 'info' | 'delete' | 'undelete' | 'remove' | 'edit' | 'view';
@@ -35,7 +36,7 @@ export function TableActions({ item, onClick }: InferType<typeof TableActions.pr
         <EditOutlined />
       </Button>
       <Button shape='circle' type='text' onClick={createOnClick('view')}>
-        <PlusCircleOutlined />
+        <EyeOutlined />
       </Button>
     </>
   );

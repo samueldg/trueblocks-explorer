@@ -12,6 +12,13 @@ export const cookieVars = {
   help_expanded: 'HELP_EXPANDED',
 };
 
+export function goToUrl(href: string) {
+  var a = document.createElement('a');
+  a.href = href;
+  a.setAttribute('target', '_blank');
+  a.click();
+}
+
 // export const getSiblings = (e: any) => {
 //   // for collecting siblings
 //   let siblings: any[] = [];

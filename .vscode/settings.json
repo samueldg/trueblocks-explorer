@@ -11,5 +11,9 @@
   "editor.formatOnSave": true,
   "[typescriptreact]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
-  }
+  },
+  "sort-imports.languages": [
+    "javascript",
+    "typescript"
+  ]
 }

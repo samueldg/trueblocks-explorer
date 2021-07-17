@@ -1,6 +1,8 @@
-import React from 'react';
-import { Route, Switch } from 'react-router-dom';
 import { DashboardView, ExplorerView, NamesView, SettingsView, SupportView } from './views';
+import { Route, Switch } from 'react-router-dom';
+
+import React from 'react';
+
 const Mousetrap = require('mousetrap');
 
 export const RootLocation = '/';
@@ -340,13 +342,13 @@ export const routes = [
     path: SettingsIndexChartsLocation,
     exact: true,
     component: SettingsView,
-    helpText: 'Charts related to the index cache.',
+    helpText: 'Visual display of the index cache.',
   },
   {
     path: SettingsIndexManifestLocation,
     exact: true,
     component: SettingsView,
-    helpText: 'Charts related to the index cache.',
+    helpText: 'The index manifestation.',
   },
   {
     path: SettingsCachesLocation,

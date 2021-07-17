@@ -1,13 +1,15 @@
-import { PlusCircleFilled, SearchOutlined } from '@ant-design/icons';
-import { addActionsColumn, addColumn, addNumColumn, addTagsColumn, BaseTable, TableActions } from '@components/Table';
-import { useCommand } from '@hooks/useCommand';
-import { createErrorNotification } from '@modules/error_notification';
-import { renderNamedAddress } from '@modules/renderers';
-import { Monitor } from '@modules/types';
+import { BaseTable, TableActions, addActionsColumn, addColumn, addNumColumn, addTagsColumn } from '@components/Table';
 import { Button, Input, Space, Spin } from 'antd';
-import Modal from 'antd/lib/modal/Modal';
-import { ColumnsType } from 'antd/lib/table';
+import { PlusCircleFilled, SearchOutlined } from '@ant-design/icons';
 import React, { useCallback, useRef, useState } from 'react';
+
+import { ColumnsType } from 'antd/lib/table';
+import Modal from 'antd/lib/modal/Modal';
+import { Monitor } from '@modules/types';
+import { createErrorNotification } from '@modules/error_notification';
+import { goToUrl } from '../../../utils';
+import { renderNamedAddress } from '@modules/renderers';
+import { useCommand } from '@hooks/useCommand';
 import useGlobalState from '../../../state';
 
 export const Monitors = () => {
@@ -275,8 +277,21 @@ const monitorSchema: ColumnsType<Monitor> = [
 function getTableActions(item: Monitor) {
   const onClick = (action: string, item: Monitor) => {
     switch (action) {
+      case 'info':
+        goToUrl('https://etherscan.io/address/' + item.address);
+        break;
+      case 'delete':
+        console.log('DELETE');
+        break;
+      case 'edit':
+        console.log('EDIT');
+        break;
+      case 'view':
+        console.log('VIEW');
+        break;
       default:
-        console.log('Clicked action', action, item.name);
+        console.log('Unknown action', action, item.name);
+        break;
     }
   };
 

@@ -1,8 +1,9 @@
-import { Area, AreaChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
+import { Area, AreaChart, CartesianGrid, Tooltip, XAxis, YAxis } from 'recharts';
 import { BaseTable, addColumn } from '@components/Table';
 import { ReconciliationArray, TransactionArray } from '@modules/types';
 
 import { ColumnsType } from 'antd/lib/table';
+import { MyAreaChartWithTable } from '@components/AccountCharts';
 import React from 'react';
 import { Transaction } from '@modules/types';
 
@@ -32,7 +33,6 @@ export const Functions = ({
     uniqItems.push({
       func: key,
       count: counts[key],
-      // color: chartColors[Math.floor(Math.random() * (9 - 0 + 1) + 0)],
     });
   });
 
@@ -41,36 +41,13 @@ export const Functions = ({
     return b.count - a.count;
   });
 
+  const top = uniqItems.filter((item: any, i: number) => i < 10);
+  const remains = uniqItems.filter((item: any, i: number) => i >= 10);
+
   return (
-    <div style={{ display: 'grid', gridTemplateColumns: '2fr 2fr 1fr' }}>
-      <BaseTable dataSource={uniqItems} columns={countSchema} loading={false} defPageSize={10} />
-      <div>
-        <ResponsiveContainer width='100%' height='100%'>
-          <AreaChart
-            width={500}
-            height={400}
-            data={uniqItems}
-            margin={{
-              top: 10,
-              right: 30,
-              left: 0,
-              bottom: 0,
-            }}>
-            <CartesianGrid strokeDasharray='3 3' />
-            <XAxis dataKey='func' />
-            <YAxis dataKey='count' />
-            <Tooltip />
-            <Area
-              type='monotone'
-              dataKey={'count'}
-              stackId='1'
-              // stroke={chartColors[i % chartColors.length] || '#63b598'}
-              // fill={chartColors[i % chartColors.length] || '#63b598'}
-            />
-          </AreaChart>
-        </ResponsiveContainer>
-      </div>
-      <div></div>
+    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr' }}>
+      <MyAreaChartWithTable title={'Top Ten'} items={top} xField={'func'} yField={'count'} schema={countSchema} />
+      <MyAreaChartWithTable title={'Remainder'} items={remains} xField={'func'} yField={'count'} schema={countSchema} />
     </div>
   );
 };
@@ -85,32 +62,3 @@ export const countSchema: ColumnsType<Transaction> = [
     dataIndex: 'count',
   }),
 ];
-
-/*
-          <PieChart width={730} height={250}>
-            <Pie
-              data={uniqItems}
-              cx='50%'
-              cy='50%'
-              dataKey='count' // make sure to map the dataKey to "value"
-              innerRadius={10} // the inner and outer radius helps to create the progress look
-              outerRadius={80}>
-              {uniqItems.map((entry: any, index: number) => {
-                if (index === 1) {
-                  return <Cell key={`cell-${index}`} fill='#f3f6f9' />; // make sure to map the index to the colour you want
-                }
-                return <Cell key={`cell-${index}`} fill='green' />;
-              })}
-              <Label
-                value={uniqItems[0].func}
-                position='center'
-                fill='grey'
-                style={{
-                  fontSize: '32px',
-                  fontWeight: 'bold',
-                  fontFamily: 'Roboto',
-                }}
-              />
-            </Pie>
-          </PieChart>
- */

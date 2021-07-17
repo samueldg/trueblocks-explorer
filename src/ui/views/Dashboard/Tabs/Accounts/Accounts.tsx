@@ -17,7 +17,6 @@ import { Result, emptyData, toFailedResult, toSuccessfulData } from '@hooks/useC
 import { useHistory, useLocation } from 'react-router-dom';
 
 import { Assets } from './LeftTabs/Assets';
-import { Charts } from './LeftTabs/Charts';
 import { ColumnsType } from 'antd/lib/table';
 import Cookies from 'js-cookie';
 import { either as Either } from 'fp-ts';
@@ -102,23 +101,8 @@ export const AccountsView = ({
     },
     {
       name: 'Assets',
-      location: DashboardAccountsAssetsLocation,
-      component: <Assets theData={theData} loading={loading} accountAddress={accountAddress} />,
-    },
-    {
-      name: 'Neighbors',
-      location: DashboardAccountsNeighborsLocation,
-      component: <Neighbors theData={theData} loading={loading} accountAddress={accountAddress} />,
-    },
-    {
-      name: 'Gas',
-      location: DashboardAccountsGasLocation,
-      component: <Gas theData={theData} loading={loading} accountAddress={accountAddress} />,
-    },
-    {
-      name: 'Charts',
       location: DashboardAccountsChartsLocation,
-      component: <Charts theData={theData} loading={loading} accountAddress={accountAddress} />,
+      component: <Assets theData={theData} loading={loading} accountAddress={accountAddress} />,
     },
     {
       name: 'Functions',
@@ -126,9 +110,19 @@ export const AccountsView = ({
       component: <Functions theData={theData} loading={loading} accountAddress={accountAddress} />,
     },
     {
+      name: 'Gas',
+      location: DashboardAccountsGasLocation,
+      component: <Gas theData={theData} loading={loading} accountAddress={accountAddress} />,
+    },
+    {
       name: 'Events',
       location: DashboardAccountsEventsLocation,
       component: <Events theData={theData} loading={loading} accountAddress={accountAddress} />,
+    },
+    {
+      name: 'Neighbors',
+      location: DashboardAccountsNeighborsLocation,
+      component: <Neighbors theData={theData} loading={loading} accountAddress={accountAddress} />,
     },
   ];
 

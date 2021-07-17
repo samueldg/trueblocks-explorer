@@ -2,6 +2,7 @@ import { Area, AreaChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YA
 import { Reconciliation, Transaction, TransactionArray } from '@modules/types';
 import { address, blknum, int256, timestamp, uint64 } from '@modules/types';
 
+import { BaseTable } from '@components/Table';
 import React from 'react';
 import { chartColors } from './colors';
 import dayjs from 'dayjs';
@@ -59,7 +60,7 @@ export default function AccountCharts({ theData }: { theData: TransactionArray }
             {asset.assetSym} ({asset.history.length} txs)
           </div>
           <div key={i + 'd2'} style={{ width: '100%', height: '200px', minWidth: '1' }}>
-            <ResponsiveContainer width='100%' height='100%'>
+            <ResponsiveContainer width='100%' height='100%' minWidth='500' minHeight='400'>
               <AreaChart
                 width={500}
                 height={400}
@@ -94,3 +95,44 @@ export default function AccountCharts({ theData }: { theData: TransactionArray }
     </div>
   );
 }
+
+export const MyAreaChartWithTable = ({
+  title,
+  items,
+  xField,
+  yField,
+  schema,
+}: {
+  title: string;
+  items: any[];
+  xField: string;
+  yField: string;
+  schema: any[];
+}) => {
+  return (
+    <div style={{ display: 'grid', gridTemplateRows: '1fr 8fr' }}>
+      <h2>{title}</h2>
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr' }}>
+        <BaseTable dataSource={items} columns={schema} loading={false} defPageSize={10} />
+        <ResponsiveContainer width='100%' height='100%' minWidth='500' minHeight='400'>
+          <AreaChart
+            width={500}
+            height={400}
+            data={items}
+            margin={{
+              top: 10,
+              right: 30,
+              left: 0,
+              bottom: 0,
+            }}>
+            <CartesianGrid strokeDasharray='3 3' />
+            <XAxis dataKey={xField} />
+            <YAxis dataKey={yField} />
+            <Tooltip />
+            <Area type='monotone' dataKey={yField} stackId='1' />
+          </AreaChart>
+        </ResponsiveContainer>
+      </div>
+    </div>
+  );
+};

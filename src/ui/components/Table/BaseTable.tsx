@@ -57,6 +57,7 @@ export const BaseTable = ({
     setKeyedData(
       dataSource
         ? dataSource.map((record: any, index: number) => {
+            if (record.key !== undefined) console.log('BaseTable assigns the key field, data should not.');
             return {
               key: index,
               extraData: extraData,
