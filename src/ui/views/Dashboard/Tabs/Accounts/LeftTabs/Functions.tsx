@@ -46,8 +46,20 @@ export const Functions = ({
 
   return (
     <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr' }}>
-      <MyAreaChartWithTable title={'Top Ten'} items={top} xField={'func'} yField={'count'} schema={countSchema} />
-      <MyAreaChartWithTable title={'Remainder'} items={remains} xField={'func'} yField={'count'} schema={countSchema} />
+      <MyAreaChartWithTable
+        title={'Top Ten Functions'}
+        items={top}
+        xField={'func'}
+        yField={'count'}
+        schema={countSchema}
+      />
+      <MyAreaChartWithTable
+        title={'Other Functions'}
+        items={remains}
+        xField={'func'}
+        yField={'count'}
+        schema={countSchema}
+      />
     </div>
   );
 };

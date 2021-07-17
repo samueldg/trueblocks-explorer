@@ -10,5 +10,10 @@ export const Neighbors = ({
   loading: boolean;
   accountAddress: string;
 }) => {
-  return <div>Neighbors</div>;
+  return (
+    <div>
+      <div style={{ width: '30%', backgroundColor: 'orange', color: 'black' }}>This module is not completed.</div>
+      <div>Neighbors</div>
+    </div>
+  );
 };

@@ -54,41 +54,38 @@ export default function AccountCharts({ theData }: { theData: TransactionArray }
 
   return (
     <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr 1fr 1fr' }}>
-      {uniqAssets.map((asset: any, i: number) => (
-        <div key={i}>
-          <div key={i + 'd1'} style={{ marginBottom: '24px', fontSize: '28px', fontWeight: 'bold' }}>
-            {asset.assetSym}
-            <br />
-            <small>({asset.history.length} txs)</small>
+      {uniqAssets.map((asset: any, i: number) => {
+        const color = chartColors[i % chartColors.length] || '#63b598';
+        return (
+          <div key={i}>
+            <div key={i + 'd1'} style={{ marginBottom: '24px', fontSize: '28px', fontWeight: 'bold' }}>
+              {asset.assetSym}
+              <br />
+              <small>({asset.history.length} txs)</small>
+            </div>
+            <div key={i + 'd2'} style={{ width: '100%', height: '200px', minWidth: '1' }}>
+              <ResponsiveContainer width='100%' height='100%' minWidth='500' minHeight='400'>
+                <AreaChart
+                  width={500}
+                  height={400}
+                  data={asset.history.map((item: any) => {
+                    return {
+                      name: dayjs(item.date).format('YYYY-MM-DD'),
+                      [asset.assetSym]: parseFloat(item.balance || 0),
+                    };
+                  })}
+                  margin={margins}>
+                  <CartesianGrid strokeDasharray='3 3' />
+                  <XAxis dataKey='name' />
+                  <YAxis />
+                  <Area type='monotone' dataKey={asset.assetSym} stackId='1' stroke={color} fill={color} />
+                  <Tooltip />
+                </AreaChart>
+              </ResponsiveContainer>
+            </div>
           </div>
-          <div key={i + 'd2'} style={{ width: '100%', height: '200px', minWidth: '1' }}>
-            <ResponsiveContainer width='100%' height='100%' minWidth='500' minHeight='400'>
-              <AreaChart
-                width={500}
-                height={400}
-                data={asset.history.map((item: any) => {
-                  return {
-                    name: dayjs(item.date).format('MM/DD/YYYY'),
-                    [asset.assetSym]: parseFloat(item.balance || 0),
-                  };
-                })}
-                margin={margins}>
-                <CartesianGrid strokeDasharray='3 3' />
-                <XAxis dataKey='name' />
-                <YAxis />
-                <Area
-                  type='monotone'
-                  dataKey={asset.assetSym}
-                  stackId='1'
-                  stroke={chartColors[i % chartColors.length] || '#63b598'}
-                  fill={chartColors[i % chartColors.length] || '#63b598'}
-                />
-                <Tooltip />
-              </AreaChart>
-            </ResponsiveContainer>
-          </div>
-        </div>
-      ))}
+        );
+      })}
     </div>
   );
 }
@@ -107,7 +104,7 @@ export const MyAreaChartWithTable = ({
   schema: any[];
 }) => {
   return (
-    <div style={{ display: 'grid', gridTemplateRows: '1fr 8fr' }}>
+    <div key={1} style={{ display: 'grid', gridTemplateRows: '1fr 8fr' }}>
       <h2>{title}</h2>
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr' }}>
         <BaseTable dataSource={items} columns={schema} loading={false} defPageSize={10} />

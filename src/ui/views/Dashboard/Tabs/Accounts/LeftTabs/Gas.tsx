@@ -10,5 +10,10 @@ export const Gas = ({
   loading: boolean;
   accountAddress: string;
 }) => {
-  return <div>Gas</div>;
+  return (
+    <div>
+      <div style={{ width: '30%', backgroundColor: 'orange', color: 'black' }}>This module is not completed.</div>
+      <div>Gas</div>
+    </div>
+  );
 };

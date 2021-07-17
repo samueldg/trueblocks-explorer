@@ -46,8 +46,14 @@ export const Events = ({
 
   return (
     <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr' }}>
-      <MyAreaChartWithTable title={'Top Ten'} items={top} xField={'evt'} yField={'count'} schema={countSchema} />
-      <MyAreaChartWithTable title={'Remainder'} items={remains} xField={'evt'} yField={'count'} schema={countSchema} />
+      <MyAreaChartWithTable title={'Top Ten Events'} items={top} xField={'evt'} yField={'count'} schema={countSchema} />
+      <MyAreaChartWithTable
+        title={'Other Events'}
+        items={remains}
+        xField={'evt'}
+        yField={'count'}
+        schema={countSchema}
+      />
       {/* <MyAreaChartWithTable title={''} items={uniqItems} xField={'evt'} yField={'count'} schema={countSchema} /> */}
     </div>
   );
