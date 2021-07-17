@@ -57,7 +57,9 @@ export default function AccountCharts({ theData }: { theData: TransactionArray }
       {uniqAssets.map((asset: any, i: number) => (
         <div key={i}>
           <div key={i + 'd1'} style={{ marginBottom: '24px', fontSize: '28px', fontWeight: 'bold' }}>
-            {asset.assetSym} ({asset.history.length} txs)
+            {asset.assetSym}
+            <br />
+            <small>({asset.history.length} txs)</small>
           </div>
           <div key={i + 'd2'} style={{ width: '100%', height: '200px', minWidth: '1' }}>
             <ResponsiveContainer width='100%' height='100%' minWidth='500' minHeight='400'>
@@ -70,16 +72,10 @@ export default function AccountCharts({ theData }: { theData: TransactionArray }
                     [asset.assetSym]: parseFloat(item.balance || 0),
                   };
                 })}
-                margin={{
-                  top: 10,
-                  right: 30,
-                  left: 0,
-                  bottom: 0,
-                }}>
+                margin={margins}>
                 <CartesianGrid strokeDasharray='3 3' />
                 <XAxis dataKey='name' />
                 <YAxis />
-                <Tooltip />
                 <Area
                   type='monotone'
                   dataKey={asset.assetSym}
@@ -87,6 +83,7 @@ export default function AccountCharts({ theData }: { theData: TransactionArray }
                   stroke={chartColors[i % chartColors.length] || '#63b598'}
                   fill={chartColors[i % chartColors.length] || '#63b598'}
                 />
+                <Tooltip />
               </AreaChart>
             </ResponsiveContainer>
           </div>
@@ -115,24 +112,22 @@ export const MyAreaChartWithTable = ({
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr' }}>
         <BaseTable dataSource={items} columns={schema} loading={false} defPageSize={10} />
         <ResponsiveContainer width='100%' height='100%' minWidth='500' minHeight='400'>
-          <AreaChart
-            width={500}
-            height={400}
-            data={items}
-            margin={{
-              top: 10,
-              right: 30,
-              left: 0,
-              bottom: 0,
-            }}>
+          <AreaChart width={500} height={400} data={items} margin={margins}>
             <CartesianGrid strokeDasharray='3 3' />
             <XAxis dataKey={xField} />
             <YAxis dataKey={yField} />
-            <Tooltip />
             <Area type='monotone' dataKey={yField} stackId='1' />
+            <Tooltip />
           </AreaChart>
         </ResponsiveContainer>
       </div>
     </div>
   );
+};
+
+const margins = {
+  top: 10,
+  right: 30,
+  left: 0,
+  bottom: 0,
 };
