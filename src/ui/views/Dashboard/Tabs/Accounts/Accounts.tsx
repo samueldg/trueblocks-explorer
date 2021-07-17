@@ -26,7 +26,7 @@ import { Gas } from './LeftTabs/Gas';
 import { History } from './LeftTabs/History';
 import { Neighbors } from './LeftTabs/Neighbors';
 import { addColumn } from '@components/Table';
-import { cookieVars } from '../../../../utils';
+import { cookieVars } from '../../../../Utils';
 import { createErrorNotification } from '@modules/error_notification';
 import { createUseStyles } from 'react-jss';
 import dayjs from 'dayjs';

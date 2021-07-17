@@ -15,7 +15,7 @@ import { IndexGrid } from './SubTabs/IndexGrid';
 import { IndexManifest } from './SubTabs/IndexManifest';
 import { IndexTable } from './SubTabs/IndexTable';
 import { Monitor } from '@modules/types';
-import { cookieVars } from '../../../../utils';
+import { cookieVars } from '../../../../Utils';
 import { createErrorNotification } from '@modules/error_notification';
 import { useCommand } from '@hooks/useCommand';
 

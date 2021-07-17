@@ -14,7 +14,7 @@ import { Documentation } from './Tabs/Documentation';
 import { HotKeys } from './Tabs/HotKeys';
 import { Licensing } from './Tabs/Licensing';
 import React from 'react';
-import { cookieVars } from '../../utils';
+import { cookieVars } from '../../Utils';
 
 export const SupportView = () => {
   const title = 'Support';

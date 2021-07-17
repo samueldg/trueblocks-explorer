@@ -13,7 +13,7 @@ import { MainMenu } from './components/MainMenu';
 import { QuestionCircleFilled } from '@ant-design/icons';
 import { Routes } from './Routes';
 import { StatusPanel } from './components/SidePanels/StatusPanel';
-import { cookieVars } from './utils';
+import { cookieVars } from './Utils';
 import { createUseStyles } from 'react-jss';
 import dayjs from 'dayjs';
 import { pipe } from 'fp-ts/lib/function';

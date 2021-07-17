@@ -14,7 +14,7 @@ import { FunctionSignatures } from './Tabs/FunctionSignatures';
 import React from 'react';
 import { Tags } from './Tabs/Tag';
 import { When } from './Tabs/When';
-import { cookieVars } from '../../utils';
+import { cookieVars } from '../../Utils';
 
 export const NamesView = () => {
   const title = 'Names';
