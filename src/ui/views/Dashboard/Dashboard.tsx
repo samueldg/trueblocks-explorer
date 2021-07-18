@@ -12,7 +12,7 @@ import { BaseView } from '@components/BaseView';
 import { Collections } from './Tabs/Collections';
 import { either as Either } from 'fp-ts';
 import { Monitors } from './Tabs/Monitors';
-import { cookieVars } from '../../Utils';
+import { cookieVars } from '../../Utilities';
 import { createErrorNotification } from '@modules/error_notification';
 import { pipe } from 'fp-ts/lib/function';
 import { runCommand } from '@modules/core';

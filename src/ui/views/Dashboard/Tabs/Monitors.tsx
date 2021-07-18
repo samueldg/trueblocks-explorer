@@ -7,7 +7,7 @@ import { ColumnsType } from 'antd/lib/table';
 import Modal from 'antd/lib/modal/Modal';
 import { Monitor } from '@modules/types';
 import { createErrorNotification } from '@modules/error_notification';
-import { goToUrl } from '../../../Utils';
+import { goToUrl } from '../../../Utilities';
 import { renderNamedAddress } from '@modules/renderers';
 import { useCommand } from '@hooks/useCommand';
 import useGlobalState from '../../../state';

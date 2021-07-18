@@ -14,7 +14,7 @@ import React from 'react';
 import { Receipts } from './Tabs/Receipts';
 import { Traces } from './Tabs/Traces';
 import { Transactions } from './Tabs/Transactions';
-import { cookieVars } from '../../Utils';
+import { cookieVars } from '../../Utilities';
 
 export const ExplorerView = () => {
   const title = 'Explorer';

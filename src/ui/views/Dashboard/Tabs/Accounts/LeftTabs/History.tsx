@@ -15,7 +15,7 @@ import { HistoryFunctions } from './HistoryFunctions';
 import { HistoryRecons } from './HistoryRecons';
 import React from 'react';
 import { TransactionArray } from '@modules/types';
-import { cookieVars } from '../../../../../Utils';
+import { cookieVars } from '../../../../../Utilities';
 import { transactionSchema } from '../Accounts';
 
 export const History = ({

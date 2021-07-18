@@ -14,7 +14,7 @@ import React from 'react';
 import { Schemas } from './Tabs/Schemas';
 import { Scrapers } from './Tabs/Scrapers';
 import { Skins } from './Tabs/Skins';
-import { cookieVars } from '../../Utils';
+import { cookieVars } from '../../Utilities';
 
 export const SettingsView = () => {
   const title = 'Settings';
