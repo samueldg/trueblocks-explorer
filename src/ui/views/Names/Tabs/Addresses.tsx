@@ -63,7 +63,7 @@ export const Addresses = () => {
     return response.data?.map((item: any, i: number) => {
       return {
         id: (i + 1).toString(),
-        nameaddr: item.name + ' ' + item.address,
+        namedAddress: item.name + ' ' + item.address,
         ...item,
       };
     });
@@ -227,9 +227,9 @@ export const Addresses = () => {
 const addressSchema: ColumnsType<Name> = [
   addColumn<Name>({
     title: 'Name / Address',
-    dataIndex: 'nameaddr',
+    dataIndex: 'namedAddress',
     configuration: {
-      render: (unused, record) => renderNamedAddress(record),
+      render: (unused, record) => renderNamedAddress(record.name, record.address),
       width: 500,
     },
   }),

@@ -37,7 +37,7 @@ export const Monitors = () => {
       : response.data[0].caches[0].items?.map((item: any, i: number) => {
           return {
             id: (i + 1).toString(),
-            nameaddr: item.name + ' ' + item.address,
+            namedAddress: item.name + ' ' + item.address,
             ...item,
           };
         });
@@ -141,6 +141,13 @@ export const Monitors = () => {
       });
   };
 
+  const recents = [
+    { name: 'TrueBlocks Wallet', address: '0xf503017d7baf7fbc0fff7492b751025c6a78179b' },
+    { name: 'BokkyPooBah', address: '0x000001f568875f378bf6d170b790967fe429c81a' },
+    { name: 'DeeEee', address: '0xd1629474d25a63b1018fcc965e1d218a00f6cbd3' },
+    { name: 'BTag', address: '0x0035fc5208ef989c28d47e552e92b0c507d2b318' },
+  ];
+
   return (
     <>
       <Modal visible={namesEditModal} footer={null}>
@@ -231,14 +238,22 @@ export const Monitors = () => {
         <PlusCircleFilled style={{ marginRight: '8px' }} />
         Add new monitor
       </div>
-      <BaseTable
-        dataSource={getData(monitors)}
-        columns={monitorSchema.map((item) => {
-          //@ts-ignore
-          return { ...item, ...getColumnSearchProps(item.dataIndex) };
-        })}
-        loading={loading}
-      />
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 5fr' }}>
+        <div style={{ borderRight: '1px solid lightgrey', marginLeft: '5' }}>
+          <h2>Recents</h2>
+          {recents.map((item) => (
+            <div>{renderNamedAddress(item.name, item.address)}</div>
+          ))}
+        </div>
+        <BaseTable
+          dataSource={getData(monitors)}
+          columns={monitorSchema.map((item) => {
+            //@ts-ignore
+            return { ...item, ...getColumnSearchProps(item.dataIndex) };
+          })}
+          loading={loading}
+        />
+      </div>
     </>
   );
 };
@@ -246,9 +261,9 @@ export const Monitors = () => {
 const monitorSchema: ColumnsType<Monitor> = [
   addColumn<Monitor>({
     title: 'Name / Address',
-    dataIndex: 'nameaddr',
+    dataIndex: 'namedAddress',
     configuration: {
-      render: (unused, record) => renderNamedAddress(record),
+      render: (unused, record) => renderNamedAddress(record.name, record.address),
       width: 500,
     },
   }),
