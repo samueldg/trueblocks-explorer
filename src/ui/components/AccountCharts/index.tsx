@@ -2,7 +2,8 @@ import { Area, AreaChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YA
 import { Reconciliation, Transaction, TransactionArray } from '@modules/types';
 import { address, blknum, int256, timestamp, uint64 } from '@modules/types';
 
-import { BaseTable } from '@components/Table';
+import { BaseTable, addColumn } from '@components/Table';
+import { ColumnsType } from 'antd/lib/table';
 import React from 'react';
 import { chartColors } from './colors';
 import dayjs from 'dayjs';
@@ -54,31 +55,44 @@ export default function AccountCharts({ theData }: { theData: TransactionArray }
 
   return (
     <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr 1fr 1fr' }}>
-      {uniqAssets.map((asset: any, i: number) => {
-        const color = chartColors[i % chartColors.length] || '#63b598';
+      {uniqAssets.map((asset: any, index: number) => {
+        const color = chartColors[index % chartColors.length] || '#63b598';
+        const schema: any[] = [
+          addColumn({
+            title: 'Date',
+            dataIndex: 'date',
+          }),
+          addColumn({
+            title: asset.assetSym,
+            dataIndex: asset.assetSym,
+          }),
+        ];
+        const title = (
+          <div key={index + 'd1'}>
+            {asset.assetSym}
+            <br />
+            <small>({asset.history.length} txs)</small>
+          </div>
+        );
+        const table = false;
+
         return (
-          <div key={i}>
-            <div key={i + 'd1'} style={{ marginBottom: '24px', fontSize: '28px', fontWeight: 'bold' }}>
-              {asset.assetSym}
-              <br />
-              <small>({asset.history.length} txs)</small>
-            </div>
-            <div key={i + 'd2'} style={{ width: '100%', height: '200px', minWidth: '1' }}>
+          <div key={index} style={table ? { display: 'grid', gridTemplateRows: '1fr 8fr' } : {}}>
+            {title === null ? <></> : <h2>{title}</h2>}
+            <div key={index + 'd2'} style={{ width: '100%', height: '200px', minWidth: '1' }}>
               <ResponsiveContainer width='100%' height='100%' minWidth='500' minHeight='400'>
                 <AreaChart
-                  width={500}
-                  height={400}
                   data={asset.history.map((item: any) => {
                     return {
-                      name: dayjs(item.date).format('YYYY-MM-DD'),
+                      date: dayjs(item.date).format('YYYY-MM-DD'),
                       [asset.assetSym]: parseFloat(item.balance || 0),
                     };
                   })}
                   margin={margins}>
                   <CartesianGrid strokeDasharray='3 3' />
-                  <XAxis dataKey='name' />
-                  <YAxis />
-                  <Area type='monotone' dataKey={asset.assetSym} stackId='1' stroke={color} fill={color} />
+                  <XAxis dataKey={schema[0].dataIndex} />
+                  <YAxis dataKey={schema[1].dataIndex} />
+                  <Area type='monotone' dataKey={schema[1].dataIndex} stackId='1' stroke={color} fill={color} />
                   <Tooltip />
                 </AreaChart>
               </ResponsiveContainer>
@@ -90,30 +104,34 @@ export default function AccountCharts({ theData }: { theData: TransactionArray }
   );
 }
 
-export const MyAreaChartWithTable = ({
-  title,
+export const MyAreaChart = ({
   items,
-  xField,
-  yField,
-  schema,
+  columns = [],
+  index = -1,
+  title = null,
+  table = false,
 }: {
-  title: string;
   items: any[];
-  xField: string;
-  yField: string;
-  schema: any[];
+  columns?: any[];
+  index?: number;
+  title?: any;
+  table?: boolean;
 }) => {
+  if (columns.length < 2) {
+    return <>{'Schema must have at least two fields in MyAreaChart'}</>;
+  }
+  const color = index === -1 ? '#63b598' : chartColors[index % chartColors.length] || '#63b598';
   return (
-    <div key={1} style={{ display: 'grid', gridTemplateRows: '1fr 8fr' }}>
-      <h2>{title}</h2>
+    <div key={index} style={table ? { display: 'grid', gridTemplateRows: '1fr 8fr' } : {}}>
+      {title === null ? <></> : <h2>{title}</h2>}
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr' }}>
-        <BaseTable dataSource={items} columns={schema} loading={false} defPageSize={10} />
+        {table ? <BaseTable dataSource={items} columns={columns} loading={false} defPageSize={10} /> : <></>}
         <ResponsiveContainer width='100%' height='100%' minWidth='500' minHeight='400'>
           <AreaChart width={500} height={400} data={items} margin={margins}>
             <CartesianGrid strokeDasharray='3 3' />
-            <XAxis dataKey={xField} />
-            <YAxis dataKey={yField} />
-            <Area type='monotone' dataKey={yField} stackId='1' />
+            <XAxis dataKey={columns[0].dataIndex} />
+            <YAxis dataKey={columns[1].dataIndex} />
+            <Area type='monotone' dataKey={columns[1].dataIndex} stackId='1' stroke={color} fill={color} />
             <Tooltip />
           </AreaChart>
         </ResponsiveContainer>

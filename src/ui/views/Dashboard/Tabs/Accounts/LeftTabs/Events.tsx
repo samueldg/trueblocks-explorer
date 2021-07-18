@@ -3,7 +3,7 @@ import { BaseTable, addColumn } from '@components/Table';
 import { ReconciliationArray, TransactionArray } from '@modules/types';
 
 import { ColumnsType } from 'antd/lib/table';
-import { MyAreaChartWithTable } from '@components/AccountCharts';
+import { MyAreaChart } from '@components/AccountCharts';
 import React from 'react';
 import { Transaction } from '@modules/types';
 
@@ -46,15 +46,8 @@ export const Events = ({
 
   return (
     <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr' }}>
-      <MyAreaChartWithTable title={'Top Ten Events'} items={top} xField={'evt'} yField={'count'} schema={countSchema} />
-      <MyAreaChartWithTable
-        title={'Other Events'}
-        items={remains}
-        xField={'evt'}
-        yField={'count'}
-        schema={countSchema}
-      />
-      {/* <MyAreaChartWithTable title={''} items={uniqItems} xField={'evt'} yField={'count'} schema={countSchema} /> */}
+      <MyAreaChart title={'Top Ten Events'} items={top} columns={countSchema} table={true} />
+      <MyAreaChart title={'Other Events'} items={remains} columns={countSchema} table={true} />
     </div>
   );
 };

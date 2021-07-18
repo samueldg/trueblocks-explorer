@@ -73,7 +73,9 @@ export const DashboardView = ({ match }: { match?: any }) => {
               ? 10
               : (transactions?.data?.length || 0) < 150
               ? 71
-              : 139 /* an arbitrary number not too big, not too small, that appears not to repeat */,
+              : (transactions?.data?.length || 0) < 3000
+              ? 239
+              : 1310 /* an arbitrary number not too big, not too small, that appears not to repeat */,
         });
         const result: Result = pipe(
           eitherResponse,
@@ -117,12 +119,17 @@ export const DashboardView = ({ match }: { match?: any }) => {
   ];
 
   return (
-    <BaseView
-      title={title}
-      defaultActive={DashboardMonitorsLocation}
-      baseActive={DashboardLocation}
-      cookieName={cookieVars.dashboard_current_tab}
-      tabs={tabs}
-    />
+    <div
+      style={{
+        overflowX: 'auto',
+      }}>
+      <BaseView
+        title={title}
+        defaultActive={DashboardMonitorsLocation}
+        baseActive={DashboardLocation}
+        cookieName={cookieVars.dashboard_current_tab}
+        tabs={tabs}
+      />
+    </div>
   );
 };
