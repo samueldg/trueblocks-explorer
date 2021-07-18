@@ -119,17 +119,12 @@ export const DashboardView = ({ match }: { match?: any }) => {
   ];
 
   return (
-    <div
-      style={{
-        overflowX: 'auto',
-      }}>
-      <BaseView
-        title={title}
-        defaultActive={DashboardMonitorsLocation}
-        baseActive={DashboardLocation}
-        cookieName={cookieVars.dashboard_current_tab}
-        tabs={tabs}
-      />
-    </div>
+    <BaseView
+      title={title}
+      defaultActive={DashboardMonitorsLocation}
+      baseActive={DashboardLocation}
+      cookieName={cookieVars.dashboard_current_tab}
+      tabs={tabs}
+    />
   );
 };
