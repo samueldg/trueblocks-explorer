@@ -241,8 +241,8 @@ export const Monitors = () => {
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 5fr' }}>
         <div style={{ borderRight: '1px solid lightgrey', marginLeft: '5' }}>
           <h2>Recents</h2>
-          {recents.map((item) => (
-            <div>{renderNamedAddress(item.name, item.address)}</div>
+          {recents.map((item, index) => (
+            <div key={index}>{renderNamedAddress(item.name, item.address)}</div>
           ))}
         </div>
         <BaseTable
