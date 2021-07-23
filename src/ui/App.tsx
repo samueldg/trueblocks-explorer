@@ -9,7 +9,7 @@ import { Result, toFailedResult, toSuccessfulData } from '@hooks/useCommand';
 import { Console } from './components/Console';
 import { either as Either } from 'fp-ts';
 import { HelpPanel } from './components/SidePanels/HelpPanel';
-import { MainMenu } from './components/MainMenu';
+import { MainMenu, MenuItems } from './components/MainMenu';
 import { QuestionCircleFilled } from '@ant-design/icons';
 import { Routes } from './Routes';
 import { StatusPanel } from './components/SidePanels/StatusPanel';
@@ -20,6 +20,8 @@ import { pipe } from 'fp-ts/lib/function';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import { runCommand } from '@modules/core';
 import useGlobalState from './state';
+import { BookOutlined, CameraOutlined, PhoneOutlined, SettingOutlined, UnorderedListOutlined } from '@ant-design/icons';
+import { ExplorerLocation, NamesLocation, RootLocation, SettingsLocation, SupportLocation } from './Routes';
 
 const { Header, Footer, Content } = Layout;
 const { Title } = Typography;
@@ -74,6 +76,34 @@ export const App = () => {
     })();
   }, []);
 
+  const menuItems: MenuItems = [
+    {
+      text: 'Dashboard',
+      icon: <UnorderedListOutlined />,
+      to: RootLocation,
+    },
+    {
+      text: 'Names',
+      icon: <BookOutlined />,
+      to: NamesLocation,
+    },
+    {
+      text: 'Explorer',
+      icon: <CameraOutlined />,
+      to: ExplorerLocation,
+    },
+    {
+      text: 'Settings',
+      icon: <SettingOutlined />,
+      to: SettingsLocation,
+    },
+    {
+      text: 'Support',
+      icon: <PhoneOutlined />,
+      to: SupportLocation,
+    },
+  ];
+
   return (
     <Layout>
       <Header className='app-header'>
@@ -87,7 +117,7 @@ export const App = () => {
           dir={PanelDirection.Left}
           cookieName={cookieVars.menu_expanded}
           collapsibleContent={false}>
-          <MainMenu />
+          <MainMenu items={menuItems} />
         </SidePanel>
         <Layout>
           <Layout>
