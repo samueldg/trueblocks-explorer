@@ -105,14 +105,14 @@ export const AccountsView = ({
       component: <Assets theData={theData} loading={loading} accountAddress={accountAddress} />,
     },
     {
-      name: 'Functions',
-      location: DashboardAccountsFunctionsLocation,
-      component: <Functions theData={theData} loading={loading} accountAddress={accountAddress} />,
-    },
-    {
       name: 'Events',
       location: DashboardAccountsEventsLocation,
       component: <Events theData={theData} loading={loading} accountAddress={accountAddress} />,
+    },
+    {
+      name: 'Functions',
+      location: DashboardAccountsFunctionsLocation,
+      component: <Functions theData={theData} loading={loading} accountAddress={accountAddress} />,
     },
     {
       name: 'Gas',

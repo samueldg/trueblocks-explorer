@@ -50,14 +50,14 @@ export const AccountHistorySider = ({ record, selectedRow }: { record: any; sele
       component: <HistoryRecons record={record} />,
     },
     {
-      name: 'Function',
-      location: DashboardAccountsHistoryFunctionsLocation,
-      component: <HistoryFunctions record={record} />,
-    },
-    {
       name: 'Events',
       location: DashboardAccountsHistoryEventsLocation,
       component: <HistoryEvents record={record} />,
+    },
+    {
+      name: 'Function',
+      location: DashboardAccountsHistoryFunctionsLocation,
+      component: <HistoryFunctions record={record} />,
     },
     {
       name: 'Traces',
