@@ -39,7 +39,7 @@ export const Console = (props: any) => {
         <div
           style={{
             backgroundColor: 'black',
-            color: 'white',
+            color: 'yellow',
             borderRadius: '8px',
             height: '40px',
             padding: '8px',

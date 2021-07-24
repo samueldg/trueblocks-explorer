@@ -113,7 +113,7 @@ export const App = () => {
       </Header>
       <Layout>
         <SidePanel
-          header='Main menu'
+          header='Menu'
           dir={PanelDirection.Left}
           cookieName={cookieVars.menu_expanded}
           collapsibleContent={false}>

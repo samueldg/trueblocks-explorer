@@ -40,6 +40,18 @@ export const StatusPanel = ({ status, loading }: StatusPanelProps) => {
 
   const statusData = status.data[0] as JsonResponse;
   const statusMeta = status.meta as JsonResponse;
+  const ripe =
+    statusMeta.ripe !== statusMeta.staging ? (
+      <ScraperProgress value={statusMeta.ripe} client={statusMeta.client} word='RIPE' color='#fadb14' />
+    ) : (
+      <></>
+    );
+  const unripe =
+    statusMeta.unripe !== statusMeta.ripe ? (
+      <ScraperProgress value={statusMeta.unripe} client={statusMeta.client} word='UNRIPE' color='#f5222d' />
+    ) : (
+      <></>
+    );
 
   return (
     <Loading loading={loading}>
@@ -82,8 +94,8 @@ export const StatusPanel = ({ status, loading }: StatusPanelProps) => {
           <div className={styles.itemHeader}>BLOCKS</div>
           <ScraperProgress value={statusMeta.finalized} client={statusMeta.client} word='FINAL' color='#52c41a' />
           <ScraperProgress value={statusMeta.staging} client={statusMeta.client} word='STAGING' color='#fadb14' />
-          <ScraperProgress value={statusMeta.ripe} client={statusMeta.client} word='RIPE' color='#fadb14' />
-          <ScraperProgress value={statusMeta.unripe} client={statusMeta.client} word='UNRIPE' color='#f5222d' />
+          {ripe}
+          {unripe}
         </div>
         <div className={styles.itemContainer}>
           <div className={styles.itemHeader}>MONITORS</div>
