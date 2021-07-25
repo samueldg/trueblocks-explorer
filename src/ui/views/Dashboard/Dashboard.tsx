@@ -67,6 +67,7 @@ export const DashboardView = ({ match }: { match?: any }) => {
           articulate: true,
           accounting: true,
           reversed: false,
+          relevant: true,
           first_record: transactions?.data?.length || 0,
           max_records:
             (transactions?.data?.length || 0) < 50

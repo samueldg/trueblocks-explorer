@@ -19,7 +19,8 @@ export const HistoryEvents = ({ record }: { record: Transaction }) => {
           }}
           hoverable={true}
           title={'Events'}>
-          {showLogs(record?.receipt?.logs, key)}
+          {showLogs(record?.receipt?.logs, key, true)}
+          {showLogs(record?.receipt?.logs, key, false)}
         </Card>
       </div>
     </div>
@@ -27,9 +28,10 @@ export const HistoryEvents = ({ record }: { record: Transaction }) => {
 };
 
 //-----------------------------------------------------------------
-const showLogs = (logs: LogArray, key: string) => {
+const showLogs = (logs: LogArray, key: string, relevant: boolean) => {
   if (!logs) return <></>;
   return logs.map((log, index) => {
+    if ((relevant && !log.address) || (!relevant && log.address)) return <div key={key + index}></div>;
     return (
       <pre key={key + index}>
         [{index}]: {JSON.stringify(log, null, 2)}
