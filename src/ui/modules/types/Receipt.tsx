@@ -1,4 +1,4 @@
-import { address, blknum, gas, hash, LogArray, wei } from '@modules/types';
+import { LogArray, address, blknum, gas, hash, wei } from '@modules/types';
 
 export declare type Receipt = {
   blockHash: hash;
@@ -7,6 +7,7 @@ export declare type Receipt = {
   cumulativeGasUsed: wei;
   from: address;
   gasUsed: gas;
+  effectiveGasPrice: gas;
   logs: LogArray;
   root: string;
   status: string;
