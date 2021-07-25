@@ -1,3 +1,7 @@
+/*
+ * Parts of this file were generated with makeClass --js. Edit only those parts of
+ * the code outside of the BEG_CODE/END_CODE sections
+ */
 import { DashboardView, ExplorerView, NamesView, SettingsView, SupportView } from './views';
 import { Route, Switch } from 'react-router-dom';
 
@@ -5,37 +9,27 @@ import React from 'react';
 
 const Mousetrap = require('mousetrap');
 
+// BEG_CODE_LOCATIONS
 export const RootLocation = '/';
 
 export const DashboardLocation = '/dashboard';
 export const DashboardMonitorsLocation = '/dashboard/monitors';
-Mousetrap.bind('s m', function () {
-  window.location.href = DashboardMonitorsLocation;
-});
 export const DashboardAccountsLocation = '/dashboard/accounts';
-Mousetrap.bind('s a', function () {
-  window.location.href = DashboardAccountsLocation;
-});
 export const DashboardAccountsHistoryLocation = '/dashboard/accounts/history';
 export const DashboardAccountsHistoryReconsLocation = '/dashboard/accounts/history/recons';
 export const DashboardAccountsHistoryFunctionsLocation = '/dashboard/accounts/history/functions';
 export const DashboardAccountsHistoryEventsLocation = '/dashboard/accounts/history/events';
 export const DashboardAccountsHistoryTracesLocation = '/dashboard/accounts/history/traces';
 export const DashboardAccountsHistoryCustomLocation = '/dashboard/accounts/history/custom';
-
 export const DashboardAccountsAssetsLocation = '/dashboard/accounts/assets';
 export const DashboardAccountsNeighborsLocation = '/dashboard/accounts/neighbors';
 export const DashboardAccountsGasLocation = '/dashboard/accounts/gas';
 export const DashboardAccountsChartsLocation = '/dashboard/accounts/charts';
 export const DashboardAccountsFunctionsLocation = '/dashboard/accounts/functions';
 export const DashboardAccountsEventsLocation = '/dashboard/accounts/events';
-
 export const DashboardCollectionsLocation = '/dashboard/collections';
 
 export const NamesLocation = '/names';
-Mousetrap.bind('s n', function () {
-  window.location.href = NamesLocation;
-});
 export const NamesAddressesLocation = '/names/addresses';
 export const NamesTagsLocation = '/names/tags';
 export const NamesFuncSigsLocation = '/names/funcsigs';
@@ -43,34 +37,13 @@ export const NamesEventSigsLocation = '/names/eventsigs';
 export const NamesBlocksLocation = '/names/blocks';
 
 export const ExplorerLocation = '/explorer';
-Mousetrap.bind('s e', function () {
-  window.location.href = ExplorerLocation;
-});
 export const ExplorerBlocksLocation = '/explorer/blocks';
-Mousetrap.bind('e b', function () {
-  window.location.href = ExplorerBlocksLocation;
-});
 export const ExplorerTransactionsLocation = '/explorer/transactions';
-Mousetrap.bind('e t', function () {
-  window.location.href = ExplorerTransactionsLocation;
-});
 export const ExplorerReceiptsLocation = '/explorer/receipts';
-Mousetrap.bind('e r', function () {
-  window.location.href = ExplorerReceiptsLocation;
-});
 export const ExplorerLogsLocation = '/explorer/logs';
-Mousetrap.bind('e l', function () {
-  window.location.href = ExplorerLogsLocation;
-});
 export const ExplorerTracesLocation = '/explorer/traces';
-Mousetrap.bind('e c', function () {
-  window.location.href = ExplorerTracesLocation;
-});
 
 export const SettingsLocation = '/settings';
-Mousetrap.bind('s s', function () {
-  window.location.href = SettingsLocation;
-});
 export const SettingsScrapersLocation = '/settings/scrapers';
 export const SettingsIndexesLocation = '/settings/indexes';
 export const SettingsIndexGridLocation = '/settings/indexes/grid';
@@ -83,29 +56,27 @@ export const SettingsSchemasLocation = '/settings/schemas';
 
 export const SupportLocation = '/support';
 export const SupportContactUsLocation = '/support/contact-us';
-Mousetrap.bind('s u', function () {
-  window.location.href = SupportContactUsLocation;
-});
 export const SupportDocumentationLocation = '/support/documentation';
 export const SupportHotKeysLocation = '/support/hot-keys';
-Mousetrap.bind('s k', function () {
-  window.location.href = SupportHotKeysLocation;
-});
 export const SupportLicensingLocation = '/support/licensing';
 export const SupportAboutUsLocation = '/support/about-us';
+// END_CODE_LOCATIONS
 
+// BEG_CODE_TEMPLATES
 export const DashboardAccountsAddressLocationTemplate = '/dashboard/accounts/:address';
-export const DashboardAccountReconsLocationAddressTemplate = '/dashboard/accounts/recons/:address';
-export const DashboardAccountFunctionsLocationAddressTemplate = '/dashboard/accounts/functions/:address';
-export const DashboardAccountGasLocationAddressTemplate = '/dashboard/accounts/gas/:address';
-export const DashboardAccountTracesLocationAddressTemplate = '/dashboard/accounts/traces/:address';
+export const DashboardAccountsReconsLocationAddressTemplate = '/dashboard/accounts/recons/:address';
+export const DashboardAccountsFunctionsLocationAddressTemplate = '/dashboard/accounts/functions/:address';
+export const DashboardAccountsGasLocationAddressTemplate = '/dashboard/accounts/gas/:address';
+export const DashboardAccountsTracesLocationAddressTemplate = '/dashboard/accounts/traces/:address';
 
 export const DashboardAccountsAddressLocation = (address: string) => `/dashboard/accounts/${address}`;
-export const DashboardAccountReconsLocationAddress = (address: string) => `/dashboard/accounts/recons/${address}`;
-export const DashboardAccountFunctionsLocationAddress = (address: string) => `/dashboard/accounts/functions/${address}`;
-export const DashboardAccountGasLocationAddress = (address: string) => `/dashboard/accounts/gas/${address}`;
-export const DashboardAccountTracesLocationAddress = (address: string) => `/dashboard/accounts/traces/${address}`;
+export const DashboardAccountsReconsLocationAddress = (address: string) => `/dashboard/accounts/recons/${address}`;
+export const DashboardAccountsFunctionsLocationAddress = (address: string) => `/dashboard/accounts/functions/${address}`;
+export const DashboardAccountsGasLocationAddress = (address: string) => `/dashboard/accounts/gas/${address}`;
+export const DashboardAccountsTracesLocationAddress = (address: string) => `/dashboard/accounts/traces/${address}`;
+// END_CODE_TEMPLATES
 
+// BEG_CODE_ROUTES
 export const routes = [
   {
     path: RootLocation,
@@ -120,6 +91,12 @@ export const routes = [
     helpText: 'The dashboard overview page gives you an overview of your holdings among other things.',
   },
   {
+    path: DashboardMonitorsLocation,
+    exact: true,
+    component: DashboardView,
+    helpText: 'Monitors are named addresses that you have indicated are of interest and should be monitored by the scrapers.',
+  },
+  {
     path: DashboardAccountsLocation,
     exact: true,
     component: DashboardView,
@@ -132,29 +109,10 @@ export const routes = [
     helpText: 'View the transactional history of an account.',
   },
   {
-    path: DashboardAccountsAddressLocationTemplate,
-    exact: false,
+    path: DashboardAccountsHistoryReconsLocation,
+    exact: true,
     component: DashboardView,
-  },
-  {
-    path: DashboardAccountFunctionsLocationAddressTemplate,
-    exact: false,
-    component: DashboardView,
-  },
-  {
-    path: DashboardAccountGasLocationAddressTemplate,
-    exact: false,
-    component: DashboardView,
-  },
-  {
-    path: DashboardAccountTracesLocationAddressTemplate,
-    exact: false,
-    component: DashboardView,
-  },
-  {
-    path: DashboardAccountReconsLocationAddressTemplate,
-    exact: false,
-    component: DashboardView,
+    helpText: 'View the reconciliation history of an account.',
   },
   {
     path: DashboardAccountsHistoryFunctionsLocation,
@@ -181,59 +139,76 @@ export const routes = [
     helpText: 'View the logo of the to address for the transaction.',
   },
   {
-    path: DashboardAccountsHistoryReconsLocation,
-    exact: true,
-    component: DashboardView,
-    helpText: 'View the reconciliation history of an account.',
-  },
-  {
-    path: DashboardMonitorsLocation,
-    exact: true,
-    component: DashboardView,
-    helpText:
-      'Monitors are named addresses that you have indicated are of interest and should be monitored by the scrapers.',
-  },
-  {
     path: DashboardAccountsAssetsLocation,
     exact: true,
     component: DashboardView,
-    helpText: 'See all assets for a given address',
+    helpText: 'See all assets for a given address.',
   },
   {
     path: DashboardAccountsNeighborsLocation,
     exact: true,
     component: DashboardView,
-    helpText: 'See all assets for a given address',
+    helpText: 'See all assets for a given address.',
   },
   {
     path: DashboardAccountsGasLocation,
     exact: true,
     component: DashboardView,
-    helpText: 'Analyze gas usage',
+    helpText: 'Analyze gas usage.',
   },
   {
     path: DashboardAccountsChartsLocation,
     exact: true,
     component: DashboardView,
-    helpText: 'See all assets for a given address',
+    helpText: 'See all assets for a given address.',
   },
   {
     path: DashboardAccountsFunctionsLocation,
     exact: true,
     component: DashboardView,
-    helpText: 'See all assets for a given address',
+    helpText: 'See all assets for a given address.',
   },
   {
     path: DashboardAccountsEventsLocation,
     exact: true,
     component: DashboardView,
-    helpText: 'See all assets for a given address',
+    helpText: 'See all assets for a given address.',
   },
   {
     path: DashboardCollectionsLocation,
     exact: true,
     component: DashboardView,
     helpText: 'Collections allow you to group together multiple monitored addresses.',
+  },
+  {
+    path: DashboardAccountsAddressLocationTemplate,
+    exact: false,
+    component: DashboardView,
+    helpText: '',
+  },
+  {
+    path: DashboardAccountsReconsLocationAddressTemplate,
+    exact: false,
+    component: DashboardView,
+    helpText: '',
+  },
+  {
+    path: DashboardAccountsFunctionsLocationAddressTemplate,
+    exact: false,
+    component: DashboardView,
+    helpText: '',
+  },
+  {
+    path: DashboardAccountsGasLocationAddressTemplate,
+    exact: false,
+    component: DashboardView,
+    helpText: '',
+  },
+  {
+    path: DashboardAccountsTracesLocationAddressTemplate,
+    exact: false,
+    component: DashboardView,
+    helpText: '',
   },
   {
     path: NamesLocation,
@@ -269,8 +244,7 @@ export const routes = [
     path: NamesBlocksLocation,
     exact: true,
     component: NamesView,
-    helpText:
-      'The blocks tab allows you to name particular blocks such as notable smart contract deployments, hard forks, or other blocks.',
+    helpText: 'The blocks tab allows you to name particular blocks such as notable smart contract deployments, hard forks, or other blocks.',
   },
   {
     path: ExplorerLocation,
@@ -403,8 +377,48 @@ export const routes = [
     exact: true,
     component: SupportView,
     helpText: 'A short history of TrueBlocks, LLC.',
-  },
+  }
 ];
+// END_CODE_ROUTES
+
+// BEG_CODE_KEYS
+Mousetrap.bind('s m', function () {
+  window.location.href = DashboardMonitorsLocation;
+});
+Mousetrap.bind('s a', function () {
+  window.location.href = DashboardAccountsLocation;
+});
+Mousetrap.bind('s n', function () {
+  window.location.href = NamesLocation;
+});
+Mousetrap.bind('s e', function () {
+  window.location.href = ExplorerLocation;
+});
+Mousetrap.bind('e b', function () {
+  window.location.href = ExplorerBlocksLocation;
+});
+Mousetrap.bind('e t', function () {
+  window.location.href = ExplorerTransactionsLocation;
+});
+Mousetrap.bind('e r', function () {
+  window.location.href = ExplorerReceiptsLocation;
+});
+Mousetrap.bind('e l', function () {
+  window.location.href = ExplorerLogsLocation;
+});
+Mousetrap.bind('e c', function () {
+  window.location.href = ExplorerTracesLocation;
+});
+Mousetrap.bind('s s', function () {
+  window.location.href = SettingsLocation;
+});
+Mousetrap.bind('s u', function () {
+  window.location.href = SupportContactUsLocation;
+});
+Mousetrap.bind('s k', function () {
+  window.location.href = SupportHotKeysLocation;
+});
+// END_CODE_KEYS
 
 const CustomRoute = (props: any) => {
   const { path, component, exact } = props;
