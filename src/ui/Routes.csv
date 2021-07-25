@@ -1,51 +1,51 @@
-name                                              ,path                                   ,exact ,template ,component     ,hotKey ,helpText
-RootLocation                                      ,/                                      ,true  ,false    ,DashboardView ,       ,The dashboard overview page gives you an overview of your holdings among other things.
-DashboardLocation                                 ,/dashboard                             ,true  ,false    ,DashboardView ,       ,The dashboard overview page gives you an overview of your holdings among other things.
-DashboardMonitorsLocation                         ,/dashboard/monitors                    ,true  ,false    ,DashboardView ,s m    ,Monitors are named addresses that you have indicated are of interest and should be monitored by the scrapers.
-DashboardAccountsLocation                         ,/dashboard/accounts                    ,true  ,false    ,DashboardView ,s a    ,View the transactional history of an account.
-DashboardAccountsHistoryLocation                  ,/dashboard/accounts/history            ,true  ,false    ,DashboardView ,       ,View the transactional history of an account.
-DashboardAccountsHistoryReconsLocation            ,/dashboard/accounts/history/recons     ,true  ,false    ,DashboardView ,       ,View the reconciliation history of an account.
-DashboardAccountsHistoryFunctionsLocation         ,/dashboard/accounts/history/functions  ,true  ,false    ,DashboardView ,       ,View the functions for a transaction.
-DashboardAccountsHistoryEventsLocation            ,/dashboard/accounts/history/events     ,true  ,false    ,DashboardView ,       ,View the events in transaction.
-DashboardAccountsHistoryTracesLocation            ,/dashboard/accounts/history/traces     ,true  ,false    ,DashboardView ,       ,View the history of traces for the transaction.
-DashboardAccountsHistoryCustomLocation            ,/dashboard/accounts/history/custom     ,true  ,false    ,DashboardView ,       ,View the logo of the to address for the transaction.
-DashboardAccountsAssetsLocation                   ,/dashboard/accounts/assets             ,true  ,false    ,DashboardView ,       ,See all assets for a given address.
-DashboardAccountsNeighborsLocation                ,/dashboard/accounts/neighbors          ,true  ,false    ,DashboardView ,       ,See all assets for a given address.
-DashboardAccountsGasLocation                      ,/dashboard/accounts/gas                ,true  ,false    ,DashboardView ,       ,Analyze gas usage.
-DashboardAccountsChartsLocation                   ,/dashboard/accounts/charts             ,true  ,false    ,DashboardView ,       ,See all assets for a given address.
-DashboardAccountsFunctionsLocation                ,/dashboard/accounts/functions          ,true  ,false    ,DashboardView ,       ,See all assets for a given address.
-DashboardAccountsEventsLocation                   ,/dashboard/accounts/events             ,true  ,false    ,DashboardView ,       ,See all assets for a given address.
-DashboardCollectionsLocation                      ,/dashboard/collections                 ,true  ,false    ,DashboardView ,       ,Collections allow you to group together multiple monitored addresses.
-DashboardAccountsAddressLocationTemplate          ,/dashboard/accounts/:address           ,false ,true     ,DashboardView ,       ,
-DashboardAccountsReconsLocationAddressTemplate    ,/dashboard/accounts/recons/:address    ,false ,true     ,DashboardView ,       ,
-DashboardAccountsFunctionsLocationAddressTemplate ,/dashboard/accounts/functions/:address ,false ,true     ,DashboardView ,       ,
-DashboardAccountsGasLocationAddressTemplate       ,/dashboard/accounts/gas/:address       ,false ,true     ,DashboardView ,       ,
-DashboardAccountsTracesLocationAddressTemplate    ,/dashboard/accounts/traces/:address    ,false ,true     ,DashboardView ,       ,
-NamesLocation                                     ,/names                                 ,true  ,false    ,NamesView     ,s n    ,Names are common or known addresses that have been given a name.
-NamesAddressesLocation                            ,/names/addresses                       ,true  ,false    ,NamesView     ,       ,Named addresses are a convenient way to keep track of human-readable names for addresses.
-NamesTagsLocation                                 ,/names/tags                            ,true  ,false    ,NamesView     ,       ,Tags are groupings used to collect together named addresses.
-NamesFuncSigsLocation                             ,/names/funcsigs                        ,true  ,false    ,NamesView     ,       ,The function signatures tab allows you to add/edit/delete four byte signatures.
-NamesEventSigsLocation                            ,/names/eventsigs                       ,true  ,false    ,NamesView     ,       ,The event signatures tab allows you to add/edit/delete event signatures.
-NamesBlocksLocation                               ,/names/blocks                          ,true  ,false    ,NamesView     ,       ,The blocks tab allows you to name particular blocks such as notable smart contract deployments&#44; hard forks&#44; or other blocks.
-ExplorerLocation                                  ,/explorer                              ,true  ,false    ,ExplorerView  ,s e    ,View the contents of the TrueBlocks index cache.
-ExplorerBlocksLocation                            ,/explorer/blocks                       ,true  ,false    ,ExplorerView  ,e b    ,View blockchain block details.
-ExplorerTransactionsLocation                      ,/explorer/transactions                 ,true  ,false    ,ExplorerView  ,e t    ,View blockchain transaction details.
-ExplorerReceiptsLocation                          ,/explorer/receipts                     ,true  ,false    ,ExplorerView  ,e r    ,View blockchain receipt details.
-ExplorerLogsLocation                              ,/explorer/logs                         ,true  ,false    ,ExplorerView  ,e l    ,View blockchain log details.
-ExplorerTracesLocation                            ,/explorer/traces                       ,true  ,false    ,ExplorerView  ,e c    ,View blockchain trace details.
-SettingsLocation                                  ,/settings                              ,true  ,false    ,SettingsView  ,s s    ,This screen allows you to adjust the way TrueBlocks two scrapers work.
-SettingsScrapersLocation                          ,/settings/scrapers                     ,true  ,false    ,SettingsView  ,       ,This screen allows you to adjust the way TrueBlocks two scrapers work.
-SettingsIndexesLocation                           ,/settings/indexes                      ,true  ,false    ,SettingsView  ,       ,View the contents of the TrueBlocks index cache.
-SettingsIndexGridLocation                         ,/settings/indexes/grid                 ,true  ,false    ,SettingsView  ,       ,Grid view of the index cache.
-SettingsIndexTableLocation                        ,/settings/indexes/table                ,true  ,false    ,SettingsView  ,       ,Table view of the index cache.
-SettingsIndexChartsLocation                       ,/settings/indexes/charts               ,true  ,false    ,SettingsView  ,       ,Visual display of the index cache.
-SettingsIndexManifestLocation                     ,/settings/indexes/manifest             ,true  ,false    ,SettingsView  ,       ,The index manifestation.
-SettingsCachesLocation                            ,/settings/caches                       ,true  ,false    ,SettingsView  ,       ,View&#44; edit&#44; clean&#44; recover space from the TrueBlocks caches.
-SettingsSkinsLocation                             ,/settings/skins                        ,true  ,false    ,SettingsView  ,       ,Change the skin or them of the application.
-SettingsSchemasLocation                           ,/settings/schemas                      ,true  ,false    ,SettingsView  ,       ,View and edit the schemas for the various screens and tables.
-SupportLocation                                   ,/support                               ,true  ,false    ,SupportView   ,       ,Information on contacting TrueBlocks&#44; LLC.
-SupportContactUsLocation                          ,/support/contact-us                    ,true  ,false    ,SupportView   ,s u    ,Information on contacting TrueBlocks&#44; LLC.
-SupportDocumentationLocation                      ,/support/documentation                 ,true  ,false    ,SupportView   ,       ,Links to various documentation sites.
-SupportHotKeysLocation                            ,/support/hot-keys                      ,true  ,false    ,SupportView   ,s k    ,A view of all the hot-keys for the program.
-SupportLicensingLocation                          ,/support/licensing                     ,true  ,false    ,SupportView   ,       ,Licensing information about the software.
-SupportAboutUsLocation                            ,/support/about-us                      ,true  ,false    ,SupportView   ,       ,A short history of TrueBlocks&#44; LLC.
+name                                              ,path                                   ,exact ,component     ,hotKey ,helpText
+RootLocation                                      ,/                                      ,true      ,DashboardView ,       ,The dashboard overview page gives you an overview of your holdings among other things.
+DashboardLocation                                 ,/dashboard                             ,true      ,DashboardView ,       ,The dashboard overview page gives you an overview of your holdings among other things.
+DashboardMonitorsLocation                         ,/dashboard/monitors                    ,true      ,DashboardView ,s m    ,Monitors are named addresses that you have indicated are of interest and should be monitored by the scrapers.
+DashboardAccountsLocation                         ,/dashboard/accounts                    ,true      ,DashboardView ,s a    ,View the transactional history of an account.
+DashboardAccountsHistoryLocation                  ,/dashboard/accounts/history            ,true      ,DashboardView ,       ,View the transactional history of an account.
+DashboardAccountsHistoryReconsLocation            ,/dashboard/accounts/history/recons     ,true      ,DashboardView ,       ,View the reconciliation history of an account.
+DashboardAccountsHistoryFunctionsLocation         ,/dashboard/accounts/history/functions  ,true      ,DashboardView ,       ,View the functions for a transaction.
+DashboardAccountsHistoryEventsLocation            ,/dashboard/accounts/history/events     ,true      ,DashboardView ,       ,View the events in transaction.
+DashboardAccountsHistoryTracesLocation            ,/dashboard/accounts/history/traces     ,true      ,DashboardView ,       ,View the history of traces for the transaction.
+DashboardAccountsHistoryCustomLocation            ,/dashboard/accounts/history/custom     ,true      ,DashboardView ,       ,View the logo of the to address for the transaction.
+DashboardAccountsAssetsLocation                   ,/dashboard/accounts/assets             ,true      ,DashboardView ,       ,See all assets for a given address.
+DashboardAccountsNeighborsLocation                ,/dashboard/accounts/neighbors          ,true      ,DashboardView ,       ,See all assets for a given address.
+DashboardAccountsGasLocation                      ,/dashboard/accounts/gas                ,true      ,DashboardView ,       ,Analyze gas usage.
+DashboardAccountsChartsLocation                   ,/dashboard/accounts/charts             ,true      ,DashboardView ,       ,See all assets for a given address.
+DashboardAccountsFunctionsLocation                ,/dashboard/accounts/functions          ,true      ,DashboardView ,       ,See all assets for a given address.
+DashboardAccountsEventsLocation                   ,/dashboard/accounts/events             ,true      ,DashboardView ,       ,See all assets for a given address.
+DashboardCollectionsLocation                      ,/dashboard/collections                 ,true      ,DashboardView ,       ,Collections allow you to group together multiple monitored addresses.
+DashboardAccountsAddressLocationTemplate          ,/dashboard/accounts/:address           ,false     ,DashboardView ,       ,
+DashboardAccountsReconsLocationAddressTemplate    ,/dashboard/accounts/recons/:address    ,false     ,DashboardView ,       ,
+DashboardAccountsFunctionsLocationAddressTemplate ,/dashboard/accounts/functions/:address ,false     ,DashboardView ,       ,
+DashboardAccountsGasLocationAddressTemplate       ,/dashboard/accounts/gas/:address       ,false     ,DashboardView ,       ,
+DashboardAccountsTracesLocationAddressTemplate    ,/dashboard/accounts/traces/:address    ,false     ,DashboardView ,       ,
+NamesLocation                                     ,/names                                 ,true      ,NamesView     ,s n    ,Names are common or known addresses that have been given a name.
+NamesAddressesLocation                            ,/names/addresses                       ,true      ,NamesView     ,       ,Named addresses are a convenient way to keep track of human-readable names for addresses.
+NamesTagsLocation                                 ,/names/tags                            ,true      ,NamesView     ,       ,Tags are groupings used to collect together named addresses.
+NamesFuncSigsLocation                             ,/names/funcsigs                        ,true      ,NamesView     ,       ,The function signatures tab allows you to add/edit/delete four byte signatures.
+NamesEventSigsLocation                            ,/names/eventsigs                       ,true      ,NamesView     ,       ,The event signatures tab allows you to add/edit/delete event signatures.
+NamesBlocksLocation                               ,/names/blocks                          ,true      ,NamesView     ,       ,The blocks tab allows you to name particular blocks such as notable smart contract deployments&#44; hard forks&#44; or other blocks.
+ExplorerLocation                                  ,/explorer                              ,true      ,ExplorerView  ,s e    ,View the contents of the TrueBlocks index cache.
+ExplorerBlocksLocation                            ,/explorer/blocks                       ,true      ,ExplorerView  ,e b    ,View blockchain block details.
+ExplorerTransactionsLocation                      ,/explorer/transactions                 ,true      ,ExplorerView  ,e t    ,View blockchain transaction details.
+ExplorerReceiptsLocation                          ,/explorer/receipts                     ,true      ,ExplorerView  ,e r    ,View blockchain receipt details.
+ExplorerLogsLocation                              ,/explorer/logs                         ,true      ,ExplorerView  ,e l    ,View blockchain log details.
+ExplorerTracesLocation                            ,/explorer/traces                       ,true      ,ExplorerView  ,e c    ,View blockchain trace details.
+SettingsLocation                                  ,/settings                              ,true      ,SettingsView  ,s s    ,This screen allows you to adjust the way TrueBlocks two scrapers work.
+SettingsScrapersLocation                          ,/settings/scrapers                     ,true      ,SettingsView  ,       ,This screen allows you to adjust the way TrueBlocks two scrapers work.
+SettingsIndexesLocation                           ,/settings/indexes                      ,true      ,SettingsView  ,       ,View the contents of the TrueBlocks index cache.
+SettingsIndexGridLocation                         ,/settings/indexes/grid                 ,true      ,SettingsView  ,       ,Grid view of the index cache.
+SettingsIndexTableLocation                        ,/settings/indexes/table                ,true      ,SettingsView  ,       ,Table view of the index cache.
+SettingsIndexChartsLocation                       ,/settings/indexes/charts               ,true      ,SettingsView  ,       ,Visual display of the index cache.
+SettingsIndexManifestLocation                     ,/settings/indexes/manifest             ,true      ,SettingsView  ,       ,The index manifestation.
+SettingsCachesLocation                            ,/settings/caches                       ,true      ,SettingsView  ,       ,View&#44; edit&#44; clean&#44; recover space from the TrueBlocks caches.
+SettingsSkinsLocation                             ,/settings/skins                        ,true      ,SettingsView  ,       ,Change the skin or them of the application.
+SettingsSchemasLocation                           ,/settings/schemas                      ,true      ,SettingsView  ,       ,View and edit the schemas for the various screens and tables.
+SupportLocation                                   ,/support                               ,true      ,SupportView   ,       ,Information on contacting TrueBlocks&#44; LLC.
+SupportContactUsLocation                          ,/support/contact-us                    ,true      ,SupportView   ,s u    ,Information on contacting TrueBlocks&#44; LLC.
+SupportDocumentationLocation                      ,/support/documentation                 ,true      ,SupportView   ,       ,Links to various documentation sites.
+SupportHotKeysLocation                            ,/support/hot-keys                      ,true      ,SupportView   ,s k    ,A view of all the hot-keys for the program.
+SupportLicensingLocation                          ,/support/licensing                     ,true      ,SupportView   ,       ,Licensing information about the software.
+SupportAboutUsLocation                            ,/support/about-us                      ,true      ,SupportView   ,       ,A short history of TrueBlocks&#44; LLC.
