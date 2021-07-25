@@ -4,7 +4,6 @@ import { addActionListener, removeListener } from '../../websockets';
 function getProgress(string: string) {
   var str = string.replace(/\s+/g, ' ');
   var tokens = str.split(' ');
-  // console.log('tokens: ', tokens);
   return { msg: tokens[1], done: tokens[2], total: tokens[4] };
 }
 
@@ -21,7 +20,6 @@ export const Console = (props: any) => {
         const { msg, done, total } = getProgress(content);
         const toPercent = () => ((parseInt(done) / parseInt(total)) * 100).toFixed(0);
         const finished = msg.includes('Finished') || msg.includes('Completed');
-        // console.log('msg: ', msg, 'finished: ', finished);
         const prevPct = progPct;
         const progressPercentage = finished ? 0 : toPercent();
         setOp(finished ? '' : content);
