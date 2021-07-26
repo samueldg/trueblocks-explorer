@@ -1,4 +1,4 @@
-import { 
+import {
   address,
   blknum,
   date,
@@ -10,7 +10,8 @@ import {
   timestamp,
   TraceArray,
   uint64,
-  wei } from '@modules/types';
+  wei,
+} from '@modules/types';
 
 export declare type Transaction = {
   hash: hash;
