@@ -6,7 +6,7 @@ import { ColumnsType } from 'antd/lib/table';
 import React from 'react';
 import { chartColors } from '../../../../../Utilities';
 import dayjs from 'dayjs';
-import useGlobalState from '../../../../../state';
+import useGlobalState from '../../../../../GlobalState';
 
 export const Assets = ({
   theData,
@@ -60,7 +60,7 @@ export const Assets = ({
   });
 
   return (
-    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr' }}>
+    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr 1fr 1fr' }}>
       {uniqAssets.map((asset: any, index: number) => {
         const color = chartColors[index % chartColors.length] || '#63b598';
         const columns: any[] = [

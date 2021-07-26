@@ -10,7 +10,7 @@ import { createErrorNotification } from '@modules/error_notification';
 import { goToUrl } from '../../../Utilities';
 import { renderNamedAddress } from '@modules/renderers';
 import { useCommand } from '@hooks/useCommand';
-import useGlobalState from '../../../state';
+import useGlobalState from '../../../GlobalState';
 
 export const Monitors = () => {
   const [monitors, loading] = useCommand('status', { mode: 'monitors', details: true });

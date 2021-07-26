@@ -33,7 +33,7 @@ import dayjs from 'dayjs';
 import { pipe } from 'fp-ts/lib/function';
 import { runCommand } from '@modules/core';
 import style from 'react-syntax-highlighter/dist/esm/styles/hljs/a11y-dark';
-import useGlobalState from '../../../../state';
+import useGlobalState from '../../../../GlobalState';
 
 const { TabPane } = Tabs;
 
