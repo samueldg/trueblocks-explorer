@@ -45,9 +45,10 @@ export const Assets = ({
     });
   });
 
-  uniqAssets = uniqAssets.filter((record: any) => {
-    return record.history.length > 1 || (record.history.length === 1 && record.history[0].balance > 0);
+  uniqAssets = uniqAssets.filter((record: AssetHistory) => {
+    return record.history.length > 1 || (record.history.length === 1 && Number(record.history[0].balance) > 0);
   });
+
   uniqAssets.sort(function (a: any, b: any) {
     if (b.history.length === a.history.length) {
       if (b.history.length === 0) {
@@ -59,7 +60,7 @@ export const Assets = ({
   });
 
   return (
-    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr 1fr 1fr' }}>
+    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr' }}>
       {uniqAssets.map((asset: any, index: number) => {
         const color = chartColors[index % chartColors.length] || '#63b598';
         const columns: any[] = [
@@ -73,7 +74,7 @@ export const Assets = ({
           }),
         ];
         const title = (
-          <div key={index + 'd1'}>
+          <div key={index + 'd1'} style={{ overflowX: 'hidden' }}>
             {asset.assetSymbol === 'ETH'
               ? asset.assetSymbol
               : names[asset.assetAddr]
