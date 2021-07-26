@@ -2,7 +2,7 @@ import React from 'react';
 import { render } from 'react-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { App } from './App';
-import { GlobalStateProvider } from './GlobalState';
+import { GlobalStateProvider } from './State';
 import { setup as setupWebsocket } from './websockets';
 
 let host = process.env.REACT_APP_API_URL ? process.env.REACT_APP_API_URL : 'localhost';

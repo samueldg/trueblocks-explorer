@@ -6,7 +6,7 @@ import { ColumnsType } from 'antd/lib/table';
 import React from 'react';
 import { chartColors } from '../../../../../Utilities';
 import dayjs from 'dayjs';
-import useGlobalState from '../../../../../GlobalState';
+import useGlobalState from '../../../../../State';
 
 export const Assets = ({
   theData,

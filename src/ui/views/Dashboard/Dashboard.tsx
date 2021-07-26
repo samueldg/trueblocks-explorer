@@ -16,7 +16,7 @@ import { cookieVars } from '../../Utilities';
 import { createErrorNotification } from '@modules/error_notification';
 import { pipe } from 'fp-ts/lib/function';
 import { runCommand } from '@modules/core';
-import useGlobalState from '../../GlobalState';
+import useGlobalState from '../../State';
 
 export const DashboardView = ({ match }: { match?: any }) => {
   const { accountAddress, setAccountAddress, transactions, setTransactions, totalRecords, setTotalRecords } =

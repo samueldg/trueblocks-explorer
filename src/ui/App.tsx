@@ -19,7 +19,7 @@ import dayjs from 'dayjs';
 import { pipe } from 'fp-ts/lib/function';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import { runCommand } from '@modules/core';
-import useGlobalState from './GlobalState';
+import useGlobalState from './State';
 import { BookOutlined, CameraOutlined, PhoneOutlined, SettingOutlined, UnorderedListOutlined } from '@ant-design/icons';
 import { ExplorerLocation, NamesLocation, RootLocation, SettingsLocation, SupportLocation } from './Routes';
 
