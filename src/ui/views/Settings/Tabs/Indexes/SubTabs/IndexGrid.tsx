@@ -2,7 +2,6 @@ import { GridTable } from '@components/GridTable';
 import { addColumn, addNumColumn } from '@components/Table';
 import { useCommand } from '@hooks/useCommand';
 import { createErrorNotification } from '@modules/error_notification';
-import { Monitor } from '@modules/types';
 import { ColumnsType } from 'antd/lib/table';
 import React, { useCallback } from 'react';
 import { indexSchema } from '../Indexes';

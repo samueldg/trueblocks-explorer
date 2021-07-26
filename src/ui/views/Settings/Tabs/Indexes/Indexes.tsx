@@ -1,9 +1,9 @@
 import React, { useCallback } from 'react';
 import {
-  SettingsIndexChartsLocation,
-  SettingsIndexGridLocation,
-  SettingsIndexManifestLocation,
-  SettingsIndexTableLocation,
+  SettingsIndexesChartsLocation,
+  SettingsIndexesGridLocation,
+  SettingsIndexesManifestLocation,
+  SettingsIndexesTableLocation,
   SettingsIndexesLocation,
 } from '../../../../Routes';
 import { TableActions, addColumn, addNumColumn } from '@components/Table';
@@ -14,7 +14,7 @@ import { IndexCharts } from './SubTabs/IndexCharts';
 import { IndexGrid } from './SubTabs/IndexGrid';
 import { IndexManifest } from './SubTabs/IndexManifest';
 import { IndexTable } from './SubTabs/IndexTable';
-import { Monitor } from '@modules/types';
+import { Chunk } from '@modules/types';
 import { cookieVars } from '../../../../Utilities';
 import { createErrorNotification } from '@modules/error_notification';
 import { useCommand } from '@hooks/useCommand';
@@ -34,29 +34,29 @@ export const IndexesView = () => {
   const tabs = [
     {
       name: 'Grid',
-      location: SettingsIndexGridLocation,
+      location: SettingsIndexesGridLocation,
       component: <IndexGrid key={'grid'} theData={getData(indexes)} loading={loading} />,
     },
     {
       name: 'Table',
-      location: SettingsIndexTableLocation,
+      location: SettingsIndexesTableLocation,
       component: <IndexTable key={'table'} theData={getData(indexes)} loading={loading} />,
     },
     {
       name: 'Charts',
-      location: SettingsIndexChartsLocation,
+      location: SettingsIndexesChartsLocation,
       component: <IndexCharts key={'chart'} theData={getData(indexes)} loading={loading} />,
     },
     {
       name: 'Manifest',
-      location: SettingsIndexManifestLocation,
+      location: SettingsIndexesManifestLocation,
       component: <IndexManifest key={'manifest'} theData={getData(indexes)} loading={loading} />,
     },
   ];
 
   return (
     <BaseView
-      defaultActive={SettingsIndexGridLocation}
+      defaultActive={SettingsIndexesGridLocation}
       baseActive={SettingsIndexesLocation}
       cookieName={cookieVars.dashboard_indexes_sub_tab}
       tabs={tabs}
@@ -72,7 +72,7 @@ function padLeft(num: number, size: number, char: string = '0') {
   return s;
 }
 
-const renderBlockRange = (record: Monitor) => {
+const renderBlockRange = (record: Chunk) => {
   return (
     <div>
       <div>
@@ -85,7 +85,7 @@ const renderBlockRange = (record: Monitor) => {
   );
 };
 
-export const indexSchema: ColumnsType<Monitor> = [
+export const indexSchema: ColumnsType<Chunk> = [
   addColumn({
     title: 'Block Range',
     dataIndex: 'firstApp',

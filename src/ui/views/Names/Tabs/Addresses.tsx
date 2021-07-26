@@ -4,7 +4,7 @@ import { Result, toFailedResult, toSuccessfulData } from '@hooks/useCommand';
 import { runCommand } from '@modules/core';
 import { createErrorNotification } from '@modules/error_notification';
 import { renderNamedAddress } from '@modules/renderers';
-import { Name } from '@modules/types';
+import { Accountname } from '@modules/types';
 import { Button, Input, Space, Spin } from 'antd';
 import Modal from 'antd/lib/modal/Modal';
 import { ColumnsType } from 'antd/lib/table';
@@ -224,8 +224,8 @@ export const Addresses = () => {
   );
 };
 
-const addressSchema: ColumnsType<Name> = [
-  addColumn<Name>({
+const addressSchema: ColumnsType<Accountname> = [
+  addColumn<Accountname>({
     title: 'Name / Address',
     dataIndex: 'namedAddress',
     configuration: {
@@ -283,7 +283,7 @@ const addressSchema: ColumnsType<Name> = [
     title: 'Monitor',
     dataIndex: 'mon',
   }),
-  addActionsColumn<Name>(
+  addActionsColumn<Accountname>(
     {
       title: '',
       dataIndex: '',
@@ -295,7 +295,7 @@ const addressSchema: ColumnsType<Name> = [
   ),
 ];
 
-function getTableActions(item: Name) {
+function getTableActions(item: Accountname) {
   const { setNamesEditModal } = useGlobalState();
   return (
     <TableActions

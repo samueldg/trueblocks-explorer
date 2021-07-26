@@ -32,8 +32,8 @@ export const DashboardCollectionsLocation = '/dashboard/collections';
 export const NamesLocation = '/names';
 export const NamesAddressesLocation = '/names/addresses';
 export const NamesTagsLocation = '/names/tags';
-export const NamesFuncSigsLocation = '/names/funcsigs';
-export const NamesEventSigsLocation = '/names/eventsigs';
+export const NamesFuncSigsLocation = '/names/func-sigs';
+export const NamesEventSigsLocation = '/names/event-sigs';
 export const NamesBlocksLocation = '/names/blocks';
 
 export const ExplorerLocation = '/explorer';
@@ -46,10 +46,10 @@ export const ExplorerTracesLocation = '/explorer/traces';
 export const SettingsLocation = '/settings';
 export const SettingsScrapersLocation = '/settings/scrapers';
 export const SettingsIndexesLocation = '/settings/indexes';
-export const SettingsIndexGridLocation = '/settings/indexes/grid';
-export const SettingsIndexTableLocation = '/settings/indexes/table';
-export const SettingsIndexChartsLocation = '/settings/indexes/charts';
-export const SettingsIndexManifestLocation = '/settings/indexes/manifest';
+export const SettingsIndexesGridLocation = '/settings/indexes/grid';
+export const SettingsIndexesTableLocation = '/settings/indexes/table';
+export const SettingsIndexesChartsLocation = '/settings/indexes/charts';
+export const SettingsIndexesManifestLocation = '/settings/indexes/manifest';
 export const SettingsCachesLocation = '/settings/caches';
 export const SettingsSkinsLocation = '/settings/skins';
 export const SettingsSchemasLocation = '/settings/schemas';
@@ -63,11 +63,11 @@ export const SupportAboutUsLocation = '/support/about-us';
 // END_CODE_LOCATIONS
 
 // BEG_CODE_TEMPLATES
-export const DashboardAccountsAddressLocationTemplate = '/dashboard/accounts/:address';
-export const DashboardAccountsReconsLocationAddressTemplate = '/dashboard/accounts/recons/:address';
-export const DashboardAccountsFunctionsLocationAddressTemplate = '/dashboard/accounts/functions/:address';
-export const DashboardAccountsGasLocationAddressTemplate = '/dashboard/accounts/gas/:address';
-export const DashboardAccountsTracesLocationAddressTemplate = '/dashboard/accounts/traces/:address';
+export const DashboardAccountsAddressTemplate = '/dashboard/accounts/:address';
+export const DashboardAccountsReconsAddressTemplate = '/dashboard/accounts/recons/:address';
+export const DashboardAccountsFunctionsAddressTemplate = '/dashboard/accounts/functions/:address';
+export const DashboardAccountsGasAddressTemplate = '/dashboard/accounts/gas/:address';
+export const DashboardAccountsTracesAddressTemplate = '/dashboard/accounts/traces/:address';
 
 export const DashboardAccountsAddressLocation = (address: string) => `/dashboard/accounts/${address}`;
 export const DashboardAccountsReconsLocationAddress = (address: string) => `/dashboard/accounts/recons/${address}`;
@@ -181,31 +181,31 @@ export const routes = [
     helpText: 'Collections allow you to group together multiple monitored addresses.',
   },
   {
-    path: DashboardAccountsAddressLocationTemplate,
+    path: DashboardAccountsAddressTemplate,
     exact: false,
     component: DashboardView,
     helpText: '',
   },
   {
-    path: DashboardAccountsReconsLocationAddressTemplate,
+    path: DashboardAccountsReconsAddressTemplate,
     exact: false,
     component: DashboardView,
     helpText: '',
   },
   {
-    path: DashboardAccountsFunctionsLocationAddressTemplate,
+    path: DashboardAccountsFunctionsAddressTemplate,
     exact: false,
     component: DashboardView,
     helpText: '',
   },
   {
-    path: DashboardAccountsGasLocationAddressTemplate,
+    path: DashboardAccountsGasAddressTemplate,
     exact: false,
     component: DashboardView,
     helpText: '',
   },
   {
-    path: DashboardAccountsTracesLocationAddressTemplate,
+    path: DashboardAccountsTracesAddressTemplate,
     exact: false,
     component: DashboardView,
     helpText: '',
@@ -301,25 +301,25 @@ export const routes = [
     helpText: 'View the contents of the TrueBlocks index cache.',
   },
   {
-    path: SettingsIndexGridLocation,
+    path: SettingsIndexesGridLocation,
     exact: true,
     component: SettingsView,
     helpText: 'Grid view of the index cache.',
   },
   {
-    path: SettingsIndexTableLocation,
+    path: SettingsIndexesTableLocation,
     exact: true,
     component: SettingsView,
     helpText: 'Table view of the index cache.',
   },
   {
-    path: SettingsIndexChartsLocation,
+    path: SettingsIndexesChartsLocation,
     exact: true,
     component: SettingsView,
     helpText: 'Visual display of the index cache.',
   },
   {
-    path: SettingsIndexManifestLocation,
+    path: SettingsIndexesManifestLocation,
     exact: true,
     component: SettingsView,
     helpText: 'The index manifestation.',

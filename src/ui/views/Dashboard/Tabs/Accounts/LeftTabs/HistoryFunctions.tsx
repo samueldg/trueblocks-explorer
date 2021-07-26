@@ -1,4 +1,4 @@
-import { LogArray, Transaction } from '@modules/types';
+import { Transaction } from '@modules/types';
 import { Card } from 'antd';
 import React from 'react';
 import { useAcctStyles } from '../AccountStyles';

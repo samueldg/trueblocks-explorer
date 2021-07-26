@@ -1,4 +1,4 @@
-import { LogArray, Transaction } from '@modules/types';
+import { LogentryArray, Transaction } from '@modules/types';
 import { Card } from 'antd';
 import React from 'react';
 import { useAcctStyles } from '../AccountStyles';
@@ -27,7 +27,7 @@ export const AccountHistoryTraces = ({ record }: { record: Transaction }) => {
 };
 
 //-----------------------------------------------------------------
-const showLogs = (logs: LogArray) => {
+const showLogs = (logs: LogentryArray) => {
   if (!logs) return <></>;
   return logs.map((log, index) => {
     return (

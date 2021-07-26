@@ -1,4 +1,4 @@
-import { LogArray, Transaction } from '@modules/types';
+import { LogentryArray, Transaction } from '@modules/types';
 import { Card } from 'antd';
 import React from 'react';
 import { useAcctStyles } from '../AccountStyles';
@@ -28,13 +28,14 @@ export const HistoryEvents = ({ record }: { record: Transaction }) => {
 };
 
 //-----------------------------------------------------------------
-const showLogs = (logs: LogArray, key: string, relevant: boolean) => {
+const showLogs = (logs: LogentryArray, key: string, relevant: boolean) => {
   if (!logs) return <></>;
   return logs.map((log, index) => {
     if ((relevant && !log.address) || (!relevant && log.address)) return <div key={key + index}></div>;
     return (
       <pre key={key + index}>
-        [{index}]: {JSON.stringify(log, null, 2)}
+        [{index}
+        {log.address ? '-' + log.logIndex : ''}]: {JSON.stringify(log, null, 2)}
       </pre>
     );
   });
