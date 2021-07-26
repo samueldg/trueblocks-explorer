@@ -10,7 +10,7 @@ import {
   timestamp,
   TraceArray,
   uint64,
-  wei
+  wei,
 } from '@modules/types';
 
 export declare type Transaction = {
