@@ -26,3 +26,5 @@ export { Trace, TraceArray } from '@modules/types/Trace';
 export { Traceaction, TraceactionArray } from '@modules/types/Traceaction';
 export { Traceresult, TraceresultArray } from '@modules/types/Traceresult';
 export { Transaction, TransactionArray } from '@modules/types/Transaction';
+export { Balance, BalanceArray } from '@modules/types/Balance';
+export { AssetHistory } from '@modules/types/AssetHistory';

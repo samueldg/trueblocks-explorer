@@ -175,10 +175,10 @@ export const renderAsNamedAddress = (address: string, acctFor: string) => {
     return <div style={{ color: 'grey' }}>{address}</div>;
   }
 
-  let style = isCurrent ? { color: 'green' } : { color: 'blue' };
+  let style = isCurrent ? { color: 'blue' } : { color: 'green' };
   if (isSpecial) {
     name = '';
-    style = { color: 'blue' };
+    style = { color: 'green' };
   }
 
   const addr =
