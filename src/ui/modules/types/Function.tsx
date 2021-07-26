@@ -1,11 +1,20 @@
-import { hash } from '@modules/types';
+import {
+  ParameterArray,
+} from '@modules/types';
 
 export declare type Function = {
-  encoding: hash;
-  type: string;
   name: string;
+  type: string;
+  abi_source: string;
+  anonymous: boolean;
+  constant: boolean;
+  stateMutability: string;
   signature: string;
-  input_names: string[];
-  output_names: string[];
+  encoding: string;
+  message: string;
+  inputs: ParameterArray;
+  outputs: ParameterArray;
+  inputs_dict: string;
+  outputs_dict: string;
 };
 export declare type FunctionArray = Function[];

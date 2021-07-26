@@ -1,11 +1,17 @@
-import { address, blknum, Function, hash } from '@modules/types';
+import {
+  address,
+  blknum,
+  Function,
+  hash,
+  TopicArray,
+} from '@modules/types';
 
-export declare type Log = {
+export declare type Logentry = {
   address: address;
   blockHash: hash;
   blockNumber: blknum;
   logIndex: blknum;
-  topics: string[];
+  topics: TopicArray;
   data: string;
   articulatedLog: Function;
   compressedLog: string;
@@ -15,4 +21,4 @@ export declare type Log = {
   type: string;
   removed: boolean;
 };
-export declare type LogArray = Log[];
+export declare type LogentryArray = Logentry[];

@@ -1,4 +1,10 @@
-import { address, blknum, int256, timestamp, uint64 } from '@modules/types';
+import {
+  address,
+  blknum,
+  int256,
+  timestamp,
+  uint64,
+} from '@modules/types';
 
 export declare type Reconciliation = {
   blockNumber: blknum;
@@ -7,6 +13,8 @@ export declare type Reconciliation = {
   assetAddr: address;
   assetSymbol: string;
   decimals: uint64;
+  prevBlk: blknum;
+  prevBlkBal: int256;
   begBal: int256;
   begBalDiff: int256;
   amountIn: int256;
@@ -25,9 +33,9 @@ export declare type Reconciliation = {
   endBalCalc: int256;
   endBalDiff: int256;
   amountNet: int256;
-  totalIn: int256;
-  totalOut: int256;
   reconciliationType: string;
   reconciled: boolean;
+  totalIn: int256;
+  totalOut: int256;
 };
 export declare type ReconciliationArray = Reconciliation[];

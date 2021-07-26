@@ -1,6 +1,15 @@
-import { address, Tag, uint64 } from '@modules/types';
+import {
+  address,
+  blknum,
+  uint64,
+} from '@modules/types';
 
-export declare type Name = {
+export declare type Chunk = {
+  nApps: blknum;
+  firstApp: blknum;
+  latestApp: blknum;
+  sizeInBytes: uint64;
+  path: string;
   address: address;
   decimals: uint64;
   deleted: boolean;
@@ -13,6 +22,6 @@ export declare type Name = {
   name: string;
   source: string;
   symbol: string;
-  tags: Tag;
+  tags: string;
 };
-export declare type NameArray = Name[];
+export declare type ChunkArray = Chunk[];

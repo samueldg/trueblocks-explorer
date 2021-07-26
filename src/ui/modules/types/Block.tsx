@@ -1,22 +1,32 @@
-import { address, blknum, date, double, gas, hash, timestamp, TransactionArray, uint64 } from '@modules/types';
+import {
+  address,
+  blknum,
+  date,
+  double,
+  gas,
+  hash,
+  timestamp,
+  TransactionArray,
+  uint64,
+} from '@modules/types';
 
 export declare type Block = {
-  blockNumber: blknum;
-  unclesCnt: uint64;
-  difficulty: uint64;
-  finalized: boolean;
   gasLimit: gas;
   gasUsed: gas;
   hash: hash;
-  light: boolean;
-  miner: address;
-  name: string;
-  date: date;
+  blockNumber: blknum;
   parentHash: hash;
+  miner: address;
+  difficulty: uint64;
   price: double;
+  finalized: boolean;
   timestamp: timestamp;
   transactions: TransactionArray;
   tx_hashes: string[];
+  name: string;
+  light: boolean;
+  date: date;
+  unclesCnt: uint64;
   extraData: string;
 };
 export declare type BlockArray = Block[];

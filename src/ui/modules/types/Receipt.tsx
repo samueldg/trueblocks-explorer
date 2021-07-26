@@ -1,4 +1,12 @@
-import { LogArray, address, blknum, gas, hash, wei } from '@modules/types';
+import {
+  address,
+  blknum,
+  bytes32,
+  gas,
+  hash,
+  LogentryArray,
+  wei,
+} from '@modules/types';
 
 export declare type Receipt = {
   blockHash: hash;
@@ -8,8 +16,8 @@ export declare type Receipt = {
   from: address;
   gasUsed: gas;
   effectiveGasPrice: gas;
-  logs: LogArray;
-  root: string;
+  logs: LogentryArray;
+  root: bytes32;
   status: string;
   to: address;
   transactionHash: hash;
