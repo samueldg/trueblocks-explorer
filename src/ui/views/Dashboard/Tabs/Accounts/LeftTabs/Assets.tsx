@@ -6,6 +6,7 @@ import { ColumnsType } from 'antd/lib/table';
 import React from 'react';
 import { chartColors } from '../../../../../Utilities';
 import dayjs from 'dayjs';
+import useGlobalState from '../../../../../state';
 
 export const Assets = ({
   theData,
@@ -16,22 +17,25 @@ export const Assets = ({
   loading: boolean;
   accountAddress: string;
 }) => {
+  const { names } = useGlobalState();
+
   if (!theData) return <></>;
 
   let uniqAssets: any = [];
   theData.map((tx: Transaction) => {
     tx.statements?.map((statement: Reconciliation) => {
-      if (uniqAssets.find((asset: AssetHistory) => asset.assetSym === statement.assetSymbol) === undefined) {
+      if (uniqAssets.find((asset: AssetHistory) => asset.assetSymbol === statement.assetSymbol) === undefined) {
         uniqAssets.push({
           color: chartColors[Math.floor(Math.random() * (9 - 0 + 1) + 0)],
-          assetSym: statement.assetSymbol,
+          assetAddr: statement.assetAddr,
+          assetSymbol: statement.assetSymbol,
           history: [],
         });
       }
     });
 
     uniqAssets.map((record: AssetHistory, i: number) => {
-      const found = tx.statements?.find((s: any) => s.assetSymbol === record.assetSym);
+      const found = tx.statements?.find((s: any) => s.assetSymbol === record.assetSymbol);
       if (found) {
         uniqAssets[i].history = [
           ...uniqAssets[i].history,
@@ -47,7 +51,7 @@ export const Assets = ({
   uniqAssets.sort(function (a: any, b: any) {
     if (b.history.length === a.history.length) {
       if (b.history.length === 0) {
-        return b.assetSym - a.assetSym;
+        return b.assetSymbol - a.assetSymbol;
       }
       return b.history[b.history.length - 1].balance - a.history[a.history.length - 1].balance;
     }
@@ -64,13 +68,17 @@ export const Assets = ({
             dataIndex: 'date',
           }),
           addColumn({
-            title: asset.assetSym,
-            dataIndex: asset.assetSym,
+            title: asset.assetSymbol,
+            dataIndex: asset.assetSymbol,
           }),
         ];
         const title = (
           <div key={index + 'd1'}>
-            {asset.assetSym}
+            {asset.assetSymbol === 'ETH'
+              ? asset.assetSymbol
+              : names[asset.assetAddr]
+              ? names[asset.assetAddr].name?.substr(0, 15) + ' (' + asset.assetSymbol + ')'
+              : asset.assetSymbol}
             <br />
             <small>({asset.history.length} txs)</small>
           </div>
@@ -79,11 +87,11 @@ export const Assets = ({
         const items = asset.history.map((item: any) => {
           return {
             date: dayjs(item.date).format('YYYY-MM-DD'),
-            [asset.assetSym]: parseFloat(item.balance || 0),
+            [asset.assetSymbol]: parseFloat(item.balance || 0),
           };
         });
 
-        return <MyAreaChart items={items} columns={columns} index={index} title={title} table={table} />;
+        return <MyAreaChart key={index} items={items} columns={columns} index={index} title={title} table={table} />;
       })}
     </div>
   );
