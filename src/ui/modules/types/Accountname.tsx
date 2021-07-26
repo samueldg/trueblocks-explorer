@@ -1,7 +1,4 @@
-import {
-  address,
-  uint64,
-} from '@modules/types';
+import { address, uint64 } from '@modules/types';
 
 export declare type Accountname = {
   tags: string;

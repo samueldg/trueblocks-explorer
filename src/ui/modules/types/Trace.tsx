@@ -1,11 +1,4 @@
-import {
-  blknum,
-  Function,
-  hash,
-  Traceaction,
-  Traceresult,
-  uint64,
-} from '@modules/types';
+import { blknum, Function, hash, Traceaction, Traceresult, uint64 } from '@modules/types';
 
 export declare type Trace = {
   blockHash: hash;

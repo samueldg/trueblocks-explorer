@@ -1,12 +1,4 @@
-import {
-  address,
-  blknum,
-  bytes32,
-  gas,
-  hash,
-  LogentryArray,
-  wei,
-} from '@modules/types';
+import { address, blknum, bytes32, gas, hash, LogentryArray, wei } from '@modules/types';
 
 export declare type Receipt = {
   blockHash: hash;

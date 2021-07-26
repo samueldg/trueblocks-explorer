@@ -1,6 +1,4 @@
-import {
-  uint64,
-} from '@modules/types';
+import { uint64 } from '@modules/types';
 
 export declare type Parameter = {
   type: string;

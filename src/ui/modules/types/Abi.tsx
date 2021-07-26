@@ -1,7 +1,4 @@
-import {
-  address,
-  FunctionArray,
-} from '@modules/types';
+import { address, FunctionArray } from '@modules/types';
 
 export declare type Abi = {
   address: address;

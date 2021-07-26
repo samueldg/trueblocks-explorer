@@ -1,6 +1,4 @@
-import {
-  ParameterArray,
-} from '@modules/types';
+import { ParameterArray } from '@modules/types';
 
 export declare type Function = {
   name: string;

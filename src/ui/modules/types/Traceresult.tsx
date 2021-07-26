@@ -1,7 +1,4 @@
-import {
-  address,
-  gas,
-} from '@modules/types';
+import { address, gas } from '@modules/types';
 
 export declare type Traceresult = {
   newContract: address;

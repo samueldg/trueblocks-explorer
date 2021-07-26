@@ -1,8 +1,4 @@
-import {
-  address,
-  blknum,
-  uint64,
-} from '@modules/types';
+import { address, blknum, uint64 } from '@modules/types';
 
 export declare type Monitor = {
   nAppearances: blknum;

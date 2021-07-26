@@ -1,8 +1,4 @@
-import {
-  address,
-  gas,
-  wei,
-} from '@modules/types';
+import { address, gas, wei } from '@modules/types';
 
 export declare type Traceaction = {
   selfDestructed: address;

@@ -1,10 +1,4 @@
-import {
-  address,
-  blknum,
-  Function,
-  hash,
-  TopicArray,
-} from '@modules/types';
+import { address, blknum, Function, hash, TopicArray } from '@modules/types';
 
 export declare type Logentry = {
   address: address;
