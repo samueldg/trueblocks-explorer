@@ -9,4 +9,7 @@ module.exports = {
   bracketSpacing: false,
   jsxBracketSameLine: true,
   jsxSingleQuote: true,
+  importOrder: ["^@core/(.*)$", "^@server/(.*)$", "^@ui/(.*)$", "^[./]"],
+  importOrderSeparation: false,
+  trailingComma: "all",
 };

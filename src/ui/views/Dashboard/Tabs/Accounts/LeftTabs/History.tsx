@@ -1,4 +1,3 @@
-import { BaseTable, SelectedRow } from '@components/Table';
 import {
   DashboardAccountsHistoryCustomLocation,
   DashboardAccountsHistoryEventsLocation,
@@ -8,15 +7,16 @@ import {
   DashboardAccountsHistoryTracesLocation,
   DashboardAccountsLocation,
 } from '../../../../../Routes';
-
-import { BaseView } from '@components/BaseView';
+import useGlobalState from '../../../../../State';
+import { cookieVars } from '../../../../../Utilities';
+import { transactionSchema } from '../Accounts';
 import { HistoryEvents } from './HistoryEvents';
 import { HistoryFunctions } from './HistoryFunctions';
 import { HistoryRecons } from './HistoryRecons';
+import { BaseView } from '@components/BaseView';
+import { BaseTable, SelectedRow } from '@components/Table';
+import { Transaction, TransactionArray } from '@modules/types';
 import React from 'react';
-import { TransactionArray } from '@modules/types';
-import { cookieVars } from '../../../../../Utilities';
-import { transactionSchema } from '../Accounts';
 
 export const History = ({
   theData,

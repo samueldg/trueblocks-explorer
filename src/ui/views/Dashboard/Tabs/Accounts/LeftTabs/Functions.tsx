@@ -1,11 +1,9 @@
-import { Area, AreaChart, CartesianGrid, Tooltip, XAxis, YAxis } from 'recharts';
+import { MyAreaChart } from '@components/MyAreaChart';
 import { BaseTable, addColumn } from '@components/Table';
 import { ReconciliationArray, TransactionArray } from '@modules/types';
-
-import { ColumnsType } from 'antd/lib/table';
-import { MyAreaChart } from '@components/MyAreaChart';
-import React from 'react';
 import { Transaction } from '@modules/types';
+import { ColumnsType } from 'antd/lib/table';
+import React from 'react';
 
 export const Functions = ({
   theData,

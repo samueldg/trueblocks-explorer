@@ -1,6 +1,3 @@
-import { BaseView, ViewParams, ViewTab } from '@components/BaseView';
-import { CheckCircleFilled, CloseCircleFilled } from '@ant-design/icons';
-import { Checkbox, Divider, Input, PageHeader, Progress, Tabs } from 'antd';
 import {
   DashboardAccountsAssetsLocation,
   DashboardAccountsChartsLocation,
@@ -11,29 +8,31 @@ import {
   DashboardAccountsLocation,
   DashboardAccountsNeighborsLocation,
 } from '../../../../Routes';
-import React, { useCallback, useEffect, useState } from 'react';
-import { Reconciliation, ReconciliationArray, Transaction } from '@modules/types';
-import { Result, emptyData, toFailedResult, toSuccessfulData } from '@hooks/useCommand';
-import { useHistory, useLocation } from 'react-router-dom';
-
+import useGlobalState from '../../../../State';
+import { cookieVars } from '../../../../Utilities';
 import { Assets } from './LeftTabs/Assets';
-import { ColumnsType } from 'antd/lib/table';
-import Cookies from 'js-cookie';
-import { either as Either } from 'fp-ts';
 import { Events } from './LeftTabs/Events';
 import { Functions } from './LeftTabs/Functions';
 import { Gas } from './LeftTabs/Gas';
 import { History } from './LeftTabs/History';
 import { Neighbors } from './LeftTabs/Neighbors';
+import { CheckCircleFilled, CloseCircleFilled } from '@ant-design/icons';
+import { BaseView, ViewParams, ViewTab } from '@components/BaseView';
 import { addColumn } from '@components/Table';
-import { cookieVars } from '../../../../Utilities';
-import { createErrorNotification } from '@modules/error_notification';
-import { createUseStyles } from 'react-jss';
-import dayjs from 'dayjs';
-import { pipe } from 'fp-ts/lib/function';
+import { Result, emptyData, toFailedResult, toSuccessfulData } from '@hooks/useCommand';
 import { runCommand } from '@modules/core';
+import { createErrorNotification } from '@modules/error_notification';
+import { Reconciliation, ReconciliationArray, Transaction } from '@modules/types';
+import { Checkbox, Divider, Input, PageHeader, Progress, Tabs } from 'antd';
+import { ColumnsType } from 'antd/lib/table';
+import dayjs from 'dayjs';
+import { either as Either } from 'fp-ts';
+import { pipe } from 'fp-ts/lib/function';
+import Cookies from 'js-cookie';
+import React, { useCallback, useEffect, useState } from 'react';
+import { createUseStyles } from 'react-jss';
+import { useHistory, useLocation } from 'react-router-dom';
 import style from 'react-syntax-highlighter/dist/esm/styles/hljs/a11y-dark';
-import useGlobalState from '../../../../State';
 
 const { TabPane } = Tabs;
 
@@ -264,12 +263,9 @@ export const transactionSchema: ColumnsType<Transaction> = [
     configuration: {
       width: '5%',
       render: (item, record, index) => (
-        <>
-          <a target='_blank' href={'http://etherscan.io/tx/' + record.hash}>
-            ES
-          </a>{' '}
-          - {index}
-        </>
+        <a target='_blank' href={'http://etherscan.io/tx/' + record.hash}>
+          ES
+        </a>
       ),
     },
   }),

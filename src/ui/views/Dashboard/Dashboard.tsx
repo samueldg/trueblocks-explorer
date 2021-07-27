@@ -4,19 +4,18 @@ import {
   DashboardLocation,
   DashboardMonitorsLocation,
 } from '../../Routes';
-import React, { useEffect, useState } from 'react';
-import { Result, emptyData, toFailedResult, toSuccessfulData } from '@hooks/useCommand';
-
-import { AccountsView } from './Tabs/Accounts/Accounts';
-import { BaseView } from '@components/BaseView';
-import { Collections } from './Tabs/Collections';
-import { either as Either } from 'fp-ts';
-import { Monitors } from './Tabs/Monitors';
-import { cookieVars } from '../../Utilities';
-import { createErrorNotification } from '@modules/error_notification';
-import { pipe } from 'fp-ts/lib/function';
-import { runCommand } from '@modules/core';
 import useGlobalState from '../../State';
+import { cookieVars } from '../../Utilities';
+import { AccountsView } from './Tabs/Accounts/Accounts';
+import { Collections } from './Tabs/Collections';
+import { Monitors } from './Tabs/Monitors';
+import { BaseView } from '@components/BaseView';
+import { Result, emptyData, toFailedResult, toSuccessfulData } from '@hooks/useCommand';
+import { runCommand } from '@modules/core';
+import { createErrorNotification } from '@modules/error_notification';
+import { either as Either } from 'fp-ts';
+import { pipe } from 'fp-ts/lib/function';
+import React, { useEffect, useState } from 'react';
 
 export const DashboardView = ({ match }: { match?: any }) => {
   const { accountAddress, setAccountAddress, transactions, setTransactions, totalRecords, setTotalRecords } =
@@ -69,14 +68,15 @@ export const DashboardView = ({ match }: { match?: any }) => {
           reversed: false,
           relevant: true,
           first_record: transactions?.data?.length || 0,
+          // 10,
           max_records:
             (transactions?.data?.length || 0) < 50
               ? 10
               : (transactions?.data?.length || 0) < 150
               ? 71
-              : (transactions?.data?.length || 0) < 3000
+              : (transactions?.data?.length || 0) < 1500
               ? 239
-              : 1310 /* an arbitrary number not too big, not too small, that appears not to repeat */,
+              : 639 /* an arbitrary number not too big, not too small, that appears not to repeat */,
         });
         const result: Result = pipe(
           eitherResponse,
