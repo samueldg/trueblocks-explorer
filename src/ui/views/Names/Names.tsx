@@ -6,15 +6,14 @@ import {
   NamesLocation,
   NamesTagsLocation,
 } from '../../Routes';
-
+import { cookieVars } from '../../Utilities';
 import { Addresses } from './Tabs/Addresses';
-import { BaseView } from '@components/BaseView';
 import { EventSignatures } from './Tabs/EventSignatures';
 import { FunctionSignatures } from './Tabs/FunctionSignatures';
-import React from 'react';
 import { Tags } from './Tabs/Tag';
 import { When } from './Tabs/When';
-import { cookieVars } from '../../Utilities';
+import { BaseView } from '@components/BaseView';
+import React from 'react';
 
 export const NamesView = () => {
   const title = 'Names';

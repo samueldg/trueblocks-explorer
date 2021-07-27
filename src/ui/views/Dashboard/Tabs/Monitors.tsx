@@ -1,16 +1,15 @@
-import { BaseTable, TableActions, addActionsColumn, addColumn, addNumColumn, addTagsColumn } from '@components/Table';
-import { Button, Input, Space, Spin, Form } from 'antd';
-import { PlusCircleFilled, SearchOutlined } from '@ant-design/icons';
-import React, { useCallback, useRef, useState } from 'react';
-
-import { ColumnsType } from 'antd/lib/table';
-import Modal from 'antd/lib/modal/Modal';
-import { Monitor } from '@modules/types';
-import { createErrorNotification } from '@modules/error_notification';
-import { goToUrl } from '../../../Utilities';
-import { renderNamedAddress } from '@modules/renderers';
-import { useCommand } from '@hooks/useCommand';
 import useGlobalState from '../../../State';
+import { goToUrl } from '../../../Utilities';
+import { PlusCircleFilled, SearchOutlined } from '@ant-design/icons';
+import { addActionsColumn, addColumn, addNumColumn, addTagsColumn, BaseTable, TableActions } from '@components/Table';
+import { useCommand } from '@hooks/useCommand';
+import { createErrorNotification } from '@modules/error_notification';
+import { renderNamedAddress } from '@modules/renderers';
+import { Monitor } from '@modules/types';
+import { Button, Form, Input, Space, Spin } from 'antd';
+import Modal from 'antd/lib/modal/Modal';
+import { ColumnsType } from 'antd/lib/table';
+import React, { useCallback, useRef, useState } from 'react';
 
 export const Monitors = () => {
   const [monitors, loading] = useCommand('status', { mode: 'monitors', details: true });

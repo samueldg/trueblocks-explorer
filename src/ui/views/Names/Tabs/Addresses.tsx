@@ -1,3 +1,5 @@
+import useGlobalState from '../../../State';
+import './Addresses.css';
 import { SearchOutlined } from '@ant-design/icons';
 import { addActionsColumn, addColumn, addFlagColumn, addTagsColumn, BaseTable, TableActions } from '@components/Table';
 import { Result, toFailedResult, toSuccessfulData } from '@hooks/useCommand';
@@ -11,8 +13,6 @@ import { ColumnsType } from 'antd/lib/table';
 import { either as Either } from 'fp-ts';
 import { pipe } from 'fp-ts/lib/function';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import useGlobalState from '../../../State';
-import './Addresses.css';
 
 export const Addresses = () => {
   const [searchText, setSearchText] = useState('');

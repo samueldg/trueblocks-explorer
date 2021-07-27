@@ -6,15 +6,14 @@ import {
   SettingsScrapersLocation,
   SettingsSkinsLocation,
 } from '../../Routes';
-
-import { BaseView } from '@components/BaseView';
+import { cookieVars } from '../../Utilities';
 import { Caches } from './Tabs/Caches';
 import { IndexesView } from './Tabs/Indexes/Indexes';
-import React from 'react';
 import { Schemas } from './Tabs/Schemas';
 import { Scrapers } from './Tabs/Scrapers';
 import { Skins } from './Tabs/Skins';
-import { cookieVars } from '../../Utilities';
+import { BaseView } from '@components/BaseView';
+import React from 'react';
 
 export const SettingsView = () => {
   const title = 'Settings';

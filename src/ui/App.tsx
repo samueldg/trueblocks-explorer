@@ -1,27 +1,30 @@
-import 'antd/dist/antd.css';
-import './app.css';
-
-import { Button, Layout, Typography } from 'antd';
-import { PanelDirection, SidePanel } from './components/SidePanels/SidePanel';
-import React, { useEffect, useState } from 'react';
-import { Result, toFailedResult, toSuccessfulData } from '@hooks/useCommand';
-
-import { Console } from './components/Console';
-import { either as Either } from 'fp-ts';
-import { HelpPanel } from './components/SidePanels/HelpPanel';
-import { MainMenu, MenuItems } from './components/MainMenu';
-import { QuestionCircleFilled } from '@ant-design/icons';
-import { Routes } from './Routes';
-import { StatusPanel } from './components/SidePanels/StatusPanel';
-import { cookieVars } from './Utilities';
-import { createUseStyles } from 'react-jss';
-import dayjs from 'dayjs';
-import { pipe } from 'fp-ts/lib/function';
-import relativeTime from 'dayjs/plugin/relativeTime';
-import { runCommand } from '@modules/core';
+import { ExplorerLocation, NamesLocation, RootLocation, Routes, SettingsLocation, SupportLocation } from './Routes';
 import useGlobalState from './State';
-import { BookOutlined, CameraOutlined, PhoneOutlined, SettingOutlined, UnorderedListOutlined } from '@ant-design/icons';
-import { ExplorerLocation, NamesLocation, RootLocation, SettingsLocation, SupportLocation } from './Routes';
+import { cookieVars } from './Utilities';
+import './app.css';
+import { Console } from './components/Console';
+import { MainMenu, MenuItems } from './components/MainMenu';
+import { HelpPanel } from './components/SidePanels/HelpPanel';
+import { PanelDirection, SidePanel } from './components/SidePanels/SidePanel';
+import { StatusPanel } from './components/SidePanels/StatusPanel';
+import {
+  BookOutlined,
+  CameraOutlined,
+  PhoneOutlined,
+  QuestionCircleFilled,
+  SettingOutlined,
+  UnorderedListOutlined,
+} from '@ant-design/icons';
+import { Result, toFailedResult, toSuccessfulData } from '@hooks/useCommand';
+import { runCommand } from '@modules/core';
+import { Button, Layout, Typography } from 'antd';
+import 'antd/dist/antd.css';
+import dayjs from 'dayjs';
+import relativeTime from 'dayjs/plugin/relativeTime';
+import { either as Either } from 'fp-ts';
+import { pipe } from 'fp-ts/lib/function';
+import React, { useEffect, useState } from 'react';
+import { createUseStyles } from 'react-jss';
 
 const { Header, Footer, Content } = Layout;
 const { Title } = Typography;

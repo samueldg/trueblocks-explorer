@@ -10,7 +10,7 @@ import { AccountsView } from './Tabs/Accounts/Accounts';
 import { Collections } from './Tabs/Collections';
 import { Monitors } from './Tabs/Monitors';
 import { BaseView } from '@components/BaseView';
-import { Result, emptyData, toFailedResult, toSuccessfulData } from '@hooks/useCommand';
+import { emptyData, Result, toFailedResult, toSuccessfulData } from '@hooks/useCommand';
 import { runCommand } from '@modules/core';
 import { createErrorNotification } from '@modules/error_notification';
 import { either as Either } from 'fp-ts';

@@ -1,8 +1,6 @@
-import { BookOutlined, CameraOutlined, PhoneOutlined, SettingOutlined, UnorderedListOutlined } from '@ant-design/icons';
 import { Menu } from 'antd';
-import React, { ReactNode } from 'react';
+import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { ExplorerLocation, NamesLocation, RootLocation, SettingsLocation, SupportLocation } from '../../Routes';
 
 export declare type MenuItem = {
   to: string;

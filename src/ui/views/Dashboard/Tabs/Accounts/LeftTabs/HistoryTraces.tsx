@@ -1,7 +1,7 @@
+import { useAcctStyles } from '../AccountStyles';
 import { LogentryArray, Transaction } from '@modules/types';
 import { Card } from 'antd';
 import React from 'react';
-import { useAcctStyles } from '../AccountStyles';
 
 //-----------------------------------------------------------------
 export const AccountHistoryTraces = ({ record }: { record: Transaction }) => {

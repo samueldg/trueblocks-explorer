@@ -2,9 +2,8 @@
 import useGlobalState from '../../../../../State';
 import { chartColors } from '../../../../../Utilities';
 import { MyAreaChart } from '@components/MyAreaChart';
-import { BaseTable, addColumn } from '@components/Table';
-import { Reconciliation, Transaction, TransactionArray, AssetHistory, ReconciliationArray } from '@modules/types';
-import { ColumnsType } from 'antd/lib/table';
+import { addColumn } from '@components/Table';
+import { AssetHistory, Reconciliation, Transaction, TransactionArray } from '@modules/types';
 import dayjs from 'dayjs';
 import React from 'react';
 

@@ -1,7 +1,7 @@
+import { useAcctStyles } from '../AccountStyles';
 import { Reconciliation, Transaction } from '@modules/types';
 import { Card } from 'antd';
 import React, { useState } from 'react';
-import { useAcctStyles } from '../AccountStyles';
 
 //-----------------------------------------------------------------
 export const HistoryRecons = ({ record }: { record: Transaction }) => {

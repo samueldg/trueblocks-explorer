@@ -1,7 +1,7 @@
+import { routes } from '../../Routes';
 import { Loading } from '@components/Loading';
 import React from 'react';
 import { useLocation } from 'react-router-dom';
-import { routes } from '../../Routes';
 
 export const HelpPanel = () => {
   const location = useLocation();

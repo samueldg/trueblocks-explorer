@@ -1,9 +1,4 @@
-import { chartColors } from '../../Utilities';
-import { BaseTable, addColumn } from '@components/Table';
-import { Reconciliation, Transaction, TransactionArray } from '@modules/types';
-import { AssetHistory } from '@modules/types';
-import { ColumnsType } from 'antd/lib/table';
-import dayjs from 'dayjs';
+import { BaseTable } from '@components/Table';
 import React from 'react';
 import { Area, AreaChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 

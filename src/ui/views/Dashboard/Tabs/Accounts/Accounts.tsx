@@ -18,7 +18,7 @@ import { Neighbors } from './LeftTabs/Neighbors';
 import { CheckCircleFilled, CloseCircleFilled } from '@ant-design/icons';
 import { BaseView, ViewTab } from '@components/BaseView';
 import { addColumn } from '@components/Table';
-import { Result, emptyData, toSuccessfulData } from '@hooks/useCommand';
+import { emptyData, Result, toSuccessfulData } from '@hooks/useCommand';
 import { Reconciliation, ReconciliationArray, Transaction } from '@modules/types';
 import { Checkbox, Divider, Input, Progress, Tabs } from 'antd';
 import { ColumnsType } from 'antd/lib/table';

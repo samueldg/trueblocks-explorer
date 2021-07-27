@@ -1,4 +1,4 @@
-import { date, int256 } from '@modules/types';
+import { int256 } from '@modules/types';
 
 export declare type Balance = {
   date: Date;

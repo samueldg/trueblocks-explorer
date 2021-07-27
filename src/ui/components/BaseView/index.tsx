@@ -1,8 +1,7 @@
 import { PageHeader, Tabs } from 'antd';
+import Cookies from 'js-cookie';
 import React, { ReactNode, useState } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
-
-import Cookies from 'js-cookie';
 
 const { TabPane } = Tabs;
 

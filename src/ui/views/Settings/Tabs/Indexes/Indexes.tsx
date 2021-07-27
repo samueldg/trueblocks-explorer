@@ -1,23 +1,22 @@
-import React, { useCallback } from 'react';
 import {
   SettingsIndexesChartsLocation,
   SettingsIndexesGridLocation,
+  SettingsIndexesLocation,
   SettingsIndexesManifestLocation,
   SettingsIndexesTableLocation,
-  SettingsIndexesLocation,
 } from '../../../../Routes';
-import { TableActions, addColumn, addNumColumn } from '@components/Table';
-
-import { BaseView } from '@components/BaseView';
-import { ColumnsType } from 'antd/lib/table';
+import { cookieVars } from '../../../../Utilities';
 import { IndexCharts } from './SubTabs/IndexCharts';
 import { IndexGrid } from './SubTabs/IndexGrid';
 import { IndexManifest } from './SubTabs/IndexManifest';
 import { IndexTable } from './SubTabs/IndexTable';
-import { Chunk } from '@modules/types';
-import { cookieVars } from '../../../../Utilities';
-import { createErrorNotification } from '@modules/error_notification';
+import { BaseView } from '@components/BaseView';
+import { addColumn, addNumColumn } from '@components/Table';
 import { useCommand } from '@hooks/useCommand';
+import { createErrorNotification } from '@modules/error_notification';
+import { Chunk } from '@modules/types';
+import { ColumnsType } from 'antd/lib/table';
+import React, { useCallback } from 'react';
 
 export const IndexesView = () => {
   const [indexes, loading] = useCommand('status', { mode: 'index', details: true });

@@ -1,7 +1,7 @@
+import './PanelHeader.css';
 import { Button, Divider } from 'antd';
 import classNames from 'classnames';
 import React, { ReactNode } from 'react';
-import './PanelHeader.css';
 
 function ifExpanded<Type>(expanded: boolean, onTrue: () => Type, onFalse: () => Type): Type {
   return expanded ? onTrue() : onFalse();

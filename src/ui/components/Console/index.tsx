@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
 import { addActionListener, removeListener } from '../../websockets';
+import React, { useEffect, useState } from 'react';
 
 function getProgress(string: string) {
   var str = string.replace(/\s+/g, ' ');

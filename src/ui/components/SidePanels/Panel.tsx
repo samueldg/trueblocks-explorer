@@ -1,7 +1,7 @@
+import { PanelDirection, PanelHeader } from './PanelHeader';
 import { LeftOutlined, RightOutlined } from '@ant-design/icons';
 import classNames from 'classnames';
 import React, { ReactNode } from 'react';
-import { PanelDirection, PanelHeader } from './PanelHeader';
 
 export { PanelDirection };
 

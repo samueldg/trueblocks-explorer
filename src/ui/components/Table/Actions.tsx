@@ -1,7 +1,6 @@
 import { DeleteOutlined, EditOutlined, EyeOutlined, InfoCircleOutlined, UndoOutlined } from '@ant-design/icons';
-import PropTypes, { InferType } from 'prop-types';
-
 import { Button } from 'antd';
+import PropTypes, { InferType } from 'prop-types';
 import React from 'react';
 
 type Action = 'info' | 'delete' | 'undelete' | 'remove' | 'edit' | 'view';

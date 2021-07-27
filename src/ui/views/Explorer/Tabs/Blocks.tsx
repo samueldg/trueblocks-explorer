@@ -1,10 +1,10 @@
+import { useCommand } from '../../../hooks/useCommand';
 import { addColumn, addNumColumn, BaseTable, TableActions } from '@components/Table';
 import { createErrorNotification } from '@modules/error_notification';
 import { Block } from '@modules/types';
 import { ColumnsType } from 'antd/lib/table';
 import dayjs from 'dayjs';
 import React, { useCallback } from 'react';
-import { useCommand } from '../../../hooks/useCommand';
 
 export const Blocks = () => {
   const [blocks, loading] = useCommand('blocks', { list: 0, list_count: 12, cache: true });

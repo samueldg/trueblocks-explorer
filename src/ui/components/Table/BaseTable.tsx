@@ -1,9 +1,7 @@
 import 'antd/dist/antd.css';
-
-import React, { useEffect, useState } from 'react';
 import Table, { ColumnsType } from 'antd/lib/table';
-
 import Mousetrap from 'mousetrap';
+import React, { useEffect, useState } from 'react';
 
 export type SelectedRow = {
   curRow: number;

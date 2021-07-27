@@ -9,11 +9,11 @@
   "cSpell.enabled": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": true
+  },
   "[typescriptreact]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "sort-imports.languages": [
-    "javascript",
-    "typescript"
-  ]
+  "sort-imports.languages": ["javascript", "typescript"]
 }

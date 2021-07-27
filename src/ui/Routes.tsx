@@ -2,10 +2,10 @@
  * Parts of this file were generated with makeClass --js. Edit only those parts of
  * the code outside of the BEG_CODE/END_CODE sections
  */
-import { DashboardView, ExplorerView, NamesView, SettingsView, SupportView } from './views';
-import { Route, Switch } from 'react-router-dom';
-
 import React from 'react';
+import { Route, Switch } from 'react-router-dom';
+import { DashboardView, ExplorerView, NamesView, SettingsView, SupportView } from './views';
+
 
 const Mousetrap = require('mousetrap');
 

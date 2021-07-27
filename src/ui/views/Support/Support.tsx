@@ -6,15 +6,14 @@ import {
   SupportLicensingLocation,
   SupportLocation,
 } from '../../Routes';
-
+import { cookieVars } from '../../Utilities';
 import { About } from './Tabs/About';
-import { BaseView } from '@components/BaseView';
 import { Contact } from './Tabs/Contact';
 import { Documentation } from './Tabs/Documentation';
 import { HotKeys } from './Tabs/HotKeys';
 import { Licensing } from './Tabs/Licensing';
+import { BaseView } from '@components/BaseView';
 import React from 'react';
-import { cookieVars } from '../../Utilities';
 
 export const SupportView = () => {
   const title = 'Support';
