@@ -1,5 +1,4 @@
 import {
-  DashboardAccountsAssetsLocation,
   DashboardAccountsChartsLocation,
   DashboardAccountsEventsLocation,
   DashboardAccountsFunctionsLocation,
@@ -17,21 +16,15 @@ import { Gas } from './LeftTabs/Gas';
 import { History } from './LeftTabs/History';
 import { Neighbors } from './LeftTabs/Neighbors';
 import { CheckCircleFilled, CloseCircleFilled } from '@ant-design/icons';
-import { BaseView, ViewParams, ViewTab } from '@components/BaseView';
+import { BaseView, ViewTab } from '@components/BaseView';
 import { addColumn } from '@components/Table';
-import { Result, emptyData, toFailedResult, toSuccessfulData } from '@hooks/useCommand';
-import { runCommand } from '@modules/core';
-import { createErrorNotification } from '@modules/error_notification';
+import { Result, emptyData, toSuccessfulData } from '@hooks/useCommand';
 import { Reconciliation, ReconciliationArray, Transaction } from '@modules/types';
-import { Checkbox, Divider, Input, PageHeader, Progress, Tabs } from 'antd';
+import { Checkbox, Divider, Input, Progress, Tabs } from 'antd';
 import { ColumnsType } from 'antd/lib/table';
 import dayjs from 'dayjs';
-import { either as Either } from 'fp-ts';
-import { pipe } from 'fp-ts/lib/function';
-import Cookies from 'js-cookie';
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { createUseStyles } from 'react-jss';
-import { useHistory, useLocation } from 'react-router-dom';
 import style from 'react-syntax-highlighter/dist/esm/styles/hljs/a11y-dark';
 
 const { TabPane } = Tabs;
