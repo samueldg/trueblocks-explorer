@@ -5,9 +5,7 @@ import {
   DashboardAccountsHistoryLocation,
   DashboardAccountsHistoryReconsLocation,
   DashboardAccountsHistoryTracesLocation,
-  DashboardAccountsLocation,
 } from '../../../../../Routes';
-import useGlobalState from '../../../../../State';
 import { cookieVars } from '../../../../../Utilities';
 import { transactionSchema } from '../Accounts';
 import { HistoryEvents } from './HistoryEvents';
@@ -15,7 +13,7 @@ import { HistoryFunctions } from './HistoryFunctions';
 import { HistoryRecons } from './HistoryRecons';
 import { BaseView } from '@components/BaseView';
 import { BaseTable, SelectedRow } from '@components/Table';
-import { Transaction, TransactionArray } from '@modules/types';
+import { TransactionArray } from '@modules/types';
 import React from 'react';
 
 export const History = ({

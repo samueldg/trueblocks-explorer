@@ -1,7 +1,6 @@
 import { MyAreaChart } from '@components/MyAreaChart';
-import { BaseTable, addColumn } from '@components/Table';
-import { ReconciliationArray, TransactionArray } from '@modules/types';
-import { Transaction } from '@modules/types';
+import { addColumn } from '@components/Table';
+import { Transaction, TransactionArray } from '@modules/types';
 import { ColumnsType } from 'antd/lib/table';
 import React from 'react';
 
