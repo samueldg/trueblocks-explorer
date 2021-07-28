@@ -1,6 +1,6 @@
+import * as Core from './index';
 import * as Either from 'fp-ts/lib/Either';
 import fetchMock, { enableFetchMocks } from 'jest-fetch-mock';
-import * as Core from './index';
 
 enableFetchMocks();
 

@@ -1,5 +1,5 @@
-import renderer from 'react-test-renderer';
 import * as Mappers from './mappers';
+import renderer from 'react-test-renderer';
 
 describe('Table/mappers module', () => {
   test('renderFlag returns correct components', () => {

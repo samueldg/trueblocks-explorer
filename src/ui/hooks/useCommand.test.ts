@@ -1,6 +1,6 @@
+import { Result, useCommand } from './useCommand';
 import { renderHook, RenderResult } from '@testing-library/react-hooks';
 import fetchMock, { enableFetchMocks } from 'jest-fetch-mock';
-import { Result, useCommand } from './useCommand';
 
 enableFetchMocks();
 
